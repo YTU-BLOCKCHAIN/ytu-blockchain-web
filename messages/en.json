@@ -1,0 +1,31 @@
+{
+  "Nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "blog": "Blog",
+    "community": "Community",
+    "sponsors": "Sponsors",
+    "contact": "Contact",
+    "join": "Join"
+  },
+  "Landing": {
+    "title": "Building the decentralized future together at YTÜ",
+    "subtitle": "Yıldız Technical University Blockchain Club is a student community that learns, builds and shares around blockchain, DeFi, zero-knowledge and open-source technologies.",
+    "cta": "Join the Community"
+  },
+  "Common": {
+    "comingSoon": "Coming Soon",
+    "comingSoonBody": "The template for this page is ready; content will be here very soon."
+  },
+  "Footer": {
+    "tagline": "Building the decentralized future together.",
+    "communityHeading": "Community",
+    "rights": "© 2026 YTÜ Blockchain Club. All rights reserved."
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for may have moved or never existed.",
+    "back": "Back to home"
+  }
+}

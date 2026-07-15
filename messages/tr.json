@@ -1,0 +1,31 @@
+{
+  "Nav": {
+    "home": "Anasayfa",
+    "about": "Hakkımızda",
+    "projects": "Projeler",
+    "blog": "Blog",
+    "community": "Topluluk",
+    "sponsors": "Sponsorlar",
+    "contact": "İletişim",
+    "join": "Üye Ol"
+  },
+  "Landing": {
+    "title": "Merkeziyetsiz geleceği YTÜ'de birlikte inşa ediyoruz",
+    "subtitle": "Yıldız Teknik Üniversitesi Blockchain Kulübü; blockchain, DeFi, zero-knowledge ve açık kaynak teknolojileri üzerine öğrenen, üreten ve paylaşan bir öğrenci topluluğudur.",
+    "cta": "Topluluğa Katıl"
+  },
+  "Common": {
+    "comingSoon": "Çok Yakında",
+    "comingSoonBody": "Bu sayfanın şablonu hazır; içerik çok yakında burada olacak."
+  },
+  "Footer": {
+    "tagline": "Merkeziyetsiz geleceği birlikte inşa ediyoruz.",
+    "communityHeading": "Topluluk",
+    "rights": "© 2026 YTÜ Blockchain Kulübü. Tüm hakları saklıdır."
+  },
+  "NotFound": {
+    "title": "Sayfa bulunamadı",
+    "description": "Aradığınız sayfa taşınmış ya da hiç var olmamış olabilir.",
+    "back": "Anasayfaya dön"
+  }
+}
