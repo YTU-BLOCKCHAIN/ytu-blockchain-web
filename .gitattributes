@@ -1,0 +1,14 @@
+# Tüm platformlarda (Windows, macOS, Linux, CI) satır sonlarını LF'e normalize et.
+# Prettier `endOfLine: "lf"` ile tutarlı olması ve pre-push/CI'ın her yerde
+# aynı davranması için gereklidir.
+* text=auto eol=lf
+
+# İkili dosyalar — asla normalize edilmez.
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.woff binary
+*.woff2 binary
