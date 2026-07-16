@@ -16,5 +16,8 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      # package-lock.json npm 11 ile üretiliyor; CI'daki npm'i buna sabitle ki
+      # `npm ci` lock'u kabul etsin (Node 22 varsayılan npm 10 ile çözüm farkı oluşuyor).
+      - run: npm install -g npm@11
       - run: npm ci
       - run: npm run verify
