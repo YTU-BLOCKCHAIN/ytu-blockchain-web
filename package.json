@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint . --cache",
     "typecheck": "next typegen && tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -16,7 +16,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --fix",
+      "eslint --fix --cache",
       "prettier --write"
     ],
     "*.{js,cjs,mjs,json,md,css}": [
