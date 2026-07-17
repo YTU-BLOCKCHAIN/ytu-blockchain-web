@@ -48,6 +48,61 @@
       "description": "Become a member of YTÜ Blockchain Club — learn, build and be part of the community."
     }
   },
+  "About": {
+    "mission": {
+      "heading": "Our Mission",
+      "lead": "We want to make blockchain something students at YTÜ can learn, build, and share.",
+      "leadRest": "We are building a community where every curious student has support on the path from idea to production.",
+      "body": "Across DeFi, zero-knowledge proofs, smart contracts, and open source, we learn and build together through workshops, projects, and events."
+    },
+    "values": {
+      "heading": "Core Values",
+      "intro": "The principles that guide every decision, from the team to what we ship.",
+      "items": {
+        "learn": {
+          "title": "Learn by Building",
+          "description": "We don't just read — we learn by building through workshops, projects, and hackathons."
+        },
+        "openSource": {
+          "title": "Open Source",
+          "description": "We share what we build — code, docs, and materials are open to everyone."
+        },
+        "community": {
+          "title": "Build Together",
+          "description": "We're open to everyone across departments and levels; the best work happens together."
+        },
+        "security": {
+          "title": "Security First",
+          "description": "Security is essential on-chain; we learn good practices from the start."
+        }
+      }
+    },
+    "team": {
+      "heading": "Team",
+      "intro": "The students who run the club together."
+    },
+    "sponsors": {
+      "heading": "Sponsors & Partners",
+      "intro": "Organizations that support our community. You can be one of them.",
+      "placeholder": "Your logo here",
+      "ctaLead": "Want to support the club?",
+      "cta": "Become a sponsor"
+    },
+    "join": {
+      "heading": "Join the Club",
+      "intro": "Curious about blockchain? No experience required — we learn together.",
+      "areas": {
+        "defi": "DeFi",
+        "zk": "Zero-Knowledge (ZK)",
+        "contracts": "Smart Contracts",
+        "openSource": "Open Source"
+      },
+      "areasHint": "Pick your interest when you apply",
+      "contactLead": "Have a different area in mind?",
+      "contactLink": "Send us a note",
+      "contactRest": "— we're always happy to meet new people."
+    }
+  },
   "Landing": {
     "title": "Building the decentralized future together at YTÜ",
     "subtitle": "Yıldız Technical University Blockchain Club is a student community that learns, builds and shares around blockchain, DeFi, zero-knowledge and open-source technologies.",

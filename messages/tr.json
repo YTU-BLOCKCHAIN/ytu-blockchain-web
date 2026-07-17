@@ -48,6 +48,61 @@
       "description": "YTÜ Blockchain Kulübü'ne üye olun; öğrenin, üretin ve toplulukta yer alın."
     }
   },
+  "About": {
+    "mission": {
+      "heading": "Misyonumuz",
+      "lead": "Blockchain'i YTÜ'de öğrenilebilir, üretilebilir ve paylaşılabilir kılmak istiyoruz.",
+      "leadRest": "Merak eden her öğrencinin fikirden üretime giden yolda yalnız kalmadığı bir topluluk kuruyoruz.",
+      "body": "DeFi'den sıfır bilgi ispatlarına, akıllı kontratlardan açık kaynağa kadar geniş bir alanda; workshop'lar, projeler ve etkinliklerle birlikte öğreniyor ve üretiyoruz."
+    },
+    "values": {
+      "heading": "Temel Değerlerimiz",
+      "intro": "Ekipten üretime, her kararımıza yön veren ilkeler.",
+      "items": {
+        "learn": {
+          "title": "Öğrenerek Üret",
+          "description": "Okumakla kalmıyoruz; workshop, proje ve hackathon'larla üreterek öğreniyoruz."
+        },
+        "openSource": {
+          "title": "Açık Kaynak",
+          "description": "Ürettiğimizi paylaşıyoruz — kod, doküman ve materyaller herkese açık."
+        },
+        "community": {
+          "title": "Birlikte İnşa Et",
+          "description": "Farklı bölüm ve seviyelerden herkese açığız; en iyi işler birlikte çıkar."
+        },
+        "security": {
+          "title": "Güvenlik Önce",
+          "description": "Zincir üstünde güvenlik esastır; iyi pratikleri en baştan öğreniyoruz."
+        }
+      }
+    },
+    "team": {
+      "heading": "Ekip",
+      "intro": "Kulübü birlikte yürüten öğrenciler."
+    },
+    "sponsors": {
+      "heading": "Sponsorlar & Partnerler",
+      "intro": "Topluluğumuzu destekleyen kurumlar. Siz de aramızda yer alabilirsiniz.",
+      "placeholder": "Logonuz burada",
+      "ctaLead": "Kulübe destek olmak ister misiniz?",
+      "cta": "Sponsor olun"
+    },
+    "join": {
+      "heading": "Kulübe Katıl",
+      "intro": "Blockchain'e meraklı mısın? Deneyim şart değil — birlikte öğreniyoruz.",
+      "areas": {
+        "defi": "DeFi",
+        "zk": "Sıfır Bilgi (ZK)",
+        "contracts": "Akıllı Kontratlar",
+        "openSource": "Açık Kaynak"
+      },
+      "areasHint": "Başvuruda ilgi alanını seç",
+      "contactLead": "Aklında başka bir alan mı var?",
+      "contactLink": "Bize yaz",
+      "contactRest": "— her zaman yeni insanlarla tanışmaya açığız."
+    }
+  },
   "Landing": {
     "title": "Merkeziyetsiz geleceği YTÜ'de birlikte inşa ediyoruz",
     "subtitle": "Yıldız Teknik Üniversitesi Blockchain Kulübü; blockchain, DeFi, zero-knowledge ve açık kaynak teknolojileri üzerine öğrenen, üreten ve paylaşan bir öğrenci topluluğudur.",
