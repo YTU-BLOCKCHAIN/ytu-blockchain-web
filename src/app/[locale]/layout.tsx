@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { hasLocale, NextIntlClientProvider, type Locale } from 'next-intl';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { routing } from '@/i18n/routing';
+import { ogLocales, siteConfig } from '@/lib/site';
 
 import '../globals.css';
 
@@ -20,11 +21,33 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'YTÜ Blockchain',
-  description:
-    'Yıldız Teknik Üniversitesi Blockchain Kulübü — blockchain, DeFi ve açık kaynak topluluğu.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Meta' });
+
+  return {
+    metadataBase: new URL(siteConfig.url),
+    title: {
+      default: t('defaultTitle'),
+      template: `%s · ${siteConfig.name}`,
+    },
+    description: t('defaultDescription'),
+    applicationName: siteConfig.name,
+    openGraph: {
+      type: 'website',
+      siteName: siteConfig.name,
+      locale: ogLocales[locale],
+      title: t('defaultTitle'),
+      description: t('defaultDescription'),
+    },
+    twitter: { card: 'summary_large_image' },
+    robots: { index: true, follow: true },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
