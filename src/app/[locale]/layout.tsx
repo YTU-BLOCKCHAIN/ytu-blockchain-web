@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import { routing } from '@/i18n/routing';
 import { ogLocales, siteConfig } from '@/lib/site';
 
@@ -62,13 +63,21 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
+      suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>
