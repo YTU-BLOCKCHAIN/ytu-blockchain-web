@@ -9,6 +9,9 @@
     "contact": "İletişim",
     "join": "Üye Ol"
   },
+  "Theme": {
+    "toggle": "Temayı değiştir"
+  },
   "Meta": {
     "defaultTitle": "YTÜ Blockchain Kulübü",
     "defaultDescription": "Yıldız Teknik Üniversitesi Blockchain Kulübü; blockchain, DeFi, zero-knowledge ve açık kaynak teknolojileri üzerine öğrenen, üreten ve paylaşan öğrenci topluluğu.",

@@ -4,6 +4,7 @@ import { Link } from '@/i18n/navigation';
 
 import LocaleSwitcher from './LocaleSwitcher';
 import StatusBanner from './StatusBanner';
+import ThemeToggle from './ThemeToggle';
 
 const NAV_ITEMS = [
   { key: 'about', href: '/about' },
@@ -41,7 +42,10 @@ export default function Header() {
           ))}
         </nav>
 
-        <LocaleSwitcher />
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
+          <LocaleSwitcher />
+        </div>
       </div>
     </header>
   );
