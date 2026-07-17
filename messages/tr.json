@@ -9,6 +9,42 @@
     "contact": "İletişim",
     "join": "Üye Ol"
   },
+  "Meta": {
+    "defaultTitle": "YTÜ Blockchain Kulübü",
+    "defaultDescription": "Yıldız Teknik Üniversitesi Blockchain Kulübü; blockchain, DeFi, zero-knowledge ve açık kaynak teknolojileri üzerine öğrenen, üreten ve paylaşan öğrenci topluluğu.",
+    "home": {
+      "title": "YTÜ Blockchain Kulübü — Blockchain, DeFi ve Açık Kaynak Topluluğu",
+      "description": "Yıldız Teknik Üniversitesi Blockchain Kulübü; blockchain, DeFi, zero-knowledge ve açık kaynak üzerine öğrenen ve üreten öğrenci topluluğu."
+    },
+    "about": {
+      "title": "Hakkımızda",
+      "description": "YTÜ Blockchain Kulübü'nün hikâyesi, misyonu ve ekibi."
+    },
+    "projects": {
+      "title": "Projeler",
+      "description": "Kulüp üyelerinin geliştirdiği blockchain ve açık kaynak projeleri."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Blockchain, Ethereum, stablecoin ve zero-knowledge üzerine yazılar ve teknik analizler."
+    },
+    "community": {
+      "title": "Topluluk",
+      "description": "Telegram, GitHub ve X üzerinden YTÜ Blockchain topluluğuna katılın."
+    },
+    "sponsors": {
+      "title": "Sponsorlar",
+      "description": "YTÜ Blockchain Kulübü'ne sponsor olun; iş birliği ve destek fırsatları."
+    },
+    "contact": {
+      "title": "İletişim",
+      "description": "Sorularınız ve iş birlikleri için YTÜ Blockchain Kulübü ile iletişime geçin."
+    },
+    "join": {
+      "title": "Üye Ol",
+      "description": "YTÜ Blockchain Kulübü'ne üye olun; öğrenin, üretin ve toplulukta yer alın."
+    }
+  },
   "Landing": {
     "title": "Merkeziyetsiz geleceği YTÜ'de birlikte inşa ediyoruz",
     "subtitle": "Yıldız Teknik Üniversitesi Blockchain Kulübü; blockchain, DeFi, zero-knowledge ve açık kaynak teknolojileri üzerine öğrenen, üreten ve paylaşan bir öğrenci topluluğudur.",
