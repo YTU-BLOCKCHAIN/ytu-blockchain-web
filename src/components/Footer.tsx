@@ -49,8 +49,8 @@ export default function Footer() {
               style={{
                 maskImage: 'url(/images/footer-bg.png)',
                 WebkitMaskImage: 'url(/images/footer-bg.png)',
-                maskSize: 'contain',
-                WebkitMaskSize: 'contain',
+                maskSize: 'cover',
+                WebkitMaskSize: 'cover',
                 maskPosition: 'center',
                 WebkitMaskPosition: 'center',
                 maskRepeat: 'no-repeat',
