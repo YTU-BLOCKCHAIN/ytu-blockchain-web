@@ -12,7 +12,6 @@ export type SocialLinks = {
 /**
  * Kulüp üyeleri / ekip için veri modeli.
  * Not: İçerik repo içi TS objesi (roadmap kararı); Sanity değil.
- * Aşağıdaki kayıtlar yalnızca yer tutucudur.
  */
 export type Member = {
   /** URL-güvenli benzersiz kimlik. */
@@ -31,19 +30,7 @@ export type Member = {
 };
 
 /**
- * YER TUTUCU veri — gerçek ekip eklenince değiştirilecek.
+ * Gerçek ekip buraya eklenecek. Yukarıdaki `Member` tipini örnek alın.
+ * Dizi boşken üye render edilmez (About ekip bölümü şu an komite etiketleri kullanıyor).
  */
-export const members: readonly Member[] = [
-  {
-    slug: 'placeholder-founder',
-    name: 'Ada Yıldız',
-    role: { tr: 'Kurucu', en: 'Founder' },
-    department: 'Bilgisayar Mühendisliği',
-  },
-  {
-    slug: 'placeholder-lead',
-    name: 'Deniz Kaya',
-    role: { tr: 'Teknik Lider', en: 'Tech Lead' },
-    department: 'Elektronik ve Haberleşme Mühendisliği',
-  },
-];
+export const members: readonly Member[] = [];

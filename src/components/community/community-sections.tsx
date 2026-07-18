@@ -2,7 +2,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
-import { Link } from '@/i18n/navigation';
+import { ButtonLink } from '@/components/ui/button';
 import { siteConfig } from '@/lib/site';
 
 export function CommunityHero() {
@@ -18,17 +18,37 @@ export function CommunityHero() {
 
           <div
             data-grid-content
-            className="@4xl:p-12 col-span-full p-6 sm:col-span-8"
+            className="@4xl:p-12 relative col-span-full overflow-hidden p-6 sm:col-span-8"
           >
-            <span className="text-primary font-mono text-xs tracking-widest lowercase">
-              {'//'} {t('eyebrow')}
-            </span>
-            <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-              {t('title')}
-            </h1>
-            <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
-              {t('subtitle')}
-            </p>
+            {/* Dekoratif ASCII küre. CSS mask + bg-foreground ile çizilir →
+                metin rengini alır: dark modda açık, light modda koyu, yani
+                her iki temada da AYNI silik görsel (ayrı varyant/geçiş yok).
+                "Silik" şiddeti = opacity-*. Görsel: public/images/community-bg.png */}
+            <div
+              aria-hidden
+              className="bg-foreground pointer-events-none absolute inset-0 opacity-20 dark:opacity-15"
+              style={{
+                maskImage: 'url(/images/community-bg.png)',
+                WebkitMaskImage: 'url(/images/community-bg.png)',
+                maskSize: 'contain',
+                WebkitMaskSize: 'contain',
+                maskPosition: 'center',
+                WebkitMaskPosition: 'center',
+                maskRepeat: 'no-repeat',
+                WebkitMaskRepeat: 'no-repeat',
+              }}
+            />
+            <div className="relative">
+              <span className="text-primary font-mono text-xs tracking-widest lowercase">
+                {'//'} {t('eyebrow')}
+              </span>
+              <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
+                {t('title')}
+              </h1>
+              <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
+                {t('subtitle')}
+              </p>
+            </div>
           </div>
 
           <div aria-hidden className="max-sm:hidden">
@@ -121,12 +141,9 @@ export function CommunityCta() {
               <p className="text-muted-foreground max-w-xl text-balance">
                 {t('body')}
               </p>
-              <Link
-                href="/join"
-                className="bg-primary text-primary-foreground rounded-md px-6 py-3 text-sm font-medium transition-opacity hover:opacity-90"
-              >
+              <ButtonLink href="/join" withArrow>
                 {t('button')}
-              </Link>
+              </ButtonLink>
             </div>
           </div>
 
