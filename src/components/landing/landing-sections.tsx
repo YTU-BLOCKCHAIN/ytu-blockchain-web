@@ -2,7 +2,7 @@ import { BookOpen, Code2, Lightbulb, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
-import { Link } from '@/i18n/navigation';
+import { ButtonLink } from '@/components/ui/button';
 
 export function LandingHero() {
   const t = useTranslations('Landing');
@@ -53,18 +53,12 @@ export function LandingHero() {
                   {t('subtitle')}
                 </p>
                 <div className="mt-9 flex flex-wrap justify-center gap-3">
-                  <Link
-                    href="/join"
-                    className="bg-primary text-primary-foreground rounded-md px-6 py-3 text-sm font-medium shadow-xl shadow-indigo-900/30 transition-opacity hover:opacity-90"
-                  >
+                  <ButtonLink href="/join" withArrow>
                     {t('cta')}
-                  </Link>
-                  <Link
-                    href="/projects"
-                    className="border-border hover:bg-accent rounded-md border px-6 py-3 text-sm font-medium transition-colors"
-                  >
+                  </ButtonLink>
+                  <ButtonLink href="/projects" variant="outline">
                     {t('ctaSecondary')}
-                  </Link>
+                  </ButtonLink>
                 </div>
               </div>
             </div>
@@ -250,12 +244,9 @@ export function LandingCta() {
               <p className="text-muted-foreground max-w-xl text-balance">
                 {t('body')}
               </p>
-              <Link
-                href="/join"
-                className="bg-primary text-primary-foreground rounded-md px-6 py-3 text-sm font-medium transition-opacity hover:opacity-90"
-              >
+              <ButtonLink href="/join" withArrow>
                 {t('button')}
-              </Link>
+              </ButtonLink>
             </div>
           </div>
 
