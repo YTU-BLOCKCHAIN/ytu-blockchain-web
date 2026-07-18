@@ -20,14 +20,23 @@ export function CommunityHero() {
             data-grid-content
             className="@4xl:p-12 relative col-span-full overflow-hidden p-6 sm:col-span-8"
           >
-            {/* Dekoratif arka plan: YALNIZCA dark modda ve silik görünür; light
-                modda gizlenir (kart beyaz kalır — koyu görsel çirkin durmaz).
-                "Silik" şiddeti opacity-* ile ayarlanır. Görsel:
-                public/images/community-bg.png */}
+            {/* Dekoratif ASCII küre. CSS mask + bg-foreground ile çizilir →
+                metin rengini alır: dark modda açık, light modda koyu, yani
+                her iki temada da AYNI silik görsel (ayrı varyant/geçiş yok).
+                "Silik" şiddeti = opacity-*. Görsel: public/images/community-bg.png */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 hidden bg-cover bg-center opacity-15 dark:block"
-              style={{ backgroundImage: 'url(/images/community-bg.png)' }}
+              className="bg-foreground pointer-events-none absolute inset-0 opacity-20 dark:opacity-15"
+              style={{
+                maskImage: 'url(/images/community-bg.png)',
+                WebkitMaskImage: 'url(/images/community-bg.png)',
+                maskSize: 'contain',
+                WebkitMaskSize: 'contain',
+                maskPosition: 'center',
+                WebkitMaskPosition: 'center',
+                maskRepeat: 'no-repeat',
+                WebkitMaskRepeat: 'no-repeat',
+              }}
             />
             <div className="relative">
               <span className="text-primary font-mono text-xs tracking-widest lowercase">

@@ -20,8 +20,29 @@ export function LandingHero() {
           </div>
 
           <div className="@4xl:col-span-8 col-span-full">
-            <div data-grid-content className="px-6 py-16 text-center sm:py-24">
-              <div className="mx-auto max-w-3xl">
+            <div
+              data-grid-content
+              className="relative overflow-hidden px-6 py-16 text-center sm:py-24"
+            >
+              {/* Dekoratif kripto coin halftone (₿/D/₮) backdrop. Community bg
+                  ile aynı teknik: CSS mask + bg-foreground → metin rengini alır
+                  (dark açık, light koyu), her iki temada aynı silik görsel.
+                  Konum biraz aşağıda (center 15%). */}
+              <div
+                aria-hidden
+                className="bg-foreground pointer-events-none absolute inset-0 opacity-25 dark:opacity-15"
+                style={{
+                  maskImage: 'url(/images/landing-bg.png)',
+                  WebkitMaskImage: 'url(/images/landing-bg.png)',
+                  maskSize: 'cover',
+                  WebkitMaskSize: 'cover',
+                  maskPosition: 'center 15%',
+                  WebkitMaskPosition: 'center 15%',
+                  maskRepeat: 'no-repeat',
+                  WebkitMaskRepeat: 'no-repeat',
+                }}
+              />
+              <div className="relative mx-auto max-w-3xl">
                 <span className="text-primary font-mono text-xs tracking-widest lowercase">
                   {'//'} blockchain · defi · zk · open-source
                 </span>
