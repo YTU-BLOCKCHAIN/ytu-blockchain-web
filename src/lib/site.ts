@@ -10,11 +10,8 @@ const FALLBACK_URL = 'https://ytu-blockchain.vercel.app';
 export const siteConfig = {
   name: 'YTÜ Blockchain',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_URL,
-  /**
-   * İletişim/sponsor formlarının `mailto:` alıcısı ve gösterilen adres.
-   * TODO(1.D): Gerçek kulüp e-postası kesinleşince güncelle (şimdilik yer tutucu).
-   */
-  contactEmail: 'iletisim@ytu-blockchain.example',
+  /** İletişim/sponsor formlarının `mailto:` alıcısı ve gösterilen adres. */
+  contactEmail: 'dev@ytublockchain.com',
   /** Kulübün resmî sosyal/topluluk kanalları. */
   social: {
     github: 'https://github.com/YTU-BLOCKCHAIN',
