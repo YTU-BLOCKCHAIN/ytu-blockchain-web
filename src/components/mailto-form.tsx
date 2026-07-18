@@ -2,6 +2,8 @@
 
 import type { FormEvent } from 'react';
 
+import { buttonClasses } from '@/components/ui/button';
+
 export type MailtoField = {
   /** Form alanı adı (mailto gövdesinde etiketle birlikte kullanılır). */
   name: string;
@@ -85,10 +87,7 @@ export function MailtoForm({
         </div>
       ))}
 
-      <button
-        type="submit"
-        className="bg-primary text-primary-foreground rounded-md px-6 py-3 text-sm font-medium transition-opacity hover:opacity-90"
-      >
+      <button type="submit" className={buttonClasses()}>
         {submitLabel}
       </button>
     </form>

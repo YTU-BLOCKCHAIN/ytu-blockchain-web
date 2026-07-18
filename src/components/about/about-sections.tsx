@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { Container } from '@/components/container';
+import { ButtonLink } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 
 export function AboutHero() {
@@ -317,7 +318,7 @@ export function AboutJoin() {
                 <div
                   key={track}
                   data-grid-content
-                  className="@4xl:px-12 hover:bg-card! hover:z-1 group relative flex items-center gap-2 rounded-xl p-4 px-6 shadow-lg shadow-transparent transition-shadow hover:shadow-indigo-900/5"
+                  className="@4xl:px-12 hover:bg-card! hover:z-1 group relative flex items-center gap-2 rounded-xl p-4 px-6 shadow-lg shadow-transparent transition-shadow hover:shadow-blue-900/5"
                 >
                   <Link
                     href="/join"
@@ -346,12 +347,9 @@ export function AboutJoin() {
             </div>
 
             <div data-grid-content className="@4xl:p-12 p-6">
-              <Link
-                href="/join"
-                className="bg-primary text-primary-foreground inline-flex rounded-md px-6 py-3 text-sm font-medium shadow-xl shadow-indigo-900/30 transition-opacity hover:opacity-90"
-              >
+              <ButtonLink href="/join" withArrow>
                 {t('button')}
-              </Link>
+              </ButtonLink>
             </div>
           </div>
 

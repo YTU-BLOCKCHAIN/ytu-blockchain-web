@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { Logo } from '@/components/logo';
+import { buttonClasses } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 
 import LocaleSwitcher from './LocaleSwitcher';
@@ -53,7 +54,10 @@ export default function Header() {
             <LocaleSwitcher />
             <Link
               href="/join"
-              className="bg-primary text-primary-foreground ml-1 hidden rounded-md px-4 py-2 text-sm font-medium transition-opacity hover:opacity-90 sm:inline-flex"
+              className={buttonClasses({
+                size: 'sm',
+                className: 'ml-1 max-sm:hidden',
+              })}
             >
               {t('join')}
             </Link>
@@ -83,7 +87,10 @@ export default function Header() {
             <Link
               href="/join"
               onClick={() => setOpen(false)}
-              className="bg-primary text-primary-foreground mt-2 rounded-md px-4 py-2 text-center text-sm font-medium"
+              className={buttonClasses({
+                size: 'sm',
+                className: 'mt-2 w-full',
+              })}
             >
               {t('join')}
             </Link>

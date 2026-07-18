@@ -2,7 +2,7 @@ import { BookOpen, Code2, Lightbulb, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
-import { Link } from '@/i18n/navigation';
+import { ButtonLink } from '@/components/ui/button';
 
 export function LandingHero() {
   const t = useTranslations('Landing');
@@ -20,8 +20,29 @@ export function LandingHero() {
           </div>
 
           <div className="@4xl:col-span-8 col-span-full">
-            <div data-grid-content className="px-6 py-16 text-center sm:py-24">
-              <div className="mx-auto max-w-3xl">
+            <div
+              data-grid-content
+              className="relative overflow-hidden px-6 py-16 text-center sm:py-24"
+            >
+              {/* Dekoratif kripto coin halftone (₿/D/₮) backdrop. Community bg
+                  ile aynı teknik: CSS mask + bg-foreground → metin rengini alır
+                  (dark açık, light koyu), her iki temada aynı silik görsel.
+                  Konum biraz aşağıda (center 15%). */}
+              <div
+                aria-hidden
+                className="bg-foreground pointer-events-none absolute inset-0 opacity-25 dark:opacity-15"
+                style={{
+                  maskImage: 'url(/images/landing-bg.png)',
+                  WebkitMaskImage: 'url(/images/landing-bg.png)',
+                  maskSize: 'cover',
+                  WebkitMaskSize: 'cover',
+                  maskPosition: 'center 15%',
+                  WebkitMaskPosition: 'center 15%',
+                  maskRepeat: 'no-repeat',
+                  WebkitMaskRepeat: 'no-repeat',
+                }}
+              />
+              <div className="relative mx-auto max-w-3xl">
                 <span className="text-primary font-mono text-xs tracking-widest lowercase">
                   {'//'} blockchain · defi · zk · open-source
                 </span>
@@ -32,18 +53,12 @@ export function LandingHero() {
                   {t('subtitle')}
                 </p>
                 <div className="mt-9 flex flex-wrap justify-center gap-3">
-                  <Link
-                    href="/join"
-                    className="bg-primary text-primary-foreground rounded-md px-6 py-3 text-sm font-medium shadow-xl shadow-indigo-900/30 transition-opacity hover:opacity-90"
-                  >
+                  <ButtonLink href="/join" withArrow>
                     {t('cta')}
-                  </Link>
-                  <Link
-                    href="/projects"
-                    className="border-border hover:bg-accent rounded-md border px-6 py-3 text-sm font-medium transition-colors"
-                  >
+                  </ButtonLink>
+                  <ButtonLink href="/projects" variant="outline">
                     {t('ctaSecondary')}
-                  </Link>
+                  </ButtonLink>
                 </div>
               </div>
             </div>
@@ -229,12 +244,9 @@ export function LandingCta() {
               <p className="text-muted-foreground max-w-xl text-balance">
                 {t('body')}
               </p>
-              <Link
-                href="/join"
-                className="bg-primary text-primary-foreground rounded-md px-6 py-3 text-sm font-medium transition-opacity hover:opacity-90"
-              >
+              <ButtonLink href="/join" withArrow>
                 {t('button')}
-              </Link>
+              </ButtonLink>
             </div>
           </div>
 

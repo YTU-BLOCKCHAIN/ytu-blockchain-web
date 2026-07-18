@@ -42,3 +42,6 @@ next-env.d.ts
 
 # linting
 .eslintcache
+
+# claude code (local editor / preview config)
+.claude/

@@ -7,7 +7,7 @@
     "community": "Topluluk",
     "sponsors": "Sponsorlar",
     "contact": "İletişim",
-    "join": "Üye Ol"
+    "join": "Bize Katıl"
   },
   "Theme": {
     "toggle": "Temayı değiştir"
@@ -85,7 +85,7 @@
     "callToAction": {
       "heading": "Merakın mı var? Aramıza katıl.",
       "body": "Üye başvurusu birkaç dakika sürer; seviye fark etmez.",
-      "button": "Üye Ol"
+      "button": "Bize Katıl"
     }
   },
   "About": {
@@ -170,7 +170,7 @@
       },
       "note": "Sana uygun bir alan göremedin mi? Yeni insanlarla tanışmaya her zaman açığız.",
       "contactCta": "İletişime geç",
-      "button": "Üye Ol"
+      "button": "Bize Katıl"
     }
   },
   "Projects": {
@@ -277,7 +277,7 @@
     "cta": {
       "heading": "Aramıza katılmak ister misin?",
       "body": "Üyelik birkaç dakika sürer; her seviye için açığız.",
-      "button": "Üye Ol"
+      "button": "Bize Katıl"
     }
   },
   "Join": {
