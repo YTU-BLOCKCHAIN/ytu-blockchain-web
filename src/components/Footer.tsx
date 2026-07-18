@@ -38,33 +38,12 @@ export default function Footer() {
         <div className="@4xl:grid-cols-4 grid gap-px">
           <div
             data-grid-content
-            className="@4xl:col-span-2 relative overflow-hidden p-6 lg:p-12"
+            className="@4xl:col-span-2 space-y-6 p-6 lg:p-12"
           >
-            {/* Dekoratif noktalı dünya + ₿. Community bg ile aynı teknik:
-                CSS mask + bg-foreground → metin rengini alır (dark açık, light
-                koyu), her iki temada aynı silik görsel. Şiddet = opacity-*. */}
-            <div
-              aria-hidden
-              className="bg-foreground pointer-events-none absolute inset-0 opacity-20 dark:opacity-15"
-              style={{
-                maskImage: 'url(/images/footer-bg.png)',
-                WebkitMaskImage: 'url(/images/footer-bg.png)',
-                maskSize: 'cover',
-                WebkitMaskSize: 'cover',
-                maskPosition: 'center',
-                WebkitMaskPosition: 'center',
-                maskRepeat: 'no-repeat',
-                WebkitMaskRepeat: 'no-repeat',
-              }}
-            />
-            <div className="relative space-y-6">
-              <Link href="/" aria-label="home" className="block size-fit">
-                <Logo />
-              </Link>
-              <p className="text-muted-foreground text-balance">
-                {t('tagline')}
-              </p>
-            </div>
+            <Link href="/" aria-label="home" className="block size-fit">
+              <Logo />
+            </Link>
+            <p className="text-muted-foreground text-balance">{t('tagline')}</p>
           </div>
 
           {GROUPS.map((group) => (
