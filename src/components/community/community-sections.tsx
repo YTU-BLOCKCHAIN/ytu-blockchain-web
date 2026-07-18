@@ -18,17 +18,28 @@ export function CommunityHero() {
 
           <div
             data-grid-content
-            className="@4xl:p-12 col-span-full p-6 sm:col-span-8"
+            className="@4xl:p-12 relative col-span-full overflow-hidden p-6 sm:col-span-8"
           >
-            <span className="text-primary font-mono text-xs tracking-widest lowercase">
-              {'//'} {t('eyebrow')}
-            </span>
-            <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-              {t('title')}
-            </h1>
-            <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
-              {t('subtitle')}
-            </p>
+            {/* Dekoratif arka plan: YALNIZCA dark modda ve silik görünür; light
+                modda gizlenir (kart beyaz kalır — koyu görsel çirkin durmaz).
+                "Silik" şiddeti opacity-* ile ayarlanır. Görsel:
+                public/images/community-bg.png */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 hidden bg-cover bg-center opacity-15 dark:block"
+              style={{ backgroundImage: 'url(/images/community-bg.png)' }}
+            />
+            <div className="relative">
+              <span className="text-primary font-mono text-xs tracking-widest lowercase">
+                {'//'} {t('eyebrow')}
+              </span>
+              <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
+                {t('title')}
+              </h1>
+              <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
+                {t('subtitle')}
+              </p>
+            </div>
           </div>
 
           <div aria-hidden className="max-sm:hidden">
