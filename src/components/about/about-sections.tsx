@@ -318,7 +318,7 @@ export function AboutJoin() {
                 <div
                   key={track}
                   data-grid-content
-                  className="@4xl:px-12 hover:bg-card! hover:z-1 group relative flex items-center gap-2 rounded-xl p-4 px-6 shadow-lg shadow-transparent transition-shadow hover:shadow-indigo-900/5"
+                  className="@4xl:px-12 hover:bg-card! hover:z-1 group relative flex items-center gap-2 rounded-xl p-4 px-6 shadow-lg shadow-transparent transition-shadow hover:shadow-blue-900/5"
                 >
                   <Link
                     href="/join"

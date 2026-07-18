@@ -9,9 +9,9 @@ type ButtonSize = 'default' | 'sm';
 
 /**
  * Site geneli buton stili. Link / <button> / <a> fark etmeksizin tek kaynak.
- * primary = indigo dolgu + indigo parıltı gölge, hover'da hafif kalkma +
- * parlaklaşma, tıklamada basılma; outline = kenarlıklı ikincil. Tema
- * token'larından (primary/ring/background) beslenir → light+dark otomatik.
+ * primary = lacivert (navy) gradient + cam kenar + parıltı gölge, hover'da
+ * kalkma/parlama, tıklamada basılma; outline = kenarlıklı ikincil. Focus
+ * halkası ve zemin tema token'larından (ring/background) beslenir.
  */
 export function buttonClasses({
   variant = 'primary',
