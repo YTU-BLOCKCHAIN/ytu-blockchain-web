@@ -9,7 +9,6 @@ import { buttonClasses } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 
 import LocaleSwitcher from './LocaleSwitcher';
-import StatusBanner from './StatusBanner';
 import ThemeToggle from './ThemeToggle';
 
 const NAV_ITEMS = [
@@ -27,7 +26,6 @@ export default function Header() {
 
   return (
     <>
-      <StatusBanner />
       <header
         role="banner"
         className="border-border bg-background/75 sticky top-0 z-50 border-b backdrop-blur"
