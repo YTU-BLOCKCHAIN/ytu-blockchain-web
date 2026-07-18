@@ -280,6 +280,28 @@
       "button": "Join"
     }
   },
+  "Join": {
+    "eyebrow": "Join",
+    "title": "Become a member",
+    "subtitle": "We're not looking for experience — curiosity is enough. Drop your application and we'll get back to you.",
+    "expectHeading": "What to expect",
+    "expect": {
+      "learn": "Hands-on workshops and learning together",
+      "build": "Building on open-source projects together",
+      "community": "An active community and events",
+      "open": "Open to everyone, every department and level"
+    },
+    "form": {
+      "heading": "Application form",
+      "intro": "Fill out the form and a ready-to-send application email opens in your mail app.",
+      "name": "Full name",
+      "email": "Email",
+      "department": "Department / year",
+      "motivation": "Your interests and why you want to join",
+      "submit": "Send application",
+      "subject": "Membership application"
+    }
+  },
   "Common": {
     "comingSoon": "Coming Soon",
     "comingSoonBody": "The template for this page is ready; content will be here very soon."

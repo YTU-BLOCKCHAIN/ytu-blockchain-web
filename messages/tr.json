@@ -280,6 +280,28 @@
       "button": "Üye Ol"
     }
   },
+  "Join": {
+    "eyebrow": "Üye Ol",
+    "title": "Aramıza katıl",
+    "subtitle": "Deneyim aramıyoruz — merak yeterli. Başvurunu bırak, sana geri dönelim.",
+    "expectHeading": "Seni ne bekliyor?",
+    "expect": {
+      "learn": "Uygulamalı atölyeler ve birlikte öğrenme",
+      "build": "Açık kaynak projelerde birlikte üretim",
+      "community": "Aktif bir topluluk ve etkinlikler",
+      "open": "Her bölümden, her seviyeden herkese açık"
+    },
+    "form": {
+      "heading": "Başvuru formu",
+      "intro": "Formu doldurun; e-posta uygulamanızda hazır bir başvuru mesajı açılır.",
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "department": "Bölüm / Sınıf",
+      "motivation": "İlgi alanların ve neden katılmak istediğin",
+      "submit": "Başvuruyu gönder",
+      "subject": "Üyelik başvurusu"
+    }
+  },
   "Common": {
     "comingSoon": "Çok Yakında",
     "comingSoonBody": "Bu sayfanın şablonu hazır; içerik çok yakında burada olacak."
