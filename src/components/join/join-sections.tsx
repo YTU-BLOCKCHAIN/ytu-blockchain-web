@@ -18,17 +18,36 @@ export function JoinHero() {
 
           <div
             data-grid-content
-            className="@4xl:p-12 col-span-full p-6 sm:col-span-8"
+            className="@4xl:p-12 relative col-span-full overflow-hidden p-6 sm:col-span-8"
           >
-            <span className="text-primary font-mono text-xs tracking-widest lowercase">
-              {'//'} {t('eyebrow')}
-            </span>
-            <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-              {t('title')}
-            </h1>
-            <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
-              {t('subtitle')}
-            </p>
+            {/* Dekoratif halftone "hack / eat / sleep" döngüsü. Diğer hero'lar
+                ile aynı teknik: CSS mask + bg-foreground → görsel metin rengini
+                alır (dark açık / light koyu), her iki temada aynı silik görsel. */}
+            <div
+              aria-hidden
+              className="bg-foreground pointer-events-none absolute inset-0 opacity-25 dark:opacity-15"
+              style={{
+                maskImage: 'url(/images/join-bg.png)',
+                WebkitMaskImage: 'url(/images/join-bg.png)',
+                maskSize: '50%',
+                WebkitMaskSize: '50%',
+                maskPosition: 'right 40%',
+                WebkitMaskPosition: 'right 40%',
+                maskRepeat: 'no-repeat',
+                WebkitMaskRepeat: 'no-repeat',
+              }}
+            />
+            <div className="relative">
+              <span className="text-primary font-mono text-xs tracking-widest lowercase">
+                {'//'} {t('eyebrow')}
+              </span>
+              <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
+                {t('title')}
+              </h1>
+              <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
+                {t('subtitle')}
+              </p>
+            </div>
           </div>
 
           <div aria-hidden className="max-sm:hidden">
