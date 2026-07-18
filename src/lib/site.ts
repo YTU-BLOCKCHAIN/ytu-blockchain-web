@@ -1,20 +1,17 @@
 import type { Locale } from 'next-intl';
 
 /**
- * Domain henüz kesinleşmedi (roadmap 1.D-4). Kanonik/OG/sitemap için taban URL
- * bu fallback'ten gelir; prod'da `NEXT_PUBLIC_SITE_URL` (Vercel env) ile override edilir.
+ * Kanonik/OG/sitemap için taban URL — kulübün alan adı (apex). Prod'da
+ * `NEXT_PUBLIC_SITE_URL` (Vercel env) ile override edilebilir. DNS bağlama Faz 8.
  */
-const FALLBACK_URL = 'https://ytu-blockchain.vercel.app';
+const FALLBACK_URL = 'https://ytublockchain.com';
 
 /** Site geneli sabitler. */
 export const siteConfig = {
   name: 'YTÜ Blockchain',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_URL,
-  /**
-   * İletişim/sponsor formlarının `mailto:` alıcısı ve gösterilen adres.
-   * TODO(1.D): Gerçek kulüp e-postası kesinleşince güncelle (şimdilik yer tutucu).
-   */
-  contactEmail: 'iletisim@ytu-blockchain.example',
+  /** İletişim/sponsor formlarının `mailto:` alıcısı ve gösterilen adres. */
+  contactEmail: 'dev@ytublockchain.com',
   /** Kulübün resmî sosyal/topluluk kanalları. */
   social: {
     github: 'https://github.com/YTU-BLOCKCHAIN',
