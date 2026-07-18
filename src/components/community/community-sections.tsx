@@ -2,7 +2,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
-import { Link } from '@/i18n/navigation';
+import { ButtonLink } from '@/components/ui/button';
 import { siteConfig } from '@/lib/site';
 
 export function CommunityHero() {
@@ -141,12 +141,9 @@ export function CommunityCta() {
               <p className="text-muted-foreground max-w-xl text-balance">
                 {t('body')}
               </p>
-              <Link
-                href="/join"
-                className="bg-primary text-primary-foreground rounded-md px-6 py-3 text-sm font-medium transition-opacity hover:opacity-90"
-              >
+              <ButtonLink href="/join" withArrow>
                 {t('button')}
-              </Link>
+              </ButtonLink>
             </div>
           </div>
 
