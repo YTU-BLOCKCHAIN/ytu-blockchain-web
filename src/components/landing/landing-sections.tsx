@@ -34,8 +34,8 @@ export function LandingHero() {
                 style={{
                   maskImage: 'url(/images/landing-bg.png)',
                   WebkitMaskImage: 'url(/images/landing-bg.png)',
-                  maskSize: 'cover',
-                  WebkitMaskSize: 'cover',
+                  maskSize: 'auto 80%',
+                  WebkitMaskSize: 'auto 80%',
                   maskPosition: 'center 15%',
                   WebkitMaskPosition: 'center 15%',
                   maskRepeat: 'no-repeat',
