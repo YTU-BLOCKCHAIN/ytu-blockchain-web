@@ -25,28 +25,8 @@ export type Project = {
 };
 
 /**
- * YER TUTUCU veri — gerçek projeler eklenince değiştirilecek.
- * Sayfa bu diziden beslenir; dizi boşken sayfa "coming soon" gösterebilir.
+ * Gerçek projeler buraya eklenecek (Samet). Yeni bir kayıt için yukarıdaki
+ * `Project` tipini örnek alın. Dizi boşken projeler sayfası "coming soon"
+ * boş durumunu gösterir; kayıt eklenince kartlar otomatik listelenir.
  */
-export const projects: readonly Project[] = [
-  {
-    slug: 'placeholder-defi-dashboard',
-    title: 'DeFi Dashboard',
-    summary: {
-      tr: 'Yer tutucu proje — DeFi protokollerini tek ekranda izleyen gösterge paneli.',
-      en: 'Placeholder project — a dashboard that tracks DeFi protocols on a single screen.',
-    },
-    tags: ['DeFi', 'Next.js', 'The Graph'],
-    status: 'wip',
-  },
-  {
-    slug: 'placeholder-zk-workshop',
-    title: 'zkProof Workshop',
-    summary: {
-      tr: 'Yer tutucu proje — sıfır bilgi ispatlarına giriş atölyesi materyalleri.',
-      en: 'Placeholder project — introductory workshop materials for zero-knowledge proofs.',
-    },
-    tags: ['zero-knowledge', 'education'],
-    status: 'archived',
-  },
-];
+export const projects: readonly Project[] = [];

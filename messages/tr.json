@@ -173,6 +173,24 @@
       "button": "Üye Ol"
     }
   },
+  "Projects": {
+    "eyebrow": "Projeler",
+    "title": "Birlikte ürettiğimiz projeler",
+    "intro": "Üyelerimizin geliştirdiği blockchain ve açık kaynak projeleri. Fikirden ürüne, birlikte inşa ediyoruz.",
+    "status": {
+      "live": "Yayında",
+      "wip": "Geliştiriliyor",
+      "archived": "Arşiv"
+    },
+    "links": {
+      "repo": "Kod",
+      "live": "Canlı"
+    },
+    "empty": {
+      "title": "Projeler çok yakında",
+      "body": "İlk projelerimizi hazırlıyoruz. Sen de bir şeyler geliştirmek istersen aramıza katıl."
+    }
+  },
   "Common": {
     "comingSoon": "Çok Yakında",
     "comingSoonBody": "Bu sayfanın şablonu hazır; içerik çok yakında burada olacak."
