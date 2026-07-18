@@ -20,7 +20,17 @@ function maskStyle(src: string): CSSProperties {
   };
 }
 
-/** Kulüp logosu (Figma): dairesel amblem + "YTU" wordmark. */
+function MaskPart({ src, className }: { src: string; className?: string }) {
+  return (
+    <span
+      aria-hidden
+      className={cn('bg-current shrink-0', className)}
+      style={maskStyle(src)}
+    />
+  );
+}
+
+/** Kulüp logosu (Figma): dairesel amblem + "YTU BLOCKCHAIN" wordmark. */
 export function Logo({ className }: { className?: string }) {
   return (
     <span
@@ -29,16 +39,11 @@ export function Logo({ className }: { className?: string }) {
         className,
       )}
     >
-      <span
-        aria-hidden
-        className="bg-current size-7 shrink-0"
-        style={maskStyle('/logo/mark.svg')}
-      />
-      <span
-        aria-hidden
-        className="bg-current h-5 w-[38px] shrink-0"
-        style={maskStyle('/logo/wordmark.svg')}
-      />
+      <MaskPart src="/logo/mark.svg" className="size-7" />
+      <span className="inline-flex items-center gap-1.5">
+        <MaskPart src="/logo/ytu.svg" className="h-4 w-[31px]" />
+        <MaskPart src="/logo/blockchain.svg" className="h-4 w-[104px]" />
+      </span>
     </span>
   );
 }
