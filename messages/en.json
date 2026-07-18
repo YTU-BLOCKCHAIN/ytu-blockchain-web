@@ -51,7 +51,42 @@
   "Landing": {
     "title": "Building the decentralized future together at YTÜ",
     "subtitle": "Yıldız Technical University Blockchain Club is a student community that learns, builds and shares around blockchain, DeFi, zero-knowledge and open-source technologies.",
-    "cta": "Join the Community"
+    "cta": "Join the Community",
+    "ctaSecondary": "Projects",
+    "features": {
+      "heading": "What we do",
+      "intro": "From learning to building — what happens at the club.",
+      "workshops": {
+        "title": "Workshops",
+        "description": "Hands-on sessions on blockchain, DeFi and zero-knowledge."
+      },
+      "projects": {
+        "title": "Projects",
+        "description": "We build open-source projects together."
+      },
+      "blog": {
+        "title": "Blog",
+        "description": "Technical articles and analyses, from Ethereum to stablecoins."
+      },
+      "community": {
+        "title": "Community",
+        "description": "An active community on Telegram, GitHub and at events."
+      }
+    },
+    "manifesto": {
+      "heading": "Why we're here",
+      "body": "We make blockchain something students at YTÜ can learn, build and share. No experience required — we learn and build together."
+    },
+    "sponsors": {
+      "heading": "Sponsors & Partners",
+      "intro": "Organizations that support our community. You can be one of them.",
+      "placeholder": "Your logo here"
+    },
+    "callToAction": {
+      "heading": "Curious? Come join us.",
+      "body": "Applying takes a few minutes; any level is welcome.",
+      "button": "Join"
+    }
   },
   "Common": {
     "comingSoon": "Coming Soon",

@@ -51,7 +51,42 @@
   "Landing": {
     "title": "Merkeziyetsiz geleceği YTÜ'de birlikte inşa ediyoruz",
     "subtitle": "Yıldız Teknik Üniversitesi Blockchain Kulübü; blockchain, DeFi, zero-knowledge ve açık kaynak teknolojileri üzerine öğrenen, üreten ve paylaşan bir öğrenci topluluğudur.",
-    "cta": "Topluluğa Katıl"
+    "cta": "Topluluğa Katıl",
+    "ctaSecondary": "Projeler",
+    "features": {
+      "heading": "Ne yapıyoruz",
+      "intro": "Öğrenmekten üretmeye, kulüpte olan biten.",
+      "workshops": {
+        "title": "Workshoplar",
+        "description": "Blockchain, DeFi ve sıfır bilgi üzerine uygulamalı atölyeler."
+      },
+      "projects": {
+        "title": "Projeler",
+        "description": "Birlikte açık kaynak projeler geliştiriyoruz."
+      },
+      "blog": {
+        "title": "Blog",
+        "description": "Ethereum'dan stablecoin'e teknik yazılar ve analizler."
+      },
+      "community": {
+        "title": "Topluluk",
+        "description": "Telegram, GitHub ve etkinliklerle aktif bir topluluk."
+      }
+    },
+    "manifesto": {
+      "heading": "Neden buradayız",
+      "body": "Blockchain'i YTÜ'de öğrenilebilir, üretilebilir ve paylaşılabilir kılıyoruz. Deneyim şart değil — birlikte öğreniyor, birlikte üretiyoruz."
+    },
+    "sponsors": {
+      "heading": "Sponsorlar & Partnerler",
+      "intro": "Topluluğumuzu destekleyen kurumlar. Siz de aramızda yer alabilirsiniz.",
+      "placeholder": "Logonuz burada"
+    },
+    "callToAction": {
+      "heading": "Merakın mı var? Aramıza katıl.",
+      "body": "Üye başvurusu birkaç dakika sürer; seviye fark etmez.",
+      "button": "Üye Ol"
+    }
   },
   "Common": {
     "comingSoon": "Çok Yakında",
