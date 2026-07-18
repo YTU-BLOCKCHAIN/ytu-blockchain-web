@@ -88,6 +88,91 @@
       "button": "Join"
     }
   },
+  "About": {
+    "hero": {
+      "eyebrow": "About us",
+      "title": "Making blockchain something you can learn, build and share at YTÜ",
+      "intro": "YTÜ Blockchain Club brings together students at Yıldız Technical University who are curious about blockchain, DeFi, zero-knowledge and open-source technologies. No experience required — we learn and build together."
+    },
+    "mission": {
+      "heading": "Our Mission",
+      "body1": "We want to make blockchain accessible on campus — opening up a space where students turn theory into practice and learn and build together.",
+      "body2": "Our goal is to shrink the distance between idea and execution. Through workshops, open-source projects and technical content, we help our members ship real work in days, not months."
+    },
+    "values": {
+      "heading": "Our Values",
+      "intro": "The principles that guide every decision we make, from welcoming members to shipping projects.",
+      "items": {
+        "curiosity": {
+          "title": "Curiosity & Learning",
+          "description": "We ask questions, test assumptions and turn learning into a habit. Curiosity at every level is welcome here."
+        },
+        "community": {
+          "title": "Community",
+          "description": "Great work comes from diverse perspectives. We build an environment where everyone has a voice and collaboration is the default."
+        },
+        "building": {
+          "title": "Building",
+          "description": "We don't stop at slides — we write code. We turn what we learn into open-source projects and working applications."
+        },
+        "openness": {
+          "title": "Openness",
+          "description": "We want knowledge, resources and process to stay open. Transparency and open source are at the heart of how we work."
+        }
+      }
+    },
+    "team": {
+      "heading": "Our Team",
+      "intro": "The committees that run the club together. Team photos coming soon.",
+      "roles": {
+        "board": {
+          "name": "Executive Board",
+          "role": "Strategy and coordination"
+        },
+        "software": {
+          "name": "Software & Development",
+          "role": "Projects and open source"
+        },
+        "events": {
+          "name": "Events & Organization",
+          "role": "Workshops and meetups"
+        },
+        "content": {
+          "name": "Content & Media",
+          "role": "Blog, social media and design"
+        },
+        "academic": {
+          "name": "Academic & Research",
+          "role": "Technical depth and education"
+        },
+        "partnerships": {
+          "name": "Partnerships",
+          "role": "Sponsorship and outreach"
+        }
+      }
+    },
+    "sponsors": {
+      "heading": "Our Supporters",
+      "intro": "The organizations that make our community possible. You can be one of them.",
+      "placeholder": "Your logo here",
+      "cta": "Become a sponsor"
+    },
+    "join": {
+      "eyebrow": "Join us",
+      "heading": "We're open to anyone who wants to learn, build and contribute.",
+      "intro": "We're not looking for experience — curiosity is enough. Find a team that matches your interests.",
+      "tracks": {
+        "software": "Software Team",
+        "events": "Events Volunteer",
+        "content": "Content Creator",
+        "academic": "Academic Research",
+        "design": "Design"
+      },
+      "note": "Don't see a spot that fits? We're always happy to meet new people.",
+      "contactCta": "Get in touch",
+      "button": "Join"
+    }
+  },
   "Common": {
     "comingSoon": "Coming Soon",
     "comingSoonBody": "The template for this page is ready; content will be here very soon."

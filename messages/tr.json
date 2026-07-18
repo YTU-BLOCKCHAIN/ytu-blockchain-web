@@ -88,6 +88,91 @@
       "button": "Üye Ol"
     }
   },
+  "About": {
+    "hero": {
+      "eyebrow": "Hakkımızda",
+      "title": "Blockchain'i YTÜ'de öğrenilebilir, üretilebilir ve paylaşılabilir kılıyoruz",
+      "intro": "YTÜ Blockchain Kulübü, Yıldız Teknik Üniversitesi'nde blockchain, DeFi, zero-knowledge ve açık kaynak teknolojilerine meraklı öğrencileri bir araya getirir. Deneyim şart değil — birlikte öğreniyor, birlikte üretiyoruz."
+    },
+    "mission": {
+      "heading": "Misyonumuz",
+      "body1": "Blockchain teknolojisini kampüste erişilebilir kılmak; öğrencilerin teoriyi pratiğe döktüğü, birlikte öğrenip ürettiği bir alan açmak istiyoruz.",
+      "body2": "Amacımız fikir ile uygulama arasındaki mesafeyi kısaltmak. Atölyeler, açık kaynak projeler ve teknik içeriklerle üyelerimizin haftalar değil günler içinde gerçek işler ortaya koymasını sağlıyoruz."
+    },
+    "values": {
+      "heading": "Değerlerimiz",
+      "intro": "Üye almaktan proje geliştirmeye, her kararımıza yön veren ilkeler.",
+      "items": {
+        "curiosity": {
+          "title": "Merak ve Öğrenme",
+          "description": "Sorular sorar, varsayımları test eder ve öğrenmeyi bir alışkanlığa dönüştürürüz. Her seviyeden merak burada yer bulur."
+        },
+        "community": {
+          "title": "Topluluk",
+          "description": "İyi işler farklı bakış açılarından doğar. Herkesin söz sahibi olduğu, iş birliğinin esas olduğu bir ortam kuruyoruz."
+        },
+        "building": {
+          "title": "Üretmek",
+          "description": "Slaytta kalmaz, kod yazarız. Öğrendiğimizi açık kaynak projelere ve çalışan uygulamalara dönüştürürüz."
+        },
+        "openness": {
+          "title": "Açıklık",
+          "description": "Bilgi, kaynak ve süreç açık olsun isteriz. Şeffaflık ve açık kaynak, çalışma biçimimizin merkezinde."
+        }
+      }
+    },
+    "team": {
+      "heading": "Ekibimiz",
+      "intro": "Kulübü birlikte yürüten komiteler. Ekip fotoğrafları çok yakında.",
+      "roles": {
+        "board": {
+          "name": "Yönetim Kurulu",
+          "role": "Strateji ve koordinasyon"
+        },
+        "software": {
+          "name": "Yazılım & Geliştirme",
+          "role": "Projeler ve açık kaynak"
+        },
+        "events": {
+          "name": "Etkinlik & Organizasyon",
+          "role": "Atölyeler ve buluşmalar"
+        },
+        "content": {
+          "name": "İçerik & Medya",
+          "role": "Blog, sosyal medya ve tasarım"
+        },
+        "academic": {
+          "name": "Akademik & Araştırma",
+          "role": "Teknik derinlik ve eğitim"
+        },
+        "partnerships": {
+          "name": "İş Birlikleri",
+          "role": "Sponsorluk ve dış ilişkiler"
+        }
+      }
+    },
+    "sponsors": {
+      "heading": "Destekçilerimiz",
+      "intro": "Topluluğumuzu mümkün kılan kurumlar. Siz de aramızda yer alabilirsiniz.",
+      "placeholder": "Logonuz burada",
+      "cta": "Sponsor olun"
+    },
+    "join": {
+      "eyebrow": "Aramıza katıl",
+      "heading": "Öğrenmek, üretmek ve katkı vermek isteyen herkese açığız.",
+      "intro": "Deneyim aramıyoruz — merak yeterli. İlgi alanına göre bir ekipte yer alabilirsin.",
+      "tracks": {
+        "software": "Yazılım Ekibi",
+        "events": "Etkinlik Gönüllüsü",
+        "content": "İçerik Üreticisi",
+        "academic": "Akademik Araştırma",
+        "design": "Tasarım"
+      },
+      "note": "Sana uygun bir alan göremedin mi? Yeni insanlarla tanışmaya her zaman açığız.",
+      "contactCta": "İletişime geç",
+      "button": "Üye Ol"
+    }
+  },
   "Common": {
     "comingSoon": "Çok Yakında",
     "comingSoonBody": "Bu sayfanın şablonu hazır; içerik çok yakında burada olacak."

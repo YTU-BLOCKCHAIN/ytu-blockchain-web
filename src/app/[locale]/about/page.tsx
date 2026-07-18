@@ -2,7 +2,15 @@ import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-import ComingSoon from '@/components/ComingSoon';
+import { Separator } from '@/components/container';
+import {
+  AboutHero,
+  AboutJoin,
+  AboutMission,
+  AboutSponsors,
+  AboutTeam,
+  AboutValues,
+} from '@/components/about/about-sections';
 import { buildMetadata } from '@/lib/metadata';
 
 export async function generateMetadata({
@@ -28,6 +36,19 @@ export default async function AboutPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations('Nav');
-  return <ComingSoon title={t('about')} />;
+  return (
+    <>
+      <AboutHero />
+      <Separator />
+      <AboutMission />
+      <Separator />
+      <AboutValues />
+      <Separator />
+      <AboutTeam />
+      <Separator />
+      <AboutSponsors />
+      <Separator />
+      <AboutJoin />
+    </>
+  );
 }
