@@ -253,6 +253,33 @@
       "subject": "İletişim formu"
     }
   },
+  "Community": {
+    "eyebrow": "Topluluk",
+    "title": "Topluluğa katıl",
+    "subtitle": "Online kanallarımızda ve etkinliklerimizde bir aradayız. Takip et, sorular sor, üretime katıl.",
+    "channels": {
+      "github": {
+        "name": "GitHub",
+        "description": "Açık kaynak projelerimize göz at ve katkı ver.",
+        "cta": "Projelere git"
+      },
+      "x": {
+        "name": "X",
+        "description": "Duyurular, etkinlikler ve paylaşımlar için takip et.",
+        "cta": "Takip et"
+      },
+      "instagram": {
+        "name": "Instagram",
+        "description": "Etkinliklerimizden kareler ve güncel haberler.",
+        "cta": "Takip et"
+      }
+    },
+    "cta": {
+      "heading": "Aramıza katılmak ister misin?",
+      "body": "Üyelik birkaç dakika sürer; her seviye için açığız.",
+      "button": "Üye Ol"
+    }
+  },
   "Common": {
     "comingSoon": "Çok Yakında",
     "comingSoonBody": "Bu sayfanın şablonu hazır; içerik çok yakında burada olacak."
