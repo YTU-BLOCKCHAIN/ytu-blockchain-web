@@ -29,7 +29,7 @@ export function LandingHero() {
                   modda açık, light modda koyu), her iki temada aynı silik görsel. */}
               <div
                 aria-hidden
-                className="bg-foreground pointer-events-none absolute inset-0 opacity-20 dark:opacity-15"
+                className="bg-foreground pointer-events-none absolute inset-0 opacity-25 dark:opacity-15"
                 style={{
                   maskImage: 'url(/images/landing-bg.png)',
                   WebkitMaskImage: 'url(/images/landing-bg.png)',
