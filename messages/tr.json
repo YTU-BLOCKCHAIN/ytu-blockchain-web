@@ -229,6 +229,30 @@
       "direct": "veya doğrudan e-posta gönderin"
     }
   },
+  "Contact": {
+    "eyebrow": "İletişim",
+    "title": "Bize ulaşın",
+    "subtitle": "Soru, iş birliği ya da sadece merhaba demek için — yazmaktan çekinme.",
+    "reasonsHeading": "Ne için yazabilirsin?",
+    "reasons": {
+      "partnership": "İş birliği ve sponsorluk",
+      "events": "Etkinlik ve konuşmacı davetleri",
+      "press": "Basın ve medya",
+      "general": "Genel sorular ve geri bildirim"
+    },
+    "emailLabel": "E-posta",
+    "communityNote": "Topluluğa katılmak mı istiyorsun?",
+    "communityCta": "Topluluk kanalları",
+    "form": {
+      "heading": "Bize yazın",
+      "intro": "Formu doldurun; e-posta uygulamanızda hazır bir mesajla bize ulaşın.",
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "message": "Mesajınız",
+      "submit": "E-posta gönder",
+      "subject": "İletişim formu"
+    }
+  },
   "Common": {
     "comingSoon": "Çok Yakında",
     "comingSoonBody": "Bu sayfanın şablonu hazır; içerik çok yakında burada olacak."
