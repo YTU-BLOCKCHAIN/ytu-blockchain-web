@@ -1,5 +1,10 @@
-import { useTranslations } from 'next-intl';
+'use client';
 
+import { Menu, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+
+import { Logo } from '@/components/logo';
 import { Link } from '@/i18n/navigation';
 
 import LocaleSwitcher from './LocaleSwitcher';
@@ -13,40 +18,78 @@ const NAV_ITEMS = [
   { key: 'community', href: '/community' },
   { key: 'sponsors', href: '/sponsors' },
   { key: 'contact', href: '/contact' },
-  { key: 'join', href: '/join' },
 ] as const;
 
 export default function Header() {
   const t = useTranslations('Nav');
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-background/80 backdrop-blur dark:border-white/10">
+    <>
       <StatusBanner />
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-        <Link
-          href="/"
-          className="font-mono text-sm font-bold tracking-tight whitespace-nowrap"
-        >
-          YTÜ<span className="text-emerald-500">::</span>BLOCKCHAIN
-        </Link>
+      <header
+        role="banner"
+        className="border-border bg-background/75 sticky top-0 z-50 border-b backdrop-blur"
+      >
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
+          <Link href="/" aria-label="home" className="flex items-center">
+            <Logo />
+          </Link>
 
-        <nav className="hidden items-center gap-5 text-sm md:flex">
-          {NAV_ITEMS.map((item) => (
+          <nav className="hidden items-center gap-6 text-sm lg:flex">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.key}
+                href={item.href}
+                className="text-muted-foreground hover:text-foreground duration-150"
+              >
+                {t(item.key)}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
+            <LocaleSwitcher />
             <Link
-              key={item.key}
-              href={item.href}
-              className="text-foreground/70 transition-colors hover:text-foreground"
+              href="/join"
+              className="bg-primary text-primary-foreground ml-1 hidden rounded-md px-4 py-2 text-sm font-medium transition-opacity hover:opacity-90 sm:inline-flex"
             >
-              {t(item.key)}
+              {t('join')}
             </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-1">
-          <ThemeToggle />
-          <LocaleSwitcher />
+            <button
+              type="button"
+              aria-label="Menu"
+              onClick={() => setOpen((value) => !value)}
+              className="text-foreground -mr-2 p-2 lg:hidden"
+            >
+              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+
+        {open && (
+          <nav className="border-border mx-auto flex max-w-6xl flex-col gap-1 border-t px-4 py-4 sm:px-6 lg:hidden">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.key}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="text-muted-foreground hover:text-foreground py-2 text-sm"
+              >
+                {t(item.key)}
+              </Link>
+            ))}
+            <Link
+              href="/join"
+              onClick={() => setOpen(false)}
+              className="bg-primary text-primary-foreground mt-2 rounded-md px-4 py-2 text-center text-sm font-medium"
+            >
+              {t('join')}
+            </Link>
+          </nav>
+        )}
+      </header>
+    </>
   );
 }
