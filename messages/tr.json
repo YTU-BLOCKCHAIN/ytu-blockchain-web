@@ -191,6 +191,44 @@
       "body": "İlk projelerimizi hazırlıyoruz. Sen de bir şeyler geliştirmek istersen aramıza katıl."
     }
   },
+  "Sponsors": {
+    "hero": {
+      "eyebrow": "Sponsorlar",
+      "title": "YTÜ Blockchain'e sponsor olun",
+      "subtitle": "Yarının blockchain geliştiricileriyle bugünden tanışın; bir öğrenci topluluğunun büyümesine destek olun."
+    },
+    "logos": {
+      "heading": "Destekçilerimiz",
+      "intro": "Topluluğumuzu mümkün kılan kurumlar. Siz de aramızda yer alabilirsiniz.",
+      "placeholder": "Logonuz burada"
+    },
+    "benefits": {
+      "heading": "Neden sponsor olmalı?",
+      "talent": {
+        "title": "Yeteneğe erişim",
+        "description": "Motive, teknik öğrencilerle doğrudan tanışın; staj ve işe alım için erken bağ kurun."
+      },
+      "brand": {
+        "title": "Marka görünürlüğü",
+        "description": "Etkinlik, atölye ve dijital kanallarımızda kurumunuzu öğrenci topluluğuna tanıtın."
+      },
+      "ecosystem": {
+        "title": "Ekosisteme katkı",
+        "description": "Üniversitede blockchain eğitimini ve açık kaynak üretimini büyütmeye destek olun."
+      }
+    },
+    "form": {
+      "heading": "Bize ulaşın",
+      "intro": "Formu doldurun; e-posta uygulamanızda hazır bir mesajla bize ulaşın.",
+      "name": "Ad Soyad",
+      "organization": "Kurum",
+      "email": "E-posta",
+      "message": "Mesajınız",
+      "submit": "E-posta gönder",
+      "subject": "Sponsorluk başvurusu",
+      "direct": "veya doğrudan e-posta gönderin"
+    }
+  },
   "Common": {
     "comingSoon": "Çok Yakında",
     "comingSoonBody": "Bu sayfanın şablonu hazır; içerik çok yakında burada olacak."
