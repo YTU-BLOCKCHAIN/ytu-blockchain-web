@@ -229,6 +229,30 @@
       "direct": "or email us directly"
     }
   },
+  "Contact": {
+    "eyebrow": "Contact",
+    "title": "Get in touch",
+    "subtitle": "For questions, collaborations or just to say hello — don't hesitate to write.",
+    "reasonsHeading": "What can you reach out about?",
+    "reasons": {
+      "partnership": "Partnerships and sponsorship",
+      "events": "Event and speaker invitations",
+      "press": "Press and media",
+      "general": "General questions and feedback"
+    },
+    "emailLabel": "Email",
+    "communityNote": "Want to join the community?",
+    "communityCta": "Community channels",
+    "form": {
+      "heading": "Write to us",
+      "intro": "Fill out the form to reach us with a ready-to-send email.",
+      "name": "Full name",
+      "email": "Email",
+      "message": "Your message",
+      "submit": "Send email",
+      "subject": "Contact form"
+    }
+  },
   "Common": {
     "comingSoon": "Coming Soon",
     "comingSoonBody": "The template for this page is ready; content will be here very soon."

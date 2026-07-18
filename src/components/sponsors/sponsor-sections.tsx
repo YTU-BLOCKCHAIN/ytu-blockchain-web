@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
-import { SponsorForm } from '@/components/sponsors/sponsor-form';
+import { MailtoForm } from '@/components/mailto-form';
 import { siteConfig } from '@/lib/site';
 
 export function SponsorsHero() {
@@ -112,16 +112,36 @@ export function SponsorsContact() {
             {t('form.intro')}
           </p>
 
-          <SponsorForm
-            labels={{
-              name: t('form.name'),
-              organization: t('form.organization'),
-              email: t('form.email'),
-              message: t('form.message'),
-              submit: t('form.submit'),
-            }}
+          <MailtoForm
+            fields={[
+              {
+                name: 'name',
+                label: t('form.name'),
+                required: true,
+                autoComplete: 'name',
+              },
+              {
+                name: 'organization',
+                label: t('form.organization'),
+                autoComplete: 'organization',
+              },
+              {
+                name: 'email',
+                label: t('form.email'),
+                type: 'email',
+                required: true,
+                autoComplete: 'email',
+              },
+              {
+                name: 'message',
+                label: t('form.message'),
+                multiline: true,
+                required: true,
+              },
+            ]}
             recipient={siteConfig.contactEmail}
             subject={t('form.subject')}
+            submitLabel={t('form.submit')}
           />
 
           <p className="text-muted-foreground mt-6 text-sm">
