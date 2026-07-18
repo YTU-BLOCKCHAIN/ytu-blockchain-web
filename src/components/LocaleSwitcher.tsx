@@ -27,7 +27,7 @@ export default function LocaleSwitcher() {
             <span
               key={loc}
               aria-current="true"
-              className="rounded px-2 py-1 font-bold text-emerald-500"
+              className="text-primary rounded px-2 py-1 font-bold"
             >
               {loc.toUpperCase()}
             </span>
