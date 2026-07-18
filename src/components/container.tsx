@@ -37,7 +37,7 @@ export const Container = ({
         {asGrid ? (
           <div
             className={cn(
-              '**:data-grid-content:bg-card/90 **:data-grid-content:h-full **:data-grid-content:rounded grid *:p-[0.5px]',
+              'bg-border **:data-grid-content:bg-card **:data-grid-content:h-full **:data-grid-content:rounded grid *:p-[0.5px]',
               className,
             )}
           >
