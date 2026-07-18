@@ -59,7 +59,9 @@
   },
   "Footer": {
     "tagline": "Building the decentralized future together.",
+    "exploreHeading": "Explore",
     "communityHeading": "Community",
+    "status": "All systems normal",
     "rights": "© 2026 YTÜ Blockchain Club. All rights reserved."
   },
   "NotFound": {

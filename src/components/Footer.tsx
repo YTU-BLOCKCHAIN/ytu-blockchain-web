@@ -1,47 +1,92 @@
 import { useTranslations } from 'next-intl';
 
-const SOCIALS = [
-  { label: 'Telegram', href: '#' },
-  { label: 'GitHub', href: 'https://github.com/YTU-BLOCKCHAIN' },
-  { label: 'Twitter / X', href: '#' },
+import { Container, Separator } from '@/components/container';
+import { Logo } from '@/components/logo';
+import { Link } from '@/i18n/navigation';
+
+const GROUPS = [
+  {
+    heading: 'exploreHeading',
+    items: [
+      { key: 'about', href: '/about' },
+      { key: 'projects', href: '/projects' },
+      { key: 'blog', href: '/blog' },
+    ],
+  },
+  {
+    heading: 'communityHeading',
+    items: [
+      { key: 'community', href: '/community' },
+      { key: 'sponsors', href: '/sponsors' },
+      { key: 'contact', href: '/contact' },
+      { key: 'join', href: '/join' },
+    ],
+  },
 ] as const;
 
 export default function Footer() {
   const t = useTranslations('Footer');
+  const tNav = useTranslations('Nav');
 
   return (
-    <footer className="border-t border-black/10 dark:border-white/10">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="font-mono text-sm font-bold">YTÜ::BLOCKCHAIN</p>
-          <p className="mt-1 max-w-sm text-sm text-foreground/60">
-            {t('tagline')}
-          </p>
+    <footer role="contentinfo">
+      <Container>
+        <div className="h-12" />
+      </Container>
+
+      <Container asGrid>
+        <div className="@4xl:grid-cols-4 grid gap-px">
+          <div
+            data-grid-content
+            className="@4xl:col-span-2 space-y-6 p-6 lg:p-12"
+          >
+            <Link href="/" aria-label="home" className="block size-fit">
+              <Logo />
+            </Link>
+            <p className="text-muted-foreground text-balance">{t('tagline')}</p>
+          </div>
+
+          {GROUPS.map((group) => (
+            <div
+              key={group.heading}
+              data-grid-content
+              className="space-y-4 p-6 text-sm lg:p-12"
+            >
+              <span className="block font-medium">{t(group.heading)}</span>
+              <div className="flex flex-wrap gap-4 sm:flex-col">
+                {group.items.map((item) => (
+                  <Link
+                    key={item.key}
+                    href={item.href}
+                    className="text-muted-foreground hover:text-primary block duration-150"
+                  >
+                    {tNav(item.key)}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
-        <nav className="flex flex-col gap-2 text-sm sm:items-end">
-          <span className="font-mono text-xs tracking-widest text-foreground/40 uppercase">
-            {t('communityHeading')}
-          </span>
-          <div className="flex gap-4">
-            {SOCIALS.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                className="text-foreground/70 transition-colors hover:text-foreground"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {social.label}
-              </a>
-            ))}
+        <div>
+          <div
+            data-grid-content
+            className="flex flex-wrap items-center justify-between gap-4 p-6 lg:px-12"
+          >
+            <span className="text-muted-foreground text-sm">{t('rights')}</span>
+            <div className="ring-foreground/5 bg-card flex items-center gap-2 rounded-full border border-transparent py-1 pr-4 pl-2 shadow ring-1">
+              <span className="relative flex size-3">
+                <span className="absolute inset-0 block size-full animate-pulse rounded-full bg-emerald-400/40" />
+                <span className="relative m-auto block size-1 rounded-full bg-emerald-500" />
+              </span>
+              <span className="text-sm">{t('status')}</span>
+            </div>
           </div>
-        </nav>
-      </div>
+        </div>
+      </Container>
 
-      <div className="border-t border-black/5 py-4 text-center text-xs text-foreground/40 dark:border-white/5">
-        {t('rights')}
-      </div>
+      <Separator className="h-6" />
+      <Separator className="h-12" />
     </footer>
   );
 }

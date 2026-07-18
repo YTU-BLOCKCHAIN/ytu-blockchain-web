@@ -59,7 +59,9 @@
   },
   "Footer": {
     "tagline": "Merkeziyetsiz geleceği birlikte inşa ediyoruz.",
+    "exploreHeading": "Keşfet",
     "communityHeading": "Topluluk",
+    "status": "Tüm sistemler normal",
     "rights": "© 2026 YTÜ Blockchain Kulübü. Tüm hakları saklıdır."
   },
   "NotFound": {
