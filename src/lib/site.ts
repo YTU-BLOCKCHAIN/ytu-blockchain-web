@@ -15,6 +15,12 @@ export const siteConfig = {
    * TODO(1.D): Gerçek kulüp e-postası kesinleşince güncelle (şimdilik yer tutucu).
    */
   contactEmail: 'iletisim@ytu-blockchain.example',
+  /** Kulübün resmî sosyal/topluluk kanalları. */
+  social: {
+    github: 'https://github.com/YTU-BLOCKCHAIN',
+    x: 'https://x.com/BlockchainYtu',
+    instagram: 'https://www.instagram.com/ytu_blockchain/',
+  },
 } as const;
 
 /** next-intl locale → Open Graph `og:locale` eşlemesi. */
