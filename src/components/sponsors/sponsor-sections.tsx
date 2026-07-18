@@ -17,17 +17,37 @@ export function SponsorsHero() {
 
           <div
             data-grid-content
-            className="@4xl:p-12 col-span-full p-6 sm:col-span-8"
+            className="@4xl:p-12 relative col-span-full overflow-hidden p-6 sm:col-span-8"
           >
-            <span className="text-primary font-mono text-xs tracking-widest lowercase">
-              {'//'} {t('eyebrow')}
-            </span>
-            <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-              {t('title')}
-            </h1>
-            <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
-              {t('subtitle')}
-            </p>
+            {/* Dekoratif dot-matrix sahne: birbirine uzanan eller + ortada
+                bitcoin sembolü. Landing/about/projects ile aynı teknik: CSS
+                mask + bg-foreground → görsel metin rengini alır (dark açık /
+                light koyu), her iki temada aynı silik görsel, tek dosya. */}
+            <div
+              aria-hidden
+              className="bg-foreground pointer-events-none absolute inset-0 opacity-25 dark:opacity-15"
+              style={{
+                maskImage: 'url(/images/sponsors-bg.png)',
+                WebkitMaskImage: 'url(/images/sponsors-bg.png)',
+                maskSize: 'cover',
+                WebkitMaskSize: 'cover',
+                maskPosition: 'center',
+                WebkitMaskPosition: 'center',
+                maskRepeat: 'no-repeat',
+                WebkitMaskRepeat: 'no-repeat',
+              }}
+            />
+            <div className="relative">
+              <span className="text-primary font-mono text-xs tracking-widest lowercase">
+                {'//'} {t('eyebrow')}
+              </span>
+              <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
+                {t('title')}
+              </h1>
+              <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
+                {t('subtitle')}
+              </p>
+            </div>
           </div>
 
           <div aria-hidden className="max-sm:hidden">
