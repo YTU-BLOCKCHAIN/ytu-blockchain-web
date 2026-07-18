@@ -173,6 +173,24 @@
       "button": "Join"
     }
   },
+  "Projects": {
+    "eyebrow": "Projects",
+    "title": "Projects we build together",
+    "intro": "Blockchain and open-source projects built by our members. From idea to product, we build together.",
+    "status": {
+      "live": "Live",
+      "wip": "In progress",
+      "archived": "Archived"
+    },
+    "links": {
+      "repo": "Code",
+      "live": "Live site"
+    },
+    "empty": {
+      "title": "Projects coming soon",
+      "body": "We're preparing our first projects. Want to build something too? Come join us."
+    }
+  },
   "Common": {
     "comingSoon": "Coming Soon",
     "comingSoonBody": "The template for this page is ready; content will be here very soon."
