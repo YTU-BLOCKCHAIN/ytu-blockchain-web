@@ -27,7 +27,7 @@ export function LandingHero() {
               {/* Dekoratif kripto coin halftone (₿/D/₮) backdrop. Community bg
                   ile aynı teknik: CSS mask + bg-foreground → metin rengini alır
                   (dark açık, light koyu), her iki temada aynı silik görsel.
-                  Konum biraz aşağıda (center 40%). */}
+                  Konum biraz aşağıda (center 30%). */}
               <div
                 aria-hidden
                 className="bg-foreground pointer-events-none absolute inset-0 opacity-25 dark:opacity-15"
@@ -36,8 +36,8 @@ export function LandingHero() {
                   WebkitMaskImage: 'url(/images/landing-bg.png)',
                   maskSize: 'cover',
                   WebkitMaskSize: 'cover',
-                  maskPosition: 'center 40%',
-                  WebkitMaskPosition: 'center 40%',
+                  maskPosition: 'center 30%',
+                  WebkitMaskPosition: 'center 30%',
                   maskRepeat: 'no-repeat',
                   WebkitMaskRepeat: 'no-repeat',
                 }}
