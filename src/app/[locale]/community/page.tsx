@@ -2,7 +2,12 @@ import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-import ComingSoon from '@/components/ComingSoon';
+import { Separator } from '@/components/container';
+import {
+  CommunityChannels,
+  CommunityCta,
+  CommunityHero,
+} from '@/components/community/community-sections';
 import { buildMetadata } from '@/lib/metadata';
 
 export async function generateMetadata({
@@ -28,6 +33,13 @@ export default async function CommunityPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations('Nav');
-  return <ComingSoon title={t('community')} />;
+  return (
+    <>
+      <CommunityHero />
+      <Separator />
+      <CommunityChannels />
+      <Separator />
+      <CommunityCta />
+    </>
+  );
 }

@@ -253,6 +253,33 @@
       "subject": "Contact form"
     }
   },
+  "Community": {
+    "eyebrow": "Community",
+    "title": "Join the community",
+    "subtitle": "We come together on our online channels and at our events. Follow along, ask questions and start building.",
+    "channels": {
+      "github": {
+        "name": "GitHub",
+        "description": "Explore our open-source projects and contribute.",
+        "cta": "Go to projects"
+      },
+      "x": {
+        "name": "X",
+        "description": "Follow for announcements, events and updates.",
+        "cta": "Follow"
+      },
+      "instagram": {
+        "name": "Instagram",
+        "description": "Moments from our events and the latest news.",
+        "cta": "Follow"
+      }
+    },
+    "cta": {
+      "heading": "Want to join us?",
+      "body": "Becoming a member takes a few minutes; we welcome all levels.",
+      "button": "Join"
+    }
+  },
   "Common": {
     "comingSoon": "Coming Soon",
     "comingSoonBody": "The template for this page is ready; content will be here very soon."
