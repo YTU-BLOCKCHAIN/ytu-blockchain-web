@@ -7,7 +7,7 @@
     "community": "Community",
     "sponsors": "Sponsors",
     "contact": "Contact",
-    "join": "Join"
+    "join": "Join us"
   },
   "Theme": {
     "toggle": "Toggle theme"
@@ -85,7 +85,7 @@
     "callToAction": {
       "heading": "Curious? Come join us.",
       "body": "Applying takes a few minutes; any level is welcome.",
-      "button": "Join"
+      "button": "Join us"
     }
   },
   "About": {
@@ -170,7 +170,7 @@
       },
       "note": "Don't see a spot that fits? We're always happy to meet new people.",
       "contactCta": "Get in touch",
-      "button": "Join"
+      "button": "Join us"
     }
   },
   "Projects": {
@@ -277,7 +277,7 @@
     "cta": {
       "heading": "Want to join us?",
       "body": "Becoming a member takes a few minutes; we welcome all levels.",
-      "button": "Join"
+      "button": "Join us"
     }
   },
   "Join": {
