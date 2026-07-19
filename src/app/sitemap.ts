@@ -8,7 +8,6 @@ const PATHS = [
   '',
   '/about',
   '/projects',
-  '/blog',
   '/community',
   '/sponsors',
   '/contact',

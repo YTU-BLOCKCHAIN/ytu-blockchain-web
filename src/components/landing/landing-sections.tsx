@@ -1,4 +1,4 @@
-import { BookOpen, Code2, Lightbulb, Users } from 'lucide-react';
+import { Code2, Lightbulb, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
@@ -90,11 +90,6 @@ export function LandingFeatures() {
       icon: Code2,
       title: t('projects.title'),
       description: t('projects.description'),
-    },
-    {
-      icon: BookOpen,
-      title: t('blog.title'),
-      description: t('blog.description'),
     },
     {
       icon: Users,

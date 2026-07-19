@@ -306,4 +306,12 @@
   h6 {
     letter-spacing: -0.025em;
   }
+
+  /* Dropdown/anchor tıklamalarında ilgili bölüme yumuşak kayma. Hareket
+     azaltma tercihi olan kullanıcılarda devre dışı (erişilebilirlik). */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
 }

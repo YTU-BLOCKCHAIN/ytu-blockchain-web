@@ -72,7 +72,7 @@ export function AboutMission() {
   const t = useTranslations('About.mission');
 
   return (
-    <section>
+    <section id="mission" className="scroll-mt-24">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
           <div aria-hidden className="max-sm:hidden">
@@ -129,7 +129,7 @@ export function AboutValues() {
   ];
 
   return (
-    <section>
+    <section id="values" className="scroll-mt-24">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
           <div aria-hidden className="max-sm:hidden">
@@ -196,7 +196,7 @@ export function AboutTeam() {
   ];
 
   return (
-    <section>
+    <section id="team" className="scroll-mt-24">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
           <div aria-hidden className="max-sm:hidden">
@@ -252,7 +252,7 @@ export function AboutSponsors() {
   const t = useTranslations('About.sponsors');
 
   return (
-    <section>
+    <section id="sponsors" className="scroll-mt-24">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
           <div aria-hidden className="max-sm:hidden">
