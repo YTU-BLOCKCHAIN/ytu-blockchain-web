@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-import { Separator } from '@/components/container';
 import { JoinApplication, JoinHero } from '@/components/join/join-sections';
 import { buildMetadata } from '@/lib/metadata';
 
@@ -32,7 +31,6 @@ export default async function JoinPage({
   return (
     <>
       <JoinHero />
-      <Separator />
       <JoinApplication />
     </>
   );

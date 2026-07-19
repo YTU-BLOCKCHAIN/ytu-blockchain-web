@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-import { Separator } from '@/components/container';
 import {
   SponsorsContact,
   SponsorsHero,
@@ -36,9 +35,7 @@ export default async function SponsorsPage({
   return (
     <>
       <SponsorsHero />
-      <Separator />
       <SponsorsLogos />
-      <Separator />
       <SponsorsContact />
     </>
   );

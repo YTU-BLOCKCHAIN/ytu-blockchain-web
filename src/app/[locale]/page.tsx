@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-import { Separator } from '@/components/container';
 import {
   LandingCta,
   LandingFeatures,
@@ -39,15 +38,10 @@ export default async function LandingPage({
   return (
     <>
       <LandingHero />
-      <Separator />
       <LandingFeatures />
-      <Separator />
       <LandingManifesto />
-      <Separator />
       <LandingSponsors />
-      <Separator />
       <LandingCta />
-      <Separator />
     </>
   );
 }
