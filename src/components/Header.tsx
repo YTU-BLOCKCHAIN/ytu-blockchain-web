@@ -8,9 +8,6 @@ import { Logo } from '@/components/logo';
 import { buttonClasses } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 
-import LocaleSwitcher from './LocaleSwitcher';
-import ThemeToggle from './ThemeToggle';
-
 const NAV_ITEMS = [
   { key: 'about', href: '/about' },
   { key: 'projects', href: '/projects' },
@@ -48,8 +45,6 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-1">
-            <ThemeToggle />
-            <LocaleSwitcher />
             <Link
               href="/join"
               className={buttonClasses({
