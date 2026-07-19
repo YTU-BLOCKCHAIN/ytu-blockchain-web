@@ -1,16 +1,15 @@
 import type { Metadata } from 'next';
 import { GeistMono } from 'geist/font/mono';
-import { GeistSans } from 'geist/font/sans';
 import { hasLocale, NextIntlClientProvider, type Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import { ThemeProvider } from '@/components/ThemeProvider';
 import { routing } from '@/i18n/routing';
 import { ogLocales, siteConfig } from '@/lib/site';
 
+import '@fontsource-variable/inter';
 import '../globals.css';
 
 export async function generateMetadata({
@@ -61,23 +60,12 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html
-      lang={locale}
-      suppressHydrationWarning
-      className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
-    >
+    <html lang={locale} className={`${GeistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </ThemeProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

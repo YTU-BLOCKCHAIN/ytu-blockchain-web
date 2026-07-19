@@ -1,11 +1,10 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@custom-variant dark (&:is(.dark *));
-
 @theme {
-  /* Yerel Geist fontları (geist paketi) — build ağdan bağımsız */
-  --font-sans: var(--font-geist-sans);
+  /* Gövde fontu Inter (yerel @fontsource-variable/inter — build ağdan
+     bağımsız). Mono rolü (eyebrow'lar) Geist Mono'da kalır. */
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), 'Fira Code', monospace;
 
   --color-background: var(--background);
@@ -254,35 +253,39 @@
     --chart-5: var(--color-red-500);
   }
 
-  .dark {
-    --background: var(--color-zinc-950);
-    --foreground: var(--color-white);
+  /* Karanlık mod artık kullanıcının OS temasını takip eder (manuel toggle yok).
+     `dark:` varyantı da Tailwind v4 varsayılanı olan bu media-query'ye döner. */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: var(--color-zinc-950);
+      --foreground: var(--color-white);
 
-    --card: color-mix(in oklab, var(--color-zinc-800) 55%, #000);
-    --illustration: color-mix(in oklab, var(--color-zinc-800) 60%, #000);
-    --card-foreground: var(--color-white);
+      --card: color-mix(in oklab, var(--color-zinc-800) 55%, #000);
+      --illustration: color-mix(in oklab, var(--color-zinc-800) 60%, #000);
+      --card-foreground: var(--color-white);
 
-    --popover: var(--color-zinc-950);
-    --popover-foreground: var(--color-white);
+      --popover: var(--color-zinc-950);
+      --popover-foreground: var(--color-white);
 
-    --primary: var(--color-blue-500);
-    --primary-foreground: var(--color-white);
+      --primary: var(--color-blue-500);
+      --primary-foreground: var(--color-white);
 
-    --secondary: var(--color-zinc-800);
-    --secondary-foreground: var(--color-white);
+      --secondary: var(--color-zinc-800);
+      --secondary-foreground: var(--color-white);
 
-    --muted: var(--color-zinc-800);
-    --muted-foreground: var(--color-zinc-400);
-    --accent: var(--color-zinc-800);
-    --accent-foreground: var(--color-white);
+      --muted: var(--color-zinc-800);
+      --muted-foreground: var(--color-zinc-400);
+      --accent: var(--color-zinc-800);
+      --accent-foreground: var(--color-white);
 
-    --destructive: var(--color-red-700);
-    --destructive-foreground: var(--color-white);
+      --destructive: var(--color-red-700);
+      --destructive-foreground: var(--color-white);
 
-    --border: --alpha(var(--foreground) / 7.5%);
-    --border-illustration: --alpha(var(--foreground) / 7.5%);
-    --input: --alpha(var(--foreground) / 7.5%);
-    --ring: var(--color-zinc-600);
+      --border: --alpha(var(--foreground) / 7.5%);
+      --border-illustration: --alpha(var(--foreground) / 7.5%);
+      --input: --alpha(var(--foreground) / 7.5%);
+      --ring: var(--color-zinc-600);
+    }
   }
 
   * {
@@ -291,5 +294,16 @@
 
   body {
     @apply bg-background text-foreground font-sans;
+  }
+
+  /* Tüm başlıklar sıkı harf aralığı (tracking-tight, -0.025em) — büyük
+     puntolarda daha derli toplu görünüm. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: -0.025em;
   }
 }
