@@ -4,6 +4,7 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
+import { Container, Separator } from '@/components/container';
 import { Logo } from '@/components/logo';
 import { buttonClasses } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
@@ -62,85 +63,93 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header
-      role="banner"
-      className="border-border bg-background/70 sticky top-0 z-50 border-b backdrop-blur"
-    >
-      <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          aria-label="home"
-          className="relative z-10 flex items-center"
-        >
-          <Logo />
-        </Link>
+    <>
+      {/* Üstte boşluk bandı — sayfanın grid çerçevesiyle (yan raylar) hizalı;
+          sayfa başında görünür, kaydırınca header üste yapışır. */}
+      <Separator className="h-6" />
+      <header role="banner" className="sticky top-0 z-50">
+        <Container className="border-foreground/11 border backdrop-blur">
+          <div className="relative flex items-center justify-between gap-6 px-6 py-4 lg:px-10">
+            <Link
+              href="/"
+              aria-label="home"
+              className="relative z-10 flex items-center"
+            >
+              <Logo />
+            </Link>
 
-        {/* Masaüstü: ortalanmış nav (Tailark grid-2 deseni). */}
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 lg:flex">
-          {NAV.map((item) =>
-            'sections' in item ? (
-              <div key={item.key} className="group relative">
-                <Link
-                  href={item.href}
-                  className={`${triggerClass} flex items-center gap-1`}
-                >
-                  {t(item.key)}
-                  <ChevronDown
-                    aria-hidden
-                    className="size-3.5 opacity-70 transition-transform duration-200 group-hover:rotate-180"
-                  />
-                </Link>
-                <div className="absolute left-1/2 top-full z-50 hidden -translate-x-1/2 pt-2 group-hover:block">
-                  <ul className="border-border bg-popover min-w-48 rounded-lg border p-1.5 shadow-lg">
-                    {item.sections.map((section) => (
-                      <li key={section.label}>
-                        <Link
-                          href={section.href}
-                          className="text-foreground hover:bg-muted block rounded-md px-3 py-2 text-sm"
-                        >
-                          {t(section.label)}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ) : (
-              <Link key={item.key} href={item.href} className={triggerClass}>
-                {t(item.key)}
+            {/* Masaüstü: ortalanmış nav (Tailark grid-2 deseni). */}
+            <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 lg:flex">
+              {NAV.map((item) =>
+                'sections' in item ? (
+                  <div key={item.key} className="group relative">
+                    <Link
+                      href={item.href}
+                      className={`${triggerClass} flex items-center gap-1`}
+                    >
+                      {t(item.key)}
+                      <ChevronDown
+                        aria-hidden
+                        className="size-3.5 opacity-70 transition-transform duration-200 group-hover:rotate-180"
+                      />
+                    </Link>
+                    <div className="absolute left-1/2 top-full z-50 hidden -translate-x-1/2 pt-2 group-hover:block">
+                      <ul className="border-border bg-popover min-w-48 rounded-lg border p-1.5 shadow-lg">
+                        {item.sections.map((section) => (
+                          <li key={section.label}>
+                            <Link
+                              href={section.href}
+                              className="text-foreground hover:bg-muted block rounded-md px-3 py-2 text-sm"
+                            >
+                              {t(section.label)}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    key={item.key}
+                    href={item.href}
+                    className={triggerClass}
+                  >
+                    {t(item.key)}
+                  </Link>
+                ),
+              )}
+            </nav>
+
+            <div className="relative z-10 flex items-center gap-2">
+              <Link
+                href="/join"
+                className={buttonClasses({
+                  size: 'sm',
+                  className: 'max-lg:hidden',
+                })}
+              >
+                {t('join')}
               </Link>
-            ),
-          )}
-        </nav>
+              <button
+                type="button"
+                aria-label={open ? 'Menüyü kapat' : 'Menüyü aç'}
+                aria-expanded={open}
+                onClick={() => setOpen((value) => !value)}
+                className="text-foreground -mr-2 p-2 lg:hidden"
+              >
+                {open ? <X className="size-5" /> : <Menu className="size-5" />}
+              </button>
+            </div>
+          </div>
+        </Container>
 
-        <div className="relative z-10 flex items-center gap-2">
-          <Link
-            href="/join"
-            className={buttonClasses({
-              size: 'sm',
-              className: 'max-lg:hidden',
-            })}
-          >
-            {t('join')}
-          </Link>
-          <button
-            type="button"
-            aria-label={open ? 'Menüyü kapat' : 'Menüyü aç'}
-            aria-expanded={open}
-            onClick={() => setOpen((value) => !value)}
-            className="text-foreground -mr-2 p-2 lg:hidden"
-          >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
-        </div>
-      </div>
-
-      {open && (
-        <div className="border-border border-t lg:hidden">
-          <MobileNav onNavigate={() => setOpen(false)} />
-        </div>
-      )}
-    </header>
+        {open && (
+          <Container className="backdrop-blur lg:hidden">
+            <MobileNav onNavigate={() => setOpen(false)} />
+          </Container>
+        )}
+      </header>
+    </>
   );
 }
 
@@ -148,10 +157,7 @@ function MobileNav({ onNavigate }: { onNavigate: () => void }) {
   const t = useTranslations('Nav');
 
   return (
-    <nav
-      role="navigation"
-      className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-4 sm:px-6"
-    >
+    <nav role="navigation" className="flex flex-col gap-1 px-6 py-4">
       {NAV.map((item) => (
         <div key={item.key}>
           <Link
