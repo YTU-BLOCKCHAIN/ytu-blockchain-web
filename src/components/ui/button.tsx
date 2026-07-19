@@ -9,9 +9,9 @@ type ButtonSize = 'default' | 'sm';
 
 /**
  * Site geneli buton stili. Link / <button> / <a> fark etmeksizin tek kaynak.
- * primary = lacivert (navy) gradient + cam kenar + parıltı gölge, hover'da
- * kalkma/parlama, tıklamada basılma; outline = kenarlıklı ikincil. Focus
- * halkası ve zemin tema token'larından (ring/background) beslenir.
+ * primary = yüksek kontrast dolu buton (bg-foreground / text-background) →
+ * light'ta siyah, dark'ta beyaz (Tailark grid-2 header buton deseni); outline =
+ * kenarlıklı ikincil. Focus halkası ve zemin tema token'larından beslenir.
  */
 export function buttonClasses({
   variant = 'primary',
@@ -27,7 +27,7 @@ export function buttonClasses({
     size === 'default' && 'px-6 py-3 text-sm',
     size === 'sm' && 'px-4 py-2 text-sm',
     variant === 'primary' &&
-      'bg-linear-to-b from-blue-700 to-blue-900 text-white inset-ring-1 inset-ring-white/15 shadow-blue-700/40 hover:shadow-blue-700/60 shadow-lg hover:-translate-y-0.5 hover:from-blue-600 hover:to-blue-800 hover:shadow-xl active:translate-y-0 active:brightness-95 active:shadow-md',
+      'bg-foreground text-background shadow-sm hover:bg-foreground/90 active:bg-foreground/80',
     variant === 'outline' &&
       'border-border hover:bg-accent border bg-transparent hover:-translate-y-0.5 active:translate-y-0',
     className,
