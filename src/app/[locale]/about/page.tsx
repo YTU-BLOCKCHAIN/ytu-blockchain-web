@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-import { Separator } from '@/components/container';
 import {
   AboutHero,
   AboutJoin,
@@ -39,15 +38,10 @@ export default async function AboutPage({
   return (
     <>
       <AboutHero />
-      <Separator />
       <AboutMission />
-      <Separator />
       <AboutValues />
-      <Separator />
       <AboutTeam />
-      <Separator />
       <AboutSponsors />
-      <Separator />
       <AboutJoin />
     </>
   );
