@@ -5,6 +5,8 @@ import { Container } from '@/components/container';
 import { ButtonLink } from '@/components/ui/button';
 import { siteConfig } from '@/lib/site';
 
+import { GithubIcon, InstagramIcon, XIcon } from './brand-icons';
+
 export function CommunityHero() {
   const t = useTranslations('Community');
 
@@ -65,18 +67,21 @@ export function CommunityChannels() {
 
   const channels = [
     {
+      Icon: GithubIcon,
       name: t('channels.github.name'),
       description: t('channels.github.description'),
       cta: t('channels.github.cta'),
       href: siteConfig.social.github,
     },
     {
+      Icon: XIcon,
       name: t('channels.x.name'),
       description: t('channels.x.description'),
       cta: t('channels.x.cta'),
       href: siteConfig.social.x,
     },
     {
+      Icon: InstagramIcon,
       name: t('channels.instagram.name'),
       description: t('channels.instagram.description'),
       cta: t('channels.instagram.cta'),
@@ -85,7 +90,7 @@ export function CommunityChannels() {
   ];
 
   return (
-    <section>
+    <section id="channels" className="scroll-mt-24">
       <Container asGrid className="sm:grid-cols-2 lg:grid-cols-3">
         {channels.map((channel) => (
           <a
@@ -100,11 +105,10 @@ export function CommunityChannels() {
               className="@4xl:p-8 hover:bg-card! flex h-full flex-col gap-3 p-6 transition-colors"
             >
               <div className="flex items-center justify-between gap-2">
-                <h2 className="text-foreground font-semibold">
-                  {channel.name}
-                </h2>
+                <channel.Icon className="text-foreground size-7" />
                 <ArrowUpRight className="text-muted-foreground group-hover:text-primary size-4 transition-colors" />
               </div>
+              <h2 className="text-foreground font-semibold">{channel.name}</h2>
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {channel.description}
               </p>
@@ -123,7 +127,7 @@ export function CommunityCta() {
   const t = useTranslations('Community.cta');
 
   return (
-    <section>
+    <section id="join" className="scroll-mt-24">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
           <div aria-hidden className="max-sm:hidden">

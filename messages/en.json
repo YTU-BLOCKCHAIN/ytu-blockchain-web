@@ -3,11 +3,26 @@
     "home": "Home",
     "about": "About",
     "projects": "Projects",
-    "blog": "Blog",
     "community": "Community",
     "sponsors": "Sponsors",
     "contact": "Contact",
-    "join": "Join us"
+    "join": "Join us",
+    "sections": {
+      "about": {
+        "mission": "Mission",
+        "values": "Values",
+        "team": "Team",
+        "sponsors": "Supporters"
+      },
+      "community": {
+        "channels": "Channels",
+        "join": "Join"
+      },
+      "sponsors": {
+        "logos": "Our sponsors",
+        "contact": "Become a sponsor"
+      }
+    }
   },
   "Meta": {
     "defaultTitle": "YTÜ Blockchain Club",
@@ -23,10 +38,6 @@
     "projects": {
       "title": "Projects",
       "description": "Blockchain and open-source projects built by our club members."
-    },
-    "blog": {
-      "title": "Blog",
-      "description": "Articles and technical analyses on blockchain, Ethereum, stablecoins and zero-knowledge."
     },
     "community": {
       "title": "Community",
@@ -60,10 +71,6 @@
       "projects": {
         "title": "Projects",
         "description": "We build open-source projects together."
-      },
-      "blog": {
-        "title": "Blog",
-        "description": "Technical articles and analyses, from Ethereum to stablecoins."
       },
       "community": {
         "title": "Community",
@@ -136,7 +143,7 @@
         },
         "content": {
           "name": "Content & Media",
-          "role": "Blog, social media and design"
+          "role": "Content, social media and design"
         },
         "academic": {
           "name": "Academic & Research",

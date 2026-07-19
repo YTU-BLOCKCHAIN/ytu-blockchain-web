@@ -10,7 +10,6 @@ const GROUPS = [
     items: [
       { key: 'about', href: '/about' },
       { key: 'projects', href: '/projects' },
-      { key: 'blog', href: '/blog' },
     ],
   },
   {
@@ -30,10 +29,6 @@ export default function Footer() {
 
   return (
     <footer role="contentinfo">
-      <Container>
-        <div className="h-12" />
-      </Container>
-
       <Container asGrid>
         <div className="@4xl:grid-cols-4 grid gap-px">
           <div

@@ -3,11 +3,26 @@
     "home": "Anasayfa",
     "about": "Hakkımızda",
     "projects": "Projeler",
-    "blog": "Blog",
     "community": "Topluluk",
     "sponsors": "Sponsorlar",
     "contact": "İletişim",
-    "join": "Bize Katıl"
+    "join": "Bize Katıl",
+    "sections": {
+      "about": {
+        "mission": "Misyonumuz",
+        "values": "Değerlerimiz",
+        "team": "Ekibimiz",
+        "sponsors": "Destekçilerimiz"
+      },
+      "community": {
+        "channels": "Kanallar",
+        "join": "Katıl"
+      },
+      "sponsors": {
+        "logos": "Sponsorlarımız",
+        "contact": "Sponsor ol"
+      }
+    }
   },
   "Meta": {
     "defaultTitle": "YTÜ Blockchain Kulübü",
@@ -23,10 +38,6 @@
     "projects": {
       "title": "Projeler",
       "description": "Kulüp üyelerinin geliştirdiği blockchain ve açık kaynak projeleri."
-    },
-    "blog": {
-      "title": "Blog",
-      "description": "Blockchain, Ethereum, stablecoin ve zero-knowledge üzerine yazılar ve teknik analizler."
     },
     "community": {
       "title": "Topluluk",
@@ -60,10 +71,6 @@
       "projects": {
         "title": "Projeler",
         "description": "Birlikte açık kaynak projeler geliştiriyoruz."
-      },
-      "blog": {
-        "title": "Blog",
-        "description": "Ethereum'dan stablecoin'e teknik yazılar ve analizler."
       },
       "community": {
         "title": "Topluluk",
@@ -136,7 +143,7 @@
         },
         "content": {
           "name": "İçerik & Medya",
-          "role": "Blog, sosyal medya ve tasarım"
+          "role": "İçerik, sosyal medya ve tasarım"
         },
         "academic": {
           "name": "Akademik & Araştırma",
