@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-import { Separator } from '@/components/container';
 import {
   ProjectsGrid,
   ProjectsHeader,
@@ -35,7 +34,6 @@ export default async function ProjectsPage({
   return (
     <>
       <ProjectsHeader />
-      <Separator />
       <ProjectsGrid />
     </>
   );
