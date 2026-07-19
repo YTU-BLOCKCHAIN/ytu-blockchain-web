@@ -66,7 +66,7 @@ export function SponsorsLogos() {
   const t = useTranslations('Sponsors.logos');
 
   return (
-    <section>
+    <section id="logos" className="scroll-mt-24">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
           <div aria-hidden className="max-sm:hidden">
@@ -124,7 +124,7 @@ export function SponsorsContact() {
   ];
 
   return (
-    <section>
+    <section id="contact" className="scroll-mt-24">
       <Container asGrid className="@4xl:grid-cols-2">
         <div data-grid-content className="@4xl:p-12 p-6">
           <h2 className="text-foreground font-medium">{t('form.heading')}</h2>
