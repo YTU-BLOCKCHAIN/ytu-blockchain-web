@@ -1,19 +1,35 @@
 'use client';
 
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Container, Separator } from '@/components/container';
 import { Logo } from '@/components/logo';
-import { buttonClasses } from '@/components/ui/button';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+import { ButtonLink } from '@/components/ui/button';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu';
 import { Link } from '@/i18n/navigation';
+import { cn } from '@/lib/utils';
 
 /**
- * Nav yapısı. `sections` varsa dropdown açılır; öğeler ilgili sayfanın
- * bölümüne kaydıran hash anchor'larıdır (yeni sayfa yok — bölümlere id
- * eklenmiştir). `label` doğrudan i18n anahtarıdır (next-intl tip güvenliği için
- * literal). `sections` yoksa düz link. `as const` → t() anahtarları literal.
+ * Nav yapısı. `sections` varsa Tailark grid-2 mega-menü (NavigationMenuContent)
+ * açılır; öğeler ilgili sayfanın bölümüne kayan hash anchor'lardır. `label`
+ * doğrudan i18n anahtarı (next-intl tip güvenliği için literal); `sections`
+ * yoksa düz link. `as const` → t() anahtarları literal.
  */
 const NAV = [
   {
@@ -46,152 +62,206 @@ const NAV = [
   { key: 'contact', href: '/contact' },
 ] as const;
 
-const triggerClass =
-  'text-muted-foreground hover:text-foreground rounded-md px-3 py-1.5 text-sm font-medium transition-colors';
-
 export default function Header() {
   const t = useTranslations('Nav');
-  const [open, setOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
 
-  useEffect(() => {
-    if (!open) return;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+  React.useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  React.useEffect(() => {
+    const original = document.body.style.overflow;
+    if (isMobileMenuOpen) document.body.style.overflow = 'hidden';
     return () => {
-      document.body.style.overflow = previous;
+      document.body.style.overflow = original;
     };
-  }, [open]);
+  }, [isMobileMenuOpen]);
 
   return (
     <>
-      {/* Üstte boşluk bandı — sayfanın grid çerçevesiyle (yan raylar) hizalı;
-          sayfa başında görünür, kaydırınca header üste yapışır. */}
-      <Separator className="h-6" />
-      <header role="banner" className="sticky top-0 z-50">
-        <Container className="border-foreground/11 border backdrop-blur">
-          <div className="relative flex items-center justify-between gap-6 px-6 py-4 lg:px-10">
-            <Link
-              href="/"
-              aria-label="home"
-              className="relative z-10 flex items-center"
-            >
-              <Logo />
-            </Link>
+      {/* Üstte boşluk bandı — template gibi hafif zemin tonu, öyle ki gridin
+          yan rayları ve çizgileri header bölgesinde de görünür. */}
+      <div aria-hidden className="bg-foreground/10">
+        <Separator className="h-6" />
+      </div>
+      <header
+        role="banner"
+        data-state={isMobileMenuOpen ? 'active' : 'inactive'}
+        {...(isScrolled && { 'data-scrolled': true })}
+        className="lg:data-scrolled:pb-[0.5px] bg-foreground/10 sticky inset-x-0 top-0 z-50 max-lg:pb-px"
+      >
+        <div
+          className={cn(
+            'w-full max-lg:h-14 max-lg:overflow-hidden',
+            isMobileMenuOpen &&
+              'bg-background/75 max-lg:h-screen! max-lg:overflow-visible! backdrop-blur',
+          )}
+        >
+          <Container className="backdrop-blur">
+            <div className="relative flex flex-wrap items-center justify-between px-6 lg:px-12 lg:py-5">
+              <div className="z-51 relative flex justify-between gap-8 max-lg:h-14 max-lg:w-full">
+                <Link href="/" aria-label="home" className="flex items-center">
+                  <Logo />
+                </Link>
 
-            {/* Masaüstü: ortalanmış nav (Tailark grid-2 deseni). */}
-            <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 lg:flex">
-              {NAV.map((item) =>
-                'sections' in item ? (
-                  <div key={item.key} className="group relative">
-                    <Link
-                      href={item.href}
-                      className={`${triggerClass} flex items-center gap-1`}
-                    >
-                      {t(item.key)}
-                      <ChevronDown
-                        aria-hidden
-                        className="size-3.5 opacity-70 transition-transform duration-200 group-hover:rotate-180"
-                      />
-                    </Link>
-                    <div className="absolute left-1/2 top-full z-50 hidden -translate-x-1/2 pt-2 group-hover:block">
-                      <ul className="border-border bg-popover min-w-48 rounded-lg border p-1.5 shadow-lg">
-                        {item.sections.map((section) => (
-                          <li key={section.label}>
-                            <Link
-                              href={section.href}
-                              className="text-foreground hover:bg-muted block rounded-md px-3 py-2 text-sm"
-                            >
-                              {t(section.label)}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ) : (
-                  <Link
-                    key={item.key}
-                    href={item.href}
-                    className={triggerClass}
-                  >
-                    {t(item.key)}
-                  </Link>
-                ),
+                <button
+                  type="button"
+                  onClick={() => setIsMobileMenuOpen((v) => !v)}
+                  aria-label={isMobileMenuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+                  aria-expanded={isMobileMenuOpen}
+                  className="text-foreground relative z-20 -m-2.5 -mr-3 block cursor-pointer p-2.5 lg:hidden"
+                >
+                  <Menu className="in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0 m-auto size-5 duration-200" />
+                  <X className="in-data-[state=active]:rotate-0 in-data-[state=active]:scale-100 in-data-[state=active]:opacity-100 absolute inset-0 m-auto size-5 -rotate-180 scale-0 opacity-0 duration-200" />
+                </button>
+              </div>
+
+              {/* Masaüstü: ortalanmış mega-menü nav (Tailark grid-2). */}
+              <div className="absolute inset-0 m-auto size-fit max-lg:hidden">
+                <NavMenu />
+              </div>
+
+              {isMobileMenuOpen && (
+                <div className="w-full lg:hidden">
+                  <MobileMenu closeMenu={() => setIsMobileMenuOpen(false)} />
+                </div>
               )}
-            </nav>
 
-            <div className="relative z-10 flex items-center gap-2">
-              <Link
-                href="/join"
-                className={buttonClasses({
-                  size: 'sm',
-                  className: 'max-lg:hidden',
-                })}
-              >
-                {t('join')}
-              </Link>
-              <button
-                type="button"
-                aria-label={open ? 'Menüyü kapat' : 'Menüyü aç'}
-                aria-expanded={open}
-                onClick={() => setOpen((value) => !value)}
-                className="text-foreground -mr-2 p-2 lg:hidden"
-              >
-                {open ? <X className="size-5" /> : <Menu className="size-5" />}
-              </button>
+              <div className="z-51 max-lg:in-data-[state=active]:mt-6 in-data-[state=active]:flex relative mb-6 hidden w-full flex-wrap items-center justify-end lg:m-0 lg:flex lg:w-fit lg:p-0">
+                <ButtonLink href="/join" size="sm" className="max-lg:w-full">
+                  {t('join')}
+                </ButtonLink>
+              </div>
             </div>
-          </div>
-        </Container>
-
-        {open && (
-          <Container className="backdrop-blur lg:hidden">
-            <MobileNav onNavigate={() => setOpen(false)} />
           </Container>
-        )}
+        </div>
       </header>
     </>
   );
 }
 
-function MobileNav({ onNavigate }: { onNavigate: () => void }) {
+/** Masaüstü mega-menü — sections'lı öğeler açılır panel, diğerleri düz link. */
+function NavMenu() {
   const t = useTranslations('Nav');
 
   return (
-    <nav role="navigation" className="flex flex-col gap-1 px-6 py-4">
-      {NAV.map((item) => (
-        <div key={item.key}>
+    <NavigationMenu className="**:data-[slot=navigation-menu-viewport]:min-w-276 [--viewport-outer-px:2rem] max-lg:hidden">
+      <NavigationMenuList className="gap-3">
+        {NAV.map((item) =>
+          'sections' in item ? (
+            <NavigationMenuItem key={item.key} value={item.key}>
+              <NavigationMenuTrigger>{t(item.key)}</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-full gap-1 sm:grid-cols-2">
+                  {item.sections.map((section) => (
+                    <ListItem
+                      key={section.label}
+                      href={section.href}
+                      title={t(section.label)}
+                    />
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          ) : (
+            <NavigationMenuItem key={item.key} value={item.key}>
+              <NavigationMenuLink
+                asChild
+                className={navigationMenuTriggerStyle()}
+              >
+                <Link href={item.href}>{t(item.key)}</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          ),
+        )}
+      </NavigationMenuList>
+    </NavigationMenu>
+  );
+}
+
+function ListItem({ title, href }: { title: string; href: string }) {
+  return (
+    <li>
+      <NavigationMenuLink asChild className="group rounded-xl p-3">
+        <Link href={href} className="grid gap-1">
+          <span className="text-foreground flex items-center gap-2 text-sm font-medium">
+            {title}
+            <ArrowRight
+              aria-hidden
+              strokeWidth={2.5}
+              className="not-group-hover:opacity-0 not-group-hover:-translate-x-1 size-3 duration-200"
+            />
+          </span>
+        </Link>
+      </NavigationMenuLink>
+    </li>
+  );
+}
+
+/** Mobil menü — Accordion (sections'lı) + düz linkler + CTA. */
+function MobileMenu({ closeMenu }: { closeMenu: () => void }) {
+  const t = useTranslations('Nav');
+
+  return (
+    <nav
+      role="navigation"
+      className="w-full [--color-muted:--alpha(var(--color-foreground)/5%)]"
+    >
+      <Accordion
+        type="single"
+        collapsible
+        className="**:hover:no-underline -mx-4 mt-0.5 space-y-0.5"
+      >
+        {NAV.map((item) =>
+          'sections' in item ? (
+            <AccordionItem
+              key={item.key}
+              value={item.key}
+              className="group relative border-b-0"
+            >
+              <AccordionTrigger className="**:font-normal! data-[state=open]:bg-muted flex items-center justify-between px-4 py-3 text-lg">
+                {t(item.key)}
+              </AccordionTrigger>
+              <AccordionContent className="pb-5">
+                <ul>
+                  {item.sections.map((section) => (
+                    <li key={section.label}>
+                      <Link
+                        href={section.href}
+                        onClick={closeMenu}
+                        className="text-muted-foreground block gap-2.5 px-4 py-3 text-lg"
+                      >
+                        {t(section.label)}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          ) : null,
+        )}
+      </Accordion>
+
+      {NAV.map((item) =>
+        'sections' in item ? null : (
           <Link
+            key={item.key}
             href={item.href}
-            onClick={onNavigate}
-            className="text-foreground block py-2 font-medium"
+            onClick={closeMenu}
+            className="group relative block py-4 text-lg"
           >
             {t(item.key)}
           </Link>
-          {'sections' in item && (
-            <ul className="border-border ml-2 flex flex-col border-l pl-3">
-              {item.sections.map((section) => (
-                <li key={section.label}>
-                  <Link
-                    href={section.href}
-                    onClick={onNavigate}
-                    className="text-muted-foreground hover:text-foreground block py-1.5 text-sm"
-                  >
-                    {t(section.label)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      ))}
+        ),
+      )}
 
-      <Link
-        href="/join"
-        onClick={onNavigate}
-        className={buttonClasses({ size: 'sm', className: 'mt-3 w-full' })}
-      >
+      <ButtonLink href="/join" onClick={closeMenu} className="mt-4 w-full">
         {t('join')}
-      </Link>
+      </ButtonLink>
     </nav>
   );
 }

@@ -281,8 +281,8 @@
       --destructive: var(--color-red-700);
       --destructive-foreground: var(--color-white);
 
-      --border: --alpha(var(--foreground) / 7.5%);
-      --border-illustration: --alpha(var(--foreground) / 7.5%);
+      --border: --alpha(var(--foreground) / 10%);
+      --border-illustration: --alpha(var(--foreground) / 10%);
       --input: --alpha(var(--foreground) / 7.5%);
       --ring: var(--color-zinc-600);
     }
