@@ -6,7 +6,31 @@
     "community": "Community",
     "sponsors": "Sponsors",
     "contact": "Contact",
-    "join": "Join us"
+    "join": "Join us",
+    "sections": {
+      "about": {
+        "mission": "Mission",
+        "missionDesc": "Our goal to make blockchain accessible on campus",
+        "values": "Values",
+        "valuesDesc": "The principles behind every decision",
+        "team": "Team",
+        "teamDesc": "The committees that run the club together",
+        "sponsors": "Supporters",
+        "sponsorsDesc": "The organizations that make our community possible"
+      },
+      "community": {
+        "channels": "Channels",
+        "channelsDesc": "Join us on GitHub, X and Instagram",
+        "join": "Join",
+        "joinDesc": "Become a member and take part"
+      },
+      "sponsors": {
+        "logos": "Our sponsors",
+        "logosDesc": "The organizations backing us",
+        "contact": "Become a sponsor",
+        "contactDesc": "Reach talent, grow your brand"
+      }
+    }
   },
   "Meta": {
     "defaultTitle": "YTÜ Blockchain Club",

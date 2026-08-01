@@ -6,7 +6,31 @@
     "community": "Topluluk",
     "sponsors": "Sponsorlar",
     "contact": "İletişim",
-    "join": "Bize Katıl"
+    "join": "Bize Katıl",
+    "sections": {
+      "about": {
+        "mission": "Misyonumuz",
+        "missionDesc": "Kampüste blockchain'i erişilebilir kılma amacımız",
+        "values": "Değerlerimiz",
+        "valuesDesc": "Her kararımıza yön veren ilkeler",
+        "team": "Ekibimiz",
+        "teamDesc": "Kulübü birlikte yürüten komiteler",
+        "sponsors": "Destekçilerimiz",
+        "sponsorsDesc": "Topluluğumuzu mümkün kılan kurumlar"
+      },
+      "community": {
+        "channels": "Kanallar",
+        "channelsDesc": "GitHub, X ve Instagram'da bize katıl",
+        "join": "Katıl",
+        "joinDesc": "Üye ol, topluluğun parçası ol"
+      },
+      "sponsors": {
+        "logos": "Sponsorlarımız",
+        "logosDesc": "Bize destek olan kurumlar",
+        "contact": "Sponsor ol",
+        "contactDesc": "Yeteneğe erişin, markanızı tanıtın"
+      }
+    }
   },
   "Meta": {
     "defaultTitle": "YTÜ Blockchain Kulübü",
