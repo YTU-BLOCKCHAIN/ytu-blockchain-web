@@ -210,7 +210,13 @@ function NavMenu() {
         {NAV.map((item) =>
           'sections' in item ? (
             <NavigationMenuItem key={item.key} value={item.key}>
-              <NavigationMenuTrigger>{t(item.key)}</NavigationMenuTrigger>
+              {/* Trigger'ın kendisi gerçek bir <a>: fare üzerine gelince radix
+                  dropdown'ı açıyor, tıklayınca sayfaya gidiyor. Radix'in click
+                  handler'ı açık menüyü kapatıyor (onItemSelect toggle), Next
+                  Link de ardından yönlendiriyor — ikisi çakışmıyor. */}
+              <NavigationMenuTrigger asChild>
+                <Link href={item.href}>{t(item.key)}</Link>
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="w-[38rem] max-w-[calc(100vw-4rem)]">
                   {/* Kategori başlığı (template: "Features" / "More Features"). */}
