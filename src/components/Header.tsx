@@ -202,7 +202,7 @@ function NavMenu() {
   const t = useTranslations('Nav');
 
   return (
-    <NavigationMenu className="**:data-[slot=navigation-menu-link]:relative **:data-[slot=navigation-menu-link]:z-51 **:data-[slot=navigation-menu-trigger]:relative **:data-[slot=navigation-menu-trigger]:z-51 [--viewport-outer-px:2rem] max-lg:hidden">
+    <NavigationMenu className="**:data-[slot=navigation-menu-link]:relative **:data-[slot=navigation-menu-link]:z-51 **:data-[slot=navigation-menu-trigger]:relative **:data-[slot=navigation-menu-trigger]:z-51 **:data-[slot=navigation-menu-viewport]:min-w-276 [--viewport-outer-px:2rem] max-lg:hidden">
       <NavigationMenuList className="gap-3">
         {NAV.map((item) =>
           'sections' in item ? (
