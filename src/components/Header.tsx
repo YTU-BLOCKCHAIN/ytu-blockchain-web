@@ -26,14 +26,21 @@ import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
 /**
- * Nav — `sections` olan öğeler dropdown (radix NavigationMenu, template gibi),
- * diğerleri düz link. Dropdown linkleri ilgili sayfanın bölümüne kayar.
- * `label`/`desc` doğrudan i18n anahtarı (`as const` → literal, tip güvenli).
+ * Nav — `sections` olan öğeler zengin dropdown (radix NavigationMenu, template
+ * grid-2 gibi: kategori başlığı + başlık/açıklamalı öğeler + tanıtım kartı),
+ * diğerleri düz link. `label`/`desc`/`heading`/`promo.*` doğrudan i18n anahtarı
+ * (`as const` → literal, tip güvenli).
  */
 const NAV = [
   {
     key: 'about',
     href: '/about',
+    heading: 'menu.about.heading',
+    promo: {
+      href: '/join',
+      title: 'menu.about.promo.title',
+      desc: 'menu.about.promo.desc',
+    },
     sections: [
       {
         href: '/about#mission',
@@ -60,6 +67,12 @@ const NAV = [
   {
     key: 'community',
     href: '/community',
+    heading: 'menu.community.heading',
+    promo: {
+      href: '/join',
+      title: 'menu.community.promo.title',
+      desc: 'menu.community.promo.desc',
+    },
     sections: [
       {
         href: '/community#channels',
@@ -76,6 +89,12 @@ const NAV = [
   {
     key: 'sponsors',
     href: '/sponsors',
+    heading: 'menu.sponsors.heading',
+    promo: {
+      href: '/sponsors#contact',
+      title: 'menu.sponsors.promo.title',
+      desc: 'menu.sponsors.promo.desc',
+    },
     sections: [
       {
         href: '/sponsors#logos',
@@ -183,23 +202,49 @@ function NavMenu() {
   const t = useTranslations('Nav');
 
   return (
-    <NavigationMenu className="**:data-[slot=navigation-menu-link]:relative **:data-[slot=navigation-menu-link]:z-51 **:data-[slot=navigation-menu-trigger]:relative **:data-[slot=navigation-menu-trigger]:z-51 **:data-[slot=navigation-menu-viewport]:min-w-276 [--viewport-outer-px:2rem] max-lg:hidden">
+    <NavigationMenu className="**:data-[slot=navigation-menu-link]:relative **:data-[slot=navigation-menu-link]:z-51 **:data-[slot=navigation-menu-trigger]:relative **:data-[slot=navigation-menu-trigger]:z-51 [--viewport-outer-px:2rem] max-lg:hidden">
       <NavigationMenuList className="gap-3">
         {NAV.map((item) =>
           'sections' in item ? (
             <NavigationMenuItem key={item.key} value={item.key}>
               <NavigationMenuTrigger>{t(item.key)}</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid gap-1 sm:w-[28rem] sm:grid-cols-2">
-                  {item.sections.map((section) => (
-                    <ListItem
-                      key={section.label}
-                      href={section.href}
-                      title={t(section.label)}
-                      description={t(section.desc)}
+                <div className="w-[38rem] max-w-[calc(100vw-4rem)]">
+                  {/* Kategori başlığı (template: "Features" / "More Features"). */}
+                  <span className="text-muted-foreground ml-3 block border-b pb-3 text-sm">
+                    {t(item.heading)}
+                  </span>
+
+                  <ul className="mt-2 grid grid-cols-2 gap-1">
+                    {item.sections.map((section) => (
+                      <ListItem
+                        key={section.label}
+                        href={section.href}
+                        title={t(section.label)}
+                        description={t(section.desc)}
+                      />
+                    ))}
+                  </ul>
+
+                  {/* Tanıtım kartı (template: gradient ikon + başlık + açıklama). */}
+                  <div className="relative m-3 grid grid-cols-[auto_1fr] items-center gap-3 border-t pt-6">
+                    <div
+                      aria-hidden
+                      className="bg-linear-to-br inset-ring-foreground/10 inset-ring-1 size-11 shrink-0 rounded-xl from-blue-400 to-indigo-500"
                     />
-                  ))}
-                </ul>
+                    <div className="space-y-0.5">
+                      <Link
+                        href={item.promo.href}
+                        className="text-foreground text-sm font-medium before:absolute before:inset-0"
+                      >
+                        {t(item.promo.title)}
+                      </Link>
+                      <p className="text-foreground/60 line-clamp-1 text-sm">
+                        {t(item.promo.desc)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
           ) : (

@@ -30,6 +30,29 @@
         "contact": "Become a sponsor",
         "contactDesc": "Reach talent, grow your brand"
       }
+    },
+    "menu": {
+      "about": {
+        "heading": "Get to know us",
+        "promo": {
+          "title": "Join us",
+          "desc": "No experience needed — curiosity is enough"
+        }
+      },
+      "community": {
+        "heading": "Connect",
+        "promo": {
+          "title": "Become a member",
+          "desc": "Be part of the community"
+        }
+      },
+      "sponsors": {
+        "heading": "Support us",
+        "promo": {
+          "title": "Become a sponsor",
+          "desc": "Reach talent, grow your brand"
+        }
+      }
     }
   },
   "Meta": {
