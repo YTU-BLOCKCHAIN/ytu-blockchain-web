@@ -114,7 +114,10 @@ function NavigationMenuViewport({
         <NavigationMenuPrimitive.Viewport
           data-slot="navigation-menu-viewport"
           className={cn(
-            'bg-popover text-popover-foreground h-(--radix-navigation-menu-viewport-height) ring-border md:w-(--radix-navigation-menu-viewport-width) relative w-full origin-top overflow-hidden rounded-b-3xl rounded-t p-0.5 shadow-2xl shadow-black/10 ring-1 transition-[width,height] duration-200',
+            // transition süresi/eğrisi içeriğin enter/exit animasyonuyla (0.3s
+            // ease-out) AYNI olmalı: kutu 200ms'de durup içerik 300ms boyunca
+            // kaymaya devam edince geçiş iki aşamalı, takılıyormuş gibi görünür.
+            'bg-popover text-popover-foreground h-(--radix-navigation-menu-viewport-height) ring-border md:w-(--radix-navigation-menu-viewport-width) relative w-full origin-top overflow-hidden rounded-b-3xl rounded-t p-0.5 shadow-2xl shadow-black/10 ring-1 transition-[width,height] duration-300 ease-out',
             className,
           )}
           {...props}
