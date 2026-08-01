@@ -180,8 +180,11 @@ export default function Header() {
                 </div>
               )}
 
-              <div className="z-51 max-lg:in-data-[state=active]:mt-6 in-data-[state=active]:flex relative mb-6 hidden w-full flex-wrap items-center justify-end lg:m-0 lg:flex lg:w-fit lg:p-0">
-                <ButtonLink href="/join" size="sm" className="max-lg:w-full">
+              {/* Yalnızca masaüstü CTA — mobilde MobileMenu kendi "Bize Katıl"
+                  butonunu render ediyor (o, tıklanınca menüyü de kapatıyor).
+                  Burayı mobilde göstermek iki özdeş buton demek. */}
+              <div className="z-51 relative hidden items-center justify-end lg:flex">
+                <ButtonLink href="/join" size="sm">
                   {t('join')}
                 </ButtonLink>
               </div>
