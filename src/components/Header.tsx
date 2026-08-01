@@ -1,66 +1,30 @@
 'use client';
 
-import { ArrowRight, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { Container, Separator } from '@/components/container';
 import { Logo } from '@/components/logo';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
 import { ButtonLink } from '@/components/ui/button';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
 /**
- * Nav yapısı. `sections` varsa Tailark grid-2 mega-menü (NavigationMenuContent)
- * açılır; öğeler ilgili sayfanın bölümüne kayan hash anchor'lardır. `label`
- * doğrudan i18n anahtarı (next-intl tip güvenliği için literal); `sections`
- * yoksa düz link. `as const` → t() anahtarları literal.
+ * Nav — hepsi düz link; tıklanınca ilgili sayfaya gider. Dropdown YOK.
+ * (Radix NavigationMenu'nün fixed Viewport katmanı header'ın üstünü kaplayıp
+ * tıklamaları yutuyordu; o yüzden radix header'dan tamamen çıkarıldı.)
  */
 const NAV = [
-  {
-    key: 'about',
-    href: '/about',
-    sections: [
-      { href: '/about#mission', label: 'sections.about.mission' },
-      { href: '/about#values', label: 'sections.about.values' },
-      { href: '/about#team', label: 'sections.about.team' },
-      { href: '/about#sponsors', label: 'sections.about.sponsors' },
-    ],
-  },
-  {
-    key: 'community',
-    href: '/community',
-    sections: [
-      { href: '/community#channels', label: 'sections.community.channels' },
-      { href: '/community#join', label: 'sections.community.join' },
-    ],
-  },
-  {
-    key: 'sponsors',
-    href: '/sponsors',
-    sections: [
-      { href: '/sponsors#logos', label: 'sections.sponsors.logos' },
-      { href: '/sponsors#contact', label: 'sections.sponsors.contact' },
-    ],
-  },
+  { key: 'about', href: '/about' },
+  { key: 'community', href: '/community' },
+  { key: 'sponsors', href: '/sponsors' },
   { key: 'projects', href: '/projects' },
   { key: 'contact', href: '/contact' },
 ] as const;
+
+const navLinkClass =
+  'text-muted-foreground hover:text-foreground hover:bg-foreground/5 inline-flex h-8 items-center rounded-md px-4 text-sm font-medium transition-colors';
 
 export default function Header() {
   const t = useTranslations('Nav');
@@ -83,8 +47,8 @@ export default function Header() {
 
   return (
     <>
-      {/* Üstte boşluk bandı — template gibi hafif zemin tonu, öyle ki gridin
-          yan rayları ve çizgileri header bölgesinde de görünür. */}
+      {/* Üstte boşluk bandı — template gibi hafif zemin tonu, gridin yan
+          rayları ve çizgileri header bölgesinde de görünür. */}
       <div aria-hidden className="bg-foreground/10">
         <Separator className="h-6" />
       </div>
@@ -120,19 +84,44 @@ export default function Header() {
                 </button>
               </div>
 
-              {/* Masaüstü: ortalanmış mega-menü nav (Tailark grid-2). */}
-              <div className="absolute inset-0 m-auto size-fit max-lg:hidden">
-                <NavMenu />
-              </div>
+              {/* Masaüstü: ortalanmış nav — düz linkler, tıklanınca sayfaya gider. */}
+              <nav className="absolute inset-0 m-auto hidden size-fit items-center gap-1 lg:flex">
+                {NAV.map((item) => (
+                  <Link
+                    key={item.key}
+                    href={item.href}
+                    className={navLinkClass}
+                  >
+                    {t(item.key)}
+                  </Link>
+                ))}
+              </nav>
 
+              {/* Mobil menü — düz linkler + CTA (açılınca). */}
               {isMobileMenuOpen && (
-                <div className="w-full lg:hidden">
-                  <MobileMenu closeMenu={() => setIsMobileMenuOpen(false)} />
-                </div>
+                <nav className="w-full lg:hidden">
+                  {NAV.map((item) => (
+                    <Link
+                      key={item.key}
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="text-foreground block py-4 text-lg"
+                    >
+                      {t(item.key)}
+                    </Link>
+                  ))}
+                  <ButtonLink
+                    href="/join"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="mt-4 w-full"
+                  >
+                    {t('join')}
+                  </ButtonLink>
+                </nav>
               )}
 
-              <div className="z-51 max-lg:in-data-[state=active]:mt-6 in-data-[state=active]:flex relative mb-6 hidden w-full flex-wrap items-center justify-end lg:m-0 lg:flex lg:w-fit lg:p-0">
-                <ButtonLink href="/join" size="sm" className="max-lg:w-full">
+              <div className="z-51 relative hidden lg:flex lg:w-fit">
+                <ButtonLink href="/join" size="sm">
                   {t('join')}
                 </ButtonLink>
               </div>
@@ -141,127 +130,5 @@ export default function Header() {
         </div>
       </header>
     </>
-  );
-}
-
-/** Masaüstü mega-menü — sections'lı öğeler açılır panel, diğerleri düz link. */
-function NavMenu() {
-  const t = useTranslations('Nav');
-
-  return (
-    <NavigationMenu className="**:data-[slot=navigation-menu-viewport]:min-w-276 [--viewport-outer-px:2rem] max-lg:hidden">
-      <NavigationMenuList className="gap-3">
-        {NAV.map((item) =>
-          'sections' in item ? (
-            <NavigationMenuItem key={item.key} value={item.key}>
-              <NavigationMenuTrigger>{t(item.key)}</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-full gap-1 sm:grid-cols-2">
-                  {item.sections.map((section) => (
-                    <ListItem
-                      key={section.label}
-                      href={section.href}
-                      title={t(section.label)}
-                    />
-                  ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          ) : (
-            <NavigationMenuItem key={item.key} value={item.key}>
-              <NavigationMenuLink
-                asChild
-                className={navigationMenuTriggerStyle()}
-              >
-                <Link href={item.href}>{t(item.key)}</Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          ),
-        )}
-      </NavigationMenuList>
-    </NavigationMenu>
-  );
-}
-
-function ListItem({ title, href }: { title: string; href: string }) {
-  return (
-    <li>
-      <NavigationMenuLink asChild className="group rounded-xl p-3">
-        <Link href={href} className="grid gap-1">
-          <span className="text-foreground flex items-center gap-2 text-sm font-medium">
-            {title}
-            <ArrowRight
-              aria-hidden
-              strokeWidth={2.5}
-              className="not-group-hover:opacity-0 not-group-hover:-translate-x-1 size-3 duration-200"
-            />
-          </span>
-        </Link>
-      </NavigationMenuLink>
-    </li>
-  );
-}
-
-/** Mobil menü — Accordion (sections'lı) + düz linkler + CTA. */
-function MobileMenu({ closeMenu }: { closeMenu: () => void }) {
-  const t = useTranslations('Nav');
-
-  return (
-    <nav
-      role="navigation"
-      className="w-full [--color-muted:--alpha(var(--color-foreground)/5%)]"
-    >
-      <Accordion
-        type="single"
-        collapsible
-        className="**:hover:no-underline -mx-4 mt-0.5 space-y-0.5"
-      >
-        {NAV.map((item) =>
-          'sections' in item ? (
-            <AccordionItem
-              key={item.key}
-              value={item.key}
-              className="group relative border-b-0"
-            >
-              <AccordionTrigger className="**:font-normal! data-[state=open]:bg-muted flex items-center justify-between px-4 py-3 text-lg">
-                {t(item.key)}
-              </AccordionTrigger>
-              <AccordionContent className="pb-5">
-                <ul>
-                  {item.sections.map((section) => (
-                    <li key={section.label}>
-                      <Link
-                        href={section.href}
-                        onClick={closeMenu}
-                        className="text-muted-foreground block gap-2.5 px-4 py-3 text-lg"
-                      >
-                        {t(section.label)}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
-          ) : null,
-        )}
-      </Accordion>
-
-      {NAV.map((item) =>
-        'sections' in item ? null : (
-          <Link
-            key={item.key}
-            href={item.href}
-            onClick={closeMenu}
-            className="group relative block py-4 text-lg"
-          >
-            {t(item.key)}
-          </Link>
-        ),
-      )}
-
-      <ButtonLink href="/join" onClick={closeMenu} className="mt-4 w-full">
-        {t('join')}
-      </ButtonLink>
-    </nav>
   );
 }

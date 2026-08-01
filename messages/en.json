@@ -6,23 +6,7 @@
     "community": "Community",
     "sponsors": "Sponsors",
     "contact": "Contact",
-    "join": "Join us",
-    "sections": {
-      "about": {
-        "mission": "Mission",
-        "values": "Values",
-        "team": "Team",
-        "sponsors": "Supporters"
-      },
-      "community": {
-        "channels": "Channels",
-        "join": "Join"
-      },
-      "sponsors": {
-        "logos": "Our sponsors",
-        "contact": "Become a sponsor"
-      }
-    }
+    "join": "Join us"
   },
   "Meta": {
     "defaultTitle": "YTÜ Blockchain Club",
@@ -96,7 +80,25 @@
     "hero": {
       "eyebrow": "About us",
       "title": "Making blockchain something you can learn, build and share at YTÜ",
-      "intro": "YTÜ Blockchain Club brings together students at Yıldız Technical University who are curious about blockchain, DeFi, zero-knowledge and open-source technologies. No experience required — we learn and build together."
+      "intro": "YTÜ Blockchain Club brings together students at Yıldız Technical University who are curious about blockchain, DeFi, zero-knowledge and open-source technologies. No experience required — we learn and build together.",
+      "stats": {
+        "members": {
+          "value": "50+",
+          "label": "active members"
+        },
+        "projects": {
+          "value": "30+",
+          "label": "projects"
+        },
+        "countries": {
+          "value": "20+",
+          "label": "countries"
+        },
+        "founded": {
+          "value": "2021",
+          "label": "founded"
+        }
+      }
     },
     "mission": {
       "heading": "Our Mission",

@@ -6,23 +6,7 @@
     "community": "Topluluk",
     "sponsors": "Sponsorlar",
     "contact": "İletişim",
-    "join": "Bize Katıl",
-    "sections": {
-      "about": {
-        "mission": "Misyonumuz",
-        "values": "Değerlerimiz",
-        "team": "Ekibimiz",
-        "sponsors": "Destekçilerimiz"
-      },
-      "community": {
-        "channels": "Kanallar",
-        "join": "Katıl"
-      },
-      "sponsors": {
-        "logos": "Sponsorlarımız",
-        "contact": "Sponsor ol"
-      }
-    }
+    "join": "Bize Katıl"
   },
   "Meta": {
     "defaultTitle": "YTÜ Blockchain Kulübü",
@@ -96,7 +80,25 @@
     "hero": {
       "eyebrow": "Hakkımızda",
       "title": "Blockchain'i YTÜ'de öğrenilebilir, üretilebilir ve paylaşılabilir kılıyoruz",
-      "intro": "YTÜ Blockchain Kulübü, Yıldız Teknik Üniversitesi'nde blockchain, DeFi, zero-knowledge ve açık kaynak teknolojilerine meraklı öğrencileri bir araya getirir. Deneyim şart değil — birlikte öğreniyor, birlikte üretiyoruz."
+      "intro": "YTÜ Blockchain Kulübü, Yıldız Teknik Üniversitesi'nde blockchain, DeFi, zero-knowledge ve açık kaynak teknolojilerine meraklı öğrencileri bir araya getirir. Deneyim şart değil — birlikte öğreniyor, birlikte üretiyoruz.",
+      "stats": {
+        "members": {
+          "value": "50+",
+          "label": "aktif üye"
+        },
+        "projects": {
+          "value": "30+",
+          "label": "proje"
+        },
+        "countries": {
+          "value": "20+",
+          "label": "ülke"
+        },
+        "founded": {
+          "value": "2021",
+          "label": "kuruluş"
+        }
+      }
     },
     "mission": {
       "heading": "Misyonumuz",
