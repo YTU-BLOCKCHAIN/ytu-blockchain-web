@@ -106,6 +106,10 @@
       "community": {
         "title": "Community",
         "description": "An active community on Telegram, GitHub and at events."
+      },
+      "sponsorships": {
+        "title": "Sponsorships",
+        "description": "We grow our events and projects through corporate partnerships."
       }
     },
     "manifesto": {

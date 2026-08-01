@@ -106,6 +106,10 @@
       "community": {
         "title": "Topluluk",
         "description": "Telegram, GitHub ve etkinliklerle aktif bir topluluk."
+      },
+      "sponsorships": {
+        "title": "Sponsorluklar",
+        "description": "Kurumsal iş birlikleriyle etkinliklerimizi ve projelerimizi büyütüyoruz."
       }
     },
     "manifesto": {
