@@ -63,20 +63,41 @@ const navigationMenuTriggerStyle = cva(
 function NavigationMenuTrigger({
   className,
   children,
+  asChild,
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>) {
+  const chevron = (
+    <ChevronDownIcon
+      className="relative top-px ml-1.5 size-3 opacity-75 transition duration-300 group-data-[state=open]:translate-y-px"
+      aria-hidden="true"
+      strokeWidth={2.5}
+    />
+  );
+
   return (
     <NavigationMenuPrimitive.Trigger
       data-slot="navigation-menu-trigger"
+      asChild={asChild}
       className={cn(navigationMenuTriggerStyle(), 'group', className)}
       {...props}
     >
-      {children}{' '}
-      <ChevronDownIcon
-        className="relative top-px ml-1.5 size-3 opacity-75 transition duration-300 group-data-[state=open]:translate-y-px"
-        aria-hidden="true"
-        strokeWidth={2.5}
-      />
+      {/* asChild ile trigger'ın kendisi <a> olabiliyor (tıklanabilir başlık).
+          Slot TEK çocuk istediği için chevron'u child'ın içine enjekte ediyoruz;
+          aksi halde "React.Children.only" hatası alınır. */}
+      {asChild &&
+      React.isValidElement<{ children?: React.ReactNode }>(children) ? (
+        React.cloneElement(
+          children,
+          undefined,
+          <>
+            {children.props.children} {chevron}
+          </>,
+        )
+      ) : (
+        <>
+          {children} {chevron}
+        </>
+      )}
     </NavigationMenuPrimitive.Trigger>
   );
 }
