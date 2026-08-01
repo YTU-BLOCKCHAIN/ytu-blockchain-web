@@ -10,17 +10,48 @@
     "sections": {
       "about": {
         "mission": "Misyonumuz",
+        "missionDesc": "Kampüste blockchain'i erişilebilir kılma amacımız",
         "values": "Değerlerimiz",
+        "valuesDesc": "Her kararımıza yön veren ilkeler",
         "team": "Ekibimiz",
-        "sponsors": "Destekçilerimiz"
+        "teamDesc": "Kulübü birlikte yürüten komiteler",
+        "sponsors": "Destekçilerimiz",
+        "sponsorsDesc": "Topluluğumuzu mümkün kılan kurumlar"
       },
       "community": {
         "channels": "Kanallar",
-        "join": "Katıl"
+        "channelsDesc": "GitHub, X ve Instagram'da bize katıl",
+        "join": "Katıl",
+        "joinDesc": "Üye ol, topluluğun parçası ol"
       },
       "sponsors": {
         "logos": "Sponsorlarımız",
-        "contact": "Sponsor ol"
+        "logosDesc": "Bize destek olan kurumlar",
+        "contact": "Sponsor ol",
+        "contactDesc": "Yeteneğe erişin, markanızı tanıtın"
+      }
+    },
+    "menu": {
+      "about": {
+        "heading": "Kulübü tanı",
+        "promo": {
+          "title": "Aramıza katıl",
+          "desc": "Deneyim aramıyoruz — merak yeterli"
+        }
+      },
+      "community": {
+        "heading": "Bağlan",
+        "promo": {
+          "title": "Üye ol",
+          "desc": "Topluluğun bir parçası ol"
+        }
+      },
+      "sponsors": {
+        "heading": "Destek ol",
+        "promo": {
+          "title": "Sponsor ol",
+          "desc": "Yeteneğe erişin, markanızı tanıtın"
+        }
       }
     }
   },
@@ -75,6 +106,10 @@
       "community": {
         "title": "Topluluk",
         "description": "Telegram, GitHub ve etkinliklerle aktif bir topluluk."
+      },
+      "sponsorships": {
+        "title": "Sponsorluklar",
+        "description": "Kurumsal iş birlikleriyle etkinliklerimizi ve projelerimizi büyütüyoruz."
       }
     },
     "manifesto": {
@@ -96,7 +131,25 @@
     "hero": {
       "eyebrow": "Hakkımızda",
       "title": "Blockchain'i YTÜ'de öğrenilebilir, üretilebilir ve paylaşılabilir kılıyoruz",
-      "intro": "YTÜ Blockchain Kulübü, Yıldız Teknik Üniversitesi'nde blockchain, DeFi, zero-knowledge ve açık kaynak teknolojilerine meraklı öğrencileri bir araya getirir. Deneyim şart değil — birlikte öğreniyor, birlikte üretiyoruz."
+      "intro": "YTÜ Blockchain Kulübü, Yıldız Teknik Üniversitesi'nde blockchain, DeFi, zero-knowledge ve açık kaynak teknolojilerine meraklı öğrencileri bir araya getirir. Deneyim şart değil — birlikte öğreniyor, birlikte üretiyoruz.",
+      "stats": {
+        "members": {
+          "value": "50+",
+          "label": "aktif üye"
+        },
+        "projects": {
+          "value": "30+",
+          "label": "proje"
+        },
+        "countries": {
+          "value": "20+",
+          "label": "ülke"
+        },
+        "founded": {
+          "value": "2021",
+          "label": "kuruluş"
+        }
+      }
     },
     "mission": {
       "heading": "Misyonumuz",

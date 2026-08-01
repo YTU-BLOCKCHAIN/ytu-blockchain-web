@@ -10,17 +10,48 @@
     "sections": {
       "about": {
         "mission": "Mission",
+        "missionDesc": "Our goal to make blockchain accessible on campus",
         "values": "Values",
+        "valuesDesc": "The principles behind every decision",
         "team": "Team",
-        "sponsors": "Supporters"
+        "teamDesc": "The committees that run the club together",
+        "sponsors": "Supporters",
+        "sponsorsDesc": "The organizations that make our community possible"
       },
       "community": {
         "channels": "Channels",
-        "join": "Join"
+        "channelsDesc": "Join us on GitHub, X and Instagram",
+        "join": "Join",
+        "joinDesc": "Become a member and take part"
       },
       "sponsors": {
         "logos": "Our sponsors",
-        "contact": "Become a sponsor"
+        "logosDesc": "The organizations backing us",
+        "contact": "Become a sponsor",
+        "contactDesc": "Reach talent, grow your brand"
+      }
+    },
+    "menu": {
+      "about": {
+        "heading": "Get to know us",
+        "promo": {
+          "title": "Join us",
+          "desc": "No experience needed — curiosity is enough"
+        }
+      },
+      "community": {
+        "heading": "Connect",
+        "promo": {
+          "title": "Become a member",
+          "desc": "Be part of the community"
+        }
+      },
+      "sponsors": {
+        "heading": "Support us",
+        "promo": {
+          "title": "Become a sponsor",
+          "desc": "Reach talent, grow your brand"
+        }
       }
     }
   },
@@ -75,6 +106,10 @@
       "community": {
         "title": "Community",
         "description": "An active community on Telegram, GitHub and at events."
+      },
+      "sponsorships": {
+        "title": "Sponsorships",
+        "description": "We grow our events and projects through corporate partnerships."
       }
     },
     "manifesto": {
@@ -96,7 +131,25 @@
     "hero": {
       "eyebrow": "About us",
       "title": "Making blockchain something you can learn, build and share at YTÜ",
-      "intro": "YTÜ Blockchain Club brings together students at Yıldız Technical University who are curious about blockchain, DeFi, zero-knowledge and open-source technologies. No experience required — we learn and build together."
+      "intro": "YTÜ Blockchain Club brings together students at Yıldız Technical University who are curious about blockchain, DeFi, zero-knowledge and open-source technologies. No experience required — we learn and build together.",
+      "stats": {
+        "members": {
+          "value": "50+",
+          "label": "active members"
+        },
+        "projects": {
+          "value": "30+",
+          "label": "projects"
+        },
+        "countries": {
+          "value": "20+",
+          "label": "countries"
+        },
+        "founded": {
+          "value": "2021",
+          "label": "founded"
+        }
+      }
     },
     "mission": {
       "heading": "Our Mission",

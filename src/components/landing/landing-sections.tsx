@@ -1,4 +1,4 @@
-import { Code2, Lightbulb, Users } from 'lucide-react';
+import { Code2, Handshake, Lightbulb, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
@@ -95,6 +95,11 @@ export function LandingFeatures() {
       icon: Users,
       title: t('community.title'),
       description: t('community.description'),
+    },
+    {
+      icon: Handshake,
+      title: t('sponsorships.title'),
+      description: t('sponsorships.description'),
     },
   ];
 

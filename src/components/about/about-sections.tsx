@@ -16,8 +16,16 @@ import { Link } from '@/i18n/navigation';
 export function AboutHero() {
   const t = useTranslations('About.hero');
 
+  const stats = [
+    { value: t('stats.members.value'), label: t('stats.members.label') },
+    { value: t('stats.projects.value'), label: t('stats.projects.label') },
+    { value: t('stats.countries.value'), label: t('stats.countries.label') },
+    { value: t('stats.founded.value'), label: t('stats.founded.label') },
+  ];
+
   return (
-    <section className="overflow-hidden">
+    <section id="home" className="overflow-hidden">
+      {/* Hero metin bloğu — gerçek grid-2-about-one #home markup'ı birebir. */}
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
           <div aria-hidden className="max-sm:hidden">
@@ -26,43 +34,41 @@ export function AboutHero() {
 
           <div
             data-grid-content
-            className="@4xl:p-12 relative col-span-full overflow-hidden p-6 sm:col-span-8"
+            className="@4xl:p-12 col-span-full p-6 sm:col-span-8"
           >
-            {/* Dekoratif halftone "evrim" sahnesi (Figma node 169:33030).
-                Landing/projects ile aynı teknik: CSS mask + bg-foreground →
-                görsel metin rengini alır (dark açık / light koyu), her iki
-                temada aynı silik figür, tek dosya, geçiş yok. */}
-            <div
-              aria-hidden
-              className="bg-foreground pointer-events-none absolute inset-0 opacity-25 dark:opacity-15"
-              style={{
-                maskImage: 'url(/images/about-bg.png)',
-                WebkitMaskImage: 'url(/images/about-bg.png)',
-                maskSize: 'auto 90%',
-                WebkitMaskSize: 'auto 90%',
-                maskPosition: 'center',
-                WebkitMaskPosition: 'center',
-                maskRepeat: 'no-repeat',
-                WebkitMaskRepeat: 'no-repeat',
-              }}
-            />
-            <div className="relative">
-              <span className="text-primary font-mono text-xs tracking-widest lowercase">
-                {'//'} {t('eyebrow')}
-              </span>
-              <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-                {t('title')}
-              </h1>
-              <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
-                {t('intro')}
-              </p>
-            </div>
+            <span className="text-muted-foreground text-sm font-medium">
+              {t('eyebrow')}
+            </span>
+            <h1 className="text-foreground mt-12 text-balance text-5xl font-semibold tracking-tight lg:text-6xl">
+              {t('title')}
+            </h1>
+            <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
+              {t('intro')}
+            </p>
           </div>
 
           <div aria-hidden className="max-sm:hidden">
             <div data-grid-content />
           </div>
         </div>
+      </Container>
+
+      {/* İstatistik şeridi — template'in stat bloğu, 4 gerçek rakam. */}
+      <Container asGrid className="@4xl:grid-cols-10 @xl:grid-cols-2 gap-px">
+        <div aria-hidden data-grid-content className="@max-4xl:hidden" />
+        {stats.map((s) => (
+          <div
+            key={s.label}
+            data-grid-content
+            className="@4xl:p-12 @4xl:col-span-2 p-6"
+          >
+            <p className="text-muted-foreground">
+              <strong className="text-foreground font-medium">{s.value}</strong>{' '}
+              {s.label}
+            </p>
+          </div>
+        ))}
+        <div aria-hidden data-grid-content className="@max-4xl:hidden" />
       </Container>
     </section>
   );
