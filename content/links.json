@@ -16,6 +16,25 @@
       "url": "/tr"
     },
     {
+      "label": "Telegram Grubumuz",
+      "url": "https://t.me/+xTOuB92Z3S4zOTBk",
+      "note": "Duyurular ve sohbet"
+    },
+    {
+      "label": "Medium'da Yazılarımız",
+      "url": "https://medium.com/ytublockchain"
+    },
+    {
+      "label": "Podcast'imiz",
+      "url": "https://open.spotify.com/show/5bA9wkC2zxASZCOKzu5EOX",
+      "note": "Spotify'da dinle"
+    },
+    {
+      "label": "Warpcast",
+      "url": "https://warpcast.com/ytublockchain",
+      "note": "Farcaster'da biz"
+    },
+    {
       "label": "Projelerimiz",
       "url": "/tr/projects"
     },
