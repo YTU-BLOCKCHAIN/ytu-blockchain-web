@@ -89,7 +89,11 @@ function extractText(html: string): string | null {
 
   const text = decodeEntities(
     paragraph.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]*>/g, ''),
-  ).trim();
+  )
+    // Görselli paylaşımların sonuna X'in eklediği `pic.twitter.com/xxxx`
+    // yer tutucusu: görseli zaten göstermediğimiz için kartta anlamsız duruyor.
+    .replace(/\s*pic\.(?:twitter|x)\.com\/\w+\s*$/i, '')
+    .trim();
 
   return text === '' ? null : text;
 }

@@ -76,7 +76,9 @@ export async function LandingPosts() {
                     <ArrowUpRight className="text-muted-foreground group-hover:text-primary size-4 transition-colors" />
                   </div>
 
-                  <p className="text-foreground whitespace-pre-line">
+                  {/* Uzun paylaşımlar kartı şişirmesin: 8 satırda kesilir,
+                      devamı için ziyaretçi paylaşımın kendisine gider. */}
+                  <p className="text-foreground line-clamp-8 whitespace-pre-line">
                     {post.text}
                   </p>
 
