@@ -1,0 +1,31 @@
+{
+  "$schema": "./links.schema.json",
+  "profile": {
+    "title": "YTÜ Blockchain",
+    "tagline": "Yıldız Teknik Üniversitesi Blockchain Kulübü"
+  },
+  "links": [
+    {
+      "label": "Üye Başvurusu",
+      "url": "/tr/join",
+      "note": "Başvurular açık",
+      "featured": true
+    },
+    {
+      "label": "Web Sitemiz",
+      "url": "/tr"
+    },
+    {
+      "label": "Projelerimiz",
+      "url": "/tr/projects"
+    },
+    {
+      "label": "Sponsor Olun",
+      "url": "/tr/sponsors"
+    },
+    {
+      "label": "İletişim",
+      "url": "/tr/contact"
+    }
+  ]
+}
