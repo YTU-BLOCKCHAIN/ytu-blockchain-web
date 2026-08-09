@@ -77,8 +77,10 @@ export async function LandingPosts() {
                   </div>
 
                   {/* Uzun paylaşımlar kartı şişirmesin: 8 satırda kesilir,
-                      devamı için ziyaretçi paylaşımın kendisine gider. */}
-                  <p className="text-foreground line-clamp-8 whitespace-pre-line">
+                      devamı için ziyaretçi paylaşımın kendisine gider. Sol
+                      kenar çizgisi metni bir "alıntı" gibi çerçeveler ve
+                      hover'da (kartın geri kalanıyla birlikte) belirginleşir. */}
+                  <p className="text-foreground border-primary/25 group-hover:border-primary/60 line-clamp-8 border-l-2 pl-4 whitespace-pre-line transition-colors">
                     {post.text}
                   </p>
 
