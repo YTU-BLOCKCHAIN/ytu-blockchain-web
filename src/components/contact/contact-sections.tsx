@@ -25,9 +25,13 @@ export function ContactSection() {
       </Container>
 
       <Container asGrid className="@4xl:grid-cols-2">
+        {/* Dolgu `@max-4xl:` ile veriliyor: bu hücreler `Container asGrid`'in
+            DOĞRUDAN çocuğu, yani `*:p-[0.5px]` sınıfını da yiyorlar. Düz `p-6`
+            o kurala sıralamada yeniliyor (masaüstündeki `@4xl:p-12` yeniyor) →
+            mobilde dolgu 1px'e düşüp metin kartın kenarına yapışıyordu. */}
         <div
           data-grid-content
-          className="@4xl:p-12 relative overflow-hidden p-6"
+          className="@4xl:p-12 @max-4xl:p-6 relative overflow-hidden"
         >
           {/* Dekoratif pixel-ASCII Avrupa haritası. Diğer hero'lar ile aynı
               teknik: CSS mask + bg-foreground → görsel metin rengini alır
@@ -90,7 +94,7 @@ export function ContactSection() {
           </div>
         </div>
 
-        <div data-grid-content className="@4xl:p-12 p-6">
+        <div data-grid-content className="@4xl:p-12 @max-4xl:p-6">
           <h2 className="text-foreground font-medium">{t('form.heading')}</h2>
           <p className="text-muted-foreground mb-8 mt-2 text-sm">
             {t('form.intro')}

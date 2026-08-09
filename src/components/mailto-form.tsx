@@ -16,8 +16,14 @@ export type MailtoField = {
   autoComplete?: string;
 };
 
+/**
+ * Mobilde `text-base` (16px) ŞART: iOS Safari, 16px'ten küçük yazı tipli bir
+ * alana odaklanınca sayfayı otomatik yakınlaştırır ve düzen kayar. Aynı sebeple
+ * dolgu da mobilde biraz yüksek — alan 46px'e çıkıp parmak hedefi oluyor.
+ * sm ve üstünde masaüstündeki ölçüler (14px / py-2) aynen geri geliyor.
+ */
 const FIELD_CLASS =
-  'border-border bg-background focus-visible:ring-primary/40 w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:outline-none';
+  'border-border bg-background focus-visible:ring-primary/40 w-full rounded-md border px-3 py-2.5 text-base focus-visible:ring-2 focus-visible:outline-none sm:py-2 sm:text-sm';
 
 /**
  * Backend'siz iletişim/başvuru formu. Gönderimde kullanıcının e-posta
@@ -87,7 +93,12 @@ export function MailtoForm({
         </div>
       ))}
 
-      <button type="submit" className={buttonClasses()}>
+      {/* Telefonda tam genişlik — dar ekranda yarım kalan buton hem küçük bir
+          hedef hem de formu bitmemiş gösteriyor. sm'den itibaren içerik kadar. */}
+      <button
+        type="submit"
+        className={buttonClasses({ className: 'max-sm:w-full' })}
+      >
         {submitLabel}
       </button>
     </form>

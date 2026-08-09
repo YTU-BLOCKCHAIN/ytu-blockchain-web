@@ -1,5 +1,11 @@
 import { cn } from '@/lib/utils';
 
+/*
+  Tüm yüzeyler (grid hücreleri, yan raylar, separator) opak `bg-card` kullanır.
+  Yarı saydam (`bg-card/90`) olurlarsa arkalarındaki katmanla karışır; footer'da
+  `body` (zinc-950), `main` içinde ise `bg-foreground/10` var — aynı sınıf sayfanın
+  farklı yerlerinde farklı siyah üretiyordu. Opak kalmaları tek ton garantiler.
+*/
 export const Container = ({
   className,
   children,
@@ -46,7 +52,7 @@ export const Container = ({
         ) : (
           <div
             data-slot="content"
-            className={cn('bg-card/90 h-full rounded', className)}
+            className={cn('bg-card h-full rounded', className)}
           >
             {children}
           </div>
@@ -83,7 +89,7 @@ export const Separator = ({
 const Decorator = ({ className }: { className?: string }) => {
   return (
     <div aria-hidden className={cn('p-[0.5px]', className)}>
-      <div className="bg-card/90 h-full w-2 rounded md:w-6 lg:w-full" />
+      <div className="bg-card h-full w-2 rounded md:w-6 lg:w-full" />
     </div>
   );
 };
