@@ -71,8 +71,12 @@ export function JoinApplication() {
 
   return (
     <section>
+      {/* Dolgu `@max-4xl:` ile: bu hücreler `Container asGrid`'in DOĞRUDAN
+          çocuğu, `*:p-[0.5px]` kuralını da alıyorlar ve düz `p-6` ona sıralamada
+          yeniliyor → mobilde dolgu 1px'e düşüyordu (masaüstünde `@4xl:p-12`
+          zaten kazandığı için sorun görünmüyordu). */}
       <Container asGrid className="@4xl:grid-cols-2">
-        <div data-grid-content className="@4xl:p-12 p-6">
+        <div data-grid-content className="@4xl:p-12 @max-4xl:p-6">
           <h2 className="text-foreground font-medium">{t('form.heading')}</h2>
           <p className="text-muted-foreground mb-8 mt-2 text-sm">
             {t('form.intro')}
@@ -107,7 +111,7 @@ export function JoinApplication() {
           />
         </div>
 
-        <div data-grid-content className="@4xl:p-12 p-6">
+        <div data-grid-content className="@4xl:p-12 @max-4xl:p-6">
           <h2 className="text-muted-foreground text-sm">
             {t('expectHeading')}
           </h2>
