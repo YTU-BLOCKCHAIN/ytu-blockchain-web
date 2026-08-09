@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "YTÜ Blockchain /links sayfası içeriği",
+  "type": "object",
+  "required": ["profile", "links"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "profile": {
+      "type": "object",
+      "required": ["title", "tagline"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60,
+          "description": "Sayfanın başlığı (ekran okuyucu ve sekme başlığı için)."
+        },
+        "tagline": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 140,
+          "description": "Logonun altındaki tek satırlık tanıtım cümlesi."
+        }
+      }
+    },
+    "links": {
+      "type": "array",
+      "description": "Sayfada alt alta görünecek butonlar. Sıralama buradaki sıradır.",
+      "items": {
+        "type": "object",
+        "required": ["label", "url"],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60,
+            "description": "Butonun üzerindeki yazı."
+          },
+          "url": {
+            "type": "string",
+            "pattern": "^(https://|/)",
+            "description": "Dış bağlantı 'https://' ile, kendi sitemizdeki sayfa '/' ile başlar."
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 80,
+            "description": "Butonun altındaki küçük açıklama. İsteğe bağlı."
+          },
+          "featured": {
+            "type": "boolean",
+            "description": "true ise buton dolu/vurgulu çizilir. En fazla bir bağlantıda kullanın."
+          },
+          "hidden": {
+            "type": "boolean",
+            "description": "true ise bağlantı sayfada gösterilmez (silmeden gizlemek için)."
+          }
+        }
+      }
+    }
+  }
+}

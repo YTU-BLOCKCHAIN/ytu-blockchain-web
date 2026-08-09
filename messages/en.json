@@ -121,6 +121,12 @@
       "intro": "Organizations that support our community. You can be one of them.",
       "placeholder": "Your logo here"
     },
+    "posts": {
+      "heading": "From X",
+      "intro": "Highlights from the club's feed.",
+      "follow": "Follow on X",
+      "view": "Open post"
+    },
     "callToAction": {
       "heading": "Curious? Come join us.",
       "body": "Applying takes a few minutes; any level is welcome.",
