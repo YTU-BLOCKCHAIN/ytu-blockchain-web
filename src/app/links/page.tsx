@@ -1,5 +1,17 @@
 import type { Metadata } from 'next';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BookText,
+  FolderGit2,
+  Globe,
+  Handshake,
+  type LucideIcon,
+  Mail,
+  Podcast,
+  Send,
+  UserPlus,
+} from 'lucide-react';
 // Bilerek `next/link`: bu sayfa next-intl sağlayıcısının dışında, dolayısıyla
 // `@/i18n/navigation` Link'i (dil ön eki ekler) burada yanlış olur. `/` isteğini
 // proxy tarayıcı diline göre /tr veya /en'e yönlendirir.
@@ -11,11 +23,32 @@ import {
   XIcon,
 } from '@/components/community/brand-icons';
 import { Logo } from '@/components/logo';
-import { linksContent } from '@/lib/links';
+import { type LinkItem, linksContent } from '@/lib/links';
 import { siteConfig } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
 const { profile, links } = linksContent;
+
+/**
+ * Her bağlantıya kanalını anlatan bir ikon. Eşleşme adresten türetilir; içerik
+ * dosyasına ekstra bir alan gerekmez. Bilinmeyen adres nötr `Globe`'a düşer.
+ */
+function iconForLink(link: LinkItem): LucideIcon {
+  const url = link.url.toLowerCase();
+
+  if (link.external) {
+    if (url.includes('t.me') || url.includes('telegram')) return Send;
+    if (url.includes('medium.com')) return BookText;
+    if (url.includes('spotify.com')) return Podcast;
+    return Globe;
+  }
+
+  if (url.includes('/join')) return UserPlus;
+  if (url.includes('/projects')) return FolderGit2;
+  if (url.includes('/sponsors')) return Handshake;
+  if (url.includes('/contact')) return Mail;
+  return Globe; // "Web Sitemiz" (/tr) ve tanımsız iç sayfalar
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -90,6 +123,7 @@ export default function LinksPage() {
 
           {links.map((link) => {
             const Arrow = link.external ? ArrowUpRight : ArrowRight;
+            const LeadingIcon = iconForLink(link);
 
             return (
               <a
@@ -105,25 +139,48 @@ export default function LinksPage() {
                     : 'bg-card hover:bg-accent',
                 )}
               >
-                <span className="flex flex-col gap-0.5">
-                  <span className="font-medium">{link.label}</span>
-                  {link.note && (
-                    <span
-                      className={cn(
-                        'text-xs',
-                        link.featured
-                          ? 'text-background/70'
-                          : 'text-muted-foreground',
-                      )}
-                    >
-                      {link.note}
-                    </span>
-                  )}
+                <span className="flex min-w-0 items-center gap-3.5">
+                  {/* Kanal ikonu: satırı taranabilir kılar, adresten türetilir. */}
+                  <LeadingIcon
+                    className={cn(
+                      'size-5 shrink-0',
+                      link.featured
+                        ? 'text-background'
+                        : 'text-muted-foreground group-hover:text-foreground',
+                    )}
+                  />
+                  <span className="flex min-w-0 flex-col gap-0.5">
+                    <span className="truncate font-medium">{link.label}</span>
+                    {link.note && (
+                      <span
+                        className={cn(
+                          'flex items-center gap-1.5 text-xs',
+                          link.featured
+                            ? 'text-background/70'
+                            : 'text-muted-foreground',
+                        )}
+                      >
+                        {/* "Canlı" işaret: yalnızca öne çıkan (başvuru) kartında,
+                            "başvurular açık" mesajını nabız gibi vurgular. */}
+                        {link.featured && (
+                          <span
+                            aria-hidden
+                            className="relative flex size-1.5 shrink-0"
+                          >
+                            <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
+                            <span className="bg-primary relative inline-flex size-1.5 rounded-full" />
+                          </span>
+                        )}
+                        {link.note}
+                      </span>
+                    )}
+                  </span>
                 </span>
                 <Arrow
                   className={cn(
-                    'size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5',
-                    !link.featured && 'text-muted-foreground',
+                    'size-4 shrink-0 transition-all duration-200 group-hover:translate-x-0.5',
+                    !link.featured &&
+                      'text-muted-foreground group-hover:text-primary',
                   )}
                 />
               </a>
