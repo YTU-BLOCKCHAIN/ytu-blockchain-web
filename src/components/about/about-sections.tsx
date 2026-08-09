@@ -39,7 +39,10 @@ export function AboutHero() {
             <span className="text-muted-foreground text-sm font-medium">
               {t('eyebrow')}
             </span>
-            <h1 className="text-foreground mt-12 text-balance text-5xl font-semibold tracking-tight lg:text-6xl">
+            {/* Mobilde 36px (diğer sayfa hero'larıyla aynı) — 48px telefonda
+                başlığı 4 satıra bölüp hero'yu ekranın tamamına şişiriyordu.
+                sm ve üstü birebir eskisi gibi. */}
+            <h1 className="text-foreground mt-8 text-balance text-4xl font-semibold tracking-tight sm:mt-12 sm:text-5xl lg:text-6xl">
               {t('title')}
             </h1>
             <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
@@ -53,14 +56,22 @@ export function AboutHero() {
         </div>
       </Container>
 
-      {/* İstatistik şeridi — template'in stat bloğu, 4 gerçek rakam. */}
-      <Container asGrid className="@4xl:grid-cols-10 @xl:grid-cols-2 gap-px">
+      {/* İstatistik şeridi — template'in stat bloğu, 4 gerçek rakam. Dolgu
+          `@max-4xl:` ile veriliyor: hücreler `Container asGrid`'in DOĞRUDAN
+          çocuğu olduğu için `*:p-[0.5px]` kuralını da alıyorlar, düz `p-6` ona
+          sıralamada yeniliyordu → mobilde her rakam 25px'lik dolgusuz bir
+          şeride çöküyordu (masaüstünde `@4xl:p-12` kazandığı için sorunsuzdu).
+          Dar ekranda 2×2 (`@xl` konteyner sorgusu telefonda tetiklenmiyor). */}
+      <Container
+        asGrid
+        className="@4xl:grid-cols-10 @xl:grid-cols-2 grid-cols-2 gap-px"
+      >
         <div aria-hidden data-grid-content className="@max-4xl:hidden" />
         {stats.map((s) => (
           <div
             key={s.label}
             data-grid-content
-            className="@4xl:p-12 @4xl:col-span-2 p-6"
+            className="@4xl:p-12 @4xl:col-span-2 @max-4xl:p-6"
           >
             <p className="text-muted-foreground">
               <strong className="text-foreground font-medium">{s.value}</strong>{' '}
@@ -223,9 +234,11 @@ export function AboutTeam() {
               <div
                 key={member.name}
                 data-grid-content
-                className="@4xl:p-12 @max-3xl:last:hidden p-6"
+                // 2 sütunlu (dar) düzende 6 komite tam 3 satır yapıyor; 6.'yı
+                // gizlemek son satırda tek kart + boş hücre bırakıyordu.
+                className="@4xl:p-12 p-6 max-sm:p-4"
               >
-                <div className="before:border-foreground/6.5 before:z-1 aspect-5/6 bg-muted relative w-24 overflow-hidden rounded-2xl shadow-md shadow-black/[0.03] before:absolute before:inset-0 before:rounded-2xl before:border">
+                <div className="before:border-foreground/6.5 before:z-1 aspect-5/6 bg-muted relative w-24 overflow-hidden rounded-2xl shadow-md shadow-black/[0.03] before:absolute before:inset-0 before:rounded-2xl before:border max-sm:w-20">
                   <div
                     aria-hidden
                     className={cn(

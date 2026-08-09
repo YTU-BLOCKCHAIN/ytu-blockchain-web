@@ -86,7 +86,7 @@ export function ProjectsGrid() {
 
             <div
               data-grid-content
-              className="col-span-full flex flex-col items-center gap-3 p-12 text-center sm:col-span-8"
+              className="col-span-full flex flex-col items-center gap-3 p-12 text-center max-sm:p-8 sm:col-span-8"
             >
               <h2 className="text-foreground text-balance text-xl font-medium">
                 {t('empty.title')}
