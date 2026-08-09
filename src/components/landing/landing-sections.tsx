@@ -22,7 +22,9 @@ export function LandingHero() {
           <div className="@4xl:col-span-8 col-span-full">
             <div
               data-grid-content
-              className="relative overflow-hidden px-6 py-16 text-center sm:py-24"
+              // Telefonda py-16 hero'yu ilk ekranın tamamına yayıyordu; py-12
+              // ile başlığın altındaki içeriğin varlığı görünür kalıyor.
+              className="relative overflow-hidden px-6 py-12 text-center sm:py-24"
             >
               {/* Dekoratif kripto coin halftone (₿/D/₮) backdrop. Community bg
                   ile aynı teknik: CSS mask + bg-foreground → metin rengini alır
