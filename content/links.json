@@ -1,0 +1,45 @@
+{
+  "$schema": "./links.schema.json",
+  "profile": {
+    "title": "YTÜ Blockchain",
+    "tagline": "Yıldız Teknik Üniversitesi Blockchain Kulübü"
+  },
+  "links": [
+    {
+      "label": "Üye Başvurusu",
+      "url": "/tr/join",
+      "note": "Başvurular açık",
+      "featured": true
+    },
+    {
+      "label": "Web Sitemiz",
+      "url": "/tr"
+    },
+    {
+      "label": "Telegram Grubumuz",
+      "url": "https://t.me/+xTOuB92Z3S4zOTBk",
+      "note": "Duyurular ve sohbet"
+    },
+    {
+      "label": "Medium'da Yazılarımız",
+      "url": "https://medium.com/ytublockchain"
+    },
+    {
+      "label": "Podcast'imiz",
+      "url": "https://open.spotify.com/show/5bA9wkC2zxASZCOKzu5EOX",
+      "note": "Spotify'da dinle"
+    },
+    {
+      "label": "Projelerimiz",
+      "url": "/tr/projects"
+    },
+    {
+      "label": "Sponsor Olun",
+      "url": "/tr/sponsors"
+    },
+    {
+      "label": "İletişim",
+      "url": "/tr/contact"
+    }
+  ]
+}

@@ -121,6 +121,12 @@
       "intro": "Topluluğumuzu destekleyen kurumlar. Siz de aramızda yer alabilirsiniz.",
       "placeholder": "Logonuz burada"
     },
+    "posts": {
+      "heading": "X'ten",
+      "intro": "Kulüpten öne çıkan paylaşımlar.",
+      "follow": "X'te takip et",
+      "view": "Paylaşımı aç"
+    },
     "callToAction": {
       "heading": "Merakın mı var? Aramıza katıl.",
       "body": "Üye başvurusu birkaç dakika sürer; seviye fark etmez.",

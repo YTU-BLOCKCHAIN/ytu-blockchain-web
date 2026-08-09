@@ -17,7 +17,13 @@ const PATHS = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url.replace(/\/$/, '');
 
-  return PATHS.map((path): MetadataRoute.Sitemap[number] => {
+  // Linktree sayfası dil ön eki almaz → hreflang alternatifi de yok.
+  const links: MetadataRoute.Sitemap[number] = {
+    url: `${base}/links`,
+    changeFrequency: 'weekly',
+  };
+
+  const localized = PATHS.map((path): MetadataRoute.Sitemap[number] => {
     const languages: Record<string, string> = {};
     for (const locale of routing.locales) {
       languages[locale] = `${base}/${locale}${path}`;
@@ -29,4 +35,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: { languages },
     };
   });
+
+  return [...localized, links];
 }
