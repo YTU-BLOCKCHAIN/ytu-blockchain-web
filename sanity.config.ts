@@ -1,9 +1,17 @@
 'use client';
 
+import { documentInternationalization } from '@sanity/document-internationalization';
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 
-import { sanityDataset, sanityProjectId } from './src/sanity/env';
+import {
+  sanityApiVersion,
+  sanityDataset,
+  sanityProjectId,
+} from './src/sanity/env';
+import { sanityLanguages } from './src/sanity/languages';
+import { schemaTypes } from './src/sanity/schemaTypes';
+import { structure } from './src/sanity/structure';
 
 /**
  * Gömülü Sanity Studio'nun yapılandırması.
@@ -12,13 +20,20 @@ import { sanityDataset, sanityProjectId } from './src/sanity/env';
  * uygulaması. `basePath` ile `src/app/studio/[[...tool]]/page.tsx` rotasına
  * bağlanır — ikisi aynı yolu göstermek zorunda.
  *
- * İçerik şemaları (blog yazısı, yazar) bir sonraki adımda eklenecek; şu an
- * Studio boş bir içerik modeliyle açılıyor.
+ * `documentInternationalization` yalnızca `post` için açık: yazılar dile göre
+ * ayrı dokümanlar, yazarlar ise tek ve dilden bağımsız.
  */
 export default defineConfig({
   basePath: '/studio',
   projectId: sanityProjectId,
   dataset: sanityDataset,
-  plugins: [structureTool()],
-  schema: { types: [] },
+  plugins: [
+    structureTool({ structure }),
+    documentInternationalization({
+      supportedLanguages: sanityLanguages,
+      schemaTypes: ['post'],
+      apiVersion: sanityApiVersion,
+    }),
+  ],
+  schema: { types: schemaTypes },
 });

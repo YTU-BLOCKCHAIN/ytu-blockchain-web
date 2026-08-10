@@ -16,3 +16,11 @@ export const sanityProjectId =
 
 export const sanityDataset =
   process.env.NEXT_PUBLIC_SANITY_DATASET ?? FALLBACK_DATASET;
+
+/**
+ * GROQ sorgularının hangi API sürümüne göre yorumlanacağı. Sanity'de sürüm =
+ * tarih; sabit tutulur, çünkü ileri bir tarihe alınmak sorgu davranışını
+ * değiştirebilir. Yükseltmek bilinçli bir karar olmalı (ve sorguların test
+ * edilmesini gerektirir).
+ */
+export const sanityApiVersion = '2026-08-10';
