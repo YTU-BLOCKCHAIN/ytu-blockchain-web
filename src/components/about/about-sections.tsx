@@ -287,7 +287,7 @@ export function AboutSponsors() {
                 {t('intro')}
               </p>
               <Link
-                href="/sponsors"
+                href="/contact"
                 className="text-foreground mt-6 inline-flex items-center gap-1 text-sm font-medium underline-offset-4 hover:underline"
               >
                 {t('cta')}

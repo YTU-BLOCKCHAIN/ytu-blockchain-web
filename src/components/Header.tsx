@@ -57,11 +57,6 @@ const NAV = [
         label: 'sections.about.team',
         desc: 'sections.about.teamDesc',
       },
-      {
-        href: '/about#sponsors',
-        label: 'sections.about.sponsors',
-        desc: 'sections.about.sponsorsDesc',
-      },
     ],
   },
   {
@@ -84,31 +79,18 @@ const NAV = [
         label: 'sections.community.join',
         desc: 'sections.community.joinDesc',
       },
-    ],
-  },
-  {
-    key: 'sponsors',
-    href: '/sponsors',
-    heading: 'menu.sponsors.heading',
-    promo: {
-      href: '/sponsors#contact',
-      title: 'menu.sponsors.promo.title',
-      desc: 'menu.sponsors.promo.desc',
-    },
-    sections: [
       {
-        href: '/sponsors#logos',
-        label: 'sections.sponsors.logos',
-        desc: 'sections.sponsors.logosDesc',
+        href: '/projects',
+        label: 'sections.community.projects',
+        desc: 'sections.community.projectsDesc',
       },
       {
-        href: '/sponsors#contact',
-        label: 'sections.sponsors.contact',
-        desc: 'sections.sponsors.contactDesc',
+        href: '/about#sponsors',
+        label: 'sections.community.sponsors',
+        desc: 'sections.community.sponsorsDesc',
       },
     ],
   },
-  { key: 'projects', href: '/projects' },
   { key: 'contact', href: '/contact' },
 ] as const;
 

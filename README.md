@@ -71,7 +71,7 @@ src/
       layout.tsx         # Header + Footer + i18n sağlayıcı
       page.tsx           # Anasayfa
       not-found.tsx      # 404
-      about/ projects/ blog/ community/ sponsors/ contact/ join/
+      about/ projects/ blog/ community/ contact/ join/
     globals.css
   components/            # Header, Footer, LocaleSwitcher, StatusBanner, ComingSoon
   i18n/                  # routing, request, navigation
@@ -160,7 +160,7 @@ src/
       layout.tsx         # Header + Footer + i18n provider
       page.tsx           # Landing
       not-found.tsx      # 404
-      about/ projects/ blog/ community/ sponsors/ contact/ join/
+      about/ projects/ blog/ community/ contact/ join/
     globals.css
   components/            # Header, Footer, LocaleSwitcher, StatusBanner, ComingSoon
   i18n/                  # routing, request, navigation
