@@ -100,6 +100,18 @@
       "heading": "Why we're here",
       "body": "We make blockchain something students at YTÜ can learn, build and share. No experience required — we learn and build together."
     },
+    "hackathons": {
+      "heading": "Hackathons we've won",
+      "intro": "Moments from the hackathons where our teams placed.",
+      "roleDescription": "carousel",
+      "previous": "Previous slide",
+      "next": "Next slide",
+      "slideLabel": "Go to slide {index}",
+      "link": "Read the announcement",
+      "placeholder": "photo goes here",
+      "placeholderTitle": "Hackathon photos coming soon",
+      "placeholderNote": "Photos and placements from the hackathons we've won will show up here."
+    },
     "sponsors": {
       "heading": "Sponsors & Partners",
       "intro": "Organizations that support our community. You can be one of them.",

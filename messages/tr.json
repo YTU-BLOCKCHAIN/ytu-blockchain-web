@@ -100,6 +100,18 @@
       "heading": "Neden buradayız",
       "body": "Blockchain'i YTÜ'de öğrenilebilir, üretilebilir ve paylaşılabilir kılıyoruz. Deneyim şart değil — birlikte öğreniyor, birlikte üretiyoruz."
     },
+    "hackathons": {
+      "heading": "Kazandığımız hackathonlar",
+      "intro": "Takımlarımızın derece aldığı hackathon'lardan kareler.",
+      "roleDescription": "karusel",
+      "previous": "Önceki kare",
+      "next": "Sonraki kare",
+      "slideLabel": "{index}. kareye git",
+      "link": "Haberi oku",
+      "placeholder": "görsel buraya",
+      "placeholderTitle": "Hackathon kareleri yolda",
+      "placeholderNote": "Kazandığımız hackathon'lardan fotoğraflar ve derecelerimiz buraya gelecek."
+    },
     "sponsors": {
       "heading": "Sponsorlar & Partnerler",
       "intro": "Topluluğumuzu destekleyen kurumlar. Siz de aramızda yer alabilirsiniz.",
