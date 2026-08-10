@@ -270,12 +270,11 @@
     "communityCta": "Topluluk kanalları",
     "form": {
       "heading": "Bize yazın",
-      "intro": "Formu doldurun; e-posta uygulamanızda hazır bir mesajla bize ulaşın.",
+      "intro": "Formu doldur, mesajın doğrudan bize ulaşsın. E-posta adresine bir onay mesajı göndereceğiz.",
       "name": "Ad Soyad",
       "email": "E-posta",
       "message": "Mesajınız",
-      "submit": "E-posta gönder",
-      "subject": "İletişim formu"
+      "submit": "Gönder"
     }
   },
   "Community": {
@@ -318,13 +317,36 @@
     },
     "form": {
       "heading": "Başvuru formu",
-      "intro": "Formu doldurun; e-posta uygulamanızda hazır bir başvuru mesajı açılır.",
+      "intro": "Formu doldur, başvurun doğrudan bize ulaşsın. E-posta adresine bir onay mesajı göndereceğiz.",
       "name": "Ad Soyad",
       "email": "E-posta",
       "department": "Bölüm / Sınıf",
       "motivation": "İlgi alanların ve neden katılmak istediğin",
-      "submit": "Başvuruyu gönder",
-      "subject": "Üyelik başvurusu"
+      "submit": "Başvuruyu gönder"
+    }
+  },
+  "Forms": {
+    "submitting": "Gönderiliyor…",
+    "consent": "<link>Aydınlatma metnini</link> okudum; kişisel verilerimin bu kapsamda işlenmesini kabul ediyorum.",
+    "errors": {
+      "required": "Bu alan zorunlu.",
+      "invalidEmail": "Geçerli bir e-posta adresi gir.",
+      "tooLong": "Bu alan çok uzun.",
+      "consentRequired": "Devam etmek için onay kutusunu işaretle."
+    },
+    "failure": {
+      "upstream": "Gönderim şu an tamamlanamadı. Birazdan tekrar dene ya da doğrudan {email} adresine yaz.",
+      "notConfigured": "Form şu an devre dışı. Bize doğrudan {email} adresinden ulaşabilirsin."
+    },
+    "success": {
+      "contact": {
+        "heading": "Mesajın bize ulaştı",
+        "body": "Teşekkürler! E-posta adresine bir onay mesajı gönderdik; en kısa sürede sana geri döneceğiz."
+      },
+      "join": {
+        "heading": "Başvurun bize ulaştı",
+        "body": "Teşekkürler! E-posta adresine bir onay mesajı gönderdik; başvurunu değerlendirip sana geri döneceğiz."
+      }
     }
   },
   "Common": {
