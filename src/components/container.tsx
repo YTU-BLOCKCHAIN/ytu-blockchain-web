@@ -19,13 +19,23 @@ export const Container = ({
   decorators?: number;
   props?: React.HTMLAttributes<HTMLDivElement>;
 }) => {
+  /*
+    Masaüstünde orta sütun `minmax(0,69rem)`: 69rem (=1104px) ÜST sınır, alt
+    sınır 0. Eskiden `auto` track + çocukta `lg:min-w-276` vardı; min-width alt
+    sınır olduğu için 1024px'lik pencerede bile 1104px dayatıp sayfayı 95px
+    yatay kaydırıyordu. minmax ile geniş ekranda ölçü aynı, dar ekranda sütun
+    küçülüp yan raylar (1fr) sıfırlanıyor.
+  */
   return (
     <div
       {...props}
-      className="@container grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr]"
+      className="@container grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_minmax(0,69rem)_1fr]"
     >
+      {/* `overflow-hidden`: ray sıfır genişliğe indiğinde Decorator'ın
+          `p-[0.5px]` dolgusu border-box'ta 1px'lik bir taban yaratıp sayfayı
+          1px kaydırıyor. Ray tamamen dekoratif, kırpılması sorunsuz. */}
       <div
-        className="grid"
+        className="grid overflow-hidden"
         style={{
           gridTemplateColumns: `repeat(${decorators / 2}, minmax(0, 1fr))`,
         }}
@@ -34,12 +44,7 @@ export const Container = ({
           <Decorator key={i} className="w-full" />
         ))}
       </div>
-      <div
-        className={cn(
-          'max-w-276 lg:min-w-276 mx-auto w-full',
-          !asGrid && 'p-[0.5px]',
-        )}
-      >
+      <div className={cn('max-w-276 mx-auto w-full', !asGrid && 'p-[0.5px]')}>
         {asGrid ? (
           <div
             className={cn(
@@ -58,8 +63,11 @@ export const Container = ({
           </div>
         )}
       </div>
+      {/* `overflow-hidden`: ray sıfır genişliğe indiğinde Decorator'ın
+          `p-[0.5px]` dolgusu border-box'ta 1px'lik bir taban yaratıp sayfayı
+          1px kaydırıyor. Ray tamamen dekoratif, kırpılması sorunsuz. */}
       <div
-        className="grid"
+        className="grid overflow-hidden"
         style={{
           gridTemplateColumns: `repeat(${decorators / 2}, minmax(0, 1fr))`,
         }}

@@ -4,7 +4,6 @@
     "about": "About",
     "projects": "Projects",
     "community": "Community",
-    "sponsors": "Sponsors",
     "contact": "Contact",
     "join": "Join us",
     "sections": {
@@ -14,21 +13,17 @@
         "values": "Values",
         "valuesDesc": "The principles behind every decision",
         "team": "Team",
-        "teamDesc": "The committees that run the club together",
-        "sponsors": "Supporters",
-        "sponsorsDesc": "The organizations that make our community possible"
+        "teamDesc": "The committees that run the club together"
       },
       "community": {
         "channels": "Channels",
         "channelsDesc": "Join us on GitHub, X and Instagram",
         "join": "Join",
-        "joinDesc": "Become a member and take part"
-      },
-      "sponsors": {
-        "logos": "Our sponsors",
-        "logosDesc": "The organizations backing us",
-        "contact": "Become a sponsor",
-        "contactDesc": "Reach talent, grow your brand"
+        "joinDesc": "Become a member and take part",
+        "projects": "Projects",
+        "projectsDesc": "The open-source projects we build together",
+        "sponsors": "Sponsors",
+        "sponsorsDesc": "The organizations that make our community possible"
       }
     },
     "menu": {
@@ -44,13 +39,6 @@
         "promo": {
           "title": "Become a member",
           "desc": "Be part of the community"
-        }
-      },
-      "sponsors": {
-        "heading": "Support us",
-        "promo": {
-          "title": "Become a sponsor",
-          "desc": "Reach talent, grow your brand"
         }
       }
     }
@@ -73,10 +61,6 @@
     "community": {
       "title": "Community",
       "description": "Join the YTÜ Blockchain community on Telegram, GitHub and X."
-    },
-    "sponsors": {
-      "title": "Sponsors",
-      "description": "Sponsor YTÜ Blockchain Club — partnership and support opportunities."
     },
     "contact": {
       "title": "Contact",
@@ -115,6 +99,18 @@
     "manifesto": {
       "heading": "Why we're here",
       "body": "We make blockchain something students at YTÜ can learn, build and share. No experience required — we learn and build together."
+    },
+    "hackathons": {
+      "heading": "Hackathons we've won",
+      "intro": "Moments from the hackathons where our teams placed.",
+      "roleDescription": "carousel",
+      "previous": "Previous slide",
+      "next": "Next slide",
+      "slideLabel": "Go to slide {index}",
+      "link": "Read the announcement",
+      "placeholder": "photo goes here",
+      "placeholderTitle": "Hackathon photos coming soon",
+      "placeholderNote": "Photos and placements from the hackathons we've won will show up here."
     },
     "sponsors": {
       "heading": "Sponsors & Partners",
@@ -252,44 +248,6 @@
     "empty": {
       "title": "Projects coming soon",
       "body": "We're preparing our first projects. Want to build something too? Come join us."
-    }
-  },
-  "Sponsors": {
-    "hero": {
-      "eyebrow": "Sponsors",
-      "title": "Sponsor YTÜ Blockchain",
-      "subtitle": "Meet tomorrow's blockchain builders today and support a student community as it grows."
-    },
-    "logos": {
-      "heading": "Our supporters",
-      "intro": "The organizations that make our community possible. You can be one of them.",
-      "placeholder": "Your logo here"
-    },
-    "benefits": {
-      "heading": "Why sponsor us?",
-      "talent": {
-        "title": "Access to talent",
-        "description": "Meet motivated, technical students directly and build early ties for internships and hiring."
-      },
-      "brand": {
-        "title": "Brand visibility",
-        "description": "Introduce your organization to a student community across our events, workshops and channels."
-      },
-      "ecosystem": {
-        "title": "Support the ecosystem",
-        "description": "Help grow blockchain education and open-source work at the university."
-      }
-    },
-    "form": {
-      "heading": "Get in touch",
-      "intro": "Fill out the form to reach us with a ready-to-send email.",
-      "name": "Full name",
-      "organization": "Organization",
-      "email": "Email",
-      "message": "Your message",
-      "submit": "Send email",
-      "subject": "Sponsorship inquiry",
-      "direct": "or email us directly"
     }
   },
   "Contact": {
