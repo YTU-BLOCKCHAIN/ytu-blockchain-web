@@ -37,8 +37,18 @@ depodaki [`Code.gs`](Code.gs) ile değiştir. Projeye bir ad ver
 
 ### 3. Paylaşılan gizli anahtarı üret
 
-Web App URL'ini bilen herkes tabloya satır ekleyebilir. Bunu engelleyen şey, her
-istekte gidip script tarafında doğrulanan bir gizli anahtar:
+**Neden gerekiyor?** Web App'i birazdan "erişimi olan: herkes" olarak
+yayınlayacaksın (4. adım). Bu zorunlu — isteği gönderen Vercel sunucusunun
+Google hesabı yok, kimliğini Google'a kanıtlayamıyor. Yani kapı herkese açık
+kalıyor ve URL'i ele geçiren biri doğrudan oraya istek atıp tabloya istediği
+satırı ekleyebilir.
+
+Gizli anahtar bu kapının parolası: site her gönderimde anahtarı isteğin içine
+koyar, script bendekiyle aynı mı diye bakar, tutmuyorsa reddeder. Anahtar
+**iki yerde** durur ve birebir aynı olmalıdır — Apps Script'te (kontrol eden
+taraf) ve Vercel'de (gönderen taraf). Koda yazılmaz, çünkü bu depo herkese açık.
+
+**Üret.** Rastgele 64 karakter; tahmin edilemez olması tek şart:
 
 ```bash
 openssl rand -hex 32
@@ -49,16 +59,21 @@ openssl rand -hex 32
 -join ((1..32) | ForEach-Object { '{0:x2}' -f (Get-Random -Max 256) })
 ```
 
-Çıkan değeri Apps Script editöründe **Proje Ayarları (⚙) → Script özellikleri →
-Özellik ekle** ile kaydet:
+**Kaydet.** Apps Script editöründe sol menüden **⚙ Proje Ayarları**, sayfanın en
+altında **Komut dosyası özellikleri** → **Komut dosyası özelliği ekle**:
 
-| Özellik              | Değer                                                  |
-| -------------------- | ------------------------------------------------------ |
-| `FORM_SHARED_SECRET` | Ürettiğin anahtar                                      |
-| `SPREADSHEET_ID`     | _(opsiyonel)_ Script tabloya bağlı değilse tablo ID'si |
+| Özellik              | Değer                     |
+| -------------------- | ------------------------- |
+| `FORM_SHARED_SECRET` | Az önce ürettiğin anahtar |
 
-> Aynı değeri birazdan Vercel'de `FORM_SHARED_SECRET` olarak da gireceksin —
-> ikisi birebir aynı olmalı.
+Script özellikleri Google tarafında kalır; kodla birlikte kopyalanmaz, depoya
+girmez. Aynı değeri 5. adımda Vercel'e de gireceksin.
+
+> **`SPREADSHEET_ID` gerekir mi?** Script'i tablonun içinden (Uzantılar → Apps
+> Script) açtıysan **hayır** — script zaten o tabloya bağlı, hangi dosyaya
+> yazacağını kendi bulur. Bu özellik yalnızca script'i ayrı/bağımsız bir proje
+> olarak oluşturduysan gerekir; o durumda ikinci bir özellik olarak tablonun
+> ID'sini (tablo URL'indeki `/d/` ile `/edit` arasındaki uzun kod) ekle.
 
 ### 4. Web App olarak yayınla
 
