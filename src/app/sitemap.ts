@@ -4,15 +4,7 @@ import { routing } from '@/i18n/routing';
 import { siteConfig } from '@/lib/site';
 
 /** Locale ön eki olmadan indekslenecek sayfa yolları. */
-const PATHS = [
-  '',
-  '/about',
-  '/projects',
-  '/community',
-  '/sponsors',
-  '/contact',
-  '/join',
-];
+const PATHS = ['', '/about', '/projects', '/community', '/contact', '/join'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url.replace(/\/$/, '');

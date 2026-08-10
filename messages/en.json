@@ -62,10 +62,6 @@
       "title": "Community",
       "description": "Join the YTÜ Blockchain community on Telegram, GitHub and X."
     },
-    "sponsors": {
-      "title": "Sponsors",
-      "description": "Sponsor YTÜ Blockchain Club — partnership and support opportunities."
-    },
     "contact": {
       "title": "Contact",
       "description": "Get in touch with YTÜ Blockchain Club for questions and collaborations."
@@ -240,44 +236,6 @@
     "empty": {
       "title": "Projects coming soon",
       "body": "We're preparing our first projects. Want to build something too? Come join us."
-    }
-  },
-  "Sponsors": {
-    "hero": {
-      "eyebrow": "Sponsors",
-      "title": "Sponsor YTÜ Blockchain",
-      "subtitle": "Meet tomorrow's blockchain builders today and support a student community as it grows."
-    },
-    "logos": {
-      "heading": "Our supporters",
-      "intro": "The organizations that make our community possible. You can be one of them.",
-      "placeholder": "Your logo here"
-    },
-    "benefits": {
-      "heading": "Why sponsor us?",
-      "talent": {
-        "title": "Access to talent",
-        "description": "Meet motivated, technical students directly and build early ties for internships and hiring."
-      },
-      "brand": {
-        "title": "Brand visibility",
-        "description": "Introduce your organization to a student community across our events, workshops and channels."
-      },
-      "ecosystem": {
-        "title": "Support the ecosystem",
-        "description": "Help grow blockchain education and open-source work at the university."
-      }
-    },
-    "form": {
-      "heading": "Get in touch",
-      "intro": "Fill out the form to reach us with a ready-to-send email.",
-      "name": "Full name",
-      "organization": "Organization",
-      "email": "Email",
-      "message": "Your message",
-      "submit": "Send email",
-      "subject": "Sponsorship inquiry",
-      "direct": "or email us directly"
     }
   },
   "Contact": {
