@@ -48,5 +48,17 @@ GitHub Branch Protection API'sinin `PUT .../branches/{branch}/protection` gövde
 - `no-ci.json` — mevcut geçici durum (required status check yok).
 - `with-ci.json` — hedef durum (`verify` required + strict / branch güncel olmalı).
 
-Ortak kurallar: PR zorunlu (review=0), `enforce_admins`, linear history, force-push ve
-silme kapalı.
+Ortak kurallar: PR zorunlu (review=0), `enforce_admins`, force-push ve silme kapalı.
+
+### `main` neden linear history'siz?
+
+Script, `main`'e gövdeyi tek farkla uygular: **`required_linear_history: false`**. `dev`
+linear kalır (oraya her şey squash iner), `main` kalmaz — çünkü sürümler `dev`'den
+**merge commit** ile alınır ve linear history açıkken GitHub merge commit'i reddeder.
+
+Sebebi: sürümler squash inerken `main`'in kayıtları `dev`'in geçmişinde yer almıyor, iki
+dalın ortak atası ilk günlerde takılı kalıyor ve `dev → main` PR'ı her sürümde **içerik
+farkı olmadan** çakışıyor (bkz. kapatılan PR #58). Merge commit `dev`'i `main`'in ataları
+arasına soktuğu için ortak ata güncellenir ve sonraki sürümler çakışmasız akar.
+
+Bedeli: `main` artık "her sürüm tek kayıt" değil, `dev`'in tüm geçmişini taşır.
