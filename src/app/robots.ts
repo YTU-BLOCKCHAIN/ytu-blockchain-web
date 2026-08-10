@@ -9,6 +9,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      // Gömülü Sanity Studio: editör arayüzü, indekslenecek içerik değil.
+      // (Sayfa ayrıca `noindex` meta'sı da basıyor — bu ikinci savunma hattı.)
+      disallow: '/studio',
     },
     sitemap: `${base}/sitemap.xml`,
     host: base,
