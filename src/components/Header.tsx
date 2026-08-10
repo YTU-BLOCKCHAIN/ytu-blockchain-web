@@ -116,14 +116,14 @@ export default function Header() {
   return (
     <>
       {/* Üstte boşluk bandı — template gibi hafif zemin tonu (grid çizgileri). */}
-      <div aria-hidden className="bg-foreground/10">
+      <div aria-hidden className="bg-grid-line">
         <Separator className="h-6" />
       </div>
       <header
         role="banner"
         data-state={isMobileMenuOpen ? 'active' : 'inactive'}
         {...(isScrolled && { 'data-scrolled': true })}
-        className="lg:data-scrolled:pb-[0.5px] bg-foreground/10 sticky inset-x-0 top-0 z-50 max-lg:pb-px"
+        className="lg:data-scrolled:pb-[0.5px] bg-grid-line sticky inset-x-0 top-0 z-50 max-lg:pb-px"
       >
         <div
           className={cn(

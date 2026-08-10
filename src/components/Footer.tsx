@@ -32,7 +32,11 @@ export default function Footer() {
   const tNav = useTranslations('Nav');
 
   return (
-    <footer role="contentinfo">
+    /* Zemin = grid çizgi rengi: alttaki Separator'ların çizgileri (hücre
+       aralarındaki 0.5px dolgular) bu katmanı gösterir. Zemin verilmezse
+       doğrudan `body` görünür ve footer çizgileri sayfanın geri kalanından
+       koyu kalırdı. */
+    <footer role="contentinfo" className="bg-grid-line">
       <Container asGrid>
         {/* Telefonda iki sütun: marka hücresi tam genişlik, altında "Sosyal
             Medya" ve "Keşfet" yan yana. Tek sütunda üç blok alt alta uzayıp
