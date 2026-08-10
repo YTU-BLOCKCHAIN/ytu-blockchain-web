@@ -1,10 +1,11 @@
 import { cn } from '@/lib/utils';
 
 /*
-  Tüm yüzeyler (grid hücreleri, yan raylar, separator) opak `bg-card` kullanır.
-  Yarı saydam (`bg-card/90`) olurlarsa arkalarındaki katmanla karışır; footer'da
-  `body` (zinc-950), `main` içinde ise `bg-foreground/10` var — aynı sınıf sayfanın
-  farklı yerlerinde farklı siyah üretiyordu. Opak kalmaları tek ton garantiler.
+  Tüm yüzeyler (grid hücreleri, yan raylar, separator) opak `bg-card`, tüm
+  çizgiler ise opak `bg-grid-line` kullanır. Yarı saydam olurlarsa arkalarındaki
+  katmanla karışır; footer'da `body` (zinc-950), `main` içinde ise kendi zemini
+  var — aynı sınıf sayfanın farklı yerlerinde farklı gri üretiyordu. Opak
+  kalmaları tek ton garantiler.
 */
 export const Container = ({
   className,
@@ -48,7 +49,7 @@ export const Container = ({
         {asGrid ? (
           <div
             className={cn(
-              'bg-border **:data-grid-content:bg-card **:data-grid-content:h-full **:data-grid-content:rounded grid *:p-[0.5px]',
+              'bg-grid-line **:data-grid-content:bg-card **:data-grid-content:h-full **:data-grid-content:rounded grid *:p-[0.5px]',
               className,
             )}
           >

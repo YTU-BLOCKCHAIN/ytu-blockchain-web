@@ -81,13 +81,13 @@ const socials = [
 
 export default function LinksPage() {
   return (
-    /* Zemin tonu sitenin <main>'iyle aynı (`bg-foreground/10`): hücreler arası
+    /* Zemin tonu sitenin <main>'iyle aynı (`bg-grid-line`): hücreler arası
        1px boşluklardan sızarak grid çerçevesini oluşturur. */
-    <main className="bg-foreground/10 flex flex-1 flex-col items-center px-4 py-10 sm:py-14">
+    <main className="bg-grid-line flex flex-1 flex-col items-center px-4 py-10 sm:py-14">
       <div className="w-full max-w-md">
         {/* Sitenin Container asGrid deseninin linktree genişliğindeki karşılığı:
-            bg-border zemin + gap-px → paneller arasında hairline çizgiler. */}
-        <div className="bg-border grid gap-px rounded p-px">
+            bg-grid-line zemin + gap-px → paneller arasında hairline çizgiler. */}
+        <div className="bg-grid-line grid gap-px rounded p-px">
           <header className="bg-card relative overflow-hidden rounded px-6 py-10 text-center">
             {/* Sitedeki hero'larla aynı teknik: CSS mask + bg-foreground →
                 görsel metin rengini alır, her iki temada da aynı silik doku. */}
