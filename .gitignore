@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# Şablon: yalnızca anahtar adlarını içerir, gizli değer taşımaz.
+!.env.example
 
 # vercel
 .vercel
