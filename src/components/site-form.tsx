@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState, useEffect, useMemo, useRef } from 'react';
-import { CheckCircle2 } from 'lucide-react';
+import { Check, CheckCircle2 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { buttonClasses } from '@/components/ui/button';
@@ -148,23 +148,34 @@ export function SiteForm({
       {/* KVKK açık rızası — işaretlenmeden sunucu kaydı reddediyor. */}
       <div className="space-y-1.5 pt-2">
         <label className="text-muted-foreground flex items-start gap-3 text-sm">
-          <input
-            type="checkbox"
-            name="consent"
-            required
-            defaultChecked={state.consentGiven}
-            aria-invalid={state.fieldErrors?.consent ? true : undefined}
-            aria-describedby={
-              state.fieldErrors?.consent ? 'consent-error' : undefined
-            }
-            className="border-border accent-primary mt-0.5 size-4 shrink-0 rounded"
-          />
+          {/* Native kutu yerine sitenin kendi dili: kenarlık ve zemin form
+              alanlarıyla aynı, işaretliyken primary butonun bg-foreground /
+              text-background zıtlığı (light'ta siyah, dark'ta beyaz). Tik,
+              `appearance-none` kutunun üzerine bindirilen ayrı bir ikon. */}
+          <span className="relative mt-0.5 flex size-4 shrink-0 items-center justify-center">
+            <input
+              type="checkbox"
+              name="consent"
+              required
+              defaultChecked={state.consentGiven}
+              aria-invalid={state.fieldErrors?.consent ? true : undefined}
+              aria-describedby={
+                state.fieldErrors?.consent ? 'consent-error' : undefined
+              }
+              className="peer border-border bg-background checked:border-foreground checked:bg-foreground focus-visible:ring-primary/40 aria-invalid:border-destructive size-4 appearance-none rounded border transition-colors focus-visible:ring-2 focus-visible:outline-none"
+            />
+            <Check
+              aria-hidden
+              strokeWidth={3}
+              className="text-background pointer-events-none absolute size-2.5 opacity-0 transition-opacity peer-checked:opacity-100"
+            />
+          </span>
           <span>
             {t.rich('consent', {
               link: (chunks) => (
                 <Link
                   href="/privacy"
-                  className="text-foreground hover:decoration-primary font-medium underline underline-offset-2"
+                  className="text-foreground decoration-border hover:decoration-foreground font-medium underline underline-offset-2 transition-colors"
                 >
                   {chunks}
                 </Link>
