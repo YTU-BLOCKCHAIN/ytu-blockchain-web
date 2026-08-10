@@ -5,7 +5,6 @@ import {
   BookText,
   FolderGit2,
   Globe,
-  Handshake,
   type LucideIcon,
   Mail,
   Podcast,
@@ -45,7 +44,6 @@ function iconForLink(link: LinkItem): LucideIcon {
 
   if (url.includes('/join')) return UserPlus;
   if (url.includes('/projects')) return FolderGit2;
-  if (url.includes('/sponsors')) return Handshake;
   if (url.includes('/contact')) return Mail;
   return Globe; // "Web Sitemiz" (/tr) ve tanımsız iç sayfalar
 }
