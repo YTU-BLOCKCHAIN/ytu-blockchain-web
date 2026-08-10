@@ -69,6 +69,10 @@
     "join": {
       "title": "Üye Ol",
       "description": "YTÜ Blockchain Kulübü'ne üye olun; öğrenin, üretin ve toplulukta yer alın."
+    },
+    "privacy": {
+      "title": "Aydınlatma Metni",
+      "description": "YTÜ Blockchain Kulübü form kayıtlarında kişisel verilerin nasıl işlendiğine dair aydınlatma metni."
     }
   },
   "Landing": {
@@ -266,12 +270,11 @@
     "communityCta": "Topluluk kanalları",
     "form": {
       "heading": "Bize yazın",
-      "intro": "Formu doldurun; e-posta uygulamanızda hazır bir mesajla bize ulaşın.",
+      "intro": "Formu doldur, mesajın doğrudan bize ulaşsın. E-posta adresine bir onay mesajı göndereceğiz.",
       "name": "Ad Soyad",
       "email": "E-posta",
       "message": "Mesajınız",
-      "submit": "E-posta gönder",
-      "subject": "İletişim formu"
+      "submit": "Gönder"
     }
   },
   "Community": {
@@ -314,13 +317,36 @@
     },
     "form": {
       "heading": "Başvuru formu",
-      "intro": "Formu doldurun; e-posta uygulamanızda hazır bir başvuru mesajı açılır.",
+      "intro": "Formu doldur, başvurun doğrudan bize ulaşsın. E-posta adresine bir onay mesajı göndereceğiz.",
       "name": "Ad Soyad",
       "email": "E-posta",
       "department": "Bölüm / Sınıf",
       "motivation": "İlgi alanların ve neden katılmak istediğin",
-      "submit": "Başvuruyu gönder",
-      "subject": "Üyelik başvurusu"
+      "submit": "Başvuruyu gönder"
+    }
+  },
+  "Forms": {
+    "submitting": "Gönderiliyor…",
+    "consent": "<link>Aydınlatma metnini</link> okudum; kişisel verilerimin bu kapsamda işlenmesini kabul ediyorum.",
+    "errors": {
+      "required": "Bu alan zorunlu.",
+      "invalidEmail": "Geçerli bir e-posta adresi gir.",
+      "tooLong": "Bu alan çok uzun.",
+      "consentRequired": "Devam etmek için onay kutusunu işaretle."
+    },
+    "failure": {
+      "upstream": "Gönderim şu an tamamlanamadı. Birazdan tekrar dene ya da doğrudan {email} adresine yaz.",
+      "notConfigured": "Form şu an devre dışı. Bize doğrudan {email} adresinden ulaşabilirsin."
+    },
+    "success": {
+      "contact": {
+        "heading": "Mesajın bize ulaştı",
+        "body": "Teşekkürler! E-posta adresine bir onay mesajı gönderdik; en kısa sürede sana geri döneceğiz."
+      },
+      "join": {
+        "heading": "Başvurun bize ulaştı",
+        "body": "Teşekkürler! E-posta adresine bir onay mesajı gönderdik; başvurunu değerlendirip sana geri döneceğiz."
+      }
     }
   },
   "Common": {
@@ -332,7 +358,48 @@
     "exploreHeading": "Keşfet",
     "socialHeading": "Sosyal Medya",
     "status": "Daima merkeziyetsiz",
-    "rights": "© 2026 YTÜ Blockchain Kulübü. Tüm hakları saklıdır."
+    "rights": "© 2026 YTÜ Blockchain Kulübü. Tüm hakları saklıdır.",
+    "privacy": "Aydınlatma Metni"
+  },
+  "Privacy": {
+    "eyebrow": "KVKK",
+    "title": "Aydınlatma Metni",
+    "subtitle": "Sitedeki formlarla paylaştığın kişisel verilerin nasıl işlendiğini burada açıklıyoruz.",
+    "updated": "Son güncelleme: 10 Ağustos 2026",
+    "sections": {
+      "controller": {
+        "heading": "Veri sorumlusu",
+        "body": "Bu metin, Yıldız Teknik Üniversitesi Blockchain Kulübü tarafından 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında hazırlanmıştır. Sitedeki iletişim ve üyelik başvurusu formlarıyla paylaştığın kişisel veriler bakımından veri sorumlusu kulüptür."
+      },
+      "data": {
+        "heading": "İşlenen kişisel veriler",
+        "body": "İletişim formunda ad soyad, e-posta adresi ve mesaj içeriği; üyelik başvurusu formunda ad soyad, e-posta adresi, bölüm/sınıf bilgisi ve başvuru metni işlenir. Kayda ayrıca gönderim tarihi ve sitede seçili dil eklenir. Formlar dışında çerez veya izleme aracıyla veri toplanmaz."
+      },
+      "purpose": {
+        "heading": "İşleme amacı",
+        "body": "Veriler yalnızca mesaj ve başvuruların değerlendirilmesi, sana geri dönüş yapılması ve kulüp faaliyetlerinin yürütülmesi amacıyla işlenir. Pazarlama amacıyla kullanılmaz, üçüncü kişilere satılmaz veya devredilmez."
+      },
+      "legal": {
+        "heading": "Hukuki sebep",
+        "body": "İşleme, KVKK m. 5 uyarınca açık rızana dayanır. Formu gönderirken verdiğin onayı dilediğin zaman geri çekebilirsin; bu durumda kayıtların silinir."
+      },
+      "transfer": {
+        "heading": "Yurt dışına aktarım",
+        "body": "Form kayıtları Google LLC tarafından sağlanan Google Sheets ve Google Apps Script hizmetlerinde saklanır; bildirim ve onay e-postaları da aynı altyapı üzerinden gönderilir. Bu nedenle verilerin Google’ın yurt dışındaki sunucularında işlenmesi söz konusudur ve formu gönderirken bu aktarıma da onay vermiş olursun."
+      },
+      "retention": {
+        "heading": "Saklama süresi",
+        "body": "İletişim mesajları en fazla bir yıl saklanır. Üyelik başvuruları, üyeliğin sürdüğü süre boyunca ve sona ermesinden itibaren en fazla bir yıl saklanır. Süre dolduğunda kayıtlar silinir."
+      },
+      "rights": {
+        "heading": "Hakların",
+        "body": "KVKK m. 11 uyarınca kişisel verilerinin işlenip işlenmediğini öğrenme, işlenmişse buna ilişkin bilgi talep etme, düzeltilmesini veya silinmesini isteme ve işlemeye itiraz etme haklarına sahipsin."
+      },
+      "contact": {
+        "heading": "İletişim",
+        "body": "Bu metne ve kişisel verilerine ilişkin taleplerini {email} adresine iletebilirsin."
+      }
+    }
   },
   "NotFound": {
     "title": "Sayfa bulunamadı",

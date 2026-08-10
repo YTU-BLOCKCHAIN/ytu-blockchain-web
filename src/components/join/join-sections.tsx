@@ -2,8 +2,7 @@ import { CheckCircle2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
-import { MailtoForm } from '@/components/mailto-form';
-import { siteConfig } from '@/lib/site';
+import { SiteForm } from '@/components/site-form';
 
 export function JoinHero() {
   const t = useTranslations('Join');
@@ -82,31 +81,14 @@ export function JoinApplication() {
             {t('form.intro')}
           </p>
 
-          <MailtoForm
-            fields={[
-              {
-                name: 'name',
-                label: t('form.name'),
-                required: true,
-                autoComplete: 'name',
-              },
-              {
-                name: 'email',
-                label: t('form.email'),
-                type: 'email',
-                required: true,
-                autoComplete: 'email',
-              },
-              { name: 'department', label: t('form.department') },
-              {
-                name: 'motivation',
-                label: t('form.motivation'),
-                multiline: true,
-                required: true,
-              },
-            ]}
-            recipient={siteConfig.contactEmail}
-            subject={t('form.subject')}
+          <SiteForm
+            kind="join"
+            labels={{
+              name: t('form.name'),
+              email: t('form.email'),
+              department: t('form.department'),
+              motivation: t('form.motivation'),
+            }}
             submitLabel={t('form.submit')}
           />
         </div>

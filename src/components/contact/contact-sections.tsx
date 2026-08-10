@@ -2,7 +2,7 @@ import { CheckCircle2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
-import { MailtoForm } from '@/components/mailto-form';
+import { SiteForm } from '@/components/site-form';
 import { Link } from '@/i18n/navigation';
 import { siteConfig } from '@/lib/site';
 
@@ -100,30 +100,13 @@ export function ContactSection() {
             {t('form.intro')}
           </p>
 
-          <MailtoForm
-            fields={[
-              {
-                name: 'name',
-                label: t('form.name'),
-                required: true,
-                autoComplete: 'name',
-              },
-              {
-                name: 'email',
-                label: t('form.email'),
-                type: 'email',
-                required: true,
-                autoComplete: 'email',
-              },
-              {
-                name: 'message',
-                label: t('form.message'),
-                multiline: true,
-                required: true,
-              },
-            ]}
-            recipient={siteConfig.contactEmail}
-            subject={t('form.subject')}
+          <SiteForm
+            kind="contact"
+            labels={{
+              name: t('form.name'),
+              email: t('form.email'),
+              message: t('form.message'),
+            }}
             submitLabel={t('form.submit')}
           />
         </div>

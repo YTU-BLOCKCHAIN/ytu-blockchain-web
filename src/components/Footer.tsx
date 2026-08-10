@@ -102,7 +102,12 @@ export default function Footer() {
             data-grid-content
             className="flex flex-wrap items-center justify-between gap-4 p-6 lg:px-12"
           >
-            <span className="text-muted-foreground text-sm">{t('rights')}</span>
+            <div className="text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+              <span>{t('rights')}</span>
+              <Link href="/privacy" className="hover:text-primary duration-150">
+                {t('privacy')}
+              </Link>
+            </div>
             <div className="ring-foreground/5 bg-card flex items-center gap-2 rounded-full border border-transparent py-1 pr-4 pl-2 shadow ring-1">
               <span className="relative flex size-3">
                 <span className="absolute inset-0 block size-full animate-pulse rounded-full bg-emerald-400/40" />
