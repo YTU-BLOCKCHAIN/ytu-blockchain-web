@@ -45,5 +45,9 @@ next-env.d.ts
 # linting
 .eslintcache
 
+# sanity: `npm run content:types` ara çıktısı. Tiplerin kaynağı bu dosya ama
+# kendisi tekrar üretilebilir; repoda tutulan yalnızca `sanity.types.ts`.
+/schema.json
+
 # claude code (local editor / preview config)
 .claude/
