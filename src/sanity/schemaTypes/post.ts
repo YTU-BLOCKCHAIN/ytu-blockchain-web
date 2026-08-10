@@ -34,7 +34,23 @@ export const post = defineType({
       // `slugify`: Sanity'nin varsayılanı Türkçe'yi Almanca gibi çeviriyor
       // (ü → ue). Ayrıntı için src/sanity/slugify.ts.
       options: { source: 'title', maxLength: SLUG_MAX_LENGTH, slugify },
-      validation: (rule) => rule.required(),
+      // "Generate" doğru biçimi üretiyor ama alan elle de yazılabiliyor —
+      // boşluklu ya da büyük harfli bir adres URL'i bozar, üstelik yayına
+      // çıktıktan sonra düzeltmek bağlantıları kırar. Bu yüzden biçim burada
+      // kapıda durduruluyor.
+      validation: (rule) =>
+        rule.required().custom((slug) => {
+          const value = slug?.current;
+          if (!value) return true; // boşluğu `required()` zaten yakalıyor
+
+          if (value.length > SLUG_MAX_LENGTH) {
+            return `En fazla ${SLUG_MAX_LENGTH} karakter olabilir.`;
+          }
+
+          return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)
+            ? true
+            : 'Yalnızca küçük harf, rakam ve tire kullanılabilir — boşluk, büyük harf ve Türkçe karakter olmaz. Başlığın yanındaki "Generate" düğmesi doğru biçimi üretir.';
+        }),
     }),
     defineField({
       name: 'language',
