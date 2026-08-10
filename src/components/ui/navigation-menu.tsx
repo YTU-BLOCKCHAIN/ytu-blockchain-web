@@ -125,13 +125,26 @@ function NavigationMenuViewport({
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>) {
   return (
+    /*
+      `fixed` ama containing block VIEWPORT DEĞİL: header'daki Container
+      `backdrop-blur` taşıyor, `backdrop-filter` de fixed torunlar için
+      containing block yaratıyor. Yani bu kutu içerik sütununun (1103px)
+      içinde konumlanıyor.
+
+      Şablonun `min-w-312` (1248px) + `-translate-x-8` / `-translate-x-12` +
+      `px-*` zinciri bu yüzden iki hataya yol açıyordu: kutu sütunun dışına
+      taşıp sayfayı yatay kaydırıyor, `overflow-hidden` alanı da 1088px'de
+      kalıp panelin sağından 16px'i kırpıyordu. Kutu artık containing block'u
+      birebir dolduruyor; panel Header'daki `min-w-full` ile sütunun tamamını
+      kaplıyor. Dikey gölge payı `pb-32` ile korunuyor.
+    */
     <div
       data-slot="navigation-menu-viewport-parent"
       className={cn(
-        'px-(--viewport-outer-px) min-w-312 has-data-[state=open]:grid-rows-[1fr] fixed inset-x-0 top-0 isolate z-50 mx-auto grid -translate-x-8 grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out',
+        'has-data-[state=open]:grid-rows-[1fr] fixed inset-x-0 top-0 isolate z-50 grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out',
       )}
     >
-      <div className="-translate-x-12 overflow-hidden px-12 pb-32">
+      <div className="overflow-hidden pb-32">
         <NavigationMenuPrimitive.Viewport
           data-slot="navigation-menu-viewport"
           className={cn(

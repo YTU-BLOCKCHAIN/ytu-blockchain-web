@@ -205,7 +205,10 @@ function NavMenu() {
   const t = useTranslations('Nav');
 
   return (
-    <NavigationMenu className="**:data-[slot=navigation-menu-link]:relative **:data-[slot=navigation-menu-link]:z-51 **:data-[slot=navigation-menu-trigger]:relative **:data-[slot=navigation-menu-trigger]:z-51 **:data-[slot=navigation-menu-viewport]:min-w-276 [--viewport-outer-px:2rem] max-lg:hidden">
+    /* `min-w-276` (sabit 1104px) yerine `min-w-full`: panel yine içerik
+       sütununun tamamını kaplıyor ama sütun daraldığında onunla birlikte
+       küçülüyor — sabit ölçü dar pencerede kutudan taşıp kırpılıyordu. */
+    <NavigationMenu className="**:data-[slot=navigation-menu-link]:relative **:data-[slot=navigation-menu-link]:z-51 **:data-[slot=navigation-menu-trigger]:relative **:data-[slot=navigation-menu-trigger]:z-51 **:data-[slot=navigation-menu-viewport]:min-w-full max-lg:hidden">
       <NavigationMenuList className="gap-3">
         {NAV.map((item) =>
           'sections' in item ? (
