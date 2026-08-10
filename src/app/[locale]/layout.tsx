@@ -64,9 +64,9 @@ export default async function LocaleLayout({
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
           <Header />
-          {/* Template gibi hafif zemin tonu → grid çerçevesi (yan raylar +
-              çizgiler) header'dan sayfa gövdesine kesintisiz devam eder. */}
-          <main className="bg-foreground/10 flex-1">{children}</main>
+          {/* Zemin = grid çizgi rengi → çerçeve (yan raylar + hücre araları)
+              header'dan sayfa gövdesine kesintisiz ve tek tonda devam eder. */}
+          <main className="bg-grid-line flex-1">{children}</main>
           <Footer />
         </NextIntlClientProvider>
       </body>
