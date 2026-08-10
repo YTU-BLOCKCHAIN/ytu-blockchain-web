@@ -69,6 +69,10 @@
     "join": {
       "title": "Join",
       "description": "Become a member of YTÜ Blockchain Club — learn, build and be part of the community."
+    },
+    "privacy": {
+      "title": "Privacy Notice",
+      "description": "How the YTÜ Blockchain Club processes personal data submitted through the site forms."
     }
   },
   "Landing": {
@@ -332,7 +336,48 @@
     "exploreHeading": "Explore",
     "socialHeading": "Social media",
     "status": "Always decentralized",
-    "rights": "© 2026 YTÜ Blockchain Club. All rights reserved."
+    "rights": "© 2026 YTÜ Blockchain Club. All rights reserved.",
+    "privacy": "Privacy Notice"
+  },
+  "Privacy": {
+    "eyebrow": "Privacy",
+    "title": "Privacy Notice",
+    "subtitle": "How we handle the personal data you share through the forms on this site.",
+    "updated": "Last updated: 10 August 2026",
+    "sections": {
+      "controller": {
+        "heading": "Data controller",
+        "body": "This notice is issued by the Yıldız Technical University Blockchain Club under Turkish Personal Data Protection Law No. 6698 (KVKK). The club is the data controller for personal data submitted through the contact and membership application forms on this site."
+      },
+      "data": {
+        "heading": "Personal data we process",
+        "body": "The contact form processes your full name, email address and message. The membership application form processes your full name, email address, department/year and application text. Each record also stores the submission date and the site language you were using. No data is collected through cookies or tracking tools."
+      },
+      "purpose": {
+        "heading": "Purpose of processing",
+        "body": "Data is processed solely to review messages and applications, to get back to you, and to run club activities. It is not used for marketing, and it is never sold or transferred to third parties."
+      },
+      "legal": {
+        "heading": "Legal basis",
+        "body": "Processing is based on your explicit consent under Article 5 of the KVKK. You may withdraw the consent you gave when submitting the form at any time, in which case your records are deleted."
+      },
+      "transfer": {
+        "heading": "International transfer",
+        "body": "Form records are stored in Google Sheets and Google Apps Script, provided by Google LLC; notification and confirmation emails are sent through the same infrastructure. Your data is therefore processed on Google servers outside Türkiye, and submitting the form also covers your consent to this transfer."
+      },
+      "retention": {
+        "heading": "Retention period",
+        "body": "Contact messages are kept for at most one year. Membership applications are kept for the duration of your membership and for at most one year after it ends. Records are deleted once the period expires."
+      },
+      "rights": {
+        "heading": "Your rights",
+        "body": "Under Article 11 of the KVKK you have the right to learn whether your personal data is processed, to request information about it, to have it corrected or deleted, and to object to the processing."
+      },
+      "contact": {
+        "heading": "Contact",
+        "body": "Send any request regarding this notice or your personal data to {email}."
+      }
+    }
   },
   "NotFound": {
     "title": "Page not found",
