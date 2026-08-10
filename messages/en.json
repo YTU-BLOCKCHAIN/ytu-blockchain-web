@@ -4,7 +4,6 @@
     "about": "About",
     "projects": "Projects",
     "community": "Community",
-    "sponsors": "Sponsors",
     "contact": "Contact",
     "join": "Join us",
     "sections": {
@@ -14,21 +13,17 @@
         "values": "Values",
         "valuesDesc": "The principles behind every decision",
         "team": "Team",
-        "teamDesc": "The committees that run the club together",
-        "sponsors": "Supporters",
-        "sponsorsDesc": "The organizations that make our community possible"
+        "teamDesc": "The committees that run the club together"
       },
       "community": {
         "channels": "Channels",
         "channelsDesc": "Join us on GitHub, X and Instagram",
         "join": "Join",
-        "joinDesc": "Become a member and take part"
-      },
-      "sponsors": {
-        "logos": "Our sponsors",
-        "logosDesc": "The organizations backing us",
-        "contact": "Become a sponsor",
-        "contactDesc": "Reach talent, grow your brand"
+        "joinDesc": "Become a member and take part",
+        "projects": "Projects",
+        "projectsDesc": "The open-source projects we build together",
+        "sponsors": "Sponsors",
+        "sponsorsDesc": "The organizations that make our community possible"
       }
     },
     "menu": {
@@ -44,13 +39,6 @@
         "promo": {
           "title": "Become a member",
           "desc": "Be part of the community"
-        }
-      },
-      "sponsors": {
-        "heading": "Support us",
-        "promo": {
-          "title": "Become a sponsor",
-          "desc": "Reach talent, grow your brand"
         }
       }
     }

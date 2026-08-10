@@ -4,7 +4,6 @@
     "about": "Hakkımızda",
     "projects": "Projeler",
     "community": "Topluluk",
-    "sponsors": "Sponsorlar",
     "contact": "İletişim",
     "join": "Bize Katıl",
     "sections": {
@@ -14,21 +13,17 @@
         "values": "Değerlerimiz",
         "valuesDesc": "Her kararımıza yön veren ilkeler",
         "team": "Ekibimiz",
-        "teamDesc": "Kulübü birlikte yürüten komiteler",
-        "sponsors": "Destekçilerimiz",
-        "sponsorsDesc": "Topluluğumuzu mümkün kılan kurumlar"
+        "teamDesc": "Kulübü birlikte yürüten komiteler"
       },
       "community": {
         "channels": "Kanallar",
         "channelsDesc": "GitHub, X ve Instagram'da bize katıl",
         "join": "Katıl",
-        "joinDesc": "Üye ol, topluluğun parçası ol"
-      },
-      "sponsors": {
-        "logos": "Sponsorlarımız",
-        "logosDesc": "Bize destek olan kurumlar",
-        "contact": "Sponsor ol",
-        "contactDesc": "Yeteneğe erişin, markanızı tanıtın"
+        "joinDesc": "Üye ol, topluluğun parçası ol",
+        "projects": "Projeler",
+        "projectsDesc": "Birlikte ürettiğimiz açık kaynak projeler",
+        "sponsors": "Sponsorlar",
+        "sponsorsDesc": "Topluluğumuzu mümkün kılan kurumlar"
       }
     },
     "menu": {
@@ -44,13 +39,6 @@
         "promo": {
           "title": "Üye ol",
           "desc": "Topluluğun bir parçası ol"
-        }
-      },
-      "sponsors": {
-        "heading": "Destek ol",
-        "promo": {
-          "title": "Sponsor ol",
-          "desc": "Yeteneğe erişin, markanızı tanıtın"
         }
       }
     }
