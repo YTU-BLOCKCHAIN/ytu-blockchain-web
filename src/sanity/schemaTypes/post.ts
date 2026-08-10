@@ -1,5 +1,7 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
+import { SLUG_MAX_LENGTH, slugify } from '../slugify';
+
 /**
  * Blog yazısı.
  *
@@ -29,7 +31,9 @@ export const post = defineType({
       description:
         'Yazının adresi: /blog/<adres>. Başlıktan üretilir. Yayına aldıktan sonra DEĞİŞTİRME — paylaşılmış bağlantılar kırılır.',
       type: 'slug',
-      options: { source: 'title', maxLength: 96 },
+      // `slugify`: Sanity'nin varsayılanı Türkçe'yi Almanca gibi çeviriyor
+      // (ü → ue). Ayrıntı için src/sanity/slugify.ts.
+      options: { source: 'title', maxLength: SLUG_MAX_LENGTH, slugify },
       validation: (rule) => rule.required(),
     }),
     defineField({
