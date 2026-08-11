@@ -4,15 +4,23 @@ import { sanityClient } from '@/sanity/lib/client';
 import { postQuery, postRoutesQuery, postsQuery } from '@/sanity/queries';
 
 /**
- * Blog içeriğini çeken katman.
- *
- * **Tazelik:** her istek `post` cache etiketiyle işaretleniyor. Bir sonraki
- * adımda kurulacak Sanity webhook'u yazı yayınlandığında bu etiketi
- * bayatlatacak ve sayfa saniyeler içinde tazelenecek. Webhook henüz yokken
- * içerik donup kalmasın diye ayrıca 60 saniyelik bir üst sınır var — webhook
- * devreye girince bu sınır yalnızca emniyet ağı olarak kalır.
+ * Blog sorgularının cache etiketi. `src/app/api/revalidate/route.ts` da bu
+ * sabiti kullanıyor — iki yerde ayrı ayrı yazılsaydı birindeki yazım hatası
+ * "webhook çalışıyor ama site tazelenmiyor" gibi sessiz bir arızaya dönerdi.
  */
-const POST_CACHE = { next: { tags: ['post'], revalidate: 60 } };
+export const POST_TAG = 'post';
+
+/**
+ * Tazelik iki katmanlı:
+ *
+ * - **Asıl yol webhook:** yazı yayınlanınca Sanity `/api/revalidate` ucunu
+ *   çağırıyor, etiket geçersizleşiyor ve içerik saniyeler içinde sitede.
+ * - **`revalidate` yalnızca emniyet ağı:** bir webhook teslimatı düşerse içerik
+ *   en fazla bu kadar bayat kalır. Webhook geldiğine göre kısa tutmanın anlamı
+ *   yok; her ziyaret sonrası yeniden sorgulamak ücretsiz plan kotasını boşuna
+ *   yiyor.
+ */
+const POST_CACHE = { next: { tags: [POST_TAG], revalidate: 300 } };
 
 export async function getPosts(language: Locale) {
   return sanityClient.fetch(postsQuery, { language }, POST_CACHE);
