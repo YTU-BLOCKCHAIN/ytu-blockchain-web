@@ -10,7 +10,9 @@ export const config = {
   // API, Next dahili yolları ve dosyalar (nokta içerenler) hariç her yolu eşle.
   // `/links` de dışarıda: linktree sayfası dil ön eki almaz (Instagram
   // biyografisindeki adres `/tr/links`e yönlenmesin), kendi kök layout'unda
-  // yaşar. `links(?:$|/)` yalnızca tam eşleşmeyi dışlar → `/linksxyz` normal
-  // akışta kalır ve temiz 404 verir.
-  matcher: '/((?!api|_next|_vercel|links(?:$|/)|.*\\..*).*)',
+  // yaşar. `/studio` da dışarıda: gömülü Sanity Studio dil ön eki tanımıyor,
+  // `/en/studio`ya yönlendirilirse hiç açılmaz.
+  // `links(?:$|/)` / `studio(?:$|/)` yalnızca tam eşleşmeyi dışlar →
+  // `/linksxyz` normal akışta kalır ve temiz 404 verir.
+  matcher: '/((?!api|_next|_vercel|links(?:$|/)|studio(?:$|/)|.*\\..*).*)',
 };

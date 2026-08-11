@@ -6,3 +6,6 @@ coverage
 package-lock.json
 next-env.d.ts
 .husky/_
+# Prettier'ın parser'ı yok: Apps Script kaynağı ve env şablonu.
+*.gs
+.env.example
