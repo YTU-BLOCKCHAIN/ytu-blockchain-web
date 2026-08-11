@@ -28,26 +28,24 @@ export function BlogFeed({ posts }: { posts: BlogCardPost[] }) {
   const [active, setActive] = useState<PostCategory | typeof ALL>(ALL);
 
   /*
-    Şeritte yalnızca en az bir yazısı olan kategoriler var. Sabit listenin
-    tamamını basmak "süzdüm, hiçbir şey çıkmadı" ekranı üretirdi; sıra ise
-    `POST_CATEGORIES`ten geliyor, yani içerik değiştikçe düğmeler yer
-    değiştirmiyor.
+    Şerit, içerikte karşılığı olsun olmasın **tanımlı bütün kategorileri**
+    gösteriyor: blogun konu başlıkları sayfanın sabit bir parçası, yazı sayısına
+    göre görünüp kaybolan bir öğe değil. Sıra `POST_CATEGORIES`ten geldiği için
+    içerik değiştikçe düğmeler yer değiştirmiyor.
+
+    Bedeli, boş çıkan bir süzme ihtimali — aşağıda açık bir mesajla karşılanıyor.
   */
-  const categories = useMemo(() => {
-    const present = new Set(posts.map((post) => post.category));
-    return POST_CATEGORIES.map(({ value }) => value).filter((value) =>
-      present.has(value),
-    );
-  }, [posts]);
+  const categories = useMemo(
+    () => POST_CATEGORIES.map(({ value }) => value),
+    [],
+  );
 
   const visible =
     active === ALL ? posts : posts.filter((post) => post.category === active);
 
   return (
     <>
-      {/* Tek kategori varsa süzgeç bir şeye yaramaz ("Tümü" ile aynı sonucu
-          verir); şerit hiç çizilmiyor. */}
-      {categories.length > 1 ? (
+      {posts.length > 0 ? (
         <section>
           <Container className="@4xl:px-12 py-4 md:px-6">
             {/*
@@ -96,13 +94,26 @@ export function BlogFeed({ posts }: { posts: BlogCardPost[] }) {
         </section>
       ) : null}
 
-      <section>
-        <Container asGrid className="sm:grid-cols-2 lg:grid-cols-3">
-          {visible.map((post) => (
-            <PostCard key={post.id} post={post} />
-          ))}
-        </Container>
-      </section>
+      {/* Şerit bütün kategorileri gösterdiği için henüz yazısı olmayan biri
+          seçilebiliyor. Boş ızgara "sayfa bozuldu" hissi verir; tek hücrede
+          açık bir mesaj daha dürüst. */}
+      {visible.length === 0 ? (
+        <section>
+          <Container asGrid>
+            <div data-grid-content className="@4xl:p-12 p-6 text-center">
+              <p className="text-muted-foreground">{t('filters.empty')}</p>
+            </div>
+          </Container>
+        </section>
+      ) : (
+        <section>
+          <Container asGrid className="sm:grid-cols-2 lg:grid-cols-3">
+            {visible.map((post) => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </Container>
+        </section>
+      )}
     </>
   );
 }
