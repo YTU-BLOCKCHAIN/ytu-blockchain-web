@@ -71,15 +71,34 @@ src/
       layout.tsx         # Header + Footer + i18n sağlayıcı
       page.tsx           # Anasayfa
       not-found.tsx      # 404
-      about/ projects/ blog/ community/ contact/ join/
+      about/ projects/ blog/ community/ contact/ join/ privacy/
     globals.css
   components/            # Header, Footer, LocaleSwitcher, StatusBanner, ComingSoon
   i18n/                  # routing, request, navigation
+  lib/forms/            # form alanları + gönderim Server Action'ı
   proxy.ts              # next-intl ara katmanı (Next 16'da "proxy")
   global.d.ts           # next-intl tip genişletmesi
 messages/               # tr.json, en.json (tüm metinler burada)
+google-apps-script/     # form arka ucu (Sheets + e-posta)
 .github/workflows/      # CI
 ```
+
+### Formlar
+
+İletişim ve üyelik başvurusu formları bir Server Action üzerinden Google Apps Script
+Web App'ine gider; oradan kayıt Google Sheets'e düşer, kulübe bildirim ve formu
+dolduran kişiye onay e-postası çıkar.
+
+```text
+Tarayıcı ──▶ Server Action ──▶ Apps Script ──┬─▶ Sheets
+             (doğrulama, spam)               ├─▶ kulübe bildirim
+                                             └─▶ dolduran kişiye onay
+```
+
+Kurulum ve deploy adımları: **[`google-apps-script/README.md`](google-apps-script/README.md)**.
+Gereken ortam değişkenleri (`FORM_ENDPOINT_URL`, `FORM_SHARED_SECRET`) için
+[`.env.example`](.env.example) dosyasına bakın; ikisi tanımlı değilse formlar
+"şu an devre dışı" hatası verir.
 
 ### Uluslararasılaştırma (i18n)
 
@@ -160,15 +179,34 @@ src/
       layout.tsx         # Header + Footer + i18n provider
       page.tsx           # Landing
       not-found.tsx      # 404
-      about/ projects/ blog/ community/ contact/ join/
+      about/ projects/ blog/ community/ contact/ join/ privacy/
     globals.css
   components/            # Header, Footer, LocaleSwitcher, StatusBanner, ComingSoon
   i18n/                  # routing, request, navigation
+  lib/forms/            # form fields + submission Server Action
   proxy.ts              # next-intl middleware (called "proxy" in Next 16)
   global.d.ts           # next-intl type augmentation
 messages/               # tr.json, en.json (all copy lives here)
+google-apps-script/     # form backend (Sheets + email)
 .github/workflows/      # CI
 ```
+
+### Forms
+
+The contact and membership application forms post through a Server Action to a
+Google Apps Script Web App, which appends the record to Google Sheets, notifies
+the club and sends a confirmation email to the person who submitted it.
+
+```text
+Browser ──▶ Server Action ──▶ Apps Script ──┬─▶ Sheets
+            (validation, spam)              ├─▶ club notification
+                                            └─▶ submitter confirmation
+```
+
+Setup and deployment steps: **[`google-apps-script/README.md`](google-apps-script/README.md)**.
+See [`.env.example`](.env.example) for the required environment variables
+(`FORM_ENDPOINT_URL`, `FORM_SHARED_SECRET`); without them the forms report that
+submission is currently unavailable.
 
 ### Internationalization (i18n)
 

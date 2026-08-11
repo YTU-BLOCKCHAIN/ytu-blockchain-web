@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# Şablon: yalnızca anahtar adlarını içerir, gizli değer taşımaz.
+!.env.example
 
 # vercel
 .vercel
@@ -42,6 +44,10 @@ next-env.d.ts
 
 # linting
 .eslintcache
+
+# sanity: `npm run content:types` ara çıktısı. Tiplerin kaynağı bu dosya ama
+# kendisi tekrar üretilebilir; repoda tutulan yalnızca `sanity.types.ts`.
+/schema.json
 
 # claude code (local editor / preview config)
 .claude/
