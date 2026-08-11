@@ -1,43 +1,129 @@
-import { ArrowUpRight } from 'lucide-react';
 import { type Locale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 import { Container } from '@/components/container';
 import { Link } from '@/i18n/navigation';
 import { formatPostDate } from '@/lib/blog';
+import { cn } from '@/lib/utils';
 import { imageUrl } from '@/sanity/lib/image';
 import type { PostsQueryResult } from '@/sanity/types';
+
+import { type BlogCardPost, PostDate, PostMeta } from './blog-card';
+import { BlogFeed } from './blog-feed';
+
+type Post = PostsQueryResult[number];
+
+/**
+ * Sanity kaydını kartın beklediği düz veriye çevirir. Adresi olmayan bir yazı
+ * kart olarak çizilemez (bağlantısı hiçbir yere gitmez) — `null` dönüp listeden
+ * düşüyor. Sorgu zaten `defined(slug.current)` süzüyor; bu ikinci kapı yalnız
+ * tipteki `string | null`ı kapatmak için.
+ */
+function toCard(post: Post, locale: Locale): BlogCardPost | null {
+  if (!post.slug) return null;
+
+  return {
+    id: post._id,
+    slug: post.slug,
+    title: post.title ?? '',
+    excerpt: post.excerpt ?? '',
+    date: formatPostDate(post.publishedAt, locale),
+    dateTime: post.publishedAt,
+    tags: post.tags ?? [],
+    authorName: post.author?.name ?? null,
+    // 2× ölçü: kutu 24px, retina ekranda 48px'lik kaynak keskin durur.
+    authorAvatarUrl: post.author?.avatar
+      ? imageUrl(post.author.avatar, 48, 48)
+      : null,
+  };
+}
 
 export function BlogHero() {
   const t = useTranslations('Blog');
 
   return (
-    <section className="overflow-hidden">
-      <Container asGrid>
-        <div className="grid grid-cols-10 gap-px">
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
-
-          <div
-            data-grid-content
-            className="@4xl:p-12 col-span-full p-6 sm:col-span-8"
-          >
-            <span className="text-primary font-mono text-xs tracking-widest lowercase">
-              {'//'} {t('eyebrow')}
-            </span>
-            <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-              {t('title')}
-            </h1>
-            <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
-              {t('subtitle')}
-            </p>
-          </div>
-
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+    <section>
+      <Container className="@4xl:py-12 pb-6 pt-12">
+        <div className="@4xl:px-12 max-w-xl px-6">
+          {/* Mobilde 36px — diğer sayfa hero'larıyla aynı ölçü; 48px telefonda
+              başlığı fazladan satıra bölüp hero'yu ekranın tamamına şişiriyor.
+              Geniş ekranda tasarımın 60px'ine çıkıyor. */}
+          <h1 className="text-foreground text-balance text-4xl font-semibold sm:text-5xl lg:text-6xl">
+            {t('title')}
+          </h1>
+          <p className="text-muted-foreground mt-6 text-balance text-lg">
+            {t('subtitle')}
+          </p>
         </div>
+      </Container>
+    </section>
+  );
+}
+
+/**
+ * En yeni yazı — iki sütunlu, kapak görselli büyük kart. Süzgecin üstünde
+ * durduğu için etiket seçiminden etkilenmez: sayfaya giren herkes kulübün en
+ * son ne yazdığını görür.
+ */
+function FeaturedPost({ post, locale }: { post: Post; locale: Locale }) {
+  const card = toCard(post, locale);
+  if (!card) return null;
+
+  const cover = post.coverImage;
+
+  return (
+    <section>
+      <Container asGrid>
+        <article
+          className={cn(
+            'group relative grid gap-px',
+            cover && 'md:grid-cols-2',
+          )}
+        >
+          {cover ? (
+            <div>
+              <div data-grid-content className="@4xl:p-12 p-6">
+                {/* `before`: görselin üstüne ince bir iç kenarlık koyar — açık
+                    zeminde soluk bir kapak kartın içinde yüzer gibi durmasın. */}
+                <div className="before:border-foreground/10 before:inset-ring-background/10 relative aspect-video overflow-hidden rounded-[10px] shadow-md shadow-black/10 before:absolute before:inset-0 before:rounded-[10px] before:border before:inset-ring-1">
+                  <Image
+                    src={imageUrl(cover, 1200, 675)}
+                    alt={cover.alt ?? ''}
+                    width={1200}
+                    height={675}
+                    priority
+                    sizes="(min-width: 768px) 34rem, 100vw"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          ) : null}
+
+          <div>
+            <div
+              data-grid-content
+              className="@4xl:p-12 flex flex-col p-6 transition duration-200"
+            >
+              <div className="space-y-4">
+                <PostDate post={card} />
+
+                <h2 className="text-foreground text-balance text-lg font-semibold md:text-xl">
+                  <Link
+                    href={`/blog/${card.slug}`}
+                    className="before:absolute before:inset-0"
+                  >
+                    {card.title}
+                  </Link>
+                </h2>
+
+                <p className="text-muted-foreground">{card.excerpt}</p>
+              </div>
+
+              <PostMeta post={card} className="pt-4" />
+            </div>
+          </div>
+        </article>
       </Container>
     </section>
   );
@@ -54,7 +140,8 @@ export function BlogList({
 
   // Henüz o dilde yazı yoksa bölümü boş bir ızgarayla bırakmak "sayfa bozuk"
   // hissi veriyor; tek hücrede açık bir mesaj daha dürüst.
-  if (posts.length === 0) {
+  const [featured, ...rest] = posts;
+  if (!featured) {
     return (
       <section>
         <Container asGrid>
@@ -66,62 +153,14 @@ export function BlogList({
     );
   }
 
+  const cards = rest
+    .map((post) => toCard(post, locale))
+    .filter((card): card is BlogCardPost => card !== null);
+
   return (
-    <section>
-      <Container asGrid className="sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => {
-          const date = formatPostDate(post.publishedAt, locale);
-
-          return (
-            <Link
-              key={post._id}
-              href={`/blog/${post.slug}`}
-              className="group relative"
-            >
-              <div
-                data-grid-content
-                className="hover:bg-card! flex h-full flex-col transition-colors"
-              >
-                {post.coverImage ? (
-                  <Image
-                    src={imageUrl(post.coverImage, 800, 450)}
-                    alt={post.coverImage.alt ?? ''}
-                    width={800}
-                    height={450}
-                    sizes="(min-width: 1024px) 22rem, (min-width: 640px) 50vw, 100vw"
-                    className="h-auto w-full rounded-t object-cover"
-                  />
-                ) : null}
-
-                <div className="@4xl:p-8 flex flex-1 flex-col gap-3 p-6">
-                  <div className="flex items-start justify-between gap-2">
-                    <h2 className="text-foreground text-balance font-semibold">
-                      {post.title}
-                    </h2>
-                    <ArrowUpRight className="text-muted-foreground group-hover:text-primary mt-0.5 size-4 shrink-0 transition-colors" />
-                  </div>
-
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {post.excerpt}
-                  </p>
-
-                  <div className="text-muted-foreground mt-auto flex flex-wrap items-center gap-x-2 pt-3 text-xs">
-                    {date ? (
-                      <time dateTime={post.publishedAt ?? undefined}>
-                        {date}
-                      </time>
-                    ) : null}
-                    {date && post.author?.name ? (
-                      <span aria-hidden>·</span>
-                    ) : null}
-                    {post.author?.name ? <span>{post.author.name}</span> : null}
-                  </div>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </Container>
-    </section>
+    <>
+      <FeaturedPost post={featured} locale={locale} />
+      <BlogFeed posts={cards} locale={locale} />
+    </>
   );
 }
