@@ -11,6 +11,12 @@ yok; GitHub üzerinden düzenlenebilirler.
 Her ikisinde de akış aynı: GitHub'da dosyayı düzenle → pull request aç → kontrol
 yeşile dönünce birleştirilir.
 
+> **Blog yazıları burada değil.** Onlar Sanity'de tutulur ve `/studio`
+> adresinden yazılır — GitHub'a hiç uğramazsın. Rehber:
+> **[`docs/blog.md`](../docs/blog.md)**.
+>
+> Buradaki `posts.json` blog değil, ana sayfadaki **X paylaşımları** bölümüdür.
+
 ---
 
 ## `links.json` nasıl güncellenir?
