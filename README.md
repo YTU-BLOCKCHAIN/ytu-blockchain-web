@@ -21,9 +21,9 @@ _Official website of the Yıldız Technical University Blockchain Club._
 
 ### Hakkında
 
-Bu depo, kulübün web sitesinin ön yüzünü barındırır. Blog içeriği ayrı bir depoda
-([`ytu-blockchain-sanity`](https://github.com/YTU-BLOCKCHAIN)) Sanity CMS ile yönetilir.
-Site iki dillidir (TR/EN) ve içerik hazır olmayan bölümler "çok yakında" şablonuyla yayınlanır.
+Bu depo, kulübün web sitesinin ön yüzünü **ve** blog içerik yönetimini barındırır:
+Sanity Studio siteye gömülüdür, `/studio` adresinden açılır. Site iki dillidir (TR/EN) ve
+içerik hazır olmayan bölümler "çok yakında" şablonuyla yayınlanır.
 
 ### Teknoloji
 
@@ -33,12 +33,13 @@ Site iki dillidir (TR/EN) ve içerik hazır olmayan bölümler "çok yakında" �
 | Dil       | TypeScript (strict)                  |
 | Stil      | Tailwind CSS v4                      |
 | i18n      | next-intl (`/tr`, `/en`)             |
-| Blog/CMS  | Sanity.io (yalnızca blog, ayrı depo) |
+| Blog/CMS  | Sanity.io (Studio gömülü, `/studio`) |
 | Deploy    | Vercel                               |
 
 ### Başlangıç
 
-Gereksinim: **Node.js 20.9+** ve **npm**.
+Gereksinim: **Node.js 22.12+** ve **npm**. (Sanity Studio v6 bu sürümü şart koşuyor;
+depodaki `.nvmrc` de 22'yi sabitler.)
 
 ```bash
 npm install      # bağımlılıkları kur (husky hook'larını da devreye alır)
@@ -49,16 +50,17 @@ Tarayıcıda `/` adresi otomatik olarak `/tr` diline yönlenir.
 
 ### Komutlar
 
-| Komut                  | Açıklama                                                       |
-| ---------------------- | -------------------------------------------------------------- |
-| `npm run dev`          | Geliştirme sunucusu                                            |
-| `npm run build`        | Production derlemesi (Vercel'in çalıştırdığı)                  |
-| `npm run start`        | Derlenmiş uygulamayı sunar                                     |
-| `npm run typecheck`    | Tip kontrolü (`tsc --noEmit`)                                  |
-| `npm run lint`         | ESLint                                                         |
-| `npm run format`       | Prettier ile biçimlendir                                       |
-| `npm run format:check` | Biçim kontrolü                                                 |
-| **`npm run verify`**   | **typecheck + lint + format:check + build** (push kapısı & CI) |
+| Komut                   | Açıklama                                                        |
+| ----------------------- | --------------------------------------------------------------- |
+| `npm run dev`           | Geliştirme sunucusu                                             |
+| `npm run build`         | Production derlemesi (Vercel'in çalıştırdığı)                   |
+| `npm run start`         | Derlenmiş uygulamayı sunar                                      |
+| `npm run typecheck`     | Tip kontrolü (`tsc --noEmit`)                                   |
+| `npm run lint`          | ESLint                                                          |
+| `npm run format`        | Prettier ile biçimlendir                                        |
+| `npm run format:check`  | Biçim kontrolü                                                  |
+| `npm run content:types` | Sanity şemasından TypeScript tipleri üretir (`sanity.types.ts`) |
+| **`npm run verify`**    | **typecheck + lint + format:check + build** (push kapısı & CI)  |
 
 > `npm run verify` yeşilse Vercel de yeşildir. Bu komut hem `pre-push` hook'unda hem CI'da koşar.
 
@@ -72,14 +74,22 @@ src/
       page.tsx           # Anasayfa
       not-found.tsx      # 404
       about/ projects/ blog/ community/ contact/ join/ privacy/
+    studio/[[...tool]]/  # gömülü Sanity Studio (kendi kök layout'u var)
+    api/revalidate/      # Sanity webhook'u → sayfaları tazeler
     globals.css
   components/            # Header, Footer, LocaleSwitcher, StatusBanner, ComingSoon
+  components/blog/       # liste kartları, yazı düzeni, Portable Text eşlemesi
   i18n/                  # routing, request, navigation
+  lib/blog.ts            # blog sorguları + cache etiketi
   lib/forms/            # form alanları + gönderim Server Action'ı
+  sanity/                # şemalar, GROQ sorguları, istemci, Studio menüsü
   proxy.ts              # next-intl ara katmanı (Next 16'da "proxy")
   global.d.ts           # next-intl tip genişletmesi
 messages/               # tr.json, en.json (tüm metinler burada)
+docs/blog.md            # editörler için: blog yazısı nasıl yazılır
 google-apps-script/     # form arka ucu (Sheets + e-posta)
+sanity.config.ts        # Studio yapılandırması
+sanity.types.ts         # şemadan üretilen tipler (elle düzenlenmez)
 .github/workflows/      # CI
 ```
 
@@ -99,6 +109,34 @@ Kurulum ve deploy adımları: **[`google-apps-script/README.md`](google-apps-scr
 Gereken ortam değişkenleri (`FORM_ENDPOINT_URL`, `FORM_SHARED_SECRET`) için
 [`.env.example`](.env.example) dosyasına bakın; ikisi tanımlı değilse formlar
 "şu an devre dışı" hatası verir.
+
+### Blog (Sanity)
+
+Yazılar Sanity'de saklanır, editörler siteye gömülü Studio'dan yazar
+(`/studio`). Yayınlanan yazı bir webhook'la siteyi tazeler; okuyucu tarafı
+`/tr/blog` ve `/tr/blog/<adres>` sayfalarıdır.
+
+```text
+Studio (/studio) ──▶ Sanity Content Lake ──┬─▶ /blog sayfaları (GROQ ile okunur)
+                                            └─▶ webhook ──▶ /api/revalidate
+```
+
+**Yazı yazacaksan:** kod bilmeye gerek yok, **[`docs/blog.md`](docs/blog.md)** yeter.
+
+**Geliştirici notları:**
+
+- Dil **doküman seviyesinde**: her dil ayrı bir `post` dokümanı, bağ
+  `@sanity/document-internationalization` eklentisinin `translation.metadata`
+  dokümanıyla kurulur. Bir yazının çevirisi olmak zorunda değildir.
+- Şemayı değiştirdikten sonra **`npm run content:types`** çalıştır ve üretilen
+  `sanity.types.ts` dosyasını commit'le — CI'da Sanity ortam değişkenleri
+  olmadığı için orada üretilemez.
+- Gövde biçimleri `src/sanity/schemaTypes/blockContent.ts` ile
+  `src/components/blog/post-body.tsx` arasında **bire bir** yürümek zorundadır;
+  şemaya eklenip render'a eklenmeyen bir biçim sitede sessizce kaybolur.
+- Proje kimliği ve dataset adı gizli değildir (Studio istemcide çalışır) ve
+  `src/sanity/env.ts` içinde yedek değerleri vardır; `SANITY_REVALIDATE_SECRET`
+  ise gizlidir, [`.env.example`](.env.example) dosyasına bakın.
 
 ### Uluslararasılaştırma (i18n)
 
@@ -129,24 +167,25 @@ Branch modeli, commit kuralları ve PR süreci için **[CONTRIBUTING.md](CONTRIB
 
 ### About
 
-This repository holds the front-end of the club's website. Blog content is managed with Sanity CMS
-in a separate repository ([`ytu-blockchain-sanity`](https://github.com/YTU-BLOCKCHAIN)). The site is
-bilingual (TR/EN); sections without content yet ship with a "coming soon" template.
+This repository holds the front-end of the club's website **and** its blog content management:
+Sanity Studio is embedded in the site and opens at `/studio`. The site is bilingual (TR/EN);
+sections without content yet ship with a "coming soon" template.
 
 ### Tech Stack
 
-| Layer     | Choice                               |
-| --------- | ------------------------------------ |
-| Framework | Next.js 16 (App Router)              |
-| Language  | TypeScript (strict)                  |
-| Styling   | Tailwind CSS v4                      |
-| i18n      | next-intl (`/tr`, `/en`)             |
-| Blog/CMS  | Sanity.io (blog only, separate repo) |
-| Deploy    | Vercel                               |
+| Layer     | Choice                                 |
+| --------- | -------------------------------------- |
+| Framework | Next.js 16 (App Router)                |
+| Language  | TypeScript (strict)                    |
+| Styling   | Tailwind CSS v4                        |
+| i18n      | next-intl (`/tr`, `/en`)               |
+| Blog/CMS  | Sanity.io (Studio embedded, `/studio`) |
+| Deploy    | Vercel                                 |
 
 ### Getting Started
 
-Requires **Node.js 20.9+** and **npm**.
+Requires **Node.js 22.12+** and **npm**. (Sanity Studio v6 mandates it; the repo's
+`.nvmrc` pins 22 as well.)
 
 ```bash
 npm install      # install dependencies (also activates husky hooks)
@@ -157,16 +196,17 @@ Visiting `/` redirects to the default locale `/tr`.
 
 ### Scripts
 
-| Command                | Description                                                |
-| ---------------------- | ---------------------------------------------------------- |
-| `npm run dev`          | Development server                                         |
-| `npm run build`        | Production build (the one Vercel runs)                     |
-| `npm run start`        | Serves the built app                                       |
-| `npm run typecheck`    | Type checking (`tsc --noEmit`)                             |
-| `npm run lint`         | ESLint                                                     |
-| `npm run format`       | Format with Prettier                                       |
-| `npm run format:check` | Check formatting                                           |
-| **`npm run verify`**   | **typecheck + lint + format:check + build** (push gate/CI) |
+| Command                 | Description                                                           |
+| ----------------------- | --------------------------------------------------------------------- |
+| `npm run dev`           | Development server                                                    |
+| `npm run build`         | Production build (the one Vercel runs)                                |
+| `npm run start`         | Serves the built app                                                  |
+| `npm run typecheck`     | Type checking (`tsc --noEmit`)                                        |
+| `npm run lint`          | ESLint                                                                |
+| `npm run format`        | Format with Prettier                                                  |
+| `npm run format:check`  | Check formatting                                                      |
+| `npm run content:types` | Generates TypeScript types from the Sanity schema (`sanity.types.ts`) |
+| **`npm run verify`**    | **typecheck + lint + format:check + build** (push gate/CI)            |
 
 > If `npm run verify` is green, Vercel is green too. It runs in both the `pre-push` hook and CI.
 
@@ -180,14 +220,22 @@ src/
       page.tsx           # Landing
       not-found.tsx      # 404
       about/ projects/ blog/ community/ contact/ join/ privacy/
+    studio/[[...tool]]/  # embedded Sanity Studio (has its own root layout)
+    api/revalidate/      # Sanity webhook → refreshes the pages
     globals.css
   components/            # Header, Footer, LocaleSwitcher, StatusBanner, ComingSoon
+  components/blog/       # list cards, post layout, Portable Text mapping
   i18n/                  # routing, request, navigation
+  lib/blog.ts            # blog queries + cache tag
   lib/forms/            # form fields + submission Server Action
+  sanity/                # schemas, GROQ queries, client, Studio structure
   proxy.ts              # next-intl middleware (called "proxy" in Next 16)
   global.d.ts           # next-intl type augmentation
 messages/               # tr.json, en.json (all copy lives here)
+docs/blog.md            # for editors: how to write a blog post (Turkish)
 google-apps-script/     # form backend (Sheets + email)
+sanity.config.ts        # Studio configuration
+sanity.types.ts         # types generated from the schema (never edited by hand)
 .github/workflows/      # CI
 ```
 
@@ -207,6 +255,34 @@ Setup and deployment steps: **[`google-apps-script/README.md`](google-apps-scrip
 See [`.env.example`](.env.example) for the required environment variables
 (`FORM_ENDPOINT_URL`, `FORM_SHARED_SECRET`); without them the forms report that
 submission is currently unavailable.
+
+### Blog (Sanity)
+
+Posts live in Sanity and editors write them in the Studio embedded in the site
+(`/studio`). Publishing a post triggers a webhook that refreshes the site; the
+reader-facing pages are `/tr/blog` and `/tr/blog/<slug>`.
+
+```text
+Studio (/studio) ──▶ Sanity Content Lake ──┬─▶ /blog pages (read via GROQ)
+                                            └─▶ webhook ──▶ /api/revalidate
+```
+
+**Writing a post** needs no code — see **[`docs/blog.md`](docs/blog.md)** (Turkish).
+
+**Developer notes:**
+
+- Translation is **document-level**: each language is a separate `post`
+  document, tied together by the `translation.metadata` document from
+  `@sanity/document-internationalization`. A post need not exist in every language.
+- After changing the schema run **`npm run content:types`** and commit the
+  generated `sanity.types.ts` — CI has no Sanity environment variables, so it
+  cannot generate them there.
+- The body formats in `src/sanity/schemaTypes/blockContent.ts` and
+  `src/components/blog/post-body.tsx` must stay **in lockstep**; a format added
+  to the schema but not to the renderer disappears silently on the site.
+- Project id and dataset are not secret (the Studio runs client-side) and have
+  fallbacks in `src/sanity/env.ts`; `SANITY_REVALIDATE_SECRET` is secret — see
+  [`.env.example`](.env.example).
 
 ### Internationalization (i18n)
 
