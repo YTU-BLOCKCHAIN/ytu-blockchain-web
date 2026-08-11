@@ -1,59 +1,53 @@
 'use client';
 
-import { type Locale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 
 import { Container } from '@/components/container';
 import { cn } from '@/lib/utils';
+import {
+  CATEGORY_LABEL_KEY,
+  POST_CATEGORIES,
+  type PostCategory,
+} from '@/sanity/categories';
 
 import { type BlogCardPost, PostCard } from './blog-card';
 
-/** Süzgeç kapalıyken seçili olan sanal etiket. Gerçek bir etiketle çakışmaz. */
+/** Süzgeç kapalıyken seçili olan sanal kategori. Gerçek bir değerle çakışmaz. */
 const ALL = '';
 
 /**
- * Etiket süzgeci + yazı ızgarası.
+ * Kategori süzgeci + yazı ızgarası.
  *
  * Süzme istemcide, bellekteki listede yapılıyor: kulübün yazı sayısı bir sayfaya
- * sığacak ölçekte, dolayısıyla her etiket değişiminde sunucuya gidip yeniden
+ * sığacak ölçekte, dolayısıyla her kategori değişiminde sunucuya gidip yeniden
  * çizmenin (ve her tıklamada ağ beklemenin) karşılığı yok.
  */
-export function BlogFeed({
-  posts,
-  locale,
-}: {
-  posts: BlogCardPost[];
-  locale: Locale;
-}) {
+export function BlogFeed({ posts }: { posts: BlogCardPost[] }) {
   const t = useTranslations('Blog');
-  const [activeTag, setActiveTag] = useState(ALL);
+  const [active, setActive] = useState<PostCategory | typeof ALL>(ALL);
 
   /*
-    Etiketler ızgaradaki yazılardan türetiliyor; sabit bir liste değil. İki
-    sonucu var: editör Studio'da yeni bir etiket yazdığında süzgeçte kendiliğinden
-    beliriyor, ve her düğmenin arkasında en az bir kart olduğu garanti — "süzdüm,
-    hiçbir şey kalmadı" ekranı oluşamıyor.
+    Şeritte yalnızca en az bir yazısı olan kategoriler var. Sabit listenin
+    tamamını basmak "süzdüm, hiçbir şey çıkmadı" ekranı üretirdi; sıra ise
+    `POST_CATEGORIES`ten geliyor, yani içerik değiştikçe düğmeler yer
+    değiştirmiyor.
   */
-  const tags = useMemo(() => {
-    const seen = new Set<string>();
-    for (const post of posts) {
-      for (const tag of post.tags) seen.add(tag);
-    }
-    // Sıralama dile bağlı (ı/i, ç, ş): `locale` açıkça veriliyor, aksi halde
-    // sunucu ile tarayıcı farklı sıralayıp hydration uyuşmazlığı çıkarabilir.
-    return [...seen].sort((a, b) => a.localeCompare(b, locale));
-  }, [posts, locale]);
+  const categories = useMemo(() => {
+    const present = new Set(posts.map((post) => post.category));
+    return POST_CATEGORIES.map(({ value }) => value).filter((value) =>
+      present.has(value),
+    );
+  }, [posts]);
 
   const visible =
-    activeTag === ALL
-      ? posts
-      : posts.filter((post) => post.tags.includes(activeTag));
+    active === ALL ? posts : posts.filter((post) => post.category === active);
 
   return (
     <>
-      {/* Tek etiket varsa süzgeç bir şeye yaramaz ("Tümü" ile aynı sonucu
+      {/* Tek kategori varsa süzgeç bir şeye yaramaz ("Tümü" ile aynı sonucu
           verir); şerit hiç çizilmiyor. */}
-      {tags.length > 1 ? (
+      {categories.length > 1 ? (
         <section>
           <Container className="@4xl:px-12 py-4 md:px-6">
             {/*
@@ -66,34 +60,37 @@ export function BlogFeed({
               aria-label={t('filters.label')}
               className="max-lg:mask-r-from-85% -ml-0.5 flex snap-x snap-mandatory overflow-x-auto py-3 max-md:pl-6"
             >
-              {[ALL, ...tags].map((tag) => {
-                const active = tag === activeTag;
+              {/* Dizi açıkça tipleniyor: `[ALL, ...categories]` yayılınca TS
+                  düz `string[]`e genişletiyor ve hem `setActive` hem etiket
+                  aramasının daraltması kayboluyor. */}
+              {([ALL, ...categories] as (PostCategory | typeof ALL)[]).map(
+                (value) => {
+                  const selected = value === active;
 
-                return (
-                  <button
-                    key={tag}
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => setActiveTag(tag)}
-                    className="text-muted-foreground group shrink-0 snap-center px-1"
-                  >
-                    <span
-                      className={cn(
-                        'flex w-fit items-center gap-2 whitespace-nowrap rounded-full px-3 py-1 text-sm transition-colors',
-                        active
-                          ? 'bg-muted text-primary ring-foreground/10 font-medium ring-1'
-                          : 'group-hover:text-foreground group-hover:bg-foreground/5',
-                      )}
+                  return (
+                    <button
+                      key={value}
+                      type="button"
+                      aria-pressed={selected}
+                      onClick={() => setActive(value)}
+                      className="text-muted-foreground group shrink-0 snap-center px-1"
                     >
-                      {/* Etiket editörün Studio'da yazdığı gibi basılıyor.
-                          Tasarımın `capitalize`ı tek kelimelik kategorilere
-                          göre; bizim serbest etiketlerimizde "zk"yı "Zk",
-                          "defi"yi "Defi" yapıp kısaltmaları bozuyordu. */}
-                      <span>{tag === ALL ? t('filters.all') : tag}</span>
-                    </span>
-                  </button>
-                );
-              })}
+                      <span
+                        className={cn(
+                          'flex w-fit items-center gap-2 whitespace-nowrap rounded-full px-3 py-1 text-sm transition-colors',
+                          selected
+                            ? 'bg-muted text-primary ring-foreground/10 font-medium ring-1'
+                            : 'group-hover:text-foreground group-hover:bg-foreground/5',
+                        )}
+                      >
+                        {value === ALL
+                          ? t('filters.all')
+                          : t(CATEGORY_LABEL_KEY[value])}
+                      </span>
+                    </button>
+                  );
+                },
+              )}
             </div>
           </Container>
         </section>

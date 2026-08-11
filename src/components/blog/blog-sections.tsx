@@ -5,6 +5,7 @@ import { Container } from '@/components/container';
 import { Link } from '@/i18n/navigation';
 import { formatPostDate } from '@/lib/blog';
 import { cn } from '@/lib/utils';
+import { isPostCategory } from '@/sanity/categories';
 import { imageUrl } from '@/sanity/lib/image';
 import type { PostsQueryResult } from '@/sanity/types';
 
@@ -29,7 +30,7 @@ function toCard(post: Post, locale: Locale): BlogCardPost | null {
     excerpt: post.excerpt ?? '',
     date: formatPostDate(post.publishedAt, locale),
     dateTime: post.publishedAt,
-    tags: post.tags ?? [],
+    category: isPostCategory(post.category) ? post.category : null,
     authorName: post.author?.name ?? null,
     // 2× ölçü: kutu 24px, retina ekranda 48px'lik kaynak keskin durur.
     authorAvatarUrl: post.author?.avatar
@@ -160,7 +161,7 @@ export function BlogList({
   return (
     <>
       <FeaturedPost post={featured} locale={locale} />
-      <BlogFeed posts={cards} locale={locale} />
+      <BlogFeed posts={cards} />
     </>
   );
 }

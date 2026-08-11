@@ -109,7 +109,7 @@ export type Post = {
     _type: 'image';
   };
   author?: AuthorReference;
-  tags?: Array<string>;
+  category?: 'announcements' | 'hackathons';
   body?: BlockContent;
 };
 
@@ -274,7 +274,7 @@ export type AllSanitySchemaTypes =
 
 // Source: src/sanity/queries.ts
 // Variable: postsQuery
-// Query: *[_type == "post" && language == $language && defined(slug.current)]    | order(publishedAt desc) {      _id,      title,      "slug": slug.current,      excerpt,      publishedAt,      coverImage,      tags,      author->{ name, role, avatar }    }
+// Query: *[_type == "post" && language == $language && defined(slug.current)]    | order(publishedAt desc) {      _id,      title,      "slug": slug.current,      excerpt,      publishedAt,      coverImage,      category,      author->{ name, role, avatar }    }
 export type PostsQueryResult = Array<{
   _id: string;
   title: string | null;
@@ -289,7 +289,7 @@ export type PostsQueryResult = Array<{
     alt?: string;
     _type: 'image';
   } | null;
-  tags: Array<string> | null;
+  category: 'announcements' | 'hackathons' | null;
   author: {
     name: string | null;
     role: string | null;
@@ -305,7 +305,7 @@ export type PostsQueryResult = Array<{
 
 // Source: src/sanity/queries.ts
 // Variable: postQuery
-// Query: *[_type == "post" && language == $language && slug.current == $slug][0] {    _id,    title,    "slug": slug.current,    excerpt,    publishedAt,    coverImage,    tags,    body,    author->{ name, role, avatar, url }  }
+// Query: *[_type == "post" && language == $language && slug.current == $slug][0] {    _id,    title,    "slug": slug.current,    excerpt,    publishedAt,    coverImage,    category,    body,    author->{ name, role, avatar, url }  }
 export type PostQueryResult = {
   _id: string;
   title: string | null;
@@ -320,7 +320,7 @@ export type PostQueryResult = {
     alt?: string;
     _type: 'image';
   } | null;
-  tags: Array<string> | null;
+  category: 'announcements' | 'hackathons' | null;
   body: BlockContent | null;
   author: {
     name: string | null;
@@ -349,8 +349,8 @@ export type PostRoutesQueryResult = Array<{
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
-    '\n  *[_type == "post" && language == $language && defined(slug.current)]\n    | order(publishedAt desc) {\n      _id,\n      title,\n      "slug": slug.current,\n      excerpt,\n      publishedAt,\n      coverImage,\n      tags,\n      author->{ name, role, avatar }\n    }\n': PostsQueryResult;
-    '\n  *[_type == "post" && language == $language && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    publishedAt,\n    coverImage,\n    tags,\n    body,\n    author->{ name, role, avatar, url }\n  }\n': PostQueryResult;
+    '\n  *[_type == "post" && language == $language && defined(slug.current)]\n    | order(publishedAt desc) {\n      _id,\n      title,\n      "slug": slug.current,\n      excerpt,\n      publishedAt,\n      coverImage,\n      category,\n      author->{ name, role, avatar }\n    }\n': PostsQueryResult;
+    '\n  *[_type == "post" && language == $language && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    publishedAt,\n    coverImage,\n    category,\n    body,\n    author->{ name, role, avatar, url }\n  }\n': PostQueryResult;
     '\n  *[_type == "post" && defined(slug.current) && defined(language)] {\n    "slug": slug.current,\n    language,\n    _updatedAt\n  }\n': PostRoutesQueryResult;
   }
 }
