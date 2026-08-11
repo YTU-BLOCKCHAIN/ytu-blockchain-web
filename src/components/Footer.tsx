@@ -16,6 +16,7 @@ const EXPLORE = [
   { key: 'about', href: '/about' },
   { key: 'projects', href: '/projects' },
   { key: 'community', href: '/community' },
+  { key: 'blog', href: '/blog' },
   { key: 'contact', href: '/contact' },
   { key: 'join', href: '/join' },
 ] as const;

@@ -91,6 +91,7 @@ const NAV = [
       },
     ],
   },
+  { key: 'blog', href: '/blog' },
   { key: 'contact', href: '/contact' },
 ] as const;
 

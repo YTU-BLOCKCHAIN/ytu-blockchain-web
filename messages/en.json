@@ -4,6 +4,7 @@
     "about": "About",
     "projects": "Projects",
     "community": "Community",
+    "blog": "Blog",
     "contact": "Contact",
     "join": "Join us",
     "sections": {
@@ -61,6 +62,10 @@
     "community": {
       "title": "Community",
       "description": "Join the YTÜ Blockchain community on Telegram, GitHub and X."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Event announcements, club news and writing on blockchain from YTU Blockchain Club."
     },
     "contact": {
       "title": "Contact",
@@ -303,6 +308,13 @@
       "body": "Becoming a member takes a few minutes; we welcome all levels.",
       "button": "Join us"
     }
+  },
+  "Blog": {
+    "eyebrow": "Blog",
+    "title": "News and writing from the club",
+    "subtitle": "Event announcements, club updates and what we write about blockchain.",
+    "empty": "No posts yet. We will be here soon.",
+    "backToList": "All posts"
   },
   "Join": {
     "eyebrow": "Join",
