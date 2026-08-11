@@ -271,3 +271,79 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint;
+
+// Source: src/sanity/queries.ts
+// Variable: postsQuery
+// Query: *[_type == "post" && language == $language && defined(slug.current)]    | order(publishedAt desc) {      _id,      title,      "slug": slug.current,      excerpt,      publishedAt,      coverImage,      tags,      author->{ name, role }    }
+export type PostsQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  excerpt: string | null;
+  publishedAt: string | null;
+  coverImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  } | null;
+  tags: Array<string> | null;
+  author: {
+    name: string | null;
+    role: string | null;
+  } | null;
+}>;
+
+// Source: src/sanity/queries.ts
+// Variable: postQuery
+// Query: *[_type == "post" && language == $language && slug.current == $slug][0] {    _id,    title,    "slug": slug.current,    excerpt,    publishedAt,    coverImage,    tags,    body,    author->{ name, role, avatar, url }  }
+export type PostQueryResult = {
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  excerpt: string | null;
+  publishedAt: string | null;
+  coverImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  } | null;
+  tags: Array<string> | null;
+  body: BlockContent | null;
+  author: {
+    name: string | null;
+    role: string | null;
+    avatar: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+    } | null;
+    url: string | null;
+  } | null;
+} | null;
+
+// Source: src/sanity/queries.ts
+// Variable: postRoutesQuery
+// Query: *[_type == "post" && defined(slug.current) && defined(language)] {    "slug": slug.current,    language,    _updatedAt  }
+export type PostRoutesQueryResult = Array<{
+  slug: string | null;
+  language: string | null;
+  _updatedAt: string;
+}>;
+
+// Query TypeMap
+import '@sanity/client';
+declare module '@sanity/client' {
+  interface SanityQueries {
+    '\n  *[_type == "post" && language == $language && defined(slug.current)]\n    | order(publishedAt desc) {\n      _id,\n      title,\n      "slug": slug.current,\n      excerpt,\n      publishedAt,\n      coverImage,\n      tags,\n      author->{ name, role }\n    }\n': PostsQueryResult;
+    '\n  *[_type == "post" && language == $language && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    publishedAt,\n    coverImage,\n    tags,\n    body,\n    author->{ name, role, avatar, url }\n  }\n': PostQueryResult;
+    '\n  *[_type == "post" && defined(slug.current) && defined(language)] {\n    "slug": slug.current,\n    language,\n    _updatedAt\n  }\n': PostRoutesQueryResult;
+  }
+}

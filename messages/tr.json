@@ -4,6 +4,7 @@
     "about": "Hakkımızda",
     "projects": "Projeler",
     "community": "Topluluk",
+    "blog": "Blog",
     "contact": "İletişim",
     "join": "Bize Katıl",
     "sections": {
@@ -61,6 +62,10 @@
     "community": {
       "title": "Topluluk",
       "description": "Telegram, GitHub ve X üzerinden YTÜ Blockchain topluluğuna katılın."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "YTÜ Blockchain Kulübü’nden etkinlik duyuruları, kulüpten haberler ve blockchain üzerine yazılar."
     },
     "contact": {
       "title": "İletişim",
@@ -303,6 +308,13 @@
       "body": "Üyelik birkaç dakika sürer; her seviye için açığız.",
       "button": "Bize Katıl"
     }
+  },
+  "Blog": {
+    "eyebrow": "Blog",
+    "title": "Kulüpten haberler ve yazılar",
+    "subtitle": "Etkinlik duyuruları, kulüpten gelişmeler ve blockchain üzerine yazdıklarımız.",
+    "empty": "Henüz yazı yok. Yakında burada olacağız.",
+    "backToList": "Tüm yazılar"
   },
   "Join": {
     "eyebrow": "Üye Ol",

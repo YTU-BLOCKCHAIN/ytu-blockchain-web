@@ -12,6 +12,14 @@ type BuildMetadataOptions = {
   description: string;
   /** true ise başlık şablonu (`%s · ...`) uygulanmaz — anasayfa için. */
   titleAbsolute?: boolean;
+  /** Paylaşım kartındaki görsel. 1200×630 önerilir. */
+  image?: { url: string; alt: string };
+  /**
+   * Verilirse sayfa `og:type=article` olur — blog yazıları için. Tarih ISO
+   * biçiminde; sosyal platformlar ve arama motorları yayın tarihini buradan
+   * okur.
+   */
+  article?: { publishedTime: string; authors?: string[] };
 };
 
 /**
@@ -25,6 +33,8 @@ export function buildMetadata({
   title,
   description,
   titleAbsolute = false,
+  image,
+  article,
 }: BuildMetadataOptions): Metadata {
   const suffix = pathname === '/' ? '' : pathname;
   const url = `/${locale}${suffix}`;
@@ -35,22 +45,36 @@ export function buildMetadata({
   }
   languages['x-default'] = `/${routing.defaultLocale}${suffix}`;
 
+  const images = image
+    ? [{ url: image.url, width: 1200, height: 630, alt: image.alt }]
+    : undefined;
+
+  const openGraphBase = {
+    siteName: siteConfig.name,
+    locale: ogLocales[locale],
+    title,
+    description,
+    url,
+    images,
+  };
+
   return {
     title: titleAbsolute ? { absolute: title } : title,
     description,
     alternates: { canonical: url, languages },
-    openGraph: {
-      type: 'website',
-      siteName: siteConfig.name,
-      locale: ogLocales[locale],
-      title,
-      description,
-      url,
-    },
+    openGraph: article
+      ? {
+          ...openGraphBase,
+          type: 'article',
+          publishedTime: article.publishedTime,
+          authors: article.authors,
+        }
+      : { ...openGraphBase, type: 'website' },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images,
     },
   };
 }
