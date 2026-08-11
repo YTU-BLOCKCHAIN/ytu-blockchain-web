@@ -4,9 +4,7 @@ Blog yazıları **Sanity Studio** üzerinden yazılır. Kod bilmeye, GitHub'a gi
 ya da pull request açmaya gerek yok — yazıp **Publish**'e basıyorsun, birkaç
 saniye içinde sitede oluyor.
 
-> Studio adresi: **`<site-adresi>/studio`**
-> Şu an: `https://ytu-blockchain-web.vercel.app/studio`
-> (Alan adı bağlandığında `ytublockchain.com/studio` olacak.)
+> Studio adresi: **<https://ytublockchain.com/studio>**
 
 ---
 
