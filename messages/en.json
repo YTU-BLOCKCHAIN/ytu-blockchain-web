@@ -310,9 +310,13 @@
     }
   },
   "Blog": {
-    "eyebrow": "Blog",
     "title": "News and writing from the club",
     "subtitle": "Event announcements, club updates and what we write about blockchain.",
+    "read": "Read",
+    "filters": {
+      "label": "Filter by topic",
+      "all": "All"
+    },
     "empty": "No posts yet. We will be here soon.",
     "backToList": "All posts"
   },

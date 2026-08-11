@@ -310,9 +310,13 @@
     }
   },
   "Blog": {
-    "eyebrow": "Blog",
     "title": "Kulüpten haberler ve yazılar",
     "subtitle": "Etkinlik duyuruları, kulüpten gelişmeler ve blockchain üzerine yazdıklarımız.",
+    "read": "Oku",
+    "filters": {
+      "label": "Konuya göre süz",
+      "all": "Tümü"
+    },
     "empty": "Henüz yazı yok. Yakında burada olacağız.",
     "backToList": "Tüm yazılar"
   },
