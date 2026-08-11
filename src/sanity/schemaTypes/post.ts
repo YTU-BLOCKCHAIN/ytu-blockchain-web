@@ -1,5 +1,6 @@
-import { defineArrayMember, defineField, defineType } from 'sanity';
+import { defineField, defineType } from 'sanity';
 
+import { POST_CATEGORIES } from '../categories';
 import { SLUG_MAX_LENGTH, slugify } from '../slugify';
 
 /**
@@ -102,13 +103,23 @@ export const post = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'tags',
-      title: 'Etiketler',
-      description: 'En fazla dört tane. Örn. "ethereum", "etkinlik".',
-      type: 'array',
-      of: [defineArrayMember({ type: 'string' })],
-      options: { layout: 'tags' },
-      validation: (rule) => rule.max(4).unique(),
+      name: 'category',
+      title: 'Kategori',
+      description:
+        'Blog listesindeki süzgeç ve yazının üstündeki kırıntı bundan geliyor.',
+      type: 'string',
+      // Serbest etiket yerine kapalı liste: süzgeç şeridi ancak sabit bir
+      // kümeyle öngörülebilir olur, yoksa her yazım hatası ("duyuru",
+      // "Duyurular") yeni bir düğme doğururdu. Liste `../categories`ten
+      // geliyor — site tarafındaki süzgeç de aynı kaynağı okuyor.
+      options: {
+        list: POST_CATEGORIES.map(({ value, studioTitle }) => ({
+          value,
+          title: studioTitle,
+        })),
+      },
+      initialValue: POST_CATEGORIES[0].value,
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'body',

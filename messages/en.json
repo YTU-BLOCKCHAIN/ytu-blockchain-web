@@ -318,7 +318,11 @@
       "all": "All"
     },
     "empty": "No posts yet. We will be here soon.",
-    "backToList": "All posts"
+    "categories": {
+      "announcements": "Announcements",
+      "hackathons": "Hackathons"
+    },
+    "breadcrumb": "Blog"
   },
   "Join": {
     "eyebrow": "Join",

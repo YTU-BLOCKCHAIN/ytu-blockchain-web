@@ -318,7 +318,11 @@
       "all": "Tümü"
     },
     "empty": "Henüz yazı yok. Yakında burada olacağız.",
-    "backToList": "Tüm yazılar"
+    "categories": {
+      "announcements": "Duyurular",
+      "hackathons": "Hackathonlar"
+    },
+    "breadcrumb": "Blog"
   },
   "Join": {
     "eyebrow": "Üye Ol",

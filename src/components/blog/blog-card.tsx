@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
+import type { PostCategory } from '@/sanity/categories';
 
 /**
  * Bir kartın çizilmesi için gereken her şey — sunucuda hazırlanmış düz veri.
@@ -22,7 +23,8 @@ export type BlogCardPost = {
   date: string | null;
   /** `<time datetime>` için ham ISO değer. */
   dateTime: string | null;
-  tags: string[];
+  /** Süzgeçte kullanılıyor; tanınmayan bir değerse `null`. */
+  category: PostCategory | null;
   authorName: string | null;
   authorAvatarUrl: string | null;
 };
