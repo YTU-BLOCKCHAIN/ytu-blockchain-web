@@ -20,7 +20,7 @@ export const postsQuery = defineQuery(`
       publishedAt,
       coverImage,
       tags,
-      author->{ name, role }
+      author->{ name, role, avatar }
     }
 `);
 
