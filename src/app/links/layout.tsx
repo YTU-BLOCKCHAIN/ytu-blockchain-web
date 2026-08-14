@@ -18,7 +18,12 @@ export default function LinksLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr" className={`${GeistMono.variable} h-full antialiased`}>
+    /* `links-theme`: sayfayı OS temasından bağımsız olarak koyu ve tam siyah
+       zeminli sabitler (globals.css). */
+    <html
+      lang="tr"
+      className={`${GeistMono.variable} links-theme h-full antialiased`}
+    >
       <body className="bg-background text-foreground flex min-h-full flex-col">
         {children}
       </body>

@@ -303,6 +303,38 @@
     }
   }
 
+  /*
+    `/links` (linktree) paleti. Bu sayfa Instagram biyografisinden açılıyor ve
+    herkeste birebir aynı görünmeli, o yüzden OS temasını TAKİP ETMEZ: her zaman
+    koyu. Değerler koyu temanınkiyle aynı, tek fark zemin — zinc-950 değil TAM
+    SİYAH. Kartlar (`--card`) siyahın üstünde hafif bir yükselti olarak durur,
+    aralarındaki 1px boşluklar zemini gösterir, yani ayraçlar da siyahtır.
+    Seçici `html.links-theme` (0,1,1): yukarıdaki `:root` bloklarını sırasından
+    bağımsız olarak geçer.
+  */
+  html.links-theme {
+    color-scheme: dark;
+
+    --background: #000;
+    --foreground: var(--color-white);
+
+    --card: color-mix(in oklab, var(--color-zinc-800) 55%, #000);
+    --card-foreground: var(--color-white);
+
+    --primary: var(--color-blue-500);
+    --primary-foreground: var(--color-white);
+
+    --muted: var(--color-zinc-800);
+    --muted-foreground: var(--color-zinc-400);
+    --accent: var(--color-zinc-800);
+    --accent-foreground: var(--color-white);
+
+    --border: --alpha(var(--foreground) / 10%);
+    --input: --alpha(var(--foreground) / 7.5%);
+    --ring: var(--color-zinc-600);
+    --grid-line: var(--background);
+  }
+
   * {
     @apply outline-ring/50;
   }
