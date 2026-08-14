@@ -9,7 +9,8 @@ import {
   LandingFeatures,
   LandingHero,
   LandingManifesto,
-  LandingSponsors,
+  // Sponsorlar & Partnerler bölümü şimdilik yayında değil (aşağıya bakın).
+  // LandingSponsors,
 } from '@/components/landing/landing-sections';
 import { buildMetadata } from '@/lib/metadata';
 
@@ -43,7 +44,9 @@ export default async function LandingPage({
       <LandingFeatures />
       <LandingManifesto />
       <LandingHackathons />
-      <LandingSponsors />
+      {/* Gerçek sponsor/partner logoları hazır olana kadar gizlendi; bileşen
+          `landing-sections.tsx` içinde duruyor, geri açmak için yorumu kaldırın. */}
+      {/* <LandingSponsors /> */}
       <LandingPosts />
       <LandingCta />
     </>
