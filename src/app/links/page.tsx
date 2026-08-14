@@ -1,20 +1,15 @@
 import type { Metadata } from 'next';
 import {
-  ArrowRight,
   ArrowUpRight,
   BookText,
   FolderGit2,
   Globe,
-  type LucideIcon,
   Mail,
   Podcast,
   Send,
   UserPlus,
 } from 'lucide-react';
-// Bilerek `next/link`: bu sayfa next-intl sağlayıcısının dışında, dolayısıyla
-// `@/i18n/navigation` Link'i (dil ön eki ekler) burada yanlış olur. `/` isteğini
-// proxy tarayıcı diline göre /tr veya /en'e yönlendirir.
-import Link from 'next/link';
+import type { ComponentType } from 'react';
 
 import {
   GithubIcon,
@@ -29,16 +24,27 @@ import { cn } from '@/lib/utils';
 const { profile, links } = linksContent;
 
 /**
+ * Satır ikonu. Hem lucide ikonları hem de kendi marka logolarımız bu imzaya
+ * uyar, böylece ikisi de aynı satır bileşenine verilebiliyor.
+ */
+type RowIcon = ComponentType<{ className?: string }>;
+
+/**
  * Her bağlantıya kanalını anlatan bir ikon. Eşleşme adresten türetilir; içerik
  * dosyasına ekstra bir alan gerekmez. Bilinmeyen adres nötr `Globe`'a düşer.
  */
-function iconForLink(link: LinkItem): LucideIcon {
+function iconForLink(link: LinkItem): RowIcon {
   const url = link.url.toLowerCase();
 
   if (link.external) {
     if (url.includes('t.me') || url.includes('telegram')) return Send;
     if (url.includes('medium.com')) return BookText;
     if (url.includes('spotify.com')) return Podcast;
+    if (url.includes('instagram.com')) return InstagramIcon;
+    // `//x.com` (yalnız "x.com" değil): adres hep `https://` ile başladığı için
+    // bu kalıp host'u yakalar, içinde "x.com" geçen başka adreslere uymaz.
+    if (url.includes('//x.com') || url.includes('twitter.com')) return XIcon;
+    if (url.includes('github.com')) return GithubIcon;
     return Globe;
   }
 
@@ -47,6 +53,30 @@ function iconForLink(link: LinkItem): LucideIcon {
   if (url.includes('/contact')) return Mail;
   return Globe; // "Web Sitemiz" (/tr) ve tanımsız iç sayfalar
 }
+
+/** "https://x.com/BlockchainYtu" → "@BlockchainYtu". */
+function handleFromUrl(url: string): string | null {
+  const handle = new URL(url).pathname.split('/').filter(Boolean).at(-1);
+  return handle ? `@${handle}` : null;
+}
+
+/**
+ * Sosyal hesaplar. Eskiden sayfanın altında üçlü bir ikon şeridiydi; artık
+ * listenin devamında teker teker kendi satırları. Adresler `siteConfig.social`
+ * ile tek kaynaktan, kullanıcı adı da adresten türetiliyor — elle yazılmış
+ * ikinci bir kopya `siteConfig` değişince eskimiş olurdu.
+ */
+const socialLinks: LinkItem[] = [
+  { label: 'Instagram', url: siteConfig.social.instagram },
+  { label: 'X', url: siteConfig.social.x },
+  { label: 'GitHub', url: siteConfig.social.github },
+].map(({ label, url }) => ({
+  label,
+  url,
+  note: handleFromUrl(url),
+  featured: false,
+  external: true,
+}));
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -68,32 +98,96 @@ export const metadata: Metadata = {
   },
 };
 
-/** İkon şeridi. Adresler `siteConfig.social`'den — sitenin geri kalanıyla tek kaynak. */
-const socials = [
-  {
-    label: 'Instagram',
-    href: siteConfig.social.instagram,
-    Icon: InstagramIcon,
-  },
-  { label: 'X', href: siteConfig.social.x, Icon: XIcon },
-  { label: 'GitHub', href: siteConfig.social.github, Icon: GithubIcon },
-];
+/**
+ * Ekranda görünen satırlar: önce içerik bağlantıları, sonra sosyal hesaplar.
+ * İkon eşleşmesi adresten türetildiği ve iki liste de sabit olduğu için render
+ * sırasında değil, modül yüklenirken bir kez hesaplanıyor.
+ */
+const rows: { link: LinkItem; LeadingIcon: RowIcon }[] = [
+  ...links,
+  ...socialLinks,
+].map((link) => ({ link, LeadingIcon: iconForLink(link) }));
+
+/** Listenin tek satırı — içerik bağlantıları ve sosyal hesaplar aynı kart. */
+function LinkRow({ link, LeadingIcon }: (typeof rows)[number]) {
+  return (
+    <a
+      href={link.url}
+      {...(link.external
+        ? { target: '_blank', rel: 'noreferrer noopener' }
+        : {})}
+      className={cn(
+        // Köşeler yalnızca sm'den itibaren: telefonda kartlar ekranın iki
+        // kenarına dayanıyor, orada yuvarlatma kırpılmış gibi duruyordu.
+        'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none sm:rounded',
+        link.featured
+          ? 'bg-foreground text-background hover:bg-foreground/90'
+          : 'bg-card hover:bg-accent',
+      )}
+    >
+      <span className="flex min-w-0 items-center gap-3.5">
+        {/* Kanal ikonu: satırı taranabilir kılar, adresten türetilir. */}
+        <LeadingIcon
+          className={cn(
+            'size-5 shrink-0',
+            link.featured
+              ? 'text-background'
+              : 'text-muted-foreground group-hover:text-foreground',
+          )}
+        />
+        <span className="flex min-w-0 flex-col gap-0.5">
+          <span className="truncate font-medium">{link.label}</span>
+          {link.note && (
+            <span
+              className={cn(
+                'flex items-center gap-1.5 text-xs',
+                link.featured ? 'text-background/70' : 'text-muted-foreground',
+              )}
+            >
+              {/* "Canlı" işaret: yalnızca öne çıkan (başvuru) kartında,
+                  "başvurular açık" mesajını nabız gibi vurgular. */}
+              {link.featured && (
+                <span aria-hidden className="relative flex size-1.5 shrink-0">
+                  <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
+                  <span className="bg-primary relative inline-flex size-1.5 rounded-full" />
+                </span>
+              )}
+              {link.note}
+            </span>
+          )}
+        </span>
+      </span>
+      {/* Ok her satırda aynı (çapraz): burada iç/dış ayrımı yapmıyoruz, sayfadaki
+          her bağlantı zaten ziyaretçiyi linktree'den bir yere götürüyor. */}
+      <ArrowUpRight
+        className={cn(
+          'size-4 shrink-0 transition-all duration-200 group-hover:translate-x-0.5',
+          !link.featured && 'text-muted-foreground group-hover:text-primary',
+        )}
+      />
+    </a>
+  );
+}
 
 export default function LinksPage() {
   return (
-    /* Zemin tonu sitenin <main>'iyle aynı (`bg-grid-line`): hücreler arası
-       1px boşluklardan sızarak grid çerçevesini oluşturur. */
-    <main className="bg-grid-line flex flex-1 flex-col items-center px-4 py-10 sm:py-14">
+    /* Telefonda tam ekran: yatay padding yok, kartlar kenardan kenara. Yatay
+       boşluk ve üst nefes payı yalnızca sm'den itibaren (orada liste `max-w-md`
+       ile ortalanıyor). Alt padding, son satırı sabit kaydırma şeridinin
+       yoğun kısmından kurtarır. */
+    <main className="flex flex-1 flex-col items-center pb-24 sm:px-4 sm:pt-14">
       <div className="w-full max-w-md">
-        {/* Sitenin Container asGrid deseninin linktree genişliğindeki karşılığı:
-            bg-grid-line zemin + gap-px → paneller arasında hairline çizgiler. */}
-        <div className="bg-grid-line grid gap-px rounded p-px">
-          <header className="bg-card relative overflow-hidden rounded px-6 py-10 text-center">
+        {/* `gap-px`: kartlar arasındaki 1px boşluklardan zemin (tam siyah)
+            sızar, ayraç çizgisi bu. Kartlar siyahın üstünde hafif yükselti. */}
+        <div className="grid gap-px">
+          <header className="bg-card relative overflow-hidden px-6 py-10 text-center sm:rounded">
             {/* Sitedeki hero'larla aynı teknik: CSS mask + bg-foreground →
-                görsel metin rengini alır, her iki temada da aynı silik doku. */}
+                görsel metin rengini alır. Sayfa her zaman koyu olduğu için
+                opaklık tek değer (`dark:` varyantı OS temasına bakardı, bu
+                sayfa ise ona bakmıyor). */}
             <div
               aria-hidden
-              className="bg-foreground pointer-events-none absolute inset-0 opacity-25 dark:opacity-15"
+              className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
               style={{
                 maskImage: 'url(/images/landing-bg.png)',
                 WebkitMaskImage: 'url(/images/landing-bg.png)',
@@ -119,98 +213,22 @@ export default function LinksPage() {
             </div>
           </header>
 
-          {links.map((link) => {
-            const Arrow = link.external ? ArrowUpRight : ArrowRight;
-            const LeadingIcon = iconForLink(link);
-
-            return (
-              <a
-                key={`${link.label}-${link.url}`}
-                href={link.url}
-                {...(link.external
-                  ? { target: '_blank', rel: 'noreferrer noopener' }
-                  : {})}
-                className={cn(
-                  'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 rounded px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none',
-                  link.featured
-                    ? 'bg-foreground text-background hover:bg-foreground/90'
-                    : 'bg-card hover:bg-accent',
-                )}
-              >
-                <span className="flex min-w-0 items-center gap-3.5">
-                  {/* Kanal ikonu: satırı taranabilir kılar, adresten türetilir. */}
-                  <LeadingIcon
-                    className={cn(
-                      'size-5 shrink-0',
-                      link.featured
-                        ? 'text-background'
-                        : 'text-muted-foreground group-hover:text-foreground',
-                    )}
-                  />
-                  <span className="flex min-w-0 flex-col gap-0.5">
-                    <span className="truncate font-medium">{link.label}</span>
-                    {link.note && (
-                      <span
-                        className={cn(
-                          'flex items-center gap-1.5 text-xs',
-                          link.featured
-                            ? 'text-background/70'
-                            : 'text-muted-foreground',
-                        )}
-                      >
-                        {/* "Canlı" işaret: yalnızca öne çıkan (başvuru) kartında,
-                            "başvurular açık" mesajını nabız gibi vurgular. */}
-                        {link.featured && (
-                          <span
-                            aria-hidden
-                            className="relative flex size-1.5 shrink-0"
-                          >
-                            <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
-                            <span className="bg-primary relative inline-flex size-1.5 rounded-full" />
-                          </span>
-                        )}
-                        {link.note}
-                      </span>
-                    )}
-                  </span>
-                </span>
-                <Arrow
-                  className={cn(
-                    'size-4 shrink-0 transition-all duration-200 group-hover:translate-x-0.5',
-                    !link.featured &&
-                      'text-muted-foreground group-hover:text-primary',
-                  )}
-                />
-              </a>
-            );
-          })}
-
-          {/* Sosyal hesaplar da çerçevenin bir hücresi — kanal kartlarıyla aynı dil. */}
-          <div className="bg-card flex items-center justify-center gap-2 rounded px-5 py-4">
-            {socials.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label={social.label}
-                className="text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:ring-ring flex size-11 items-center justify-center rounded transition-colors focus-visible:ring-2 focus-visible:outline-none"
-              >
-                <social.Icon className="size-5" />
-              </a>
-            ))}
-          </div>
+          {rows.map((row) => (
+            <LinkRow key={`${row.link.label}-${row.link.url}`} {...row} />
+          ))}
         </div>
-
-        <footer className="mt-8 text-center">
-          <Link
-            href="/"
-            className="text-muted-foreground hover:text-foreground font-mono text-xs tracking-widest lowercase transition-colors"
-          >
-            ytublockchain.com
-          </Link>
-        </footer>
       </div>
+
+      {/* Alt kenarda hafif blur + karartma: içerik bu şeridin altında eriyerek
+          sayfanın devam ettiğini, yani kaydırılabildiğini belli eder. Zemin
+          siyah olduğu için altında içerik kalmadığında kendiliğinden görünmez
+          olur — kısa ekranda gizlemek için ayrıca JS gerekmiyor. */}
+      <div
+        aria-hidden
+        // Maske yalnızca en alttaki ~%15'i tam opak bırakır, kalanı uzun bir
+        // rampayla söner: kısa/sert bir bant yerine yumuşak bir eriyiş.
+        className="from-background pointer-events-none fixed inset-x-0 bottom-0 h-32 bg-linear-to-t to-transparent backdrop-blur-[2px] [mask-image:linear-gradient(to_top,#000_15%,transparent)]"
+      />
     </main>
   );
 }

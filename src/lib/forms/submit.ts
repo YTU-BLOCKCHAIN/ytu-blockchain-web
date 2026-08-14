@@ -1,11 +1,15 @@
 'use server';
 
+import { headers } from 'next/headers';
+
 import {
   formFields,
   type FieldErrorKey,
   type FormKind,
   type FormState,
 } from './config';
+import { takeSubmissionSlot } from './rate-limit';
+import { verifyTurnstile } from './turnstile';
 
 /**
  * Kaba ama pratikte yeterli biçim kontrolü. Adresin gerçekten var olduğunu
@@ -23,6 +27,20 @@ const MIN_FILL_MS = 2000;
 
 /** Apps Script yavaşsa kullanıcı süresiz beklemesin. */
 const REQUEST_TIMEOUT_MS = 15_000;
+
+/**
+ * Gönderenin IP'si — hız sınırı anahtarı ve Turnstile'a verilen `remoteip`.
+ *
+ * `x-forwarded-for` istemci tarafından uydurulabilir; Vercel'de bu başlığı
+ * platformun kendi vekili yazdığı için güvenilir. Kendi başına bir güvenlik
+ * kontrolü değil, yalnızca sayaç anahtarı.
+ */
+async function clientIp(): Promise<string | null> {
+  const list = await headers();
+  const forwarded = list.get('x-forwarded-for');
+  if (forwarded) return forwarded.split(',')[0]?.trim() || null;
+  return list.get('x-real-ip');
+}
 
 /**
  * Formu doğrular ve Apps Script Web App'ine iletir (kurulum:
@@ -81,6 +99,24 @@ export async function submitForm(
 
   if (Object.keys(fieldErrors).length > 0) {
     return { status: 'invalid', fieldErrors, ...entered };
+  }
+
+  const ip = await clientIp();
+
+  // Hız sınırı Turnstile'dan ÖNCE: sel gönderimde Cloudflare'e her denemede bir
+  // istek atmayalım. Yalnızca doğrulamayı geçen denemeler sayılıyor, yani
+  // formundaki hatayı düzeltmeye çalışan kullanıcı hakkını harcamıyor.
+  // IP okunamazsa (yerel geliştirme) herkes tek kovayı paylaşır.
+  if (!takeSubmissionSlot(ip ?? 'unknown')) {
+    return { status: 'error', reason: 'rateLimited', ...entered };
+  }
+
+  const verdict = await verifyTurnstile(
+    String(formData.get('cf-turnstile-response') ?? ''),
+    ip,
+  );
+  if (verdict === 'failed') {
+    return { status: 'error', reason: 'captcha', ...entered };
   }
 
   const endpoint = process.env.FORM_ENDPOINT_URL;
