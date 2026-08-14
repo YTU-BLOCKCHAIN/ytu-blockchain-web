@@ -110,6 +110,21 @@ Gereken ortam değişkenleri (`FORM_ENDPOINT_URL`, `FORM_SHARED_SECRET`) için
 [`.env.example`](.env.example) dosyasına bakın; ikisi tanımlı değilse formlar
 "şu an devre dışı" hatası verir.
 
+Spam koruması dört katman:
+
+| Katman               | Nerede                                                   | Ne yapar                                                        |
+| -------------------- | -------------------------------------------------------- | --------------------------------------------------------------- |
+| Honeypot             | `site-form.tsx` + `submit.ts`                            | Görünmez alan doluysa kayıt sessizce atılır                     |
+| Zaman tuzağı         | `submit.ts`                                              | Sayfa açıldıktan 2 sn içinde gelen gönderim insan eliyle olamaz |
+| Hız sınırı           | [`lib/forms/rate-limit.ts`](src/lib/forms/rate-limit.ts) | IP başına 10 dakikada en fazla 10 gönderim                      |
+| Cloudflare Turnstile | [`lib/forms/turnstile.ts`](src/lib/forms/turnstile.ts)   | Bot doğrulaması; formda görünür kutu olarak çıkar               |
+
+Turnstile ücretsiz ve limitsiz. Anahtarları (`NEXT_PUBLIC_TURNSTILE_SITE_KEY`,
+`TURNSTILE_SECRET_KEY`) tanımlı değilken **koruma kapalıdır ama formlar
+çalışır** — diğer üç katman her hâlükârda devrededir. Cloudflare'e ulaşılamadığı
+anlarda gönderim bilerek geçirilir: kesinti yüzünden üyelik başvurularını
+kaybetmek, o sırada kaçabilecek birkaç spam'den pahalıdır.
+
 ### Blog (Sanity)
 
 Yazılar Sanity'de saklanır, editörler siteye gömülü Studio'dan yazar
@@ -255,6 +270,21 @@ Setup and deployment steps: **[`google-apps-script/README.md`](google-apps-scrip
 See [`.env.example`](.env.example) for the required environment variables
 (`FORM_ENDPOINT_URL`, `FORM_SHARED_SECRET`); without them the forms report that
 submission is currently unavailable.
+
+Spam protection comes in four layers:
+
+| Layer                | Where                                                    | What it does                                         |
+| -------------------- | -------------------------------------------------------- | ---------------------------------------------------- |
+| Honeypot             | `site-form.tsx` + `submit.ts`                            | Hidden field filled in → record silently dropped     |
+| Timing trap          | `submit.ts`                                              | Submitted under 2s after load → not humanly possible |
+| Rate limit           | [`lib/forms/rate-limit.ts`](src/lib/forms/rate-limit.ts) | At most 10 submissions per IP per 10 minutes         |
+| Cloudflare Turnstile | [`lib/forms/turnstile.ts`](src/lib/forms/turnstile.ts)   | Bot verification, shown as a visible box in the form |
+
+Turnstile is free and unlimited. While its keys (`NEXT_PUBLIC_TURNSTILE_SITE_KEY`,
+`TURNSTILE_SECRET_KEY`) are unset, **verification is off but the forms still
+work** — the other three layers always apply. When Cloudflare is unreachable the
+submission is deliberately let through: losing membership applications to an
+outage costs more than the handful of spam that may slip in meanwhile.
 
 ### Blog (Sanity)
 
