@@ -51,7 +51,13 @@ export const formFields = {
 export type FieldErrorKey = 'required' | 'invalidEmail' | 'tooLong';
 
 /** Gönderim başarısızlığı — `Forms.failure.*` çeviri anahtarına karşılık gelir. */
-export type FailureReason = 'notConfigured' | 'upstream';
+export type FailureReason =
+  | 'notConfigured'
+  | 'upstream'
+  /** Turnstile jetonu yok ya da Cloudflare reddetti. */
+  | 'captcha'
+  /** Aynı IP'den kısa sürede çok fazla gönderim. */
+  | 'rateLimited';
 
 /** `useActionState` durumu. */
 export type FormState = {

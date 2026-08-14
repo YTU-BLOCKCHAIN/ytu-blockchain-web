@@ -76,8 +76,8 @@ yazar — panik yok, düzeltip tekrar commit'le. Site bozulmaz.
 
 ### Sosyal medya hesapları
 
-Instagram / X / GitHub ikonları bu dosyadan **değil**, `src/lib/site.ts`
-içindeki `siteConfig.social` alanından gelir — çünkü aynı adresler sitenin başka
+Instagram / X / GitHub satırları (listenin en altındaki üç bağlantı) bu dosyadan
+**değil**, `src/lib/site.ts` içindeki `siteConfig.social` alanından gelir — çünkü aynı adresler sitenin başka
 yerlerinde de kullanılıyor ve tek yerden yönetilmesi gerekiyor. Hesap adresi
 değişirse orayı güncellemek lazım (kod dosyası, bir geliştiriciye söyleyin).
 
@@ -85,8 +85,8 @@ değişirse orayı güncellemek lazım (kod dosyası, bir geliştiriciye söyley
 
 ## `posts.json` nasıl güncellenir?
 
-Ana sayfanın alt kısmında, sponsorların altında **"X'ten — Kulüpten öne çıkan
-paylaşımlar"** bölümü var. Oradaki kartları bu dosya belirler.
+Ana sayfanın alt kısmında, hackathon karelerinin altında **"X'ten — Kulüpten öne
+çıkan paylaşımlar"** bölümü var. Oradaki kartları bu dosya belirler.
 
 **Sadece paylaşımın adresini yapıştırıyorsun.** Metin, tarih ve hesap adı X'ten
 otomatik çekilir — kopyalamana gerek yok, yazım hatası riski yok, kartta yazan

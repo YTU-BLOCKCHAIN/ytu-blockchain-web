@@ -52,11 +52,13 @@ const NAV = [
         label: 'sections.about.values',
         desc: 'sections.about.valuesDesc',
       },
-      {
-        href: '/about#team',
-        label: 'sections.about.team',
-        desc: 'sections.about.teamDesc',
-      },
+      // Ekibimiz bölümü about sayfasında gizli olduğu için menüden de kaldırıldı;
+      // `<AboutTeam />` geri açıldığında bu öğeyi de geri alın.
+      // {
+      //   href: '/about#team',
+      //   label: 'sections.about.team',
+      //   desc: 'sections.about.teamDesc',
+      // },
     ],
   },
   {
@@ -84,11 +86,13 @@ const NAV = [
         label: 'sections.community.projects',
         desc: 'sections.community.projectsDesc',
       },
-      {
-        href: '/about#sponsors',
-        label: 'sections.community.sponsors',
-        desc: 'sections.community.sponsorsDesc',
-      },
+      // Destekçilerimiz bölümü about sayfasında gizli olduğu için menüden de
+      // kaldırıldı; `<AboutSponsors />` geri açıldığında bu öğeyi de geri alın.
+      // {
+      //   href: '/about#sponsors',
+      //   label: 'sections.community.sponsors',
+      //   desc: 'sections.community.sponsorsDesc',
+      // },
     ],
   },
   { key: 'blog', href: '/blog' },

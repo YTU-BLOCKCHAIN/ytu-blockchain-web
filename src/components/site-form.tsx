@@ -1,8 +1,9 @@
 'use client';
 
-import { useActionState, useEffect, useMemo, useRef } from 'react';
+import { useActionState, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Check, CheckCircle2 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
+import Script from 'next/script';
 
 import { buttonClasses } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
@@ -22,6 +23,18 @@ import { siteConfig } from '@/lib/site';
  */
 const FIELD_CLASS =
   'border-border bg-background focus-visible:ring-primary/40 aria-invalid:border-destructive w-full rounded-md border px-3 py-2.5 text-base focus-visible:ring-2 focus-visible:outline-none sm:py-2 sm:text-sm';
+
+/**
+ * Cloudflare Turnstile site anahtarı. Tanımsızsa widget hiç basılmaz ve sunucu
+ * da doğrulamayı atlar (`lib/forms/turnstile.ts`) — anahtarlar eklenene kadar
+ * formlar honeypot, zaman tuzağı ve hız sınırıyla çalışmaya devam eder.
+ * `NEXT_PUBLIC_` ön eki şart: değer build sırasında istemci paketine gömülüyor
+ * (site anahtarı zaten herkese açık, gizli olan `TURNSTILE_SECRET_KEY`).
+ */
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+/** Widget'ın kendi ölçüsü (300×65) — yüklenirken düzen zıplamasın. */
+const TURNSTILE_MIN_HEIGHT = 'min-h-[65px]';
 
 /**
  * İletişim ve başvuru formlarının ortak gövdesi. Gönderim, `submitForm` Server
@@ -65,6 +78,49 @@ export function SiteForm({
     }
     if (startedAtInput.current) {
       startedAtInput.current.value = String(startedAt.current);
+    }
+  }, [state]);
+
+  /*
+    Turnstile "explicit" modda basılıyor (`?render=explicit`). Varsayılan örtük
+    modda script yüklenince sayfayı bir kez tarayıp widget'ları basar; App
+    Router'da forma istemci tarafı gezinmeyle gelindiğinde o tarama çoktan
+    bitmiş oluyor ve widget hiç çıkmıyor. Burada basmayı biz tetikliyoruz.
+  */
+  const turnstileBox = useRef<HTMLDivElement>(null);
+  const widgetId = useRef<string | null>(null);
+
+  const renderTurnstile = useCallback(() => {
+    if (!TURNSTILE_SITE_KEY || !turnstileBox.current || widgetId.current)
+      return;
+    widgetId.current =
+      window.turnstile?.render(turnstileBox.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+        language: locale,
+        theme: 'auto',
+      }) ?? null;
+  }, [locale]);
+
+  useEffect(() => {
+    // Script bu formdan önce yüklendiyse (aynı oturumda ikinci form) `onReady`
+    // bir daha çalışmaz; o durumu bu ilk çağrı karşılıyor.
+    renderTurnstile();
+    return () => {
+      if (widgetId.current) {
+        window.turnstile?.remove(widgetId.current);
+        widgetId.current = null;
+      }
+    };
+  }, [renderTurnstile]);
+
+  useEffect(() => {
+    // Jeton TEK KULLANIMLIK: başarısız gönderimden sonra sıfırlanmazsa ikinci
+    // deneme harcanmış jetonla gider ve kullanıcı doğrulama hatasına takılır.
+    if (
+      widgetId.current &&
+      (state.status === 'invalid' || state.status === 'error')
+    ) {
+      window.turnstile?.reset(widgetId.current);
     }
   }, [state]);
 
@@ -206,6 +262,21 @@ export function SiteForm({
         name="startedAt"
         defaultValue=""
       />
+
+      {/* Turnstile — anahtar tanımlıysa görünür bir kutu olarak basılır ve
+          çözülünce forma `cf-turnstile-response` gizli alanını bırakır. Kutunun
+          kendi Cloudflare rozeti korumayı zaten belli ediyor, altına ayrıca
+          açıklama satırı konmuyor. */}
+      {TURNSTILE_SITE_KEY && (
+        <div className="pt-1">
+          <Script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+            strategy="afterInteractive"
+            onReady={renderTurnstile}
+          />
+          <div ref={turnstileBox} className={TURNSTILE_MIN_HEIGHT} />
+        </div>
+      )}
 
       {/* Telefonda tam genişlik — dar ekranda yarım kalan buton hem küçük bir
           hedef hem de formu bitmemiş gösteriyor. sm'den itibaren içerik kadar. */}

@@ -357,7 +357,9 @@
     },
     "failure": {
       "upstream": "Gönderim şu an tamamlanamadı. Birazdan tekrar dene ya da doğrudan {email} adresine yaz.",
-      "notConfigured": "Form şu an devre dışı. Bize doğrudan {email} adresinden ulaşabilirsin."
+      "notConfigured": "Form şu an devre dışı. Bize doğrudan {email} adresinden ulaşabilirsin.",
+      "captcha": "Güvenlik doğrulaması tamamlanamadı. Yukarıdaki kutuyu tekrar dene ya da doğrudan {email} adresine yaz.",
+      "rateLimited": "Kısa sürede çok fazla gönderim yapıldı. Birkaç dakika sonra tekrar dene ya da doğrudan {email} adresine yaz."
     },
     "success": {
       "contact": {
@@ -406,7 +408,7 @@
       },
       "transfer": {
         "heading": "Yurt dışına aktarım",
-        "body": "Form kayıtları Google LLC tarafından sağlanan Google Sheets ve Google Apps Script hizmetlerinde saklanır; bildirim ve onay e-postaları da aynı altyapı üzerinden gönderilir. Bu nedenle verilerin Google’ın yurt dışındaki sunucularında işlenmesi söz konusudur ve formu gönderirken bu aktarıma da onay vermiş olursun."
+        "body": "Form kayıtları Google LLC tarafından sağlanan Google Sheets ve Google Apps Script hizmetlerinde saklanır; bildirim ve onay e-postaları da aynı altyapı üzerinden gönderilir. Bu nedenle verilerin Google’ın yurt dışındaki sunucularında işlenmesi söz konusudur ve formu gönderirken bu aktarıma da onay vermiş olursun. Ayrıca formların bot gönderimlerine karşı korunması için Cloudflare, Inc. tarafından sağlanan Turnstile hizmeti kullanılır; bu doğrulama sırasında IP adresin ve tarayıcı bilgilerin Cloudflare’ın yurt dışındaki sunucularında işlenir. Turnstile çerez kullanmaz ve bu veriler yalnızca gönderimin bir bot tarafından yapılıp yapılmadığını anlamak için kullanılır."
       },
       "retention": {
         "heading": "Saklama süresi",
