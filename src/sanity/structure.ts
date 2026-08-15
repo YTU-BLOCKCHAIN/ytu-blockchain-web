@@ -48,5 +48,14 @@ export const structure: StructureResolver = (S) =>
               ),
             ),
         ),
+      // Hackathon'lar dile göre bölünmüyor: dil alan seviyesinde, yani tek
+      // kayıt iki dili de taşıyor (bkz. schemaTypes/localized.ts).
+      S.documentTypeListItem('hackathon')
+        .title('Hackathonlar')
+        .child(
+          S.documentTypeList('hackathon')
+            .title('Hackathonlar')
+            .defaultOrdering([{ field: 'year', direction: 'desc' }]),
+        ),
       S.documentTypeListItem('author').title('Yazarlar'),
     ]);

@@ -15,6 +15,18 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type LocalizedText = {
+  _type: 'localizedText';
+  tr?: string;
+  en?: string;
+};
+
+export type LocalizedString = {
+  _type: 'localizedString';
+  tr?: string;
+  en?: string;
+};
+
 export type SanityImageAssetReference = {
   _ref: string;
   _type: 'reference';
@@ -52,6 +64,42 @@ export type BlockContent = Array<
       _key: string;
     }
 >;
+
+export type Hackathon = {
+  _id: string;
+  _type: 'hackathon';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  event?: string;
+  year?: number;
+  award?: LocalizedString;
+  detail?: LocalizedText;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+  url?: string;
+};
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop';
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot';
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
 
 export type TranslationMetadata = {
   _id: string;
@@ -111,22 +159,6 @@ export type Post = {
   author?: AuthorReference;
   category?: 'announcements' | 'hackathons';
   body?: BlockContent;
-};
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop';
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot';
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
 };
 
 export type Author = {
@@ -251,16 +283,19 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | LocalizedText
+  | LocalizedString
   | SanityImageAssetReference
   | BlockContent
+  | Hackathon
+  | SanityImageCrop
+  | SanityImageHotspot
   | TranslationMetadata
   | InternationalizedArrayReference
   | PostReference
   | InternationalizedArrayReferenceValue
   | AuthorReference
   | Post
-  | SanityImageCrop
-  | SanityImageHotspot
   | Author
   | Slug
   | SanityImagePaletteSwatch
@@ -345,6 +380,25 @@ export type PostRoutesQueryResult = Array<{
   _updatedAt: string;
 }>;
 
+// Source: src/sanity/queries.ts
+// Variable: hackathonsQuery
+// Query: *[_type == "hackathon"] | order(year desc, _createdAt desc) {    _id,    event,    year,    award,    detail,    image,    url  }
+export type HackathonsQueryResult = Array<{
+  _id: string;
+  event: string | null;
+  year: number | null;
+  award: LocalizedString | null;
+  detail: LocalizedText | null;
+  image: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  } | null;
+  url: string | null;
+}>;
+
 // Query TypeMap
 import '@sanity/client';
 declare module '@sanity/client' {
@@ -352,5 +406,6 @@ declare module '@sanity/client' {
     '\n  *[_type == "post" && language == $language && defined(slug.current)]\n    | order(publishedAt desc) {\n      _id,\n      title,\n      "slug": slug.current,\n      excerpt,\n      publishedAt,\n      coverImage,\n      category,\n      author->{ name, role, avatar }\n    }\n': PostsQueryResult;
     '\n  *[_type == "post" && language == $language && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    publishedAt,\n    coverImage,\n    category,\n    body,\n    author->{ name, role, avatar, url }\n  }\n': PostQueryResult;
     '\n  *[_type == "post" && defined(slug.current) && defined(language)] {\n    "slug": slug.current,\n    language,\n    _updatedAt\n  }\n': PostRoutesQueryResult;
+    '\n  *[_type == "hackathon"] | order(year desc, _createdAt desc) {\n    _id,\n    event,\n    year,\n    award,\n    detail,\n    image,\n    url\n  }\n': HackathonsQueryResult;
   }
 }
