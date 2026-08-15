@@ -48,17 +48,37 @@ GitHub Branch Protection API'sinin `PUT .../branches/{branch}/protection` gövde
 - `no-ci.json` — mevcut geçici durum (required status check yok).
 - `with-ci.json` — hedef durum (`verify` required + strict / branch güncel olmalı).
 
-Ortak kurallar: PR zorunlu (review=0), `enforce_admins`, force-push ve silme kapalı.
+JSON gövdesi `dev`'in kurallarıdır: PR zorunlu (review=0), `enforce_admins`, linear
+history, force-push ve silme kapalı. Script `main`'e uygularken üç alanı gevşetir.
 
-### `main` neden linear history'siz?
+### `main` neden `dev`'den gevşek?
 
-Script, `main`'e gövdeyi tek farkla uygular: **`required_linear_history: false`**. `dev`
-linear kalır (oraya her şey squash iner), `main` kalmaz — çünkü sürümler `dev`'den
-**merge commit** ile alınır ve linear history açıkken GitHub merge commit'i reddeder.
+`dev` katkı kapısıdır — inceleme, CI ve squash orada olur. `main` ise bir işbirliği
+yüzeyi değil, yalnızca **"prod şu an burada"** işaretçisidir. `dev`'e inen PR'da yapılan
+denetimi `main`'de tekrarlamak koruma değil, sadece tören. Bu yüzden script `main`'e
+şunları uygular:
 
-Sebebi: sürümler squash inerken `main`'in kayıtları `dev`'in geçmişinde yer almıyor, iki
-dalın ortak atası ilk günlerde takılı kalıyor ve `dev → main` PR'ı her sürümde **içerik
-farkı olmadan** çakışıyor (bkz. kapatılan PR #58). Merge commit `dev`'i `main`'in ataları
-arasına soktuğu için ortak ata güncellenir ve sonraki sürümler çakışmasız akar.
+| Alan                            | `dev`   | `main`  | Neden                                               |
+| ------------------------------- | ------- | ------- | --------------------------------------------------- |
+| `required_linear_history`       | `true`  | `false` | Sürüm merge commit ile alınır (aşağıya bak)         |
+| `required_pull_request_reviews` | PR şart | `null`  | Sürüm için PR şartı yok; bakımcı yerelden merge'ler |
+| `enforce_admins`                | `true`  | `false` | Bakımcı tıkanınca korumayı sökmeden ilerleyebilsin  |
+| `allow_force_pushes`            | kapalı  | kapalı  | **İkisinde de kapalı** — geri dönülmez              |
+| `allow_deletions`               | kapalı  | kapalı  | **İkisinde de kapalı** — geri dönülmez              |
+
+Sürüm alma böylece PR'sız ve çakışmasız:
+
+```bash
+git switch main && git merge dev && git push   # Vercel Production tetiklenir
+```
+
+#### Linear history neden `main`'de kapalı?
+
+Açık bırakılırsa GitHub merge commit'i reddeder ve sürüm squash'a mecbur kalır. Squash
+inen sürümün kaydı `dev`'in geçmişinde yer almadığı için iki dalın **ortak atası ilk
+günlerde takılı kalır**; sonraki her sürümde `dev → main` **içerik farkı olmadan**
+çakışır (bkz. kapatılan PR #58 ve PR #84 — aynı hata iki kez yaşandı). Merge commit
+`dev`'i `main`'in ataları arasına soktuğu için ortak ata güncellenir ve sonraki sürümler
+temiz akar.
 
 Bedeli: `main` artık "her sürüm tek kayıt" değil, `dev`'in tüm geçmişini taşır.
