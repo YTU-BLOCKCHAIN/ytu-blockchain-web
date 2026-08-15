@@ -56,18 +56,19 @@ export function BlogHero() {
             Ölçü `cover` değil: bu bant çok geniş ve alçak (≈1103×356), `cover`
             görseli 1103×620'ye çekiyordu → dpr 2'de 2206 fiziksel piksel, oysa
             kaynak 1920. Yani maske büyütülüyor ve tanecikler şişip bulanıyordu.
-            `auto 130%` ile çizim 822×463'e iniyor (1644 fiziksel < 1920), yani
-            artık küçültme yapılıyor ve halftone net kalıyor. Karşılığında bant
-            enini tam doldurmuyor; leke sağda toplanıyor, metnin olduğu sol
-            taraf temiz kalıyor — projects hero'sundaki ölçüyle aynı yaklaşım. */}
+            `auto 100%` ile çizim 633×356'ya iniyor: 1266 fiziksel piksel, yani
+            kaynağın 0.66'sı — net bir küçültme, halftone keskin kalıyor.
+            Karşılığında bant enini tam doldurmuyor (%57); leke sağda toplanıp
+            sola doğru sönüyor, başlığın olduğu taraf tamamen temiz kalıyor.
+            Daha da küçültmek gerekirse tek değişecek sayı bu yüzde. */}
         <div
           aria-hidden
           className="bg-foreground pointer-events-none absolute inset-0 -scale-x-100 opacity-15 dark:opacity-15"
           style={{
             maskImage: 'url(/images/blog-bg.png)',
             WebkitMaskImage: 'url(/images/blog-bg.png)',
-            maskSize: 'auto 130%',
-            WebkitMaskSize: 'auto 130%',
+            maskSize: 'auto 100%',
+            WebkitMaskSize: 'auto 100%',
             maskPosition: 'left top',
             WebkitMaskPosition: 'left top',
             maskRepeat: 'no-repeat',
