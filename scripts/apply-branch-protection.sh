@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 #
 # Branch protection kurallarını versiyonlanmış JSON'dan main ve dev'e uygular.
-# `main` tek noktada ayrışır: linear history kapalı (sürümler merge commit ile
-# alınıyor). Ayrıntı: scripts/README.md.
+# Katkı kapısı `dev`: her şey oraya PR ile iner ve orada squash'lanır. `main` ise
+# yalnızca "prod şu an burada" işaretçisi; sürümü bakımcı yerelden `git merge dev`
+# ile alıp push eder. Ayrıntı: scripts/README.md.
 #
 # Kullanım:  bash scripts/apply-branch-protection.sh [with-ci|no-ci]
 #   with-ci  → `verify` required status check AÇIK (hedef durum).
@@ -30,9 +31,25 @@ if [[ "$MODE" == "with-ci" ]]; then
   echo "⚠️  with-ci: CI otomatik tetiklenmiyorsa PR'lar deadlock'a girer. Devam ediliyor..." >&2
 fi
 
-# Dal başına gövdeyi üretir. `main` tek farkla ayrışır: `required_linear_history`
-# KAPALI, çünkü sürümler `dev`'den merge commit ile alınıyor (linear history açıkken
-# GitHub merge commit'i reddeder). `dev` linear kalır — oraya her şey squash iner.
+# Dal başına gövdeyi üretir. `dev` JSON'u olduğu gibi alır. `main` üç noktada
+# gevşer — üçü de aynı sebebe dayanıyor: `main` bir işbirliği yüzeyi değil, sürüm
+# işaretçisi. İnceleme `dev`'e inen PR'da zaten yapılmış oluyor.
+#
+#   required_linear_history: false → sürüm `dev`'den merge commit ile alınır.
+#     Açık bırakılırsa GitHub merge commit'i reddeder; squash'a mecbur kalınır ve
+#     `main` ile `dev` SHA olarak ayrışır. O ayrışma her sürümde `dev -> main`
+#     PR'ının İÇERİK FARKI OLMADAN çakışmasına yol açıyordu (PR #58, PR #84).
+#
+#   required_pull_request_reviews: null → sürüm için PR şartı yok. Bakımcı
+#     yerelde `git switch main && git merge dev && git push` yapar. Kendi kendine
+#     onayladığın (review=0) bir PR'ın kattığı değer, açtığı çakışma sorunundan
+#     azdı.
+#
+#   enforce_admins: false → bakımcı tıkanınca kuralı devre dışı bırakmadan
+#     ilerleyebilsin.
+#
+# Force-push ve dal silme koruması İKİ DALDA DA açık kalır: bunlar sürtünme
+# yaratmıyor ama geri dönülmez hataları engelliyor.
 #
 # Override JSON'u ayrı bir dosyaya kopyalamak yerine burada üretiliyor: tek kaynak
 # kalsın, iki dosya zamanla birbirinden kaymasın. jq her yerde yok; node zaten
@@ -43,6 +60,8 @@ render_config() {
       const fs = require("node:fs");
       const config = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
       config.required_linear_history = false;
+      config.required_pull_request_reviews = null;
+      config.enforce_admins = false;
       process.stdout.write(JSON.stringify(config, null, 2));
     ' "$CONFIG"
   else

@@ -20,10 +20,21 @@ main            → production (Vercel Production)
       └── feat/* fix/* chore/* docs/* → özellik dalları
 ```
 
-- `main`'e **doğrudan push yok**. Her şey `dev` üzerinden geçer.
-- Özellik dalları `dev`'den açılır, iş bitince `dev`'e **PR** ile döner.
-- `dev` → `main` de **PR** ile ilerler.
+- Özellik dalları `dev`'den açılır, iş bitince `dev`'e **PR** ile döner. Katkı
+  kapısı burasıdır: inceleme, CI ve squash `dev`'de olur.
 - Dal adı örnekleri: `feat/landing`, `fix/header-overflow`, `docs/readme`.
+- **`dev` → `main` PR ile değil, bakımcının yerelden aldığı merge ile ilerler:**
+
+  ```bash
+  git switch main && git merge dev && git push
+  ```
+
+  `main` bir işbirliği yüzeyi değil, "prod şu an burada" işaretçisidir; denetim
+  zaten `dev`'e inen PR'da yapılmış olur. Merge commit ayrıca iki dalın ortak
+  atasını güncel tutar — squash'lı sürümler bunu bozup her seferinde sahte
+  çakışma üretiyordu (bkz. `scripts/README.md`).
+
+- `main`'e **force-push ve dal silme kapalıdır** ve öyle kalır.
 
 ### Commit Kuralı — Conventional Commits
 
@@ -77,9 +88,20 @@ main            → production (Vercel Production)
       └── feat/* fix/* chore/* docs/* → feature branches
 ```
 
-- **No direct pushes to `main`.** Everything goes through `dev`.
-- Branch off `dev` for features; open a **PR** back into `dev`.
-- `dev` → `main` also happens via **PR**.
+- Branch off `dev` for features; open a **PR** back into `dev`. This is the
+  contribution gate: review, CI and squashing all happen on `dev`.
+- **`dev` → `main` is not a PR — the maintainer merges it locally:**
+
+  ```bash
+  git switch main && git merge dev && git push
+  ```
+
+  `main` is not a collaboration surface, just a "production is here" pointer;
+  the review already happened on the PR into `dev`. The merge commit also keeps
+  the two branches' merge base current — squashed releases broke that and
+  produced phantom conflicts every time (see `scripts/README.md`).
+
+- Force pushes and branch deletion stay **disabled** on `main`.
 
 ### Commit Convention — Conventional Commits
 
