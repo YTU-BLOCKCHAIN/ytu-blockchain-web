@@ -51,15 +51,23 @@ export function BlogHero() {
             bg-foreground → görsel metin rengini alır (dark açık / light koyu),
             her iki temada aynı silik görsel, tek dosya, geçiş yok. Yatay
             çevrilip (-scale-x-100) sağa yaslanır: kaynaktaki parlak leke solda,
-            başlık da solda — çevirmezsek metnin altında kalıyor. */}
+            başlık da solda — çevirmezsek metnin altında kalıyor.
+
+            Ölçü `cover` değil: bu bant çok geniş ve alçak (≈1103×356), `cover`
+            görseli 1103×620'ye çekiyordu → dpr 2'de 2206 fiziksel piksel, oysa
+            kaynak 1920. Yani maske büyütülüyor ve tanecikler şişip bulanıyordu.
+            `auto 130%` ile çizim 822×463'e iniyor (1644 fiziksel < 1920), yani
+            artık küçültme yapılıyor ve halftone net kalıyor. Karşılığında bant
+            enini tam doldurmuyor; leke sağda toplanıyor, metnin olduğu sol
+            taraf temiz kalıyor — projects hero'sundaki ölçüyle aynı yaklaşım. */}
         <div
           aria-hidden
           className="bg-foreground pointer-events-none absolute inset-0 -scale-x-100 opacity-15 dark:opacity-15"
           style={{
             maskImage: 'url(/images/blog-bg.png)',
             WebkitMaskImage: 'url(/images/blog-bg.png)',
-            maskSize: 'cover',
-            WebkitMaskSize: 'cover',
+            maskSize: 'auto 130%',
+            WebkitMaskSize: 'auto 130%',
             maskPosition: 'left top',
             WebkitMaskPosition: 'left top',
             maskRepeat: 'no-repeat',
