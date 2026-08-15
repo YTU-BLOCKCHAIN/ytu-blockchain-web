@@ -36,6 +36,11 @@
     {
       "label": "İletişim",
       "url": "/tr/contact"
+    },
+    {
+      "label": "Sponsorluk Görüşmesi",
+      "url": "https://cal.com/ytublockchain",
+      "note": "Takvimden randevu al"
     }
   ]
 }
