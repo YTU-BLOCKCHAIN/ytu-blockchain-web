@@ -280,6 +280,11 @@
       "email": "Email",
       "message": "Your message",
       "submit": "Send message"
+    },
+    "sponsorship": {
+      "heading": "Sponsorships",
+      "body": "To sponsor our events or explore a partnership, pick a time that works for you from our calendar.",
+      "button": "Book a call"
     }
   },
   "Community": {
