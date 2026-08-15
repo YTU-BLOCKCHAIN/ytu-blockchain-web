@@ -50,3 +50,25 @@ export const postRoutesQuery = defineQuery(`
     _updatedAt
   }
 `);
+
+/**
+ * Ana sayfa karuseli için bütün hackathon kayıtları, yeniden eskiye.
+ *
+ * Dile göre süzülmüyor: dil alan seviyesinde tutuluyor (`award`/`detail`
+ * içindeki alt alanlar), yani tek kayıt iki dili de taşıyor ve indirgeme
+ * sunucu bileşeninde `localize()` ile yapılıyor.
+ *
+ * `year` eşit olursa sonra eklenen üste gelir; aksi halde aynı yıla ait iki
+ * derecenin sırası sorgudan sorguya değişebilirdi.
+ */
+export const hackathonsQuery = defineQuery(`
+  *[_type == "hackathon"] | order(year desc, _createdAt desc) {
+    _id,
+    event,
+    year,
+    award,
+    detail,
+    image,
+    url
+  }
+`);

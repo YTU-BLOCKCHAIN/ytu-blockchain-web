@@ -87,6 +87,7 @@ src/
   global.d.ts           # next-intl tip genişletmesi
 messages/               # tr.json, en.json (tüm metinler burada)
 docs/blog.md            # editörler için: blog yazısı nasıl yazılır
+docs/hackathons.md      # editörler için: hackathon derecesi nasıl eklenir
 google-apps-script/     # form arka ucu (Sheets + e-posta)
 sanity.config.ts        # Studio yapılandırması
 sanity.types.ts         # şemadan üretilen tipler (elle düzenlenmez)
@@ -248,6 +249,7 @@ src/
   global.d.ts           # next-intl type augmentation
 messages/               # tr.json, en.json (all copy lives here)
 docs/blog.md            # for editors: how to write a blog post (Turkish)
+docs/hackathons.md      # for editors: how to add a hackathon result (Turkish)
 google-apps-script/     # form backend (Sheets + email)
 sanity.config.ts        # Studio configuration
 sanity.types.ts         # types generated from the schema (never edited by hand)
