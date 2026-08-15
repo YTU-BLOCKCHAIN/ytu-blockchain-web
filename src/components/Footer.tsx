@@ -103,11 +103,31 @@ export default function Footer() {
             data-grid-content
             className="flex flex-wrap items-center justify-between gap-4 p-6 lg:px-12"
           >
-            <div className="text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
-              <span>{t('rights')}</span>
-              <Link href="/privacy" className="hover:text-primary duration-150">
-                {t('privacy')}
-              </Link>
+            <div className="text-muted-foreground flex flex-col gap-1 text-sm">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                <span>{t('rights')}</span>
+                <Link
+                  href="/privacy"
+                  className="hover:text-primary duration-150"
+                >
+                  {t('privacy')}
+                </Link>
+              </div>
+              {/* Geliştirici künyesi. Adres kulübe ait olmadığı için
+                  `siteConfig`e değil buraya yazılı; dış bağlantı olduğundan
+                  i18n `Link`'i değil düz `<a>` kullanılıyor — o, adresin başına
+                  dil önekini takardı. */}
+              <p>
+                {t('developedBy')}{' '}
+                <a
+                  href="https://erdemasik.me"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="hover:text-primary duration-150"
+                >
+                  {t('developer')}
+                </a>
+              </p>
             </div>
             <div className="ring-foreground/5 bg-card flex items-center gap-2 rounded-full border border-transparent py-1 pr-4 pl-2 shadow ring-1">
               <span className="relative flex size-3">
