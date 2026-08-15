@@ -3,6 +3,21 @@ import { revalidateTag } from 'next/cache';
 import type { NextRequest } from 'next/server';
 
 import { POST_TAG } from '@/lib/blog';
+import { HACKATHON_TAG } from '@/lib/hackathons';
+
+/**
+ * Doküman tipi → tazelenecek cache etiketi.
+ *
+ * `post` ve `author` aynı etikete düşüyor: yazar adı değişse bile onu basan
+ * yazı sayfalarının tazelenmesi gerekiyor. Listede olmayan bir tip (ör.
+ * eklentinin `translation.metadata` dokümanı) hiçbir şeyi tazelemez — eskiden
+ * her webhook körlemesine blog etiketini geçersiz kılıyordu.
+ */
+const TAGS_BY_TYPE: Record<string, string> = {
+  post: POST_TAG,
+  author: POST_TAG,
+  hackathon: HACKATHON_TAG,
+};
 
 /**
  * Sanity webhook ucu — yazı yayınlandığında blog sayfalarını tazeler.
@@ -47,9 +62,15 @@ export async function POST(request: NextRequest) {
     return new Response('Bad request', { status: 400 });
   }
 
-  // Tek etiket bütün blog sorgularını kapsıyor: yazar adı değişse bile
-  // yazı sayfaları onu bastığı için hepsinin tazelenmesi gerekiyor.
-  revalidateTag(POST_TAG, { expire: 0 });
+  const tag = TAGS_BY_TYPE[body._type];
 
-  return Response.json({ revalidated: true, type: body._type });
+  // Tanımadığımız tip: 200 dönüyoruz ki Sanity teslimatı başarısız sayıp
+  // tekrar tekrar denemesin, ama hiçbir etiketi boşuna geçersiz kılmıyoruz.
+  if (!tag) {
+    return Response.json({ revalidated: false, type: body._type });
+  }
+
+  revalidateTag(tag, { expire: 0 });
+
+  return Response.json({ revalidated: true, type: body._type, tag });
 }
