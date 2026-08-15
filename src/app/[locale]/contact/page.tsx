@@ -2,7 +2,10 @@ import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-import { ContactSection } from '@/components/contact/contact-sections';
+import {
+  ContactSection,
+  SponsorshipSection,
+} from '@/components/contact/contact-sections';
 import { buildMetadata } from '@/lib/metadata';
 
 export async function generateMetadata({
@@ -28,5 +31,10 @@ export default async function ContactPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return <ContactSection />;
+  return (
+    <>
+      <ContactSection />
+      <SponsorshipSection />
+    </>
+  );
 }

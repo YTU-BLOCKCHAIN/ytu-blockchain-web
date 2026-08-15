@@ -12,6 +12,8 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_URL,
   /** İletişim/sponsor formlarının `mailto:` alıcısı ve gösterilen adres. */
   contactEmail: 'dev@ytublockchain.com',
+  /** Sponsorluk görüşmeleri için randevu takvimi (iletişim sayfasındaki buton). */
+  bookingUrl: 'https://cal.com/ytublockchain',
   /** Kulübün resmî sosyal/topluluk kanalları. */
   social: {
     github: 'https://github.com/YTU-BLOCKCHAIN',

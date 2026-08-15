@@ -1,8 +1,9 @@
-import { CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
 import { SiteForm } from '@/components/site-form';
+import { buttonClasses } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 import { siteConfig } from '@/lib/site';
 
@@ -109,6 +110,75 @@ export function ContactSection() {
             }}
             submitLabel={t('form.submit')}
           />
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/**
+ * Sponsorluk şeridi — iletişim kartının hemen altında, tek hücrelik tam
+ * genişlikte bir bant. Metin solda, randevu butonu sağda: hackathon başlığıyla
+ * aynı `justify-between` deseni, dar ekranda alt alta sarıyor.
+ *
+ * Buton dışarı (cal.com) çıktığı için `ButtonLink` değil düz `<a>`: `ButtonLink`
+ * next-intl'in `Link`'ini kullanır, o da adresin başına dil önekini takar.
+ */
+export function SponsorshipSection() {
+  const t = useTranslations('Contact.sponsorship');
+
+  return (
+    <section>
+      <Container asGrid>
+        {/* Dolgu `@max-4xl:` ile veriliyor — yukarıdaki iletişim hücresiyle
+            aynı sebep: bu hücre `Container asGrid`'in DOĞRUDAN çocuğu, yani
+            `*:p-[0.5px]` sınıfını da yiyor. Düz `p-6` o kurala sıralamada
+            yeniliyor (masaüstündeki `@4xl:p-12` yeniyor) → mobilde dolgu 1px'e
+            düşüp başlık ve buton ızgara çizgilerine yapışıyordu. */}
+        <div
+          data-grid-content
+          className="@4xl:p-12 @max-4xl:p-6 relative flex flex-wrap items-end justify-between gap-6 overflow-hidden"
+        >
+          {/* Dekoratif halftone dünya haritası + ortada ₿. Diğer hero'lar ile
+              aynı teknik: CSS mask + bg-foreground → görsel metin rengini alır
+              (dark açık / light koyu), her iki temada aynı silik görsel. */}
+          <div
+            aria-hidden
+            className="bg-foreground pointer-events-none absolute inset-0 opacity-20 dark:opacity-15"
+            style={{
+              maskImage: 'url(/images/sponsorship-bg.png)',
+              WebkitMaskImage: 'url(/images/sponsorship-bg.png)',
+              maskSize: 'cover',
+              WebkitMaskSize: 'cover',
+              maskPosition: 'center',
+              WebkitMaskPosition: 'center',
+              maskRepeat: 'no-repeat',
+              WebkitMaskRepeat: 'no-repeat',
+            }}
+          />
+          <div className="relative max-w-xl">
+            <h2 className="text-foreground text-balance text-2xl font-semibold sm:text-3xl">
+              {t('heading')}
+            </h2>
+            <p className="text-muted-foreground mt-3 text-balance">
+              {t('body')}
+            </p>
+          </div>
+
+          {/* Telefonda tam genişlik: formdaki gönder butonuyla aynı davranış,
+              dar ekranda yarım kalan buton hem küçük bir hedef hem de bandı
+              bitmemiş gösteriyor. */}
+          <a
+            href={siteConfig.bookingUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            className={buttonClasses({ className: 'relative max-sm:w-full' })}
+          >
+            {t('button')}
+            {/* Dışarı çıkan bağlantı: ok sağ-yukarı. `withArrow`'un yatay
+                kaymasının çapraz karşılığı. */}
+            <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
         </div>
       </Container>
     </section>

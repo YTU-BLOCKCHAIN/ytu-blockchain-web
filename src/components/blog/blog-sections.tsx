@@ -44,8 +44,29 @@ export function BlogHero() {
 
   return (
     <section>
-      <Container className="@4xl:py-12 pb-6 pt-12">
-        <div className="@4xl:px-12 max-w-xl px-6">
+      {/* `relative overflow-hidden` kartın kendisinde: leke kartın yuvarlatılmış
+          sınırında kırpılsın, yan raylara taşmasın. */}
+      <Container className="@4xl:py-12 relative overflow-hidden pb-6 pt-12">
+        {/* Dekoratif halftone leke. Diğer hero'lar ile aynı teknik: CSS mask +
+            bg-foreground → görsel metin rengini alır (dark açık / light koyu),
+            her iki temada aynı silik görsel, tek dosya, geçiş yok. Yatay
+            çevrilip (-scale-x-100) sağa yaslanır: kaynaktaki parlak leke solda,
+            başlık da solda — çevirmezsek metnin altında kalıyor. */}
+        <div
+          aria-hidden
+          className="bg-foreground pointer-events-none absolute inset-0 -scale-x-100 opacity-15 dark:opacity-15"
+          style={{
+            maskImage: 'url(/images/blog-bg.png)',
+            WebkitMaskImage: 'url(/images/blog-bg.png)',
+            maskSize: 'cover',
+            WebkitMaskSize: 'cover',
+            maskPosition: 'left top',
+            WebkitMaskPosition: 'left top',
+            maskRepeat: 'no-repeat',
+            WebkitMaskRepeat: 'no-repeat',
+          }}
+        />
+        <div className="@4xl:px-12 relative max-w-xl px-6">
           {/* Mobilde 36px — diğer sayfa hero'larıyla aynı ölçü; 48px telefonda
               başlığı fazladan satıra bölüp hero'yu ekranın tamamına şişiriyor.
               Geniş ekranda tasarımın 60px'ine çıkıyor. */}
