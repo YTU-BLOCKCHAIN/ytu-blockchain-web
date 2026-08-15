@@ -1,8 +1,9 @@
-import { Code2, Handshake, Lightbulb, Users } from 'lucide-react';
+import { ArrowRight, Code2, Handshake, Lightbulb, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
 import { ButtonLink } from '@/components/ui/button';
+import { Link } from '@/i18n/navigation';
 
 export function LandingHero() {
   const t = useTranslations('Landing');
@@ -24,7 +25,12 @@ export function LandingHero() {
               data-grid-content
               // Telefonda py-16 hero'yu ilk ekranın tamamına yayıyordu; py-12
               // ile başlığın altındaki içeriğin varlığı görünür kalıyor.
-              className="relative overflow-hidden px-6 py-12 text-center sm:py-24"
+              //
+              // Üst dolgu alttan daha az: hero'nun ilk elemanı artık duyuru
+              // rozeti ve header'la arasında 98px boşluk kalıyordu — rozet
+              // sayfadan kopuk duruyordu. Alt dolgu aynı kaldı, oradaki nefes
+              // butonların altında hâlâ gerekli.
+              className="relative overflow-hidden px-6 pt-6 pb-12 text-center sm:pt-10 sm:pb-24"
             >
               {/* Dekoratif kripto coin halftone (₿/D/₮) backdrop. Community bg
                   ile aynı teknik: CSS mask + bg-foreground → metin rengini alır
@@ -45,9 +51,33 @@ export function LandingHero() {
                 }}
               />
               <div className="relative mx-auto max-w-3xl">
-                <span className="text-primary font-mono text-xs tracking-widest lowercase">
+                {/* Duyuru rozeti. Görsel dili sıfırdan uydurulmadı: footer'daki
+                    durum rozetiyle aynı — `rounded-full`, `bg-card`, ince ring
+                    ve nabız atan nokta. Yeşil bu sitede "açık / canlı" demek
+                    (form onayları, footer durumu), o yüzden "alımlar başladı"
+                    için doğru renk.
+
+                    Rozet bir bağlantı: duyuruyu görüp ne yapacağını sorduran
+                    bir etiket olmasın, doğrudan başvuru sayfasına götürsün.
+                    Hover'da yarım adım kalkması sitedeki buton diliyle aynı.
+
+                    `motion-safe:`: kullanıcı hareket azaltma diyorsa nabız
+                    durur, rozet sabit kalır. */}
+                <Link
+                  href="/join"
+                  className="ring-foreground/5 bg-card hover:ring-foreground/15 group mb-6 inline-flex items-center gap-2.5 rounded-full py-1 pr-4 pl-2.5 text-lg shadow ring-1 transition-all duration-200 hover:-translate-y-0.5"
+                >
+                  <span className="relative flex size-4">
+                    <span className="absolute inset-0 block size-full rounded-full bg-emerald-400/40 motion-safe:animate-pulse" />
+                    <span className="relative m-auto block size-1.5 rounded-full bg-emerald-500" />
+                  </span>
+                  <span>{t('announcement')}</span>
+                  <ArrowRight className="size-4.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+                </Link>
+
+                <div className="text-primary font-mono text-xs tracking-widest lowercase">
                   {'//'} blockchain · defi · zk · open-source
-                </span>
+                </div>
                 <h1 className="text-foreground mt-4 text-balance text-4xl font-semibold sm:text-6xl">
                   {t('title')}
                 </h1>
