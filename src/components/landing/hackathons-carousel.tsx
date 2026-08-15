@@ -233,8 +233,15 @@ export function HackathonsCarousel({ items }: { items: HackathonSlide[] }) {
                         {slide.event ?? t('placeholderTitle')}
                       </h3>
 
+                      {/* Derece rozeti. Metin rengi `text-primary` DEĞİL: rozet
+                          zaten mavi bir zemine (`bg-primary/10`) oturuyor,
+                          üstüne aynı tondaki metin gelince 12px mono yazı
+                          zeminde eriyordu — açık temada 5.8:1, koyuda 4.8:1,
+                          yani AA eşiğini ancak sıyırıyordu. Tonu temaya göre
+                          koyultup açmak yazıyı zeminden ayırıyor; renk yine aynı
+                          mavi ailesinden, rozetin kimliği bozulmuyor. */}
                       {slide.award && (
-                        <span className="bg-primary/10 text-primary w-fit rounded-full px-3 py-1 font-mono text-xs">
+                        <span className="bg-primary/10 w-fit rounded-full px-3 py-1 font-mono text-xs text-blue-800 dark:text-blue-300">
                           {slide.award}
                         </span>
                       )}
