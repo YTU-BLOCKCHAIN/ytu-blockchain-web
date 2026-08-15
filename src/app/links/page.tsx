@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import {
   ArrowUpRight,
   BookText,
+  CalendarClock,
   FolderGit2,
   Globe,
   Mail,
@@ -37,6 +38,7 @@ function iconForLink(link: LinkItem): RowIcon {
   const url = link.url.toLowerCase();
 
   if (link.external) {
+    if (url.includes('cal.com')) return CalendarClock;
     if (url.includes('t.me') || url.includes('telegram')) return Send;
     if (url.includes('medium.com')) return BookText;
     if (url.includes('spotify.com')) return Podcast;

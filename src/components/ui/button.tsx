@@ -24,12 +24,17 @@ export function buttonClasses({
 } = {}) {
   return cn(
     'group inline-flex items-center justify-center gap-2 rounded-md font-medium whitespace-nowrap transition-all duration-200 focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
+    // Hover'da yarım adım yukarı kalkma her iki varyantta ortak: renk
+    // değişimi varyanta özel (primary koyulaşır, outline zemin kazanır) ama
+    // "kalkma" jesti site genelinde tek ve aynı. İstisnası olan çağıran
+    // (ör. hackathon okları) `hover:translate-y-0` ile kapatır.
+    'hover:-translate-y-0.5 active:translate-y-0',
     size === 'default' && 'px-6 py-3 text-sm',
     size === 'sm' && 'px-4 py-2 text-sm',
     variant === 'primary' &&
       'bg-foreground text-background shadow-sm hover:bg-foreground/90 active:bg-foreground/80',
     variant === 'outline' &&
-      'border-border hover:bg-accent border bg-transparent hover:-translate-y-0.5 active:translate-y-0',
+      'border-border hover:bg-accent border bg-transparent',
     className,
   );
 }
