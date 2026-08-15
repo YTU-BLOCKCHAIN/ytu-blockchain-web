@@ -387,7 +387,9 @@
     "socialHeading": "Sosyal Medya",
     "status": "Daima merkeziyetsiz",
     "rights": "© 2026 YTÜ Blockchain Kulübü. Tüm hakları saklıdır.",
-    "privacy": "Aydınlatma Metni"
+    "privacy": "Aydınlatma Metni",
+    "developedBy": "Geliştiren",
+    "developer": "Erdem Aşık"
   },
   "Privacy": {
     "eyebrow": "KVKK",
