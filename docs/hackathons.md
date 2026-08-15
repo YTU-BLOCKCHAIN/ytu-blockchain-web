@@ -21,17 +21,22 @@ Sağ üstteki **+** (yeni doküman) düğmesine bas ve alanları doldur.
 | --------------------- | ------- | ------------------------------------------------------------------- |
 | **Etkinlik adı**      | ✅      | Markadır, **çevrilmez**: iki dilde de aynı. Örn. `ETHIstanbul`.     |
 | **Yıl**               | ✅      | Kartın üstünde küçük yazıyla görünür ve **sıralamayı belirler**.    |
-| **Derece**            | ✅      | Türkçe ve İngilizce ayrı ayrı. Örn. `1.'lik` / `1st place`.         |
+| **Derece**            | —       | Derece aldıysanız. Örn. `1.'lik` / `1st place`. Boşsa rozet çıkmaz. |
 | **Not**               | —       | Takım, track ya da tek cümlelik hikâye. Türkçe + İngilizce.         |
 | **Kare görseli**      | —       | Yatay (16:10 civarı) bir kare en iyi oturur.                        |
 | **Duyuru bağlantısı** | —       | Haber, X paylaşımı veya etkinlik sayfası. `https://` ile başlamalı. |
+
+Zorunlu olan yalnızca **Etkinlik adı** ve **Yıl**. Her hackathon'da derece
+almak gerekmiyor — bölüm takımın yer aldığı etkinlikleri listeliyor, derece
+girilmezse kartta rozet hiç görünmez.
 
 Bitince sağ alttaki **Publish**'e bas. Kayıt birkaç saniye içinde ana sayfada.
 
 ### Dil alanları
 
 **Derece** ve **Not** alanlarının içinde `Türkçe` ve `İngilizce` diye iki kutu
-var. İkisini de doldurman gerekiyor — Studio boş bırakırsan yayınlatmaz.
+var. İkisi de isteğe bağlı; ama **birini doldurursan diğerini de doldurman
+gerekiyor** — Studio yarım çeviriyi yayınlatmaz.
 
 Blog yazılarından farklı olarak burada **her dil için ayrı kayıt açılmaz**. Tek
 kayıt iki dili birden taşır; görseli ve yılı bir kez girersin. Böylece bir

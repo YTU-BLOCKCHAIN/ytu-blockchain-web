@@ -37,9 +37,12 @@ export const hackathon = defineType({
     defineField({
       name: 'award',
       title: 'Derece',
-      description: 'Örn. "1.\'lik" / "1st place". Kartta rozet olarak görünür.',
+      description:
+        'Örn. "1.\'lik" / "1st place". Kartta rozet olarak görünür. Derece alınmadıysa boş bırakılabilir — rozet o zaman hiç çıkmaz.',
       type: 'localizedString',
-      validation: (rule) => rule.required(),
+      // Zorunlu DEĞİL: bölüm yalnızca kazanılan hackathon'ları değil takımın
+      // yer aldığı hackathon'ları listeliyor. Doldurulursa iki dil de zorunlu
+      // kalır (bkz. localized.ts) — yarım çeviriye izin verilmiyor.
     }),
     defineField({
       name: 'detail',

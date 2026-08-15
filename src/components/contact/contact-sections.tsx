@@ -6,6 +6,39 @@ import { SiteForm } from '@/components/site-form';
 import { buttonClasses } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 import { siteConfig } from '@/lib/site';
+import { cn } from '@/lib/utils';
+
+/**
+ * cal.com randevu butonu — hem "Bize ulaşın" kartında hem sponsorluk bandında
+ * kullanılıyor. Tek bileşen: iki yere kopyalansaydı biri değişip diğeri
+ * kalırdı, oysa ikisinin birebir aynı görünmesi isteniyor.
+ *
+ * `ButtonLink` değil düz `<a>`: adres dışarı çıkıyor, `ButtonLink` next-intl'in
+ * `Link`'ini kullandığı için başına dil önekini takardı.
+ */
+function BookingButton({
+  label,
+  className,
+}: {
+  label: string;
+  className?: string;
+}) {
+  return (
+    <a
+      href={siteConfig.bookingUrl}
+      target="_blank"
+      rel="noreferrer noopener"
+      className={buttonClasses({
+        className: cn('relative max-sm:w-full', className),
+      })}
+    >
+      {label}
+      {/* Dışarı çıkan bağlantı: ok sağ-yukarı. `withArrow`'un yatay kaymasının
+          çapraz karşılığı. */}
+      <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+    </a>
+  );
+}
 
 export function ContactSection() {
   const t = useTranslations('Contact');
@@ -81,6 +114,12 @@ export function ContactSection() {
               >
                 {siteConfig.contactEmail}
               </a>
+            </div>
+
+            {/* E-postanın hemen altında: ikisi de doğrudan iletişim kanalı,
+                biri yazılı biri sözlü. Form zaten sağdaki kartta. */}
+            <div className="mt-6">
+              <BookingButton label={t('sponsorship.button')} />
             </div>
 
             <p className="text-muted-foreground mt-8 text-sm">
@@ -168,20 +207,7 @@ export function SponsorshipSection() {
               </p>
             </div>
 
-            {/* Telefonda tam genişlik: formdaki gönder butonuyla aynı davranış,
-              dar ekranda yarım kalan buton hem küçük bir hedef hem de bandı
-              bitmemiş gösteriyor. */}
-            <a
-              href={siteConfig.bookingUrl}
-              target="_blank"
-              rel="noreferrer noopener"
-              className={buttonClasses({ className: 'relative max-sm:w-full' })}
-            >
-              {t('button')}
-              {/* Dışarı çıkan bağlantı: ok sağ-yukarı. `withArrow`'un yatay
-                kaymasının çapraz karşılığı. */}
-              <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
+            <BookingButton label={t('button')} />
           </div>
         </div>
       </Container>
