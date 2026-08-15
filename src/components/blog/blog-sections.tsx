@@ -47,30 +47,28 @@ export function BlogHero() {
       {/* `relative overflow-hidden` kartın kendisinde: leke kartın yuvarlatılmış
           sınırında kırpılsın, yan raylara taşmasın. */}
       <Container className="@4xl:py-12 relative overflow-hidden pb-6 pt-12">
-        {/* Dekoratif halftone leke. Diğer hero'lar ile aynı teknik: CSS mask +
-            bg-foreground → görsel metin rengini alır (dark açık / light koyu),
-            her iki temada aynı silik görsel, tek dosya, geçiş yok. Yatay
-            çevrilip (-scale-x-100) sağa yaslanır: kaynaktaki parlak leke solda,
-            başlık da solda — çevirmezsek metnin altında kalıyor.
+        {/* Dekoratif halftone balina kuyruğu. Diğer hero'lar ile aynı teknik:
+            CSS mask + bg-foreground → görsel metin rengini alır (dark açık /
+            light koyu), her iki temada aynı silik görsel, tek dosya, geçiş yok.
 
-            Ölçü `cover` değil: bu bant çok geniş ve alçak (≈1103×356), `cover`
-            görseli 1103×620'ye çekiyordu → dpr 2'de 2206 fiziksel piksel, oysa
-            kaynak 1920. Yani maske büyütülüyor ve tanecikler şişip bulanıyordu.
-            `auto 100%` ile çizim 633×356'ya iniyor: 1266 fiziksel piksel, yani
-            kaynağın 0.66'sı — net bir küçültme, halftone keskin kalıyor.
-            Karşılığında bant enini tam doldurmuyor (%57); leke sağda toplanıp
-            sola doğru sönüyor, başlığın olduğu taraf tamamen temiz kalıyor.
-            Daha da küçültmek gerekirse tek değişecek sayı bu yüzde. */}
+            Çevirme yok: kaynakta kuyruk zaten sağda, sol üst köşe boş — başlığın
+            oturduğu yer. Sağa yaslanınca ikisi çakışmıyor.
+
+            Ölçü `cover` değil. Bant çok geniş ve alçak (≈1103×356), `cover`
+            maskeyi bandın enine kadar şişirir; kaynak 1492px olduğu için dpr 2'de
+            büyütmeye girer ve halftone taneleri bulanır. `auto 115%` ile çizim
+            ≈626×409 oluyor: 1252 fiziksel piksel < 1492, yani hâlâ küçültme.
+            Netliği korumak için bu yüzde ~135'i geçmemeli. */}
         <div
           aria-hidden
-          className="bg-foreground pointer-events-none absolute inset-0 -scale-x-100 opacity-15 dark:opacity-15"
+          className="bg-foreground pointer-events-none absolute inset-0 opacity-15 dark:opacity-15"
           style={{
             maskImage: 'url(/images/blog-bg.png)',
             WebkitMaskImage: 'url(/images/blog-bg.png)',
-            maskSize: 'auto 100%',
-            WebkitMaskSize: 'auto 100%',
-            maskPosition: 'left top',
-            WebkitMaskPosition: 'left top',
+            maskSize: 'auto 115%',
+            WebkitMaskSize: 'auto 115%',
+            maskPosition: 'right center',
+            WebkitMaskPosition: 'right center',
             maskRepeat: 'no-repeat',
             WebkitMaskRepeat: 'no-repeat',
           }}
@@ -176,8 +174,19 @@ export function BlogList({
     return (
       <section>
         <Container asGrid>
-          <div data-grid-content className="@4xl:p-12 p-6 text-center">
-            <p className="text-muted-foreground">{t('empty')}</p>
+          {/* Boş sarmalayıcı şart: `*:p-[0.5px]` yalnızca DOĞRUDAN çocuğa iner.
+              Kart doğrudan çocukken öneksiz `p-6` o kurala sıralamada yeniliyor
+              (yalnızca `@4xl:p-12` kazanıyor) → dar ekranda dolgu 0.5px'e düşüp
+              bölüm bir şeride iniyordu. Sarmalayıcıyla dolgu her ölçüde çalışıyor
+              ve kartın ızgara çizgisi de çıkıyor.
+
+              Dolgu bilerek diğer kartlarla aynı: bu blok yalnızca hiç yazı
+              yokken çiziliyor, kalıcı bir bölüm değil — abartılı bir yükseklik
+              vermeye gerek yok. */}
+          <div>
+            <div data-grid-content className="@4xl:p-12 p-6 text-center">
+              <p className="text-muted-foreground">{t('empty')}</p>
+            </div>
           </div>
         </Container>
       </section>
