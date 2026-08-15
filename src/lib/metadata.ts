@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 
 import { routing } from '@/i18n/routing';
-import { ogLocales, siteConfig } from '@/lib/site';
+import { ogLocales, siteConfig, xHandle } from '@/lib/site';
 
 type BuildMetadataOptions = {
   locale: Locale;
@@ -12,8 +12,12 @@ type BuildMetadataOptions = {
   description: string;
   /** true ise başlık şablonu (`%s · ...`) uygulanmaz — anasayfa için. */
   titleAbsolute?: boolean;
-  /** Paylaşım kartındaki görsel. 1200×630 önerilir. */
-  image?: { url: string; alt: string };
+  /**
+   * Paylaşım kartını üreten rotanın yolu. Öntanımlı, dilin kök kartı; kendi
+   * `opengraph-image.tsx` dosyası olan segmentler (blog yazıları) kendi
+   * yollarını geçer.
+   */
+  ogImagePath?: string;
   /**
    * Verilirse sayfa `og:type=article` olur — blog yazıları için. Tarih ISO
    * biçiminde; sosyal platformlar ve arama motorları yayın tarihini buradan
@@ -26,6 +30,11 @@ type BuildMetadataOptions = {
  * Bir sayfa için locale-aware metadata üretir: başlık, açıklama, kanonik URL,
  * hreflang alternatifleri ve Open Graph / Twitter kartları. `metadataBase`,
  * başlık şablonu ve robots kök layout'ta tanımlıdır.
+ *
+ * Kart **görseli burada verilmiyor**: onu `opengraph-image.tsx` dosya
+ * konvansiyonu üretiyor (bkz. `src/lib/og.tsx`). Next'te dosya tabanlı
+ * metadata `generateMetadata`'yı ezdiği için buradan bir görsel geçmek sessizce
+ * etkisiz kalırdı — tek kaynak dosya konvansiyonu.
  */
 export function buildMetadata({
   locale,
@@ -33,7 +42,7 @@ export function buildMetadata({
   title,
   description,
   titleAbsolute = false,
-  image,
+  ogImagePath,
   article,
 }: BuildMetadataOptions): Metadata {
   const suffix = pathname === '/' ? '' : pathname;
@@ -45,9 +54,26 @@ export function buildMetadata({
   }
   languages['x-default'] = `/${routing.defaultLocale}${suffix}`;
 
-  const images = image
-    ? [{ url: image.url, width: 1200, height: 630, alt: image.alt }]
-    : undefined;
+  /*
+    Paylaşım kartı görseli. Görseli `opengraph-image.tsx` dosya konvansiyonu
+    üretiyor ama adresi BURADAN veriliyor, iki ölçülmüş sebeple:
+
+    1. Dosya yalnızca kendi segmentine uygulanıyor, alt sayfalara devrolmuyor
+       (`/tr` kart alırken `/tr/about` almıyordu).
+    2. Dokümanın aksine `generateMetadata`, aynı segmentteki dosya
+       konvansiyonunu eziyor — yani "dosya her zaman kazanır"a güvenilemiyor.
+
+    Adresi açıkça geçmek ikisini de konu dışı bırakıyor: hangi sayfanın hangi
+    kartı alacağı burada, tek yerde ve tahmine yer bırakmadan belli.
+  */
+  const images = [
+    {
+      url: ogImagePath ?? `/${locale}/opengraph-image`,
+      width: 1200,
+      height: 630,
+      alt: siteConfig.name,
+    },
+  ];
 
   const openGraphBase = {
     siteName: siteConfig.name,
@@ -71,7 +97,11 @@ export function buildMetadata({
         }
       : { ...openGraphBase, type: 'website' },
     twitter: {
+      // `site` burada da veriliyor: Next metadata'yı alan alan birleştirmiyor,
+      // sayfanın `twitter` nesnesi layout'unkini komple değiştiriyor. Yalnız
+      // layout'ta bıraksaydık hiçbir sayfada görünmezdi.
       card: 'summary_large_image',
+      site: xHandle,
       title,
       description,
       images,
