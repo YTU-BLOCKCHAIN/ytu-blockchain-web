@@ -7,7 +7,6 @@ import { PostArticle } from '@/components/blog/post-sections';
 import { routing } from '@/i18n/routing';
 import { getPost, getPostRoutes } from '@/lib/blog';
 import { buildMetadata } from '@/lib/metadata';
-import { imageUrl } from '@/sanity/lib/image';
 
 type PostParams = { locale: Locale; slug: string };
 
@@ -43,12 +42,8 @@ export async function generateMetadata({
     pathname: `/blog/${slug}`,
     title: post.title ?? '',
     description: post.excerpt ?? '',
-    image: post.coverImage
-      ? {
-          url: imageUrl(post.coverImage, 1200, 630),
-          alt: post.coverImage.alt ?? post.title ?? '',
-        }
-      : undefined,
+    // Yazının kendi başlıklı kartı — bu segmentteki `opengraph-image.tsx`.
+    ogImagePath: `/${locale}/blog/${slug}/opengraph-image`,
     article: post.publishedAt
       ? {
           publishedTime: post.publishedAt,

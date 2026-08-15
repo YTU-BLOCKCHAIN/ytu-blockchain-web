@@ -22,6 +22,12 @@ export const siteConfig = {
   },
 } as const;
 
+/**
+ * X kullanıcı adı, `@handle` biçiminde — paylaşım kartındaki `twitter:site`
+ * için. Adresten türetiliyor ki hesap değişince tek yer güncellensin.
+ */
+export const xHandle = `@${new URL(siteConfig.social.x).pathname.replace(/\//g, '')}`;
+
 /** next-intl locale → Open Graph `og:locale` eşlemesi. */
 export const ogLocales: Record<Locale, string> = {
   tr: 'tr_TR',
