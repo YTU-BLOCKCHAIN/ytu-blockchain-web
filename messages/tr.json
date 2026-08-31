@@ -392,11 +392,19 @@
     "developedBy": "Geliştiren",
     "developer": "Erdem Aşık"
   },
+  "Consent": {
+    "title": "Çerezler",
+    "body": "Siteyi nasıl kullandığını anlamak için Google Analytics kullanmak istiyoruz. Kabul etmezsen hiçbir ölçüm çerezi yazılmaz ve Google’a hiçbir istek gitmez.",
+    "accept": "Kabul et",
+    "reject": "Reddet",
+    "privacy": "Ayrıntılar",
+    "manage": "Çerez tercihleri"
+  },
   "Privacy": {
     "eyebrow": "KVKK",
     "title": "Aydınlatma Metni",
-    "subtitle": "Sitedeki formlarla paylaştığın kişisel verilerin nasıl işlendiğini burada açıklıyoruz.",
-    "updated": "Son güncelleme: 10 Ağustos 2026",
+    "subtitle": "Sitedeki formlarla paylaştığın kişisel verilerin ve ölçüm çerezlerinin nasıl işlendiğini burada açıklıyoruz.",
+    "updated": "Son güncelleme: 31 Ağustos 2026",
     "sections": {
       "controller": {
         "heading": "Veri sorumlusu",
@@ -404,19 +412,23 @@
       },
       "data": {
         "heading": "İşlenen kişisel veriler",
-        "body": "İletişim formunda ad soyad, e-posta adresi ve mesaj içeriği; üyelik başvurusu formunda ad soyad, e-posta adresi, bölüm/sınıf bilgisi ve başvuru metni işlenir. Kayda ayrıca gönderim tarihi ve sitede seçili dil eklenir. Formlar dışında çerez veya izleme aracıyla veri toplanmaz."
+        "body": "İletişim formunda ad soyad, e-posta adresi ve mesaj içeriği; üyelik başvurusu formunda ad soyad, e-posta adresi, bölüm/sınıf bilgisi ve başvuru metni işlenir. Kayda ayrıca gönderim tarihi ve sitede seçili dil eklenir. Bunların dışında, yalnızca ölçüme onay verirsen, ziyaret ettiğin sayfalar ve tarayıcı bilgin gibi veriler işlenir (aşağıdaki “Çerezler ve ölçüm” bölümü)."
+      },
+      "cookies": {
+        "heading": "Çerezler ve ölçüm",
+        "body": "Sitenin çalışması için zorunlu olmayan tek araç Google LLC tarafından sağlanan Google Analytics 4’tür; ziyaretçi sayısı ve hangi sayfaların okunduğu gibi toplu istatistikler için kullanılır. İlk ziyaretinde çıkan çubukta kabul etmediğin sürece Google Analytics hiç yüklenmez, Google’a tek bir istek bile gitmez ve tarayıcına çerez yazılmaz. Kabul edersen adı “_ga” ile başlayan çerezler yazılır; ziyaret ettiğin sayfa adresleri, yönlendiren adres, IP adresinden türetilen yaklaşık konum ile tarayıcı ve cihaz bilgin Google’a iletilir. Reklam ve kişiselleştirme amaçlı ölçüm her hâlükârda kapalıdır. Kararını sayfanın altındaki “Çerez tercihleri” bağlantısından istediğin zaman değiştirebilirsin; reddettiğinde daha önce yazılmış “_ga” çerezleri de silinir."
       },
       "purpose": {
         "heading": "İşleme amacı",
-        "body": "Veriler yalnızca mesaj ve başvuruların değerlendirilmesi, sana geri dönüş yapılması ve kulüp faaliyetlerinin yürütülmesi amacıyla işlenir. Pazarlama amacıyla kullanılmaz, üçüncü kişilere satılmaz veya devredilmez."
+        "body": "Veriler yalnızca mesaj ve başvuruların değerlendirilmesi, sana geri dönüş yapılması ve kulüp faaliyetlerinin yürütülmesi amacıyla işlenir. Pazarlama amacıyla kullanılmaz, üçüncü kişilere satılmaz veya devredilmez. Ölçüm verileri ise yalnızca sitenin hangi bölümlerinin ilgi gördüğünü anlamak ve siteyi geliştirmek için toplu hâlde incelenir."
       },
       "legal": {
         "heading": "Hukuki sebep",
-        "body": "İşleme, KVKK m. 5 uyarınca açık rızana dayanır. Formu gönderirken verdiğin onayı dilediğin zaman geri çekebilirsin; bu durumda kayıtların silinir."
+        "body": "İşleme, KVKK m. 5 uyarınca açık rızana dayanır. Formu gönderirken verdiğin onayı dilediğin zaman geri çekebilirsin; bu durumda kayıtların silinir. Ölçüm çerezleri de açık rızana dayanır: çubuktaki “Reddet” seçeneğiyle hiç başlamaz, sonradan “Çerez tercihleri” bağlantısından rızanı geri çekebilirsin."
       },
       "transfer": {
         "heading": "Yurt dışına aktarım",
-        "body": "Form kayıtları Google LLC tarafından sağlanan Google Sheets ve Google Apps Script hizmetlerinde saklanır; bildirim ve onay e-postaları da aynı altyapı üzerinden gönderilir. Bu nedenle verilerin Google’ın yurt dışındaki sunucularında işlenmesi söz konusudur ve formu gönderirken bu aktarıma da onay vermiş olursun. Ayrıca formların bot gönderimlerine karşı korunması için Cloudflare, Inc. tarafından sağlanan Turnstile hizmeti kullanılır; bu doğrulama sırasında IP adresin ve tarayıcı bilgilerin Cloudflare’ın yurt dışındaki sunucularında işlenir. Turnstile çerez kullanmaz ve bu veriler yalnızca gönderimin bir bot tarafından yapılıp yapılmadığını anlamak için kullanılır."
+        "body": "Form kayıtları Google LLC tarafından sağlanan Google Sheets ve Google Apps Script hizmetlerinde saklanır; bildirim ve onay e-postaları da aynı altyapı üzerinden gönderilir. Bu nedenle verilerin Google’ın yurt dışındaki sunucularında işlenmesi söz konusudur ve formu gönderirken bu aktarıma da onay vermiş olursun. Ayrıca formların bot gönderimlerine karşı korunması için Cloudflare, Inc. tarafından sağlanan Turnstile hizmeti kullanılır; bu doğrulama sırasında IP adresin ve tarayıcı bilgilerin Cloudflare’ın yurt dışındaki sunucularında işlenir. Turnstile çerez kullanmaz ve bu veriler yalnızca gönderimin bir bot tarafından yapılıp yapılmadığını anlamak için kullanılır. Ölçüme onay vermen hâlinde, yukarıda sayılan ölçüm verileri de Google’ın yurt dışındaki sunucularında işlenir; onay vermezsen Google Analytics’e hiçbir veri gitmez."
       },
       "retention": {
         "heading": "Saklama süresi",

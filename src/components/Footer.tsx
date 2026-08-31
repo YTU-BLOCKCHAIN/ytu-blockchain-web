@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 
+import { ConsentPreferencesButton } from '@/components/analytics/consent-preferences';
 import {
   GithubIcon,
   InstagramIcon,
@@ -31,6 +32,7 @@ const SOCIALS = [
 export default function Footer() {
   const t = useTranslations('Footer');
   const tNav = useTranslations('Nav');
+  const tConsent = useTranslations('Consent');
 
   return (
     /* Zemin = grid çizgi rengi: alttaki Separator'ların çizgileri (hücre
@@ -112,6 +114,7 @@ export default function Footer() {
                 >
                   {t('privacy')}
                 </Link>
+                <ConsentPreferencesButton label={tConsent('manage')} />
               </div>
               {/* Geliştirici künyesi. Adres kulübe ait olmadığı için
                   `siteConfig`e değil buraya yazılı; dış bağlantı olduğundan

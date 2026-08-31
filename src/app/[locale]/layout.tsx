@@ -4,6 +4,7 @@ import { hasLocale, NextIntlClientProvider, type Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
+import { Analytics } from '@/components/analytics';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { routing } from '@/i18n/routing';
@@ -100,6 +101,9 @@ export default async function LocaleLayout({
           <main className="bg-grid-line flex-1">{children}</main>
           <Footer />
         </NextIntlClientProvider>
+        {/* Ölçüm ve çerez onay çubuğu. Sağlayıcının DIŞINDA: metnini prop
+            olarak alıyor, `/links` köküyle aynı bileşeni paylaşabilsin diye. */}
+        <Analytics locale={locale} />
       </body>
     </html>
   );
