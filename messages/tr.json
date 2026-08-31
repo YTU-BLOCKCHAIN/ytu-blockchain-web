@@ -393,6 +393,14 @@
     "developedBy": "Geliştiren",
     "developer": "Erdem Aşık"
   },
+  "Consent": {
+    "title": "Çerezler",
+    "body": "Siteyi nasıl kullandığını anlamak için Google Analytics kullanmak istiyoruz. Kabul etmezsen hiçbir ölçüm çerezi yazılmaz ve Google’a hiçbir istek gitmez.",
+    "accept": "Kabul et",
+    "reject": "Reddet",
+    "privacy": "Ayrıntılar",
+    "manage": "Çerez tercihleri"
+  },
   "Privacy": {
     "eyebrow": "KVKK",
     "title": "Aydınlatma Metni",

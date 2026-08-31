@@ -393,6 +393,14 @@
     "developedBy": "Developed by",
     "developer": "Erdem Aşık"
   },
+  "Consent": {
+    "title": "Cookies",
+    "body": "We would like to use Google Analytics to understand how the site is used. If you decline, no analytics cookie is written and no request is sent to Google.",
+    "accept": "Accept",
+    "reject": "Decline",
+    "privacy": "Details",
+    "manage": "Cookie preferences"
+  },
   "Privacy": {
     "eyebrow": "Privacy",
     "title": "Privacy Notice",
