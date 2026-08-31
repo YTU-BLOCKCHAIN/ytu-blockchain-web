@@ -33,8 +33,9 @@ export const author = defineType({
     }),
     defineField({
       name: 'url',
-      title: 'Kişisel bağlantı',
-      description: 'X, LinkedIn, GitHub ya da kişisel site. Boş bırakılabilir.',
+      title: 'Profil bağlantısı',
+      description:
+        'Yazının altındaki "Yazan ..." satırı buraya götürür. Genelde X (Twitter) profili; LinkedIn, GitHub ya da kişisel site de olabilir. Boş bırakılırsa satır düz metin olarak basılır.',
       type: 'url',
       validation: (rule) => rule.uri({ scheme: ['http', 'https'] }),
     }),
