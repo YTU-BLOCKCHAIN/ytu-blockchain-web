@@ -7,7 +7,6 @@ import {
   Globe,
   Mail,
   Podcast,
-  Send,
   UserPlus,
 } from 'lucide-react';
 import type { ComponentType } from 'react';
@@ -39,7 +38,10 @@ function iconForLink(link: LinkItem): RowIcon {
 
   if (link.external) {
     if (url.includes('cal.com')) return CalendarClock;
-    if (url.includes('t.me') || url.includes('telegram')) return Send;
+    // Başvuru formu dışarıda (Google Forms) barınıyor ama satır hâlâ bir
+    // başvuru satırı: ikon `/join` sayfasınınkiyle aynı kalsın.
+    if (url.includes('forms.gle') || url.includes('docs.google.com/forms'))
+      return UserPlus;
     if (url.includes('medium.com')) return BookText;
     if (url.includes('spotify.com')) return Podcast;
     if (url.includes('instagram.com')) return InstagramIcon;
