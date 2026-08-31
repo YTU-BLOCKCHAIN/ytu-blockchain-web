@@ -126,6 +126,28 @@ Turnstile ücretsiz ve limitsiz. Anahtarları (`NEXT_PUBLIC_TURNSTILE_SITE_KEY`,
 anlarda gönderim bilerek geçirilir: kesinti yüzünden üyelik başvurularını
 kaybetmek, o sırada kaçabilecek birkaç spam'den pahalıdır.
 
+### Ölçüm (Google Analytics)
+
+GA4, [`@next/third-parties`](https://nextjs.org/docs/app/guides/third-party-libraries)
+üzerinden yükleniyor. Kurulum tek bir ortam değişkenine bakar: `NEXT_PUBLIC_GA_ID`
+**boşsa ölçüm tamamen kapalıdır** — gtag yüklenmez, onay çubuğu da çıkmaz. Bu
+yüzden değişken yalnızca Vercel'in Production ortamına girilir; yerel ve Preview
+trafiği rakamlara karışmaz.
+
+KVKK gereği ölçüm **açık rızaya** bağlı ve bu sıkı yorumla uygulandı:
+
+| Adım                        | Nerede                                                                        | Ne olur                                                 |
+| --------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------- |
+| Consent Mode v2 varsayılanı | [`lib/analytics.ts`](src/lib/analytics.ts)                                    | gtag'den önce koşar, her izni `denied` yapar            |
+| Onay çubuğu                 | [`analytics/consent-banner.tsx`](src/components/analytics/consent-banner.tsx) | Karar verilene kadar GA bileşeni **hiç basılmaz**       |
+| Kararın saklanması          | `localStorage` (`ytub.analytics-consent`)                                     | Çerez değil — onay çerezi için onay gerekmesin diye     |
+| Rızayı geri çekme           | Footer → "Çerez tercihleri"                                                   | Çubuğu tekrar açar; reddedince `_ga*` çerezleri silinir |
+
+Yani ziyaretçi "Kabul et" demeden `googletagmanager.com`'a tek bir istek bile
+gitmez. Çubuk `/tr`, `/en` ve `/links` köklerinin üçünde de basılır (`/studio`
+hariç: orası ziyaretçi değil, editör arayüzü). Aydınlatma metninin "Çerezler ve
+ölçüm" bölümü bu davranışı anlatır — davranış değişirse **metin de değişmeli**.
+
 ### Blog (Sanity)
 
 Yazılar Sanity'de saklanır, editörler siteye gömülü Studio'dan yazar
@@ -287,6 +309,30 @@ Turnstile is free and unlimited. While its keys (`NEXT_PUBLIC_TURNSTILE_SITE_KEY
 work** — the other three layers always apply. When Cloudflare is unreachable the
 submission is deliberately let through: losing membership applications to an
 outage costs more than the handful of spam that may slip in meanwhile.
+
+### Analytics (Google Analytics)
+
+GA4 is loaded through [`@next/third-parties`](https://nextjs.org/docs/app/guides/third-party-libraries).
+The whole setup hinges on one environment variable: while `NEXT_PUBLIC_GA_ID` is
+empty **analytics is entirely off** — gtag is never loaded and no consent banner
+appears. The variable is therefore set only on Vercel's Production environment,
+so local and Preview traffic never pollutes the numbers.
+
+Turkish data protection law (KVKK) requires **explicit consent** for analytics,
+implemented here in its strict reading:
+
+| Step                    | Where                                                                         | What happens                                                  |
+| ----------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Consent Mode v2 default | [`lib/analytics.ts`](src/lib/analytics.ts)                                    | Runs before gtag, sets every signal to `denied`               |
+| Consent banner          | [`analytics/consent-banner.tsx`](src/components/analytics/consent-banner.tsx) | The GA component is **never rendered** until a choice is made |
+| Storing the choice      | `localStorage` (`ytub.analytics-consent`)                                     | Not a cookie — so the consent record needs no consent         |
+| Withdrawing consent     | Footer → "Cookie preferences"                                                 | Reopens the banner; declining also clears `_ga*` cookies      |
+
+So until a visitor presses "Accept", not a single request reaches
+`googletagmanager.com`. The banner renders on all three roots (`/tr`, `/en` and
+`/links`) but not on `/studio`, which is the editor UI rather than a visitor
+surface. The "Cookies and analytics" section of the privacy notice describes this
+behaviour — **change the behaviour, change the text**.
 
 ### Blog (Sanity)
 
