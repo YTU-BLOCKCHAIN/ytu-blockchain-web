@@ -134,7 +134,6 @@
     },
     "callToAction": {
       "heading": "Curious? Come join us.",
-      "body": "Applying takes a few minutes; any level is welcome.",
       "button": "Join us"
     }
   },
@@ -393,11 +392,19 @@
     "developedBy": "Developed by",
     "developer": "Erdem Aşık"
   },
+  "Consent": {
+    "title": "Cookies",
+    "body": "We would like to use Google Analytics to understand how the site is used. If you decline, no analytics cookie is written and no request is sent to Google.",
+    "accept": "Accept",
+    "reject": "Decline",
+    "privacy": "Details",
+    "manage": "Cookie preferences"
+  },
   "Privacy": {
     "eyebrow": "Privacy",
     "title": "Privacy Notice",
-    "subtitle": "How we handle the personal data you share through the forms on this site.",
-    "updated": "Last updated: 10 August 2026",
+    "subtitle": "How we handle the personal data you share through the forms on this site, and the analytics cookies we may set.",
+    "updated": "Last updated: 31 August 2026",
     "sections": {
       "controller": {
         "heading": "Data controller",
@@ -405,19 +412,23 @@
       },
       "data": {
         "heading": "Personal data we process",
-        "body": "The contact form processes your full name, email address and message. The membership application form processes your full name, email address, department/year and application text. Each record also stores the submission date and the site language you were using. No data is collected through cookies or tracking tools."
+        "body": "The contact form processes your full name, email address and message. The membership application form processes your full name, email address, department/year and application text. Each record also stores the submission date and the site language you were using. Beyond that, and only if you consent to analytics, data such as the pages you visit and your browser information is processed (see “Cookies and analytics” below)."
+      },
+      "cookies": {
+        "heading": "Cookies and analytics",
+        "body": "The only non-essential tool on this site is Google Analytics 4, provided by Google LLC; it is used for aggregate statistics such as visitor counts and which pages are read. Unless you accept in the banner shown on your first visit, Google Analytics is never loaded, not a single request is sent to Google, and no cookie is written to your browser. If you accept, cookies whose names begin with “_ga” are stored, and the page addresses you visit, the referring address, an approximate location derived from your IP address, and your browser and device information are sent to Google. Advertising and personalisation measurement stays switched off in every case. You can change your decision at any time from the “Cookie preferences” link at the bottom of the page; declining also deletes any “_ga” cookies that were stored earlier."
       },
       "purpose": {
         "heading": "Purpose of processing",
-        "body": "Data is processed solely to review messages and applications, to get back to you, and to run club activities. It is not used for marketing, and it is never sold or transferred to third parties."
+        "body": "Data is processed solely to review messages and applications, to get back to you, and to run club activities. It is not used for marketing, and it is never sold or transferred to third parties. Analytics data is reviewed only in aggregate, to understand which parts of the site draw interest and to improve it."
       },
       "legal": {
         "heading": "Legal basis",
-        "body": "Processing is based on your explicit consent under Article 5 of the KVKK. You may withdraw the consent you gave when submitting the form at any time, in which case your records are deleted."
+        "body": "Processing is based on your explicit consent under Article 5 of the KVKK. You may withdraw the consent you gave when submitting the form at any time, in which case your records are deleted. Analytics cookies also rely on your explicit consent: choosing “Decline” in the banner means they never start, and you can withdraw consent later from the “Cookie preferences” link."
       },
       "transfer": {
         "heading": "International transfer",
-        "body": "Form records are stored in Google Sheets and Google Apps Script, provided by Google LLC; notification and confirmation emails are sent through the same infrastructure. Your data is therefore processed on Google servers outside Türkiye, and submitting the form also covers your consent to this transfer. The forms are also protected against bot submissions by Turnstile, a service provided by Cloudflare, Inc.; during this check your IP address and browser information are processed on Cloudflare servers outside Türkiye. Turnstile does not use cookies, and this data is only used to determine whether a submission was made by a bot."
+        "body": "Form records are stored in Google Sheets and Google Apps Script, provided by Google LLC; notification and confirmation emails are sent through the same infrastructure. Your data is therefore processed on Google servers outside Türkiye, and submitting the form also covers your consent to this transfer. The forms are also protected against bot submissions by Turnstile, a service provided by Cloudflare, Inc.; during this check your IP address and browser information are processed on Cloudflare servers outside Türkiye. Turnstile does not use cookies, and this data is only used to determine whether a submission was made by a bot. If you consent to analytics, the analytics data listed above is also processed on Google servers outside Türkiye; if you do not consent, no data reaches Google Analytics at all."
       },
       "retention": {
         "heading": "Retention period",

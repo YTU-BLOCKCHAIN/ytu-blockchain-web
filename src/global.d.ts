@@ -32,3 +32,17 @@ declare global {
     };
   }
 }
+
+/**
+ * Google Analytics (gtag.js). `window.gtag`, sayfanın HTML'ine basılan Consent
+ * Mode varsayılan bloğu tarafından gtag.js gelmeden ÖNCE tanımlanıyor
+ * (`lib/analytics.ts`), bu yüzden onay güncellemesi script yüklenmemişken de
+ * güvenle çağrılabilir — komut `dataLayer` kuyruğunda bekler. Yine de alan
+ * isteğe bağlı: ölçüm kimliği tanımsızken o blok hiç basılmıyor.
+ * Kullanımı: `components/analytics/consent-banner.tsx`.
+ */
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}

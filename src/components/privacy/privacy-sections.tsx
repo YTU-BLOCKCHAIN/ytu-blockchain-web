@@ -7,6 +7,7 @@ import { siteConfig } from '@/lib/site';
 const SECTIONS = [
   'controller',
   'data',
+  'cookies',
   'purpose',
   'legal',
   'transfer',

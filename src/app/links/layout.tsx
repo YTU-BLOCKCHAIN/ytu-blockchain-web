@@ -1,5 +1,7 @@
 import { GeistMono } from 'geist/font/mono';
 
+import { Analytics } from '@/components/analytics';
+
 import '@fontsource-variable/inter';
 import '../globals.css';
 
@@ -26,6 +28,10 @@ export default function LinksLayout({
     >
       <body className="bg-background text-foreground flex min-h-full flex-col">
         {children}
+        {/* Instagram biyografisinden gelen trafiğin indiği sayfa burası, yani
+            ölçmeye en çok değen yer. Sayfa `lang="tr"` olduğu için çubuk da
+            Türkçe: burada dil seçici yok. */}
+        <Analytics locale="tr" />
       </body>
     </html>
   );
