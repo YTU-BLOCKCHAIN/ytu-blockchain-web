@@ -2,7 +2,8 @@ import { CheckCircle2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
-import { SiteForm } from '@/components/site-form';
+// Başvuru formu geçici olarak kapalı; aşağıdaki blokla birlikte geri açılacak.
+// import { SiteForm } from '@/components/site-form';
 
 export function JoinHero() {
   const t = useTranslations('Join');
@@ -75,6 +76,10 @@ export function JoinApplication() {
           yeniliyor → mobilde dolgu 1px'e düşüyordu (masaüstünde `@4xl:p-12`
           zaten kazandığı için sorun görünmüyordu). */}
       <Container asGrid className="@4xl:grid-cols-2">
+        {/* Başvuru formu şimdilik kapalı: alım dönemi açılınca aşağıdaki blok
+            ve dosyanın başındaki `SiteForm` importu birlikte geri açılacak.
+            `Join.form.*` çeviri anahtarları da o gün için duruyor.
+
         <div data-grid-content className="@4xl:p-12 @max-4xl:p-6">
           <h2 className="text-foreground font-medium">{t('form.heading')}</h2>
           <p className="text-muted-foreground mb-8 mt-2 text-sm">
@@ -91,6 +96,20 @@ export function JoinApplication() {
             }}
             submitLabel={t('form.submit')}
           />
+        </div>
+
+        */}
+
+        {/* Formun yerini tutan mesaj. `min-h-64`: masaüstünde hücre zaten yan
+            sütunun boyuna uzuyor, bu taban yalnızca tek sütuna düşen mobilde
+            iş görüyor — yoksa yazı ince bir şeride sıkışıyordu. */}
+        <div
+          data-grid-content
+          className="@4xl:p-12 @max-4xl:p-6 flex min-h-64 items-center justify-center"
+        >
+          <p className="text-foreground text-balance text-center text-3xl font-semibold tracking-tight sm:text-4xl">
+            {t('soon')}
+          </p>
         </div>
 
         <div data-grid-content className="@4xl:p-12 @max-4xl:p-6">

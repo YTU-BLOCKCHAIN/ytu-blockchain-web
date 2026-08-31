@@ -9,9 +9,6 @@ import { Container } from '@/components/container';
 import { buttonClasses } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-/** Veri boşken çizilecek yer tutucu kare sayısı (sponsor slotları gibi). */
-const PLACEHOLDER_SLIDES = 3;
-
 /**
  * Karuselin çizmek için ihtiyaç duyduğu düz veri. Dile indirgeme ve Sanity
  * görsel adresi üretimi sunucu tarafında bitmiş oluyor (bkz.
@@ -39,18 +36,16 @@ export type HackathonSlide = {
  * İstemci bileşeni: kaydırma durumu (aktif kare, baştayız/sondayız) tarayıcıda
  * tutuluyor; metinler `NextIntlClientProvider` üzerinden geliyor. Veriyi
  * kendisi çekemeyeceği için props ile alıyor.
+ *
+ * En az bir kare olduğu varsayılır: liste boşken bölümü hiç çizmeme kararı
+ * veri katmanında veriliyor (bkz. `landing-hackathons.tsx`).
  */
-export function HackathonsCarousel({ items }: { items: HackathonSlide[] }) {
+export function HackathonsCarousel({
+  items: slides,
+}: {
+  items: HackathonSlide[];
+}) {
   const t = useTranslations('Landing.hackathons');
-
-  // Hiç kayıt yoksa bölümü gizlemek yerine yer tutucu kareler çiziliyor:
-  // bölüm ana sayfanın iskeletinde duruyor, "yakında" hissi veriyor.
-  const slides: HackathonSlide[] =
-    items.length > 0
-      ? items
-      : Array.from({ length: PLACEHOLDER_SLIDES }, (_, i) => ({
-          key: `placeholder-${i}`,
-        }));
 
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
