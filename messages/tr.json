@@ -85,7 +85,6 @@
     "subtitle": "Yıldız Teknik Üniversitesi Blockchain Kulübü; blockchain, DeFi, zero-knowledge ve açık kaynak teknolojileri üzerine öğrenen, üreten ve paylaşan bir öğrenci topluluğudur.",
     "cta": "Topluluğa Katıl",
     "ctaSecondary": "Projeler",
-    "announcement": "Ekip alımları başladı!",
     "features": {
       "heading": "Ne yapıyoruz",
       "intro": "Öğrenmekten üretmeye, kulüpte olan biten.",
@@ -329,12 +328,14 @@
       "announcements": "Duyurular",
       "hackathons": "Hackathonlar"
     },
-    "breadcrumb": "Blog"
+    "breadcrumb": "Blog",
+    "postedBy": "Yazan {name}"
   },
   "Join": {
     "eyebrow": "Üye Ol",
     "title": "Aramıza katıl",
-    "subtitle": "Deneyim aramıyoruz — merak yeterli. Başvurunu bırak, sana geri dönelim.",
+    "subtitle": "Deneyim aramıyoruz — merak yeterli.",
+    "soon": "Çok yakında sizlerleyiz...",
     "expectHeading": "Seni ne bekliyor?",
     "expect": {
       "learn": "Uygulamalı atölyeler ve birlikte öğrenme",

@@ -21,6 +21,25 @@ export function PostArticle({
   const date = formatPostDate(post.publishedAt, locale);
   const category = isPostCategory(post.category) ? post.category : null;
 
+  // Yazar künyesi — adı olmayan yazarda hiç basılmıyor, çünkü tek başına bir
+  // profil fotoğrafı kimin yazdığını söylemiyor.
+  const byline = post.author?.name ? (
+    <>
+      {post.author.avatar ? (
+        // Ad hemen yanında yazdığı için fotoğraf dekoratif — ekran okuyucuya
+        // aynı bilgiyi iki kez okutmuyoruz.
+        <Image
+          alt=""
+          src={imageUrl(post.author.avatar, 64, 64)}
+          width={32}
+          height={32}
+          className="ring-border-illustration bg-card size-6 shrink-0 rounded-full object-cover ring-1"
+        />
+      ) : null}
+      <span>{t('postedBy', { name: post.author.name })}</span>
+    </>
+  ) : null;
+
   return (
     <article>
       <Container asGrid>
@@ -68,39 +87,19 @@ export function PostArticle({
               </div>
             ) : null}
 
-            {/* Yazar solda, tarih sağda, altında ince ayraç — gövdeyi
-                künyeden ayırıyor. */}
-            <div className="mt-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b pb-6">
-              <div className="flex items-center gap-2">
-                {post.author?.avatar ? (
-                  <div className="ring-border-illustration bg-card aspect-square size-6 overflow-hidden rounded-md border border-transparent shadow-md shadow-black/15 ring-1">
-                    {/* Adı hemen yanında yazdığı için fotoğraf dekoratif —
-                        ekran okuyucuya aynı bilgiyi iki kez okutmuyoruz. */}
-                    <Image
-                      alt=""
-                      src={imageUrl(post.author.avatar, 48, 48)}
-                      width={24}
-                      height={24}
-                      className="size-full object-cover"
-                    />
-                  </div>
-                ) : null}
-                {post.author?.name ? (
-                  <span className="text-foreground text-sm font-medium">
-                    {post.author.name}
-                  </span>
-                ) : null}
-              </div>
-
-              {date ? (
+            {/* Künye yalnız tarih: yazar satırı yazının altına, okuma
+                bittiği yere alındı. Altındaki ince ayraç gövdeyi başlıktan
+                ayırıyor. */}
+            {date ? (
+              <div className="mt-8 border-b pb-6 text-center">
                 <time
                   dateTime={post.publishedAt ?? undefined}
                   className="text-muted-foreground text-sm"
                 >
                   {date}
                 </time>
-              ) : null}
-            </div>
+              </div>
+            ) : null}
 
             {/* Özet giriş paragrafı olarak: gövdeden bir tık büyük, yazının ne
                 anlattığını okumaya başlamadan veriyor. */}
@@ -111,6 +110,27 @@ export function PostArticle({
             ) : null}
 
             {post.body ? <PostBody value={post.body} /> : null}
+
+            {byline ? (
+              <footer className="mt-12 border-t pt-6">
+                {/* Bağlantı varsa satırın tamamı tıklanabilir: fotoğraf ve ad
+                    tek hedef, küçük yuvarlağı ayrıca nişan almak gerekmiyor. */}
+                {post.author?.url ? (
+                  <a
+                    href={post.author.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm duration-150"
+                  >
+                    {byline}
+                  </a>
+                ) : (
+                  <span className="text-muted-foreground inline-flex items-center gap-2 text-sm">
+                    {byline}
+                  </span>
+                )}
+              </footer>
+            ) : null}
           </div>
         </div>
       </Container>

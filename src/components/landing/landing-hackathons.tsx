@@ -14,10 +14,16 @@ import { type HackathonSlide, HackathonsCarousel } from './hackathons-carousel';
  *
  * Dil burada indirgeniyor: kayıtlar iki dili birden taşıyor (alan seviyesinde
  * çeviri), karusele tek dilin metni iniyor.
+ *
+ * Studio'da hiç hackathon yoksa bölüm hiç çizilmez (`LandingPosts` ile aynı
+ * davranış): ana sayfada boş bir kutu kalmaz, ilk kayıt eklendiğinde bölüm
+ * kendiliğinden görünür olur.
  */
 export async function LandingHackathons() {
-  const locale = await getLocale();
   const hackathons = await getHackathons();
+  if (hackathons.length === 0) return null;
+
+  const locale = await getLocale();
 
   const items: HackathonSlide[] = hackathons.map((hackathon) => ({
     key: hackathon._id,
