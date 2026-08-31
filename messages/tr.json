@@ -329,7 +329,8 @@
       "announcements": "Duyurular",
       "hackathons": "Hackathonlar"
     },
-    "breadcrumb": "Blog"
+    "breadcrumb": "Blog",
+    "postedBy": "Yazan {name}"
   },
   "Join": {
     "eyebrow": "Üye Ol",

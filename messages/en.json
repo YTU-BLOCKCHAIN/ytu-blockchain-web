@@ -329,7 +329,8 @@
       "announcements": "Announcements",
       "hackathons": "Hackathons"
     },
-    "breadcrumb": "Blog"
+    "breadcrumb": "Blog",
+    "postedBy": "Posted by {name}"
   },
   "Join": {
     "eyebrow": "Join",
