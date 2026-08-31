@@ -247,9 +247,6 @@ export function LandingCta() {
               <h2 className="text-foreground text-balance text-2xl font-semibold sm:text-3xl">
                 {t('heading')}
               </h2>
-              <p className="text-muted-foreground max-w-xl text-balance">
-                {t('body')}
-              </p>
               <ButtonLink href="/join" withArrow>
                 {t('button')}
               </ButtonLink>
