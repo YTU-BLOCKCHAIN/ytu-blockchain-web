@@ -6,23 +6,14 @@
   },
   "links": [
     {
-      "label": "Ana Ekip Başvurusu",
-      "url": "https://forms.gle/vseEKHb6QQhdMA1u6",
+      "label": "Bize Katıl",
+      "url": "https://forms.gle/i4SwuLnFhFcEEGQP9",
       "note": "Başvurular açık",
       "featured": true
     },
     {
       "label": "Web Sitemiz",
       "url": "/tr"
-    },
-    {
-      "label": "Medium'da Yazılarımız",
-      "url": "https://medium.com/ytublockchain"
-    },
-    {
-      "label": "Podcast'imiz",
-      "url": "https://open.spotify.com/show/5bA9wkC2zxASZCOKzu5EOX",
-      "note": "Spotify'da dinle"
     },
     {
       "label": "Projelerimiz",
@@ -36,6 +27,15 @@
       "label": "Sponsorluk Görüşmesi",
       "url": "https://cal.com/ytublockchain",
       "note": "Takvimden randevu al"
+    },
+    {
+      "label": "Medium'da Yazılarımız",
+      "url": "https://medium.com/ytublockchain"
+    },
+    {
+      "label": "Podcast'imiz",
+      "url": "https://open.spotify.com/show/5bA9wkC2zxASZCOKzu5EOX",
+      "note": "Spotify'da dinle"
     }
   ]
 }
