@@ -103,13 +103,21 @@ export const metadata: Metadata = {
 };
 
 /**
- * Ekranda görünen satırlar: önce içerik bağlantıları, sonra sosyal hesaplar.
+ * Sosyal hesaplar "Web Sitemiz" (`/tr`) satırının hemen altına girer; o satır
+ * içerik dosyasından kaldırılırsa listenin sonuna düşer.
+ */
+const socialsAt =
+  links.findIndex((link) => link.url === '/tr') + 1 || links.length;
+
+/**
+ * Ekranda görünen satırlar: içerik bağlantıları, araya sosyal hesaplar.
  * İkon eşleşmesi adresten türetildiği ve iki liste de sabit olduğu için render
  * sırasında değil, modül yüklenirken bir kez hesaplanıyor.
  */
 const rows: { link: LinkItem; LeadingIcon: RowIcon }[] = [
-  ...links,
+  ...links.slice(0, socialsAt),
   ...socialLinks,
+  ...links.slice(socialsAt),
 ].map((link) => ({ link, LeadingIcon: iconForLink(link) }));
 
 /** Listenin tek satırı — içerik bağlantıları ve sosyal hesaplar aynı kart. */
