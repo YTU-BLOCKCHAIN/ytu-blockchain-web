@@ -9,7 +9,7 @@
  * - `outline`: soyma için kenar noktaları (dünya biriminde).
  *
  * Kulüp logosu `/logo/mark.svg`'den çizilir. Diğerleri
- * `scripts/build-stickers.mjs`'in beyaz kenar eklediği görsellerdir; onlarda
+ * `scripts/build-stickers.mjs`'in kırpıp boyutladığı görsellerdir; onlarda
  * lacivert logo alanları sim + holo, geri kalanı ince bir film parlaklığı
  * alır.
  */
@@ -33,7 +33,6 @@ export type StickerAsset = {
   dispose(): void;
 };
 
-const PAPER = '#f6f6f3';
 const GRID = 96; // kenar/doluluk ızgarasının uzun kenardaki hücre sayısı
 
 function loadImage(src: string) {
@@ -91,9 +90,8 @@ function texture(c: HTMLCanvasElement) {
 
 function drawLogo(logo: HTMLImageElement) {
   const TEX = 1024;
-  const R_CUT = 500; // die-cut kenarı (beyaz vinil)
-  const R_DISK = 452; // simli lacivert zemin
-  const LOGO = 820; // logo kutusunun kenarı
+  const R_DISK = 500; // simli lacivert zemin (sticker'ın kendisi)
+  const LOGO = 900; // logo kutusunun kenarı
 
   const tinted = (color: string) => {
     const c = canvas(TEX, TEX);
@@ -113,8 +111,6 @@ function drawLogo(logo: HTMLImageElement) {
 
   const map = canvas(TEX, TEX);
   const m = ctx2d(map);
-  m.fillStyle = PAPER;
-  circle(m, R_CUT);
   const g = m.createRadialGradient(
     TEX * 0.4,
     TEX * 0.35,
@@ -188,7 +184,7 @@ function drawImageSticker(img: HTMLImageElement) {
       fxData[o + 1] = 70;
       fxData[o + 2] = 255;
     } else if (!(min > 236 && Math.max(r, g, b) - min < 10)) {
-      // Baskı (kenardaki beyaz vinil hariç): hafif film parlaklığı
+      // Baskı (düz beyaz alanlar hariç): hafif film parlaklığı
       fxData[o] = 26;
     }
   }
