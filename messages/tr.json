@@ -135,6 +135,13 @@
     "callToAction": {
       "heading": "Merakın mı var? Aramıza katıl.",
       "button": "Bize Katıl"
+    },
+    "sticker": {
+      "hint": "Kenarından tutup soy, ortasından çevir.",
+      "label": "YTU Blockchain stickerları",
+      "previous": "Önceki sticker",
+      "next": "Sonraki sticker",
+      "slideLabel": "{index}. sticker"
     }
   },
   "About": {
