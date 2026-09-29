@@ -14,6 +14,7 @@ import type { ComponentType } from 'react';
 import {
   GithubIcon,
   InstagramIcon,
+  WhatsappIcon,
   XIcon,
 } from '@/components/community/brand-icons';
 import { Logo } from '@/components/logo';
@@ -45,6 +46,7 @@ function iconForLink(link: LinkItem): RowIcon {
     if (url.includes('medium.com')) return BookText;
     if (url.includes('spotify.com')) return Podcast;
     if (url.includes('instagram.com')) return InstagramIcon;
+    if (url.includes('whatsapp.com')) return WhatsappIcon;
     // `//x.com` (yalnız "x.com" değil): adres hep `https://` ile başladığı için
     // bu kalıp host'u yakalar, içinde "x.com" geçen başka adreslere uymaz.
     if (url.includes('//x.com') || url.includes('twitter.com')) return XIcon;
@@ -103,11 +105,12 @@ export const metadata: Metadata = {
 };
 
 /**
- * Sosyal hesaplar "Web Sitemiz" (`/tr`) satırının hemen altına girer; o satır
- * içerik dosyasından kaldırılırsa listenin sonuna düşer.
+ * Sosyal hesaplar "Projelerimiz" (`/tr/projects`) satırının hemen üstüne girer
+ * (yani "Web Sitemiz" ve WhatsApp topluluğunun altına); o satır içerik
+ * dosyasından kaldırılırsa listenin sonuna düşer.
  */
-const socialsAt =
-  links.findIndex((link) => link.url === '/tr') + 1 || links.length;
+const projectsAt = links.findIndex((link) => link.url === '/tr/projects');
+const socialsAt = projectsAt === -1 ? links.length : projectsAt;
 
 /**
  * Ekranda görünen satırlar: içerik bağlantıları, araya sosyal hesaplar.
