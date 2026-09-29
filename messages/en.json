@@ -135,6 +135,13 @@
     "callToAction": {
       "heading": "Curious? Come join us.",
       "button": "Join us"
+    },
+    "sticker": {
+      "hint": "Peel it from the edge, spin it from the middle.",
+      "label": "YTU Blockchain stickers",
+      "previous": "Previous sticker",
+      "next": "Next sticker",
+      "slideLabel": "Sticker {index}"
     }
   },
   "About": {
