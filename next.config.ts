@@ -26,14 +26,20 @@ const nextConfig: NextConfig = {
     ],
   },
   // Config yönlendirmeleri proxy'den (next-intl) önce çalışır, bu yüzden
-  // `/logos` dil ön eki almadan doğrudan hedefe gider. `permanent: false`:
-  // Drive klasörü değişirse tarayıcı önbelleği eski adreste takılı kalmasın.
+  // `/logos` ve `/roadmap` dil ön eki almadan doğrudan hedefe gider.
+  // `permanent: false`: hedef adres değişirse tarayıcı önbelleği eski adreste
+  // takılı kalmasın.
   async redirects() {
     return [
       {
         source: '/logos',
         destination:
           'https://drive.google.com/drive/folders/1E81tW2cuuCLdr59PWBD17ytId2NQINer',
+        permanent: false,
+      },
+      {
+        source: '/roadmap',
+        destination: 'https://ytu-blockchain.notion.site/',
         permanent: false,
       },
     ];
