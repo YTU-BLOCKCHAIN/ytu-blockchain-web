@@ -9,7 +9,7 @@ import {
   Podcast,
   UserPlus,
 } from 'lucide-react';
-import type { ComponentType } from 'react';
+import type { ComponentType, SVGProps } from 'react';
 
 import {
   GithubIcon,
@@ -31,33 +31,67 @@ const { profile, links } = linksContent;
 type RowIcon = ComponentType<{ className?: string }>;
 
 /**
+ * Dolu harita ikonu (Heroicons 24/solid "map", MIT). Yol haritası satırı için;
+ * lucide'ın çizgi ikonları arasında dolu olarak öne çıksın diye.
+ */
+function MapFilledIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M8.161 2.58a1.875 1.875 0 0 1 1.678 0l4.993 2.498c.106.052.23.052.336 0l3.869-1.935A1.875 1.875 0 0 1 21.75 4.82v12.485c0 .71-.401 1.36-1.037 1.677l-4.875 2.437a1.875 1.875 0 0 1-1.676 0l-4.994-2.497a.375.375 0 0 0-.336 0l-3.868 1.935A1.875 1.875 0 0 1 2.25 19.18V6.695c0-.71.401-1.36 1.036-1.677l4.875-2.437ZM9 6a.75.75 0 0 1 .75.75V15a.75.75 0 0 1-1.5 0V6.75A.75.75 0 0 1 9 6Zm6.75 3a.75.75 0 0 0-1.5 0v8.25a.75.75 0 0 0 1.5 0V9Z"
+      />
+    </svg>
+  );
+}
+
+/**
+ * Satırın ikonu ve rengi. Marka kanalları markanın kendi rengini taşır;
+ * siyah/beyaz markalar (X, GitHub) koyu zeminde beyaz kalır. Sayfa
+ * hep koyu olduğu için tonlar tek değer.
+ */
+type RowIconSpec = { Icon: RowIcon; tone: string };
+
+/**
  * Her bağlantıya kanalını anlatan bir ikon. Eşleşme adresten türetilir; içerik
  * dosyasına ekstra bir alan gerekmez. Bilinmeyen adres nötr `Globe`'a düşer.
  */
-function iconForLink(link: LinkItem): RowIcon {
+function iconForLink(link: LinkItem): RowIconSpec {
   const url = link.url.toLowerCase();
 
   if (link.external) {
-    if (url.includes('cal.com')) return CalendarClock;
+    if (url.includes('cal.com'))
+      return { Icon: CalendarClock, tone: 'text-violet-400' };
     // Başvuru formu dışarıda (Google Forms) barınıyor ama satır hâlâ bir
     // başvuru satırı: ikon `/join` sayfasınınkiyle aynı kalsın.
     if (url.includes('forms.gle') || url.includes('docs.google.com/forms'))
-      return UserPlus;
-    if (url.includes('medium.com')) return BookText;
-    if (url.includes('spotify.com')) return Podcast;
-    if (url.includes('instagram.com')) return InstagramIcon;
-    if (url.includes('whatsapp.com')) return WhatsappIcon;
+      return { Icon: UserPlus, tone: 'text-primary' };
+    if (url.includes('notion.site'))
+      return { Icon: MapFilledIcon, tone: 'text-amber-400' };
+    if (url.includes('medium.com'))
+      return { Icon: BookText, tone: 'text-emerald-400' };
+    if (url.includes('spotify.com'))
+      return { Icon: Podcast, tone: 'text-[#1DB954]' };
+    if (url.includes('instagram.com'))
+      return { Icon: InstagramIcon, tone: 'text-[#E4405F]' };
+    if (url.includes('whatsapp.com'))
+      return { Icon: WhatsappIcon, tone: 'text-[#25D366]' };
     // `//x.com` (yalnız "x.com" değil): adres hep `https://` ile başladığı için
     // bu kalıp host'u yakalar, içinde "x.com" geçen başka adreslere uymaz.
-    if (url.includes('//x.com') || url.includes('twitter.com')) return XIcon;
-    if (url.includes('github.com')) return GithubIcon;
-    return Globe;
+    if (url.includes('//x.com') || url.includes('twitter.com'))
+      return { Icon: XIcon, tone: 'text-foreground' };
+    if (url.includes('github.com'))
+      return { Icon: GithubIcon, tone: 'text-foreground' };
+    return { Icon: Globe, tone: 'text-sky-400' };
   }
 
-  if (url.includes('/join')) return UserPlus;
-  if (url.includes('/projects')) return FolderGit2;
-  if (url.includes('/contact')) return Mail;
-  return Globe; // "Web Sitemiz" (/tr) ve tanımsız iç sayfalar
+  if (url.includes('/join')) return { Icon: UserPlus, tone: 'text-primary' };
+  if (url.includes('/projects'))
+    return { Icon: FolderGit2, tone: 'text-orange-400' };
+  if (url.includes('/contact')) return { Icon: Mail, tone: 'text-rose-400' };
+  // "Web Sitemiz" (/tr) ve tanımsız iç sayfalar
+  return { Icon: Globe, tone: 'text-sky-400' };
 }
 
 /** "https://x.com/BlockchainYtu" → "@BlockchainYtu". */
@@ -117,14 +151,17 @@ const socialsAt = projectsAt === -1 ? links.length : projectsAt;
  * İkon eşleşmesi adresten türetildiği ve iki liste de sabit olduğu için render
  * sırasında değil, modül yüklenirken bir kez hesaplanıyor.
  */
-const rows: { link: LinkItem; LeadingIcon: RowIcon }[] = [
+const rows: { link: LinkItem; LeadingIcon: RowIcon; tone: string }[] = [
   ...links.slice(0, socialsAt),
   ...socialLinks,
   ...links.slice(socialsAt),
-].map((link) => ({ link, LeadingIcon: iconForLink(link) }));
+].map((link) => {
+  const { Icon, tone } = iconForLink(link);
+  return { link, LeadingIcon: Icon, tone };
+});
 
 /** Listenin tek satırı — içerik bağlantıları ve sosyal hesaplar aynı kart. */
-function LinkRow({ link, LeadingIcon }: (typeof rows)[number]) {
+function LinkRow({ link, LeadingIcon, tone }: (typeof rows)[number]) {
   return (
     <a
       href={link.url}
@@ -141,13 +178,12 @@ function LinkRow({ link, LeadingIcon }: (typeof rows)[number]) {
       )}
     >
       <span className="flex min-w-0 items-center gap-3.5">
-        {/* Kanal ikonu: satırı taranabilir kılar, adresten türetilir. */}
+        {/* Kanal ikonu: satırı taranabilir kılar, adresten türetilir. Renk
+            kanalın kendisi; öne çıkan (ters renkli) kartta zemine uyar. */}
         <LeadingIcon
           className={cn(
             'size-5 shrink-0',
-            link.featured
-              ? 'text-background'
-              : 'text-muted-foreground group-hover:text-foreground',
+            link.featured ? 'text-background' : tone,
           )}
         />
         <span className="flex min-w-0 flex-col gap-0.5">
