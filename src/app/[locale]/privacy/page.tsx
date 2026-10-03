@@ -17,6 +17,8 @@ export async function generateMetadata({
     pathname: '/privacy',
     title: t('privacy.title'),
     description: t('privacy.description'),
+    // Sayfanın başlıklı kartı — bu segmentteki `opengraph-image.tsx`.
+    ogImagePath: `/${locale}/privacy/opengraph-image`,
   });
 }
 

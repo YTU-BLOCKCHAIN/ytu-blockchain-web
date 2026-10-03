@@ -20,6 +20,8 @@ export async function generateMetadata({
     pathname: '/projects',
     title: t('projects.title'),
     description: t('projects.description'),
+    // Sayfanın başlıklı kartı — bu segmentteki `opengraph-image.tsx`.
+    ogImagePath: `/${locale}/projects/opengraph-image`,
   });
 }
 

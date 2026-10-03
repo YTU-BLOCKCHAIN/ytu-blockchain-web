@@ -17,6 +17,8 @@ export async function generateMetadata({
     pathname: '/join',
     title: t('join.title'),
     description: t('join.description'),
+    // Sayfanın başlıklı kartı — bu segmentteki `opengraph-image.tsx`.
+    ogImagePath: `/${locale}/join/opengraph-image`,
   });
 }
 

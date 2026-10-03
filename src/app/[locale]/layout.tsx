@@ -71,26 +71,41 @@ export default async function LocaleLayout({
         {/* Kulübün makine okunur kimlik kartı (schema.org / JSON-LD). Arama
             motorları adı, logoyu ve resmî hesapları buradan okur; sitenin
             hangi kurumun olduğunu metinden tahmin etmeye çalışmazlar.
-            `@id` sabit: başka sayfalardan bu kimliğe referans verilebilsin.
-            Değerler `siteConfig`ten geliyor — ikinci bir kopya eskirdi. */}
+            `@id` sabit: başka sayfalardan bu kimliğe referans verilebilsin
+            (blog yazılarındaki `BlogPosting.publisher` buna bağlanıyor).
+            `WebSite` siteyi kurumdan ayrı bir varlık olarak tanıtır — adı ve
+            yayıncısı buradan okunur. Değerler `siteConfig`ten geliyor —
+            ikinci bir kopya eskirdi. */}
         <script
           type="application/ld+json"
           // Kaynak sabit ve bizim; kullanıcı girdisi yok.
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'Organization',
-              '@id': `${siteConfig.url}/#organization`,
-              name: siteConfig.name,
-              alternateName: t('defaultTitle'),
-              url: siteConfig.url,
-              logo: `${siteConfig.url}/logo/mark.svg`,
-              email: siteConfig.contactEmail,
-              parentOrganization: {
-                '@type': 'CollegeOrUniversity',
-                name: 'Yıldız Teknik Üniversitesi',
-              },
-              sameAs: Object.values(siteConfig.social),
+              '@graph': [
+                {
+                  '@type': 'Organization',
+                  '@id': `${siteConfig.url}/#organization`,
+                  name: siteConfig.name,
+                  alternateName: t('defaultTitle'),
+                  url: siteConfig.url,
+                  logo: `${siteConfig.url}/logo/mark.svg`,
+                  email: siteConfig.contactEmail,
+                  parentOrganization: {
+                    '@type': 'CollegeOrUniversity',
+                    name: 'Yıldız Teknik Üniversitesi',
+                  },
+                  sameAs: Object.values(siteConfig.social),
+                },
+                {
+                  '@type': 'WebSite',
+                  '@id': `${siteConfig.url}/#website`,
+                  name: siteConfig.name,
+                  url: siteConfig.url,
+                  inLanguage: locale,
+                  publisher: { '@id': `${siteConfig.url}/#organization` },
+                },
+              ],
             }),
           }}
         />
