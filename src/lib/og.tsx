@@ -160,6 +160,103 @@ function GridLines() {
 }
 
 /**
+ * Hairline kesişimlerine düşen dört `+` işareti — sitedeki ızgara estetiğinin
+ * "teknik çizim" vurgusu. Font glifi yerine iki ince çubukla çiziliyor:
+ * piksel fontta `+` kaba kalıyor, çubuklarla kesişimin tam üstüne oturuyor.
+ */
+function CornerTicks() {
+  const points = [
+    { x: PAD, y: 72 },
+    { x: size.width - PAD, y: 72 },
+    { x: PAD, y: size.height - 72 },
+    { x: size.width - PAD, y: size.height - 72 },
+  ];
+  const TICK = 'rgba(255,255,255,0.32)';
+
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: size.width,
+        height: size.height,
+        display: 'flex',
+      }}
+    >
+      {points.flatMap(({ x, y }) => [
+        <div
+          key={`h${x}${y}`}
+          style={{
+            position: 'absolute',
+            left: x - 8,
+            top: y,
+            width: 17,
+            height: 1,
+            background: TICK,
+          }}
+        />,
+        <div
+          key={`v${x}${y}`}
+          style={{
+            position: 'absolute',
+            left: x,
+            top: y - 8,
+            width: 1,
+            height: 17,
+            background: TICK,
+          }}
+        />,
+      ])}
+    </div>
+  );
+}
+
+/**
+ * Hafif mavi radyal parıltı — kart düz siyah kalmasın diye tek ışık kaynağı.
+ * Renk ham signal (#0e6cff); düşük alfa ile zemine karışıyor, metin kontrastını
+ * etkilemiyor.
+ */
+function Glow({ at }: { at: string }) {
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: size.width,
+        height: size.height,
+        backgroundImage: `radial-gradient(circle at ${at}, rgba(14,108,255,0.24), rgba(14,108,255,0) 62%)`,
+      }}
+    />
+  );
+}
+
+/**
+ * Sağ kenardan taşan dev hayalet amblem. Başlık kartının sağ yarısı boş
+ * kalıyordu; filigran o alanı marka dokusuyla dolduruyor ama %6 opaklıkta
+ * kalarak başlıkla yarışmıyor. Taşan kısım `shell`deki `overflow: hidden`
+ * ile kırpılıyor.
+ */
+function Watermark({ mark }: { mark: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={mark}
+      width={680}
+      height={680}
+      alt=""
+      style={{
+        position: 'absolute',
+        right: -170,
+        top: -25,
+        opacity: 0.06,
+      }}
+    />
+  );
+}
+
+/**
  * "YTU BLOCKCHAIN" kilidi. Oranlar `Logo` bileşeninden birebir: amblem 28,
  * boşluk 8, YTU 31×16, boşluk 6, BLOCKCHAIN 104×16 — hepsi `k` ile ölçekleniyor,
  * böylece iki varyantta da aynı kilit farklı boyutlarda çıkıyor.
@@ -201,9 +298,11 @@ async function shell(children: React.ReactElement) {
         background: BG,
         fontFamily: 'Geist',
         position: 'relative',
+        overflow: 'hidden',
       }}
     >
       <GridLines />
+      <CornerTicks />
       {children}
     </div>,
     { ...size, fonts },
@@ -224,21 +323,51 @@ export async function brandCard() {
     <div
       style={{
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
         width: '100%',
         height: '100%',
-        gap: 44,
+        position: 'relative',
       }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={mark} width={150} height={150} alt="" />
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6 * k }}>
+      {/* Işık amblemin hemen arkasında: kilit zeminden hafifçe ayrılıyor. */}
+      <Glow at="50% 38%" />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+          gap: 44,
+        }}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={ytu} width={31 * k} height={16 * k} alt="" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={blockchain} width={104 * k} height={16 * k} alt="" />
+        <img src={mark} width={150} height={150} alt="" />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 * k }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={ytu} width={31 * k} height={16 * k} alt="" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={blockchain} width={104 * k} height={16 * k} alt="" />
+        </div>
+      </div>
+      {/* Alan adı alt hairline bandının ortasında — çerçevenin parçası gibi. */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: size.width,
+          height: 72,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontFamily: 'EAS VHS TR',
+          fontSize: 17,
+          letterSpacing: 4,
+          color: MUTE,
+        }}
+      >
+        {siteConfig.url.replace(/^https?:\/\//, '').toUpperCase()}
       </div>
     </div>,
   );
@@ -258,10 +387,10 @@ export async function titleCard({
 }) {
   const { mark, ytu, blockchain } = await loadLogo();
 
-  // Uzun başlık kartı taşırmasın: satır yüksekliğiyle birlikte üç satır sığıyor,
-  // fazlası kırpılıyor. Kesme kelime ortasından olmasın diye sondaki yarım
-  // kelime atılıyor.
-  const MAX = 68;
+  // Uzun başlık kartı taşırmasın: 72px'te satıra ~21 karakter giriyor, üç
+  // satırdan fazlası kilitle çakışır. Kesme kelime ortasından olmasın diye
+  // sondaki yarım kelime atılıyor.
+  const MAX = 60;
   const clipped =
     title.length > MAX
       ? `${title.slice(0, MAX).replace(/\s+\S*$/, '')}…`
@@ -271,39 +400,69 @@ export async function titleCard({
     <div
       style={{
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
         width: '100%',
         height: '100%',
-        padding: `110px ${PAD}px 96px`,
+        position: 'relative',
       }}
     >
-      <Lockup k={1.7} mark={mark} ytu={ytu} blockchain={blockchain} />
+      <Watermark mark={mark} />
+      {/* Işık başlık bloğunun arkasından vuruyor — sol alt köşe. */}
+      <Glow at="12% 88%" />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          width: '100%',
+          height: '100%',
+          padding: `110px ${PAD}px 100px`,
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Lockup k={1.7} mark={mark} ytu={ytu} blockchain={blockchain} />
+          {/* Alan adı başlığın altından sağ üste taşındı: alt blok yalnızca
+              etiket + başlık, köşeler de dengede. */}
+          <div
+            style={{
+              fontFamily: 'EAS VHS TR',
+              fontSize: 17,
+              letterSpacing: 4,
+              color: MUTE,
+            }}
+          >
+            {siteConfig.url.replace(/^https?:\/\//, '').toUpperCase()}
+          </div>
+        </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-        <div
-          style={{
-            fontFamily: 'EAS VHS TR',
-            fontSize: 20,
-            letterSpacing: 3,
-            color: BLUE,
-          }}
-        >
-          {`// ${eyebrow}`}
-        </div>
-        <div
-          style={{
-            fontSize: 64,
-            fontWeight: 600,
-            letterSpacing: -1.5,
-            color: FG,
-            lineHeight: 1.15,
-          }}
-        >
-          {clipped}
-        </div>
-        <div style={{ fontSize: 24, color: MUTE }}>
-          {siteConfig.url.replace(/^https?:\/\//, '')}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div
+            style={{
+              fontFamily: 'EAS VHS TR',
+              fontSize: 22,
+              letterSpacing: 3,
+              color: BLUE,
+            }}
+          >
+            {`// ${eyebrow}`}
+          </div>
+          <div
+            style={{
+              fontSize: 72,
+              fontWeight: 600,
+              letterSpacing: -2,
+              color: FG,
+              lineHeight: 1.12,
+              maxWidth: 940,
+            }}
+          >
+            {clipped}
+          </div>
         </div>
       </div>
     </div>,
