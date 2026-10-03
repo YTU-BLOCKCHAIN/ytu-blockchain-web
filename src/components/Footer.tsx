@@ -107,7 +107,7 @@ export default function Footer() {
           >
             <div className="text-muted-foreground flex flex-col gap-1 text-sm">
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                <span>{t('rights')}</span>
+                <span>{t('rights', { year: new Date().getFullYear() })}</span>
                 <Link
                   href="/privacy"
                   className="hover:text-primary duration-150"
