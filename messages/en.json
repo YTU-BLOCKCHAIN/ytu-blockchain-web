@@ -65,7 +65,7 @@
     },
     "blog": {
       "title": "Blog",
-      "description": "Event announcements, club news and writing on blockchain from YTU Blockchain Club."
+      "description": "Event announcements, club news and writing on blockchain from YTÜ Blockchain Club."
     },
     "contact": {
       "title": "Contact",
@@ -138,7 +138,7 @@
     },
     "sticker": {
       "hint": "Peel it from the edge, spin it from the middle.",
-      "label": "YTU Blockchain stickers",
+      "label": "YTÜ Blockchain stickers",
       "previous": "Previous sticker",
       "next": "Next sticker",
       "slideLabel": "Sticker {index}"
