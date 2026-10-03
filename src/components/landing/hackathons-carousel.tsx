@@ -16,9 +16,13 @@ import { cn } from '@/lib/utils';
  */
 export type HackathonSlide = {
   key: string;
-  event?: string;
+  /* `event` ve `year` zorunlu: şema ikisini de zorunlu kılıyor ve veri katmanı
+     eksik kaydı zaten eliyor (bkz. `landing-hackathons.tsx`). Tipte isteğe
+     bağlı tutmak, karşılığı olmayan "yer tutucu başlık" dallarını canlı
+     tutuyordu — kart artık ya gerçek veriyle çiziliyor ya da hiç çizilmiyor. */
+  event: string;
+  year: number;
   award?: string;
-  year?: number;
   detail?: string;
   image?: string;
   url?: string;
@@ -198,34 +202,28 @@ export function HackathonsCarousel({
                       {slide.image ? (
                         <Image
                           src={slide.image}
-                          alt={
-                            slide.event
-                              ? `${slide.event}${slide.award ? ` — ${slide.award}` : ''}`
-                              : ''
-                          }
+                          alt={`${slide.event}${slide.award ? ` — ${slide.award}` : ''}`}
                           fill
                           sizes="(max-width: 672px) 100vw, 55vw"
                           className="object-cover"
                         />
                       ) : (
-                        <div className="text-muted-foreground/60 absolute inset-0 flex flex-col items-center justify-center gap-3">
+                        /* Görseli olmayan kare: yalnızca kupa ikonu. Eskiden
+                           altında "görsel buraya" yazıyordu — yayındaki bir
+                           bölümü yarım bırakılmış gibi gösteriyordu. */
+                        <div className="text-muted-foreground/60 absolute inset-0 flex items-center justify-center">
                           <Trophy className="size-8" />
-                          <span className="font-display text-xs tracking-widest uppercase">
-                            {t('placeholder')}
-                          </span>
                         </div>
                       )}
                     </div>
 
                     <div className="@4xl:p-12 flex flex-1 flex-col justify-center gap-4 p-6">
                       <span className="text-primary font-display text-xs tracking-widest uppercase">
-                        {slide.year
-                          ? `${'//'} ${slide.year}`
-                          : `${'//'} hackathon`}
+                        {`${'//'} ${slide.year}`}
                       </span>
 
                       <h3 className="text-foreground text-balance text-2xl font-semibold">
-                        {slide.event ?? t('placeholderTitle')}
+                        {slide.event}
                       </h3>
 
                       {/* Derece rozeti. Metin rengi `text-primary` DEĞİL: rozet
@@ -241,9 +239,11 @@ export function HackathonsCarousel({
                         </span>
                       )}
 
-                      <p className="text-muted-foreground leading-relaxed">
-                        {slide.detail ?? t('placeholderNote')}
-                      </p>
+                      {slide.detail && (
+                        <p className="text-muted-foreground leading-relaxed">
+                          {slide.detail}
+                        </p>
+                      )}
 
                       {slide.url && (
                         <a

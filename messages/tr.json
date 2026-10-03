@@ -116,10 +116,7 @@
       "previous": "Önceki kare",
       "next": "Sonraki kare",
       "slideLabel": "{index}. kareye git",
-      "link": "Haberi oku",
-      "placeholder": "görsel buraya",
-      "placeholderTitle": "Hackathon kareleri yolda",
-      "placeholderNote": "Kazandığımız hackathon'lardan fotoğraflar ve derecelerimiz buraya gelecek."
+      "link": "Haberi oku"
     },
     "sponsors": {
       "heading": "Sponsorlar & Partnerler",
