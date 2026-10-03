@@ -7,6 +7,10 @@
     "blog": "Blog",
     "contact": "İletişim",
     "join": "Bize Katıl",
+    "homeLabel": "YTÜ Blockchain — anasayfa",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "skipToContent": "İçeriğe geç",
     "sections": {
       "about": {
         "mission": "Misyonumuz",

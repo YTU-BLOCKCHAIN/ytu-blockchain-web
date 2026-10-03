@@ -143,14 +143,18 @@ export default function Header() {
           <Container className="backdrop-blur">
             <div className="relative flex flex-wrap items-center justify-between px-6 lg:px-12 lg:py-5">
               <div className="z-51 relative flex justify-between gap-8 max-lg:h-14 max-lg:w-full">
-                <Link href="/" aria-label="home" className="flex items-center">
+                <Link
+                  href="/"
+                  aria-label={t('homeLabel')}
+                  className="flex items-center"
+                >
                   <Logo />
                 </Link>
 
                 <button
                   type="button"
                   onClick={() => setIsMobileMenuOpen((v) => !v)}
-                  aria-label={isMobileMenuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+                  aria-label={isMobileMenuOpen ? t('closeMenu') : t('openMenu')}
                   aria-expanded={isMobileMenuOpen}
                   className="text-foreground relative z-20 -m-2.5 -mr-3 block cursor-pointer p-2.5 lg:hidden"
                 >

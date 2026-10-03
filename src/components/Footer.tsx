@@ -47,7 +47,11 @@ export default function Footer() {
             görünüyordu. @4xl (masaüstü) düzeni değişmedi. */}
         <div className="@4xl:grid-cols-4 grid grid-cols-2 gap-px">
           <div data-grid-content className="col-span-2 space-y-6 p-6 lg:p-12">
-            <Link href="/" aria-label="home" className="block size-fit">
+            <Link
+              href="/"
+              aria-label={tNav('homeLabel')}
+              className="block size-fit"
+            >
               <Logo />
             </Link>
             <p className="text-muted-foreground text-balance">{t('tagline')}</p>

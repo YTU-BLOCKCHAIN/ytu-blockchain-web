@@ -7,6 +7,10 @@
     "blog": "Blog",
     "contact": "Contact",
     "join": "Join us",
+    "homeLabel": "YTÜ Blockchain — home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to content",
     "sections": {
       "about": {
         "mission": "Mission",
