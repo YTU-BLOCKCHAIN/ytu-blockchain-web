@@ -200,7 +200,15 @@ export function BlogList({
   return (
     <>
       <FeaturedPost post={featured} locale={locale} />
-      <BlogFeed posts={cards} />
+      {/* Öne çıkan yazı ızgaraya girmiyor (yukarıda tam genişlikte duruyor) ama
+          kategorisi süzgece bildiriliyor: o kategori seçildiğinde süzgeç
+          "burada yazı yok" diyemesin — yazı sayfanın tepesinde duruyor. */}
+      <BlogFeed
+        posts={cards}
+        featuredCategory={
+          isPostCategory(featured.category) ? featured.category : null
+        }
+      />
     </>
   );
 }

@@ -330,7 +330,8 @@
     "filters": {
       "label": "Konuya göre süz",
       "all": "Tümü",
-      "empty": "Bu kategoride henüz yazı yok."
+      "empty": "Bu kategoride henüz yazı yok.",
+      "onlyFeatured": "Bu kategorideki tek yazı yukarıda öne çıkarıldı."
     },
     "empty": "Henüz yazı yok. Yakında burada olacağız.",
     "categories": {

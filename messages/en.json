@@ -330,7 +330,8 @@
     "filters": {
       "label": "Filter by topic",
       "all": "All",
-      "empty": "No posts in this category yet."
+      "empty": "No posts in this category yet.",
+      "onlyFeatured": "The only post in this category is the one featured above."
     },
     "empty": "No posts yet. We will be here soon.",
     "categories": {
