@@ -1,6 +1,6 @@
 # Hackathon derecesi nasıl eklenir?
 
-Ana sayfadaki **"Kazandığımız hackathonlar"** karuselini besleyen kayıtlar
+Ana sayfadaki **"Katıldığımız hackathonlar"** karuselini besleyen kayıtlar
 Sanity Studio'da tutulur. Kod bilmeye ve GitHub'a girmeye gerek yok — görsel
 dahil her şey Studio'dan giriliyor.
 

@@ -296,10 +296,11 @@
       "message": "Your message",
       "submit": "Send message"
     },
+    "bookCall": "Book a call",
     "sponsorship": {
       "heading": "Sponsorships",
       "body": "To sponsor our events or explore a partnership, pick a time that works for you from our calendar.",
-      "button": "Book a call"
+      "button": "Book a sponsorship call"
     }
   },
   "Community": {

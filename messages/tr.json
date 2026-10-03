@@ -296,10 +296,11 @@
       "message": "Mesajınız",
       "submit": "Gönder"
     },
+    "bookCall": "Görüşme ayarla",
     "sponsorship": {
       "heading": "Sponsorluklar",
       "body": "Etkinliklerimize sponsor olmak ve iş birliği olanaklarını konuşmak için takvimimizden size uygun bir zamanı seçin.",
-      "button": "Görüşme ayarla"
+      "button": "Sponsorluk görüşmesi ayarla"
     }
   },
   "Community": {

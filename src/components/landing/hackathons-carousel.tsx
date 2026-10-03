@@ -29,7 +29,7 @@ export type HackathonSlide = {
 };
 
 /**
- * "Kazandığımız hackathonlar" karuseli.
+ * "Katıldığımız hackathonlar" karuseli.
  *
  * Bağımlılık yok: yatay `scroll-snap` şeridi + oklar/noktalar. Dokunmatikte
  * doğal kaydırma, klavyede ok tuşları, `prefers-reduced-motion` açıkken

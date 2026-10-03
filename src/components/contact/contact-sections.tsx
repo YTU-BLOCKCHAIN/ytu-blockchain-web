@@ -117,9 +117,15 @@ export function ContactSection() {
             </div>
 
             {/* E-postanın hemen altında: ikisi de doğrudan iletişim kanalı,
-                biri yazılı biri sözlü. Form zaten sağdaki kartta. */}
+                biri yazılı biri sözlü. Form zaten sağdaki kartta.
+
+                Etiketi aşağıdaki sponsorluk bölümününkinden AYRI: ikisi aynı
+                takvime gidiyor ama bu satır genel bir "konuşalım" daveti,
+                oradaki özel olarak sponsorluk görüşmesi. Aynı metni iki kez
+                basmak sayfada yanlışlıkla tekrarlanmış bir düğme gibi
+                görünüyordu. */}
             <div className="mt-6">
-              <BookingButton label={t('sponsorship.button')} />
+              <BookingButton label={t('bookCall')} />
             </div>
 
             <p className="text-muted-foreground mt-8 text-sm">

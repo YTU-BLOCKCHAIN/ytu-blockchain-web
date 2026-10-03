@@ -6,7 +6,7 @@ import { imageUrl } from '@/sanity/lib/image';
 import { type HackathonSlide, HackathonsCarousel } from './hackathons-carousel';
 
 /**
- * "Kazandığımız hackathonlar" bölümünün veri katmanı.
+ * "Katıldığımız hackathonlar" bölümünün veri katmanı.
  *
  * Karusel istemci bileşeni (kaydırma durumu tarayıcıda) olduğu için verisini
  * kendisi çekemiyor — `LandingPosts` gibi tek parça olamamasının sebebi bu.
