@@ -29,7 +29,9 @@ async function build(file) {
   }
 
   const { data, info } = await sharp(src.data, { raw: src.info })
-    .trim({ threshold: 0 })
+    // Yalnız şeffaf alanı kırp: beyaz die-cut kenarı olan görsellerde sol üst
+    // piksel opak beyaz, varsayılan trim kenarı da yerdi
+    .trim({ background: { r: 0, g: 0, b: 0, alpha: 0 }, threshold: 0 })
     .resize(CONTENT, CONTENT, { fit: 'inside' })
     .extend({
       top: PAD,

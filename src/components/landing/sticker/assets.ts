@@ -146,13 +146,21 @@ function drawImageSticker(img: HTMLImageElement) {
   m.drawImage(img, 0, 0);
   const px = m.getImageData(0, 0, w, h).data;
 
-  // Lacivert logo pikselleri
+  // Lacivert logo pikselleri (#000560). Üst sınır marka mavisini (#0154FF)
+  // dışarıda tutar: yoksa mavi zeminli sticker'ların tamamı simli olurdu
   const navy = new Uint8ClampedArray(w * h * 4);
   for (let i = 0; i < w * h; i++) {
     const r = px[i * 4]!;
     const g = px[i * 4 + 1]!;
     const b = px[i * 4 + 2]!;
-    if (px[i * 4 + 3]! > 128 && b > 60 && b > r + 35 && b > g + 25 && r < 90)
+    if (
+      px[i * 4 + 3]! > 128 &&
+      b > 60 &&
+      b < 170 &&
+      b > r + 35 &&
+      b > g + 25 &&
+      r < 90
+    )
       navy[i * 4 + 3] = 255;
   }
   const navyCanvas = canvas(w, h);
