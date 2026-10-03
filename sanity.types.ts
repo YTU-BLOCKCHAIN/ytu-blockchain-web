@@ -340,9 +340,10 @@ export type PostsQueryResult = Array<{
 
 // Source: src/sanity/queries.ts
 // Variable: postQuery
-// Query: *[_type == "post" && language == $language && slug.current == $slug][0] {    _id,    title,    "slug": slug.current,    excerpt,    publishedAt,    coverImage,    category,    body,    author->{ name, role, avatar, url }  }
+// Query: *[_type == "post" && language == $language && slug.current == $slug][0] {    _id,    _updatedAt,    title,    "slug": slug.current,    excerpt,    publishedAt,    coverImage,    category,    body,    author->{ name, role, avatar, url },      "translations": *[_type == "translation.metadata" && references(^._id)][0]    .translations[]{      "slug": value->slug.current,      "language": value->language    }  }
 export type PostQueryResult = {
   _id: string;
+  _updatedAt: string;
   title: string | null;
   slug: string | null;
   excerpt: string | null;
@@ -369,15 +370,23 @@ export type PostQueryResult = {
     } | null;
     url: string | null;
   } | null;
+  translations: Array<{
+    slug: string | null;
+    language: string | null;
+  }> | null;
 } | null;
 
 // Source: src/sanity/queries.ts
 // Variable: postRoutesQuery
-// Query: *[_type == "post" && defined(slug.current) && defined(language)] {    "slug": slug.current,    language,    _updatedAt  }
+// Query: *[_type == "post" && defined(slug.current) && defined(language)] {    "slug": slug.current,    language,    _updatedAt,      "translations": *[_type == "translation.metadata" && references(^._id)][0]    .translations[]{      "slug": value->slug.current,      "language": value->language    }  }
 export type PostRoutesQueryResult = Array<{
   slug: string | null;
   language: string | null;
   _updatedAt: string;
+  translations: Array<{
+    slug: string | null;
+    language: string | null;
+  }> | null;
 }>;
 
 // Source: src/sanity/queries.ts
@@ -404,8 +413,8 @@ import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
     '\n  *[_type == "post" && language == $language && defined(slug.current)]\n    | order(publishedAt desc) {\n      _id,\n      title,\n      "slug": slug.current,\n      excerpt,\n      publishedAt,\n      coverImage,\n      category,\n      author->{ name, role, avatar }\n    }\n': PostsQueryResult;
-    '\n  *[_type == "post" && language == $language && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    publishedAt,\n    coverImage,\n    category,\n    body,\n    author->{ name, role, avatar, url }\n  }\n': PostQueryResult;
-    '\n  *[_type == "post" && defined(slug.current) && defined(language)] {\n    "slug": slug.current,\n    language,\n    _updatedAt\n  }\n': PostRoutesQueryResult;
+    '\n  *[_type == "post" && language == $language && slug.current == $slug][0] {\n    _id,\n    _updatedAt,\n    title,\n    "slug": slug.current,\n    excerpt,\n    publishedAt,\n    coverImage,\n    category,\n    body,\n    author->{ name, role, avatar, url },\n    \n  "translations": *[_type == "translation.metadata" && references(^._id)][0]\n    .translations[]{\n      "slug": value->slug.current,\n      "language": value->language\n    }\n\n  }\n': PostQueryResult;
+    '\n  *[_type == "post" && defined(slug.current) && defined(language)] {\n    "slug": slug.current,\n    language,\n    _updatedAt,\n    \n  "translations": *[_type == "translation.metadata" && references(^._id)][0]\n    .translations[]{\n      "slug": value->slug.current,\n      "language": value->language\n    }\n\n  }\n': PostRoutesQueryResult;
     '\n  *[_type == "hackathon"] | order(year desc, _createdAt desc) {\n    _id,\n    event,\n    year,\n    award,\n    detail,\n    image,\n    url\n  }\n': HackathonsQueryResult;
   }
 }

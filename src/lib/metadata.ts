@@ -19,11 +19,23 @@ type BuildMetadataOptions = {
    */
   ogImagePath?: string;
   /**
-   * Verilirse sayfa `og:type=article` olur — blog yazıları için. Tarih ISO
-   * biçiminde; sosyal platformlar ve arama motorları yayın tarihini buradan
-   * okur.
+   * Verilirse sayfa `og:type=article` olur — blog yazıları için. Tarihler ISO
+   * biçiminde; sosyal platformlar ve arama motorları yayın/güncelleme tarihini
+   * buradan okur.
    */
-  article?: { publishedTime: string; authors?: string[] };
+  article?: {
+    publishedTime: string;
+    modifiedTime?: string;
+    authors?: string[];
+  };
+  /**
+   * hreflang alternatifleri (locale → yol). Verilmezse sayfanın BÜTÜN dillerde
+   * aynı yolda yaşadığı varsayılır — statik sayfalar için doğru. Blog yazıları
+   * gibi dile göre adresi değişen sayfalar gerçek eşlemeyi geçmeli; `null`
+   * alternatifleri tamamen kapatır (ör. çevirisi olmayan yazı — var olmayan
+   * adrese hreflang vermekten kaçınmak için).
+   */
+  languageAlternates?: Record<string, string> | null;
 };
 
 /**
@@ -31,10 +43,9 @@ type BuildMetadataOptions = {
  * hreflang alternatifleri ve Open Graph / Twitter kartları. `metadataBase`,
  * başlık şablonu ve robots kök layout'ta tanımlıdır.
  *
- * Kart **görseli burada verilmiyor**: onu `opengraph-image.tsx` dosya
- * konvansiyonu üretiyor (bkz. `src/lib/og.tsx`). Next'te dosya tabanlı
- * metadata `generateMetadata`'yı ezdiği için buradan bir görsel geçmek sessizce
- * etkisiz kalırdı — tek kaynak dosya konvansiyonu.
+ * Kart görselini `opengraph-image.tsx` dosya konvansiyonu ÜRETİYOR (bkz.
+ * `src/lib/og.tsx`), ama og/twitter etiketlerine adresi buradaki `images`
+ * bloğu yazıyor — gerekçesi aşağıdaki yorumda.
  */
 export function buildMetadata({
   locale,
@@ -44,15 +55,21 @@ export function buildMetadata({
   titleAbsolute = false,
   ogImagePath,
   article,
+  languageAlternates,
 }: BuildMetadataOptions): Metadata {
   const suffix = pathname === '/' ? '' : pathname;
   const url = `/${locale}${suffix}`;
 
-  const languages: Record<string, string> = {};
-  for (const supported of routing.locales) {
-    languages[supported] = `/${supported}${suffix}`;
+  let languages: Record<string, string> | undefined;
+  if (languageAlternates === undefined) {
+    languages = {};
+    for (const supported of routing.locales) {
+      languages[supported] = `/${supported}${suffix}`;
+    }
+    languages['x-default'] = `/${routing.defaultLocale}${suffix}`;
+  } else if (languageAlternates !== null) {
+    languages = languageAlternates;
   }
-  languages['x-default'] = `/${routing.defaultLocale}${suffix}`;
 
   /*
     Paylaşım kartı görseli. Görseli `opengraph-image.tsx` dosya konvansiyonu
@@ -71,7 +88,9 @@ export function buildMetadata({
       url: ogImagePath ?? `/${locale}/opengraph-image`,
       width: 1200,
       height: 630,
-      alt: siteConfig.name,
+      // Kart görselinde sayfanın başlığı yazıyor (ya da marka kartında logo);
+      // alt metin sabit site adı yerine o başlığı taşımalı.
+      alt: `${siteConfig.name} — ${title}`,
     },
   ];
 
@@ -87,12 +106,13 @@ export function buildMetadata({
   return {
     title: titleAbsolute ? { absolute: title } : title,
     description,
-    alternates: { canonical: url, languages },
+    alternates: languages ? { canonical: url, languages } : { canonical: url },
     openGraph: article
       ? {
           ...openGraphBase,
           type: 'article',
           publishedTime: article.publishedTime,
+          modifiedTime: article.modifiedTime,
           authors: article.authors,
         }
       : { ...openGraphBase, type: 'website' },

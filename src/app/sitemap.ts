@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { hasLocale } from 'next-intl';
 
 import { routing } from '@/i18n/routing';
-import { getPostRoutes } from '@/lib/blog';
+import { getPostRoutes, postLanguageAlternates } from '@/lib/blog';
 import { siteConfig } from '@/lib/site';
 
 /** Locale ön eki olmadan indekslenecek sayfa yolları. */
@@ -31,6 +31,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const locale of routing.locales) {
       languages[locale] = `${base}/${locale}${path}`;
     }
+    // Dil tercihi eşleşmeyen ziyaretçiye öntanımlı dil — sayfa metadata'sındaki
+    // (`buildMetadata`) hreflang kümesiyle birebir aynı olmalı.
+    languages['x-default'] = `${base}/${routing.defaultLocale}${path}`;
 
     return {
       url: `${base}/${routing.defaultLocale}${path}`,
@@ -40,11 +43,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   /*
-    Blog yazıları. Sabit sayfaların aksine hreflang alternatifi YOK: bir yazının
-    Türkçe ve İngilizce sürümü ayrı dokümanlar ve adresleri de farklı
-    (`blokzincir-nedir` / `what-is-blockchain`), üstelik yazının her dilde
-    karşılığı olmak zorunda değil. Doğru eşlemeyi kurmak çeviri bağlarını da
-    sorgulamayı gerektirir — bugünkü ihtiyaç bunu karşılamıyor.
+    Blog yazıları. Hreflang eşlemesi sabit sayfalardaki gibi tahminle DEĞİL,
+    Sanity'deki çeviri bağlarından kuruluyor: bir yazının Türkçe ve İngilizce
+    sürümü ayrı dokümanlar ve adresleri de farklı (`blokzincir-nedir` /
+    `what-is-blockchain`), üstelik yazının her dilde karşılığı olmak zorunda
+    değil. Çevirisi olmayan yazı alternates almaz.
 
     Sanity erişilemezse burada hata fırlar ve derleme kırılır. Bu bilinçli:
     içeriği sessizce eksik bir site haritası yayınlamaktansa deploy'un durması
@@ -55,11 +58,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const { slug, language } = route;
     if (!slug || !hasLocale(routing.locales, language)) return [];
 
+    const languages = postLanguageAlternates(route.translations, base);
+
     return [
       {
         url: `${base}/${language}/blog/${slug}`,
         lastModified: new Date(route._updatedAt),
         changeFrequency: 'yearly',
+        ...(languages ? { alternates: { languages } } : {}),
       },
     ];
   });

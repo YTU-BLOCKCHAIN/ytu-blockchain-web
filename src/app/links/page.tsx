@@ -19,7 +19,7 @@ import {
 } from '@/components/community/brand-icons';
 import { Logo } from '@/components/logo';
 import { type LinkItem, linksContent } from '@/lib/links';
-import { siteConfig } from '@/lib/site';
+import { siteConfig, xHandle } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
 const { profile, links } = linksContent;
@@ -84,6 +84,17 @@ const socialLinks: LinkItem[] = [
   external: true,
 }));
 
+// Kart görselini bu segmentteki `opengraph-image.tsx` üretiyor; adresi
+// `buildMetadata`daki ile aynı gerekçeyle buradan açıkça veriyoruz.
+const ogImages = [
+  {
+    url: '/links/opengraph-image',
+    width: 1200,
+    height: 630,
+    alt: `${siteConfig.name} — Bağlantılar`,
+  },
+];
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: { absolute: `${profile.title} · Bağlantılar` },
@@ -96,11 +107,14 @@ export const metadata: Metadata = {
     title: `${profile.title} · Bağlantılar`,
     description: profile.tagline,
     url: '/links',
+    images: ogImages,
   },
   twitter: {
     card: 'summary_large_image',
+    site: xHandle,
     title: `${profile.title} · Bağlantılar`,
     description: profile.tagline,
+    images: ogImages,
   },
 };
 

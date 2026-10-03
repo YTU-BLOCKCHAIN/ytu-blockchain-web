@@ -24,10 +24,26 @@ export const postsQuery = defineQuery(`
     }
 `);
 
+/**
+ * Bir yazının diğer dillerdeki karşılıkları. `@sanity/document-internationalization`
+ * çeviri bağlarını ayrı bir `translation.metadata` dokümanında tutuyor; bu
+ * parça o dokümanı bulup her sürümün dilini ve adresini çıkarır (yazının kendisi
+ * de listede gelir). hreflang alternatifleri ve site haritası bundan besleniyor:
+ * TR/EN sürümlerin slug'ları farklı olduğundan eşleme tahminle kurulamaz.
+ */
+const TRANSLATIONS_FRAGMENT = `
+  "translations": *[_type == "translation.metadata" && references(^._id)][0]
+    .translations[]{
+      "slug": value->slug.current,
+      "language": value->language
+    }
+`;
+
 /** Tek yazı — dil + adres ile. */
 export const postQuery = defineQuery(`
   *[_type == "post" && language == $language && slug.current == $slug][0] {
     _id,
+    _updatedAt,
     title,
     "slug": slug.current,
     excerpt,
@@ -35,7 +51,8 @@ export const postQuery = defineQuery(`
     coverImage,
     category,
     body,
-    author->{ name, role, avatar, url }
+    author->{ name, role, avatar, url },
+    ${TRANSLATIONS_FRAGMENT}
   }
 `);
 
@@ -47,7 +64,8 @@ export const postRoutesQuery = defineQuery(`
   *[_type == "post" && defined(slug.current) && defined(language)] {
     "slug": slug.current,
     language,
-    _updatedAt
+    _updatedAt,
+    ${TRANSLATIONS_FRAGMENT}
   }
 `);
 

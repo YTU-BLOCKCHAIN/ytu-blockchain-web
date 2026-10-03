@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import { hasLocale, type Locale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
 import { PostArticle } from '@/components/blog/post-sections';
 import { routing } from '@/i18n/routing';
-import { getPost, getPostRoutes } from '@/lib/blog';
+import { getPost, getPostRoutes, postLanguageAlternates } from '@/lib/blog';
 import { buildMetadata } from '@/lib/metadata';
+import { siteConfig } from '@/lib/site';
 
 type PostParams = { locale: Locale; slug: string };
 
@@ -47,9 +48,13 @@ export async function generateMetadata({
     article: post.publishedAt
       ? {
           publishedTime: post.publishedAt,
+          modifiedTime: post._updatedAt,
           authors: post.author?.name ? [post.author.name] : undefined,
         }
       : undefined,
+    // Çeviri bağlarından kurulan gerçek hreflang eşlemesi. Öntanımlı davranış
+    // (aynı yol bütün dillerde) burada yanlış: TR/EN sürümlerin slug'ları farklı.
+    languageAlternates: postLanguageAlternates(post.translations),
   });
 }
 
@@ -64,5 +69,57 @@ export default async function PostPage({
   const post = await getPost(locale, slug);
   if (!post) notFound();
 
-  return <PostArticle post={post} locale={locale} />;
+  const t = await getTranslations({ locale, namespace: 'Meta' });
+  const pageUrl = `${siteConfig.url}/${locale}/blog/${slug}`;
+
+  /* Yazının makine okunur kimliği (schema.org). `BlogPosting` arama motoruna
+     başlığı, tarihleri ve yazarı metinden tahmin ettirmek yerine açıkça verir;
+     `publisher` kök layout'taki Organization kimliğine `@id` ile bağlanır.
+     `BreadcrumbList` sonuç sayfasında "Blog › Yazı" kırıntısını mümkün kılar. */
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BlogPosting',
+        headline: post.title ?? undefined,
+        description: post.excerpt ?? undefined,
+        datePublished: post.publishedAt ?? undefined,
+        dateModified: post._updatedAt,
+        inLanguage: locale,
+        image: `${pageUrl}/opengraph-image`,
+        mainEntityOfPage: pageUrl,
+        author: post.author?.name
+          ? {
+              '@type': 'Person',
+              name: post.author.name,
+              url: post.author.url ?? undefined,
+            }
+          : undefined,
+        publisher: { '@id': `${siteConfig.url}/#organization` },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: t('blog.title'),
+            item: `${siteConfig.url}/${locale}/blog`,
+          },
+          { '@type': 'ListItem', position: 2, name: post.title ?? slug },
+        ],
+      },
+    ],
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        // Kaynak Sanity'deki kendi içeriğimiz; JSON.stringify kaçışlıyor.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PostArticle post={post} locale={locale} />
+    </>
+  );
 }
