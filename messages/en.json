@@ -11,6 +11,12 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "skipToContent": "Skip to content",
+    "languageLabel": "Language",
+    "switchTo": "Switch to {language}",
+    "language": {
+      "tr": "Turkish",
+      "en": "English"
+    },
     "sections": {
       "about": {
         "mission": "Mission",

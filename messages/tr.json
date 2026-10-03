@@ -11,6 +11,12 @@
     "openMenu": "Menüyü aç",
     "closeMenu": "Menüyü kapat",
     "skipToContent": "İçeriğe geç",
+    "languageLabel": "Dil",
+    "switchTo": "{language} diline geç",
+    "language": {
+      "tr": "Türkçe",
+      "en": "İngilizce"
+    },
     "sections": {
       "about": {
         "mission": "Misyonumuz",

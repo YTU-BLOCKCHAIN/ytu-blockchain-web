@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { Container, Separator } from '@/components/container';
+import { LanguageSwitcher } from '@/components/language-switcher';
 import { Logo } from '@/components/logo';
 import {
   Accordion,
@@ -177,7 +178,8 @@ export default function Header() {
               {/* Yalnızca masaüstü CTA — mobilde MobileMenu kendi "Bize Katıl"
                   butonunu render ediyor (o, tıklanınca menüyü de kapatıyor).
                   Burayı mobilde göstermek iki özdeş buton demek. */}
-              <div className="z-51 relative hidden items-center justify-end lg:flex">
+              <div className="z-51 relative hidden items-center justify-end gap-3 lg:flex">
+                <LanguageSwitcher />
                 <ButtonLink href="/join" size="sm">
                   {t('join')}
                 </ButtonLink>
@@ -359,6 +361,10 @@ function MobileMenu({ closeMenu }: { closeMenu: () => void }) {
       <ButtonLink href="/join" onClick={closeMenu} className="mt-4 w-full">
         {t('join')}
       </ButtonLink>
+
+      {/* Mobilde dil seçimi menünün sonunda: CTA'nın önüne geçmemeli ama
+          masaüstündeki gibi her sayfadan erişilebilir olmalı. */}
+      <LanguageSwitcher className="mt-6 w-fit" />
     </nav>
   );
 }
