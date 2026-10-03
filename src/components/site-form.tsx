@@ -130,7 +130,7 @@ export function SiteForm({
         role="status"
         className="border-border bg-background rounded-md border p-6"
       >
-        <CheckCircle2 className="size-5 fill-emerald-400/25 text-emerald-600 dark:text-emerald-500" />
+        <CheckCircle2 className="size-5 fill-primary/25 text-primary" />
         <h3 className="text-foreground mt-4 font-medium">
           {t(`success.${kind}.heading`)}
         </h3>

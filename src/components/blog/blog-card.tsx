@@ -108,7 +108,7 @@ export function PostCard({ post }: { post: BlogCardPost }) {
     <article className="group relative">
       <div
         data-grid-content
-        className="@4xl:p-12 hover:bg-muted! flex flex-col p-6 shadow-xl shadow-transparent transition duration-200 hover:shadow-indigo-900/5"
+        className="@4xl:p-12 hover:bg-muted! flex flex-col p-6 shadow-xl shadow-transparent transition duration-200 hover:shadow-[var(--brand-deep)]/5"
       >
         <div className="space-y-4">
           <PostDate post={post} />

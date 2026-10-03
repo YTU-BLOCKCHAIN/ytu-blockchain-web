@@ -84,7 +84,7 @@ export async function LandingPosts() {
                     {post.text}
                   </p>
 
-                  <div className="text-muted-foreground mt-auto flex items-center justify-between gap-2 pt-2 font-mono text-xs">
+                  <div className="text-muted-foreground mt-auto flex items-center justify-between gap-2 pt-2 font-display text-xs uppercase">
                     {post.date && (
                       <time dateTime={post.date}>
                         {dateFormat.format(new Date(`${post.date}T00:00:00Z`))}

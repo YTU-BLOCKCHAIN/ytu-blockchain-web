@@ -229,7 +229,7 @@ function NavMenu() {
                   <div className="relative m-3 grid grid-cols-[auto_1fr] items-center gap-3 border-t pt-6">
                     <div
                       aria-hidden
-                      className="bg-linear-to-br inset-ring-foreground/10 inset-ring-1 size-11 shrink-0 rounded-xl from-blue-400 to-indigo-500"
+                      className="bg-linear-to-br inset-ring-foreground/10 inset-ring-1 size-11 shrink-0 rounded-xl from-[var(--brand-signal)] to-[var(--brand-deep)]"
                     />
                     <div className="space-y-0.5">
                       <Link

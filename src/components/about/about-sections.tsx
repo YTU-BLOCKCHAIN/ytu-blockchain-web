@@ -189,12 +189,12 @@ export function AboutValues() {
 
 /** Ekip fotoğrafları Figma'dan gelene kadar boş slotlara canlılık veren nötr degradeler. */
 const TEAM_GRADIENTS = [
-  'from-indigo-400 via-blue-400 to-teal-500',
-  'from-purple-400 via-sky-400 to-emerald-500',
-  'from-pink-400 via-blue-400 to-cyan-500',
-  'from-purple-400 via-blue-400 to-amber-500',
-  'from-teal-400 via-cyan-400 to-blue-500',
-  'from-rose-400 via-violet-400 to-indigo-500',
+  'from-[var(--brand-signal)] to-[var(--brand-deep)]',
+  'from-[var(--brand-deep)] to-[var(--brand-signal)]',
+  'from-[var(--brand-signal)] via-[var(--brand-deep)] to-[var(--brand-void)]',
+  'from-[var(--brand-void)] via-[var(--brand-deep)] to-[var(--brand-signal)]',
+  'from-[var(--brand-deep)] via-[var(--brand-signal)] to-[var(--brand-deep)]',
+  'from-[var(--brand-signal)] via-[var(--brand-signal)] to-[var(--brand-void)]',
 ];
 
 export function AboutTeam() {
@@ -357,7 +357,7 @@ export function AboutJoin() {
                 <div
                   key={track}
                   data-grid-content
-                  className="@4xl:px-12 hover:bg-card! hover:z-1 group relative flex items-center gap-2 rounded-xl p-4 px-6 shadow-lg shadow-transparent transition-shadow hover:shadow-blue-900/5"
+                  className="@4xl:px-12 hover:bg-card! hover:z-1 group relative flex items-center gap-2 rounded-xl p-4 px-6 shadow-lg shadow-transparent transition-shadow hover:shadow-[var(--brand-deep)]/5"
                 >
                   <Link
                     href="/join"

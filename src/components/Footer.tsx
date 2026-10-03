@@ -134,8 +134,8 @@ export default function Footer() {
             </div>
             <div className="ring-foreground/5 bg-card flex items-center gap-2 rounded-full border border-transparent py-1 pr-4 pl-2 shadow ring-1">
               <span className="relative flex size-3">
-                <span className="absolute inset-0 block size-full animate-pulse rounded-full bg-emerald-400/40" />
-                <span className="relative m-auto block size-1 rounded-full bg-emerald-500" />
+                <span className="absolute inset-0 block size-full animate-pulse rounded-full bg-primary/40" />
+                <span className="relative m-auto block size-1 rounded-full bg-primary" />
               </span>
               <span className="text-sm">{t('status')}</span>
             </div>

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { GeistMono } from 'geist/font/mono';
 import { hasLocale, NextIntlClientProvider, type Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -7,10 +6,10 @@ import { notFound } from 'next/navigation';
 import { Analytics } from '@/components/analytics';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import { bodyFont, displayFont } from '@/fonts';
 import { routing } from '@/i18n/routing';
 import { ogLocales, siteConfig, xHandle } from '@/lib/site';
 
-import '@fontsource-variable/inter';
 import '../globals.css';
 
 export async function generateMetadata({
@@ -66,7 +65,10 @@ export default async function LocaleLayout({
   const t = await getTranslations({ locale, namespace: 'Meta' });
 
   return (
-    <html lang={locale} className={`${GeistMono.variable} h-full antialiased`}>
+    <html
+      lang={locale}
+      className={`${displayFont.variable} ${bodyFont.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col">
         {/* Kulübün makine okunur kimlik kartı (schema.org / JSON-LD). Arama
             motorları adı, logoyu ve resmî hesapları buradan okur; sitenin

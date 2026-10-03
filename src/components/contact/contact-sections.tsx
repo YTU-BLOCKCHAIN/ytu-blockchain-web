@@ -53,7 +53,7 @@ export function ContactSection() {
   return (
     <section className="overflow-hidden">
       <Container className="@4xl:px-12 px-6 py-3">
-        <span className="text-primary font-mono text-xs tracking-widest lowercase">
+        <span className="text-primary font-display text-xs tracking-widest uppercase">
           {'//'} {t('eyebrow')}
         </span>
       </Container>
@@ -98,7 +98,7 @@ export function ContactSection() {
             <ul className="mt-4 space-y-3">
               {reasons.map((reason) => (
                 <li key={reason} className="flex items-center gap-3">
-                  <CheckCircle2 className="size-4 shrink-0 fill-emerald-400/25 text-emerald-600 dark:text-emerald-500" />
+                  <CheckCircle2 className="size-4 shrink-0 fill-primary/25 text-primary" />
                   <span className="text-sm">{reason}</span>
                 </li>
               ))}

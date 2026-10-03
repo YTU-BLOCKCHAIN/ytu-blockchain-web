@@ -1,8 +1,6 @@
-import { GeistMono } from 'geist/font/mono';
-
 import { Analytics } from '@/components/analytics';
+import { bodyFont, displayFont } from '@/fonts';
 
-import '@fontsource-variable/inter';
 import '../globals.css';
 
 /**
@@ -24,7 +22,7 @@ export default function LinksLayout({
        zeminli sabitler (globals.css). */
     <html
       lang="tr"
-      className={`${GeistMono.variable} links-theme h-full antialiased`}
+      className={`${displayFont.variable} ${bodyFont.variable} links-theme h-full antialiased`}
     >
       <body className="bg-background text-foreground flex min-h-full flex-col">
         {children}

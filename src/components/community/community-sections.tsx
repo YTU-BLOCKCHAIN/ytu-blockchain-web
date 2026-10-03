@@ -41,7 +41,7 @@ export function CommunityHero() {
               }}
             />
             <div className="relative">
-              <span className="text-primary font-mono text-xs tracking-widest lowercase">
+              <span className="text-primary font-display text-xs tracking-widest uppercase">
                 {'//'} {t('eyebrow')}
               </span>
               <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">

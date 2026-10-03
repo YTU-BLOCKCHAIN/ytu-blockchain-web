@@ -26,19 +26,31 @@ import { siteConfig } from '@/lib/site';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-const BG = '#09090b';
-const FG = '#ffffff';
-const BLUE = '#3b82f6';
-const MUTE = '#a1a1aa';
+/* Marka kiti değerleri (ytu-brand/design.md). Satori CSS değişkeni okumadığı
+   için globals.css'teki `--brand-*` tokenları burada birebir tekrar ediliyor;
+   ikisi birlikte güncellenmeli. BLUE ham signal DEĞİL: void üzerinde 12px
+   etiket için 4.27:1 kalıyordu, sitedeki koyu tema `--primary` ile aynı
+   oranda (%82 signal + beyaz) açıldı. MUTE gri değil, kitin kuralı gereği
+   beyazın saydam kademesi (--ink-dim .58) düz renge çevrilmiş hâli. */
+const BG = '#0a0a0c'; /* void */
+const FG = '#ffffff'; /* ink */
+const BLUE = '#4b8bff'; /* açılmış signal (#0e6cff tabanlı) */
+const MUTE = '#6f7076'; /* ink @ .58 → void üzerinde düz karşılığı */
 const LINE = 'rgba(255,255,255,0.10)';
 const PAD = 80;
 
 /**
  * Diskten okunan varlıklar: logo SVG'leri ve yazı tipleri.
  *
- * Yazı tipleri `geist` paketinden değil depodan (`assets/fonts/`) geliyor. İki
- * sebep: Satori **woff2 kabul etmiyor** (paket ağırlıklı woff2 dağıtıyor) ve
- * `node_modules`un çalışma zamanı paketlemesine güvenmek kırılgan.
+ * Yazı tipleri depodan (`assets/fonts/`) geliyor, npm paketinden değil: Satori
+ * **woff2 kabul etmiyor** ve `node_modules`un çalışma zamanı paketlemesine
+ * güvenmek kırılgan.
+ *
+ * Chrome/etiket rolü marka display fontuna (EAS VHS TR) geçti — kitin TTF
+ * sürümü olduğu için Satori okuyabiliyor. Gövde metni HÂLÂ Geist SemiBold:
+ * Clash Grotesk kitte yalnızca değişken woff2 olarak var, Satori ikisini de
+ * (woff2 ve değişken eksen) desteklemiyor. Statik bir TTF/OTF kesiti
+ * üretilmeden bu satır marka fontuna geçemez.
  *
  * Yollar bilerek **sabit dize**: `readFile(join(process.cwd(), değişken))`
  * yazıldığında Turbopack hangi dosyanın gerektiğini çözemeyip bütün projeyi
@@ -64,9 +76,9 @@ async function loadLogo() {
 }
 
 async function loadFonts() {
-  const [sans, mono] = await Promise.all([
+  const [sans, display] = await Promise.all([
     readFile(join(process.cwd(), 'assets/fonts/Geist-SemiBold.ttf')),
-    readFile(join(process.cwd(), 'assets/fonts/GeistMono-Regular.ttf')),
+    readFile(join(process.cwd(), 'assets/fonts/eas-vhs-tr.ttf')),
   ]);
 
   return [
@@ -77,8 +89,8 @@ async function loadFonts() {
       weight: 600 as const,
     },
     {
-      name: 'GeistMono',
-      data: mono,
+      name: 'EAS VHS TR',
+      data: display,
       style: 'normal' as const,
       weight: 400 as const,
     },
@@ -271,7 +283,7 @@ export async function titleCard({
       <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
         <div
           style={{
-            fontFamily: 'GeistMono',
+            fontFamily: 'EAS VHS TR',
             fontSize: 20,
             letterSpacing: 3,
             color: BLUE,

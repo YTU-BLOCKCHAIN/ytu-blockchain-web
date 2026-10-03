@@ -43,7 +43,7 @@ export function ProjectsHeader() {
               }}
             />
             <div className="relative">
-              <span className="text-primary font-mono text-xs tracking-widest lowercase">
+              <span className="text-primary font-display text-xs tracking-widest uppercase">
                 {'//'} {t('eyebrow')}
               </span>
               <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
@@ -65,8 +65,8 @@ export function ProjectsHeader() {
 }
 
 const STATUS_STYLES: Record<ProjectStatus, string> = {
-  live: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
-  wip: 'bg-amber-500/10 text-amber-600 dark:text-amber-400',
+  live: 'bg-primary/10 text-[var(--brand-deep)] dark:text-primary',
+  wip: 'bg-foreground/8 text-foreground/75',
   archived: 'bg-muted text-muted-foreground',
 };
 
