@@ -63,6 +63,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: 'Meta' });
+  const tNav = await getTranslations({ locale, namespace: 'Nav' });
 
   return (
     <html
@@ -111,11 +112,23 @@ export default async function LocaleLayout({
             }),
           }}
         />
+        {/* Klavyeyle gezenin header'ı atlamasını sağlayan ilk odak hedefi.
+            Normalde görünmez; yalnızca odaklanınca sol üstte beliriyor.
+            Sayfadaki İLK odaklanabilir öğe olmak zorunda, bu yüzden Header'ın
+            da üstünde. */}
+        <a
+          href="#main"
+          className="bg-background text-foreground focus:ring-ring sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded focus:px-4 focus:py-2 focus:ring-2 focus:outline-none"
+        >
+          {tNav('skipToContent')}
+        </a>
         <NextIntlClientProvider>
           <Header />
           {/* Zemin = grid çizgi rengi → çerçeve (yan raylar + hücre araları)
               header'dan sayfa gövdesine kesintisiz ve tek tonda devam eder. */}
-          <main className="bg-grid-line flex-1">{children}</main>
+          <main id="main" tabIndex={-1} className="bg-grid-line flex-1">
+            {children}
+          </main>
           <Footer />
         </NextIntlClientProvider>
         {/* Ölçüm ve çerez onay çubuğu. Sağlayıcının DIŞINDA: metnini prop
