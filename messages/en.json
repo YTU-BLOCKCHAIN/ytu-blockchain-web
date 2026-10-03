@@ -120,6 +120,8 @@
       "previous": "Previous slide",
       "next": "Next slide",
       "slideLabel": "Go to slide {index}",
+      "slideRoleDescription": "slide",
+      "slidePosition": "{index} of {total}",
       "link": "Read the announcement"
     },
     "sponsors": {

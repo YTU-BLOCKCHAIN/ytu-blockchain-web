@@ -120,6 +120,8 @@
       "previous": "Önceki kare",
       "next": "Sonraki kare",
       "slideLabel": "{index}. kareye git",
+      "slideRoleDescription": "kare",
+      "slidePosition": "{total} kareden {index}.",
       "link": "Haberi oku"
     },
     "sponsors": {

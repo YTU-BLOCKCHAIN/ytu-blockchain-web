@@ -187,8 +187,25 @@ export function HackathonsCarousel({
               }}
               className="relative flex snap-x snap-mandatory gap-px overflow-x-auto outline-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              {slides.map((slide) => (
-                <div key={slide.key} className="w-full shrink-0 snap-start">
+              {slides.map((slide, i) => (
+                /* Her kare bir "slide" olarak duyuruluyor ve konumunu söylüyor
+                   ("3 / 7") — eskiden ekran okuyucu için şeritte yalnızca
+                   sıralı kartlar vardı, kaçıncı karede olunduğu bilinmiyordu.
+
+                   `inert`: ekran dışındaki kareler odak almıyor. Öncesinde
+                   görünmeyen bir karenin içindeki bağlantıya Tab'la geçmek
+                   mümkündü, yani odak hiçbir yere gitmiş gibi görünüyordu. */
+                <div
+                  key={slide.key}
+                  role="group"
+                  aria-roledescription={t('slideRoleDescription')}
+                  aria-label={t('slidePosition', {
+                    index: i + 1,
+                    total: slides.length,
+                  })}
+                  inert={i !== active}
+                  className="w-full shrink-0 snap-start"
+                >
                   <article
                     data-grid-content
                     className="@2xl:flex-row flex h-full flex-col overflow-hidden"
