@@ -389,10 +389,6 @@
       }
     }
   },
-  "Common": {
-    "comingSoon": "Çok Yakında",
-    "comingSoonBody": "Bu sayfanın şablonu hazır; içerik çok yakında burada olacak."
-  },
   "Footer": {
     "tagline": "Merkeziyetsiz geleceği birlikte inşa ediyoruz.",
     "exploreHeading": "Keşfet",

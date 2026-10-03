@@ -389,10 +389,6 @@
       }
     }
   },
-  "Common": {
-    "comingSoon": "Coming Soon",
-    "comingSoonBody": "The template for this page is ready; content will be here very soon."
-  },
   "Footer": {
     "tagline": "Building the decentralized future together.",
     "exploreHeading": "Explore",
