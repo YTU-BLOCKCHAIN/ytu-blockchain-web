@@ -373,7 +373,6 @@
     "eyebrow": "Üye Ol",
     "title": "Aramıza katıl",
     "subtitle": "Deneyim aramıyoruz — merak yeterli.",
-    "soon": "Çok yakında sizlerleyiz...",
     "expectHeading": "Seni ne bekliyor?",
     "expect": {
       "learn": "Uygulamalı atölyeler ve birlikte öğrenme",
@@ -381,14 +380,12 @@
       "community": "Aktif bir topluluk ve etkinlikler",
       "open": "Her bölümden, her seviyeden herkese açık"
     },
-    "form": {
+    "apply": {
+      "status": "Başvurular açık",
       "heading": "Başvuru formu",
-      "intro": "Formu doldur, başvurun doğrudan bize ulaşsın. E-posta adresine bir onay mesajı göndereceğiz.",
-      "name": "Ad Soyad",
-      "email": "E-posta",
-      "department": "Bölüm / Sınıf",
-      "motivation": "İlgi alanların ve neden katılmak istediğin",
-      "submit": "Başvuruyu gönder"
+      "intro": "Formu doldurman birkaç dakika sürüyor. Başvurular Google Forms üzerinden alınıyor; formu gönderdikten sonra seninle e-postadan iletişime geçiyoruz.",
+      "button": "Başvuru formunu aç",
+      "note": "Bağlantı Google Forms'ta yeni sekmede açılır."
     }
   },
   "Forms": {
@@ -439,15 +436,15 @@
     "eyebrow": "KVKK",
     "title": "Aydınlatma Metni",
     "subtitle": "Sitedeki formlarla paylaştığın kişisel verilerin ve ölçüm çerezlerinin nasıl işlendiğini burada açıklıyoruz.",
-    "updated": "Son güncelleme: 31 Ağustos 2026",
+    "updated": "Son güncelleme: 3 Ekim 2026",
     "sections": {
       "controller": {
         "heading": "Veri sorumlusu",
-        "body": "Bu metin, Yıldız Teknik Üniversitesi Blockchain Kulübü tarafından 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında hazırlanmıştır. Sitedeki iletişim ve üyelik başvurusu formlarıyla paylaştığın kişisel veriler bakımından veri sorumlusu kulüptür."
+        "body": "Bu metin, Yıldız Teknik Üniversitesi Blockchain Kulübü tarafından 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında hazırlanmıştır. Sitedeki iletişim formu ve Google Forms üzerinden alınan üyelik başvurusu ile paylaştığın kişisel veriler bakımından veri sorumlusu kulüptür."
       },
       "data": {
         "heading": "İşlenen kişisel veriler",
-        "body": "İletişim formunda ad soyad, e-posta adresi ve mesaj içeriği; üyelik başvurusu formunda ad soyad, e-posta adresi, bölüm/sınıf bilgisi ve başvuru metni işlenir. Kayda ayrıca gönderim tarihi ve sitede seçili dil eklenir. Bunların dışında, yalnızca ölçüme onay verirsen, ziyaret ettiğin sayfalar ve tarayıcı bilgin gibi veriler işlenir (aşağıdaki “Çerezler ve ölçüm” bölümü)."
+        "body": "Sitedeki iletişim formunda ad soyad, e-posta adresi ve mesaj içeriği işlenir; kayda ayrıca gönderim tarihi ve sitede seçili dil eklenir. Üyelik başvuruları ise site üzerinden değil, Google LLC tarafından sağlanan Google Forms üzerinden alınır; bu başvuruda işlenen kişisel veriler formun kendi sayfasındaki sorularla sınırlıdır ve yanıtlar kulübün Google hesabında saklanır. Bunların dışında, yalnızca ölçüme onay verirsen, ziyaret ettiğin sayfalar ve tarayıcı bilgin gibi veriler işlenir (aşağıdaki “Çerezler ve ölçüm” bölümü)."
       },
       "cookies": {
         "heading": "Çerezler ve ölçüm",
@@ -463,7 +460,7 @@
       },
       "transfer": {
         "heading": "Yurt dışına aktarım",
-        "body": "Form kayıtları Google LLC tarafından sağlanan Google Sheets ve Google Apps Script hizmetlerinde saklanır; bildirim ve onay e-postaları da aynı altyapı üzerinden gönderilir. Bu nedenle verilerin Google’ın yurt dışındaki sunucularında işlenmesi söz konusudur ve formu gönderirken bu aktarıma da onay vermiş olursun. Ayrıca formların bot gönderimlerine karşı korunması için Cloudflare, Inc. tarafından sağlanan Turnstile hizmeti kullanılır; bu doğrulama sırasında IP adresin ve tarayıcı bilgilerin Cloudflare’ın yurt dışındaki sunucularında işlenir. Turnstile çerez kullanmaz ve bu veriler yalnızca gönderimin bir bot tarafından yapılıp yapılmadığını anlamak için kullanılır. Ölçüme onay vermen hâlinde, yukarıda sayılan ölçüm verileri de Google’ın yurt dışındaki sunucularında işlenir; onay vermezsen Google Analytics’e hiçbir veri gitmez."
+        "body": "İletişim formu kayıtları Google LLC tarafından sağlanan Google Sheets ve Google Apps Script hizmetlerinde saklanır; bildirim ve onay e-postaları da aynı altyapı üzerinden gönderilir. Üyelik başvuruları ise yine Google LLC tarafından sağlanan Google Forms üzerinde toplanır ve saklanır. Bu nedenle verilerin Google’ın yurt dışındaki sunucularında işlenmesi söz konusudur ve formu gönderirken bu aktarıma da onay vermiş olursun. Ayrıca formların bot gönderimlerine karşı korunması için Cloudflare, Inc. tarafından sağlanan Turnstile hizmeti kullanılır; bu doğrulama sırasında IP adresin ve tarayıcı bilgilerin Cloudflare’ın yurt dışındaki sunucularında işlenir. Turnstile çerez kullanmaz ve bu veriler yalnızca gönderimin bir bot tarafından yapılıp yapılmadığını anlamak için kullanılır. Ölçüme onay vermen hâlinde, yukarıda sayılan ölçüm verileri de Google’ın yurt dışındaki sunucularında işlenir; onay vermezsen Google Analytics’e hiçbir veri gitmez."
       },
       "retention": {
         "heading": "Saklama süresi",

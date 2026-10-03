@@ -1,9 +1,9 @@
-import { CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
-// Başvuru formu geçici olarak kapalı; aşağıdaki blokla birlikte geri açılacak.
-// import { SiteForm } from '@/components/site-form';
+import { buttonClasses } from '@/components/ui/button';
+import { siteConfig } from '@/lib/site';
 
 export function JoinHero() {
   const t = useTranslations('Join');
@@ -76,39 +76,43 @@ export function JoinApplication() {
           yeniliyor → mobilde dolgu 1px'e düşüyordu (masaüstünde `@4xl:p-12`
           zaten kazandığı için sorun görünmüyordu). */}
       <Container asGrid className="@4xl:grid-cols-2">
-        {/* Başvuru formu şimdilik kapalı: alım dönemi açılınca aşağıdaki blok
-            ve dosyanın başındaki `SiteForm` importu birlikte geri açılacak.
-            `Join.form.*` çeviri anahtarları da o gün için duruyor.
+        {/* Başvuru hücresi.
 
-        <div data-grid-content className="@4xl:p-12 @max-4xl:p-6">
-          <h2 className="text-foreground font-medium">{t('form.heading')}</h2>
-          <p className="text-muted-foreground mb-8 mt-2 text-sm">
-            {t('form.intro')}
-          </p>
-
-          <SiteForm
-            kind="join"
-            labels={{
-              name: t('form.name'),
-              email: t('form.email'),
-              department: t('form.department'),
-              motivation: t('form.motivation'),
-            }}
-            submitLabel={t('form.submit')}
-          />
-        </div>
-
-        */}
-
-        {/* Formun yerini tutan mesaj. `min-h-64`: masaüstünde hücre zaten yan
-            sütunun boyuna uzuyor, bu taban yalnızca tek sütuna düşen mobilde
-            iş görüyor — yoksa yazı ince bir şeride sıkışıyordu. */}
+            Form sitede DEĞİL, Google Forms'ta: başvurular tek bir yerde
+            toplansın diye ikinci bir kanal açmıyoruz. Bu yüzden burada
+            gömülü bir form yerine forma giden net bir çağrı var — sayfa
+            eskiden "çok yakında" diyordu, oysa `/links` aynı anda
+            "başvurular açık" diyip forma yönlendiriyordu. */}
         <div
           data-grid-content
-          className="@4xl:p-12 @max-4xl:p-6 flex min-h-64 items-center justify-center"
+          className="@4xl:p-12 @max-4xl:p-6 flex min-h-64 flex-col justify-center"
         >
-          <p className="text-foreground text-balance text-center text-3xl font-semibold tracking-tight sm:text-4xl">
-            {t('soon')}
+          <span className="text-primary font-display w-fit text-xs tracking-widest uppercase">
+            {`// ${t('apply.status')}`}
+          </span>
+
+          <h2 className="text-foreground mt-4 text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
+            {t('apply.heading')}
+          </h2>
+
+          <p className="text-muted-foreground mt-3 text-balance">
+            {t('apply.intro')}
+          </p>
+
+          {/* Dış bağlantı olduğu için i18n `Link`'i değil düz `<a>`: o, adresin
+              başına dil önekini takardı. */}
+          <a
+            href={siteConfig.applicationFormUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            className={buttonClasses({ className: 'mt-8 w-fit' })}
+          >
+            {t('apply.button')}
+            <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </a>
+
+          <p className="text-muted-foreground mt-3 text-xs">
+            {t('apply.note')}
           </p>
         </div>
 

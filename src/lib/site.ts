@@ -15,6 +15,12 @@ export const siteConfig = {
   /** Sponsorluk görüşmeleri için randevu takvimi (iletişim sayfasındaki buton). */
   bookingUrl: 'https://cal.com/ytublockchain',
   /**
+   * Üyelik başvuru formu. Başvurular **yalnızca** buradan alınıyor: site
+   * içinde ikinci bir form YOK, böylece başvurular tek bir yerde toplanıyor.
+   * `/join` sayfası ve `/links` satırı aynı adrese gidiyor.
+   */
+  applicationFormUrl: 'https://forms.gle/i4SwuLnFhFcEEGQP9',
+  /**
    * Kulübün resmî sosyal/topluluk kanalları.
    *
    * Hepsi burada çünkü adresler dört yerden okunuyor: `/links` sayfası,

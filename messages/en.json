@@ -373,7 +373,6 @@
     "eyebrow": "Join",
     "title": "Become a member",
     "subtitle": "We're not looking for experience — curiosity is enough.",
-    "soon": "Coming very soon...",
     "expectHeading": "What to expect",
     "expect": {
       "learn": "Hands-on workshops and learning together",
@@ -381,14 +380,12 @@
       "community": "An active community and events",
       "open": "Open to everyone, every department and level"
     },
-    "form": {
+    "apply": {
+      "status": "Applications are open",
       "heading": "Application form",
-      "intro": "Fill out the form and your application reaches us directly. We’ll send a confirmation to your email address.",
-      "name": "Full name",
-      "email": "Email",
-      "department": "Department / year",
-      "motivation": "Your interests and why you want to join",
-      "submit": "Send application"
+      "intro": "The form takes a few minutes. Applications are collected through Google Forms; once you submit it we get in touch by email.",
+      "button": "Open the application form",
+      "note": "The link opens in Google Forms in a new tab."
     }
   },
   "Forms": {
@@ -439,15 +436,15 @@
     "eyebrow": "Privacy",
     "title": "Privacy Notice",
     "subtitle": "How we handle the personal data you share through the forms on this site, and the analytics cookies we may set.",
-    "updated": "Last updated: 31 August 2026",
+    "updated": "Last updated: 3 October 2026",
     "sections": {
       "controller": {
         "heading": "Data controller",
-        "body": "This notice is issued by the Yıldız Technical University Blockchain Club under Turkish Personal Data Protection Law No. 6698 (KVKK). The club is the data controller for personal data submitted through the contact and membership application forms on this site."
+        "body": "This notice is issued by the Yıldız Technical University Blockchain Club under Turkish Personal Data Protection Law No. 6698 (KVKK). The club is the data controller for personal data submitted through the contact form on this site and through the membership application hosted on Google Forms."
       },
       "data": {
         "heading": "Personal data we process",
-        "body": "The contact form processes your full name, email address and message. The membership application form processes your full name, email address, department/year and application text. Each record also stores the submission date and the site language you were using. Beyond that, and only if you consent to analytics, data such as the pages you visit and your browser information is processed (see “Cookies and analytics” below)."
+        "body": "The contact form on this site processes your full name, email address and message; each record also stores the submission date and the site language you were using. Membership applications are not collected on this site: they are collected through Google Forms, provided by Google LLC, where the personal data processed is limited to the questions on the form itself and the responses are stored in the club's Google account. Beyond that, and only if you consent to analytics, data such as the pages you visit and your browser information is processed (see “Cookies and analytics” below)."
       },
       "cookies": {
         "heading": "Cookies and analytics",
@@ -463,7 +460,7 @@
       },
       "transfer": {
         "heading": "International transfer",
-        "body": "Form records are stored in Google Sheets and Google Apps Script, provided by Google LLC; notification and confirmation emails are sent through the same infrastructure. Your data is therefore processed on Google servers outside Türkiye, and submitting the form also covers your consent to this transfer. The forms are also protected against bot submissions by Turnstile, a service provided by Cloudflare, Inc.; during this check your IP address and browser information are processed on Cloudflare servers outside Türkiye. Turnstile does not use cookies, and this data is only used to determine whether a submission was made by a bot. If you consent to analytics, the analytics data listed above is also processed on Google servers outside Türkiye; if you do not consent, no data reaches Google Analytics at all."
+        "body": "Contact form records are stored in Google Sheets and Google Apps Script, provided by Google LLC; notification and confirmation emails are sent through the same infrastructure. Membership applications are collected and stored in Google Forms, also provided by Google LLC. Your data is therefore processed on Google servers outside Türkiye, and submitting the form also covers your consent to this transfer. The forms are also protected against bot submissions by Turnstile, a service provided by Cloudflare, Inc.; during this check your IP address and browser information are processed on Cloudflare servers outside Türkiye. Turnstile does not use cookies, and this data is only used to determine whether a submission was made by a bot. If you consent to analytics, the analytics data listed above is also processed on Google servers outside Türkiye; if you do not consent, no data reaches Google Analytics at all."
       },
       "retention": {
         "heading": "Retention period",
