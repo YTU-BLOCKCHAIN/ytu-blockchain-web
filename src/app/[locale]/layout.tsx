@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider, type Locale } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
 import { Analytics } from '@/components/analytics';
@@ -64,6 +68,37 @@ export default async function LocaleLayout({
 
   const t = await getTranslations({ locale, namespace: 'Meta' });
   const tNav = await getTranslations({ locale, namespace: 'Nav' });
+
+  /*
+    İstemciye YALNIZCA istemci bileşenlerinin okuduğu metinler iniyor.
+
+    `NextIntlClientProvider` messages'sız kullanıldığında bütün katalog her
+    sayfanın HTML'ine gömülüyordu — KVKK aydınlatma metninin tamamı dahil,
+    onu hiç kullanmayan sayfalarda bile (`/tr` ≈ 139 KB). Sunucu bileşenleri
+    `getTranslations` ile okuduğu için bu listede yer almalarına gerek yok;
+    liste yalnızca `'use client'` bileşenlerinin ihtiyacı:
+
+      Nav                 → Header, LanguageSwitcher
+      Forms               → SiteForm
+      Blog                → BlogFeed, PostCard
+      Error               → error.tsx (hata sınırı layout'un içinde çiziliyor)
+      Landing.hackathons  → HackathonsCarousel
+      Landing.sticker     → LandingSticker
+
+    Yeni bir istemci bileşeni başka bir ad alanı okursa buraya eklenmeli,
+    yoksa çalışma zamanında "missing message" hatası verir.
+  */
+  const messages = await getMessages();
+  const clientMessages = {
+    Nav: messages.Nav,
+    Forms: messages.Forms,
+    Blog: messages.Blog,
+    Error: messages.Error,
+    Landing: {
+      hackathons: messages.Landing.hackathons,
+      sticker: messages.Landing.sticker,
+    },
+  };
 
   return (
     <html
@@ -131,7 +166,7 @@ export default async function LocaleLayout({
         >
           {tNav('skipToContent')}
         </a>
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={clientMessages}>
           <Header />
           {/* Zemin = grid çizgi rengi → çerçeve (yan raylar + hücre araları)
               header'dan sayfa gövdesine kesintisiz ve tek tonda devam eder. */}
