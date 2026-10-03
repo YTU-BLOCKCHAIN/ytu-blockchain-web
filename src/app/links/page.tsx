@@ -6,6 +6,7 @@ import {
   FolderGit2,
   Globe,
   Mail,
+  Palette,
   Podcast,
   UserPlus,
 } from 'lucide-react';
@@ -90,6 +91,8 @@ function iconForLink(link: LinkItem): RowIconSpec {
   if (url.includes('/projects'))
     return { Icon: FolderGit2, tone: 'text-orange-400' };
   if (url.includes('/contact')) return { Icon: Mail, tone: 'text-rose-400' };
+  // `/brand` Notion'daki marka kılavuzuna yönlenir (bkz. next.config.ts)
+  if (url.includes('/brand')) return { Icon: Palette, tone: 'text-pink-400' };
   // "Web Sitemiz" (/tr) ve tanımsız iç sayfalar
   return { Icon: Globe, tone: 'text-sky-400' };
 }

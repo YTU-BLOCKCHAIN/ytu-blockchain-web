@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
     ],
   },
   // Config yönlendirmeleri proxy'den (next-intl) önce çalışır, bu yüzden
-  // `/logos` ve `/roadmap` dil ön eki almadan doğrudan hedefe gider.
+  // `/logos`, `/roadmap` ve `/brand` dil ön eki almadan doğrudan hedefe gider.
   // `permanent: false`: hedef adres değişirse tarayıcı önbelleği eski adreste
   // takılı kalmasın.
   async redirects() {
@@ -40,6 +40,11 @@ const nextConfig: NextConfig = {
       {
         source: '/roadmap',
         destination: 'https://ytu-blockchain.notion.site/',
+        permanent: false,
+      },
+      {
+        source: '/brand',
+        destination: 'https://ytu-blockchain.notion.site/brand',
         permanent: false,
       },
     ];
