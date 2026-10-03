@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider, type Locale } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
 import { Analytics } from '@/components/analytics';
@@ -63,6 +67,38 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: 'Meta' });
+  const tNav = await getTranslations({ locale, namespace: 'Nav' });
+
+  /*
+    İstemciye YALNIZCA istemci bileşenlerinin okuduğu metinler iniyor.
+
+    `NextIntlClientProvider` messages'sız kullanıldığında bütün katalog her
+    sayfanın HTML'ine gömülüyordu — KVKK aydınlatma metninin tamamı dahil,
+    onu hiç kullanmayan sayfalarda bile (`/tr` ≈ 139 KB). Sunucu bileşenleri
+    `getTranslations` ile okuduğu için bu listede yer almalarına gerek yok;
+    liste yalnızca `'use client'` bileşenlerinin ihtiyacı:
+
+      Nav                 → Header, LanguageSwitcher
+      Forms               → SiteForm
+      Blog                → BlogFeed, PostCard
+      Error               → error.tsx (hata sınırı layout'un içinde çiziliyor)
+      Landing.hackathons  → HackathonsCarousel
+      Landing.sticker     → LandingSticker
+
+    Yeni bir istemci bileşeni başka bir ad alanı okursa buraya eklenmeli,
+    yoksa çalışma zamanında "missing message" hatası verir.
+  */
+  const messages = await getMessages();
+  const clientMessages = {
+    Nav: messages.Nav,
+    Forms: messages.Forms,
+    Blog: messages.Blog,
+    Error: messages.Error,
+    Landing: {
+      hackathons: messages.Landing.hackathons,
+      sticker: messages.Landing.sticker,
+    },
+  };
 
   return (
     <html
@@ -97,7 +133,16 @@ export default async function LocaleLayout({
                     '@type': 'CollegeOrUniversity',
                     name: 'Yıldız Teknik Üniversitesi',
                   },
-                  sameAs: Object.values(siteConfig.social),
+                  /* `sameAs` = kulübün KİMLİĞİNİ taşıyan profiller. WhatsApp
+                     bilerek dışarıda: o bir grup davet bağlantısı, kulübün
+                     profili değil. */
+                  sameAs: [
+                    siteConfig.social.github,
+                    siteConfig.social.x,
+                    siteConfig.social.instagram,
+                    siteConfig.social.medium,
+                    siteConfig.social.spotify,
+                  ],
                 },
                 {
                   '@type': 'WebSite',
@@ -111,11 +156,23 @@ export default async function LocaleLayout({
             }),
           }}
         />
-        <NextIntlClientProvider>
+        {/* Klavyeyle gezenin header'ı atlamasını sağlayan ilk odak hedefi.
+            Normalde görünmez; yalnızca odaklanınca sol üstte beliriyor.
+            Sayfadaki İLK odaklanabilir öğe olmak zorunda, bu yüzden Header'ın
+            da üstünde. */}
+        <a
+          href="#main"
+          className="bg-background text-foreground focus:ring-ring sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded focus:px-4 focus:py-2 focus:ring-2 focus:outline-none"
+        >
+          {tNav('skipToContent')}
+        </a>
+        <NextIntlClientProvider messages={clientMessages}>
           <Header />
           {/* Zemin = grid çizgi rengi → çerçeve (yan raylar + hücre araları)
               header'dan sayfa gövdesine kesintisiz ve tek tonda devam eder. */}
-          <main className="bg-grid-line flex-1">{children}</main>
+          <main id="main" tabIndex={-1} className="bg-grid-line flex-1">
+            {children}
+          </main>
           <Footer />
         </NextIntlClientProvider>
         {/* Ölçüm ve çerez onay çubuğu. Sağlayıcının DIŞINDA: metnini prop

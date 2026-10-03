@@ -1,11 +1,11 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, BookText, Map, Podcast } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
 import { ButtonLink } from '@/components/ui/button';
 import { siteConfig } from '@/lib/site';
 
-import { GithubIcon, InstagramIcon, XIcon } from './brand-icons';
+import { GithubIcon, InstagramIcon, WhatsappIcon, XIcon } from './brand-icons';
 
 export function CommunityHero() {
   const t = useTranslations('Community');
@@ -86,6 +86,37 @@ export function CommunityChannels() {
       description: t('channels.instagram.description'),
       cta: t('channels.instagram.cta'),
       href: siteConfig.social.instagram,
+    },
+    /* Aşağıdaki dördü eskiden YALNIZCA `/links` sayfasında yaşıyordu: ana
+       siteye arama ya da paylaşılan bir bağlantıyla gelen ziyaretçi kulübün
+       en aktif kanalını (WhatsApp) ve öğrenme kaynaklarını hiç görmüyordu. */
+    {
+      Icon: WhatsappIcon,
+      name: t('channels.whatsapp.name'),
+      description: t('channels.whatsapp.description'),
+      cta: t('channels.whatsapp.cta'),
+      href: siteConfig.social.whatsapp,
+    },
+    {
+      Icon: Map,
+      name: t('channels.roadmap.name'),
+      description: t('channels.roadmap.description'),
+      cta: t('channels.roadmap.cta'),
+      href: siteConfig.roadmapPath,
+    },
+    {
+      Icon: BookText,
+      name: t('channels.medium.name'),
+      description: t('channels.medium.description'),
+      cta: t('channels.medium.cta'),
+      href: siteConfig.social.medium,
+    },
+    {
+      Icon: Podcast,
+      name: t('channels.spotify.name'),
+      description: t('channels.spotify.description'),
+      cta: t('channels.spotify.cta'),
+      href: siteConfig.social.spotify,
     },
   ];
 

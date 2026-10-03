@@ -32,16 +32,20 @@ Sağ üstteki **+** ile yeni yazı oluştur.
 
 ### 2. Alanları doldur
 
-| Alan              | Zorunlu | Ne yazılır                                                                |
-| ----------------- | ------- | ------------------------------------------------------------------------- |
-| **Başlık**        | ✅      | Yazının başlığı. En fazla 90 karakter.                                    |
-| **Adres**         | ✅      | Yazının site üzerindeki adresi. **Generate düğmesine bas** — aşağıya bak. |
-| **Yayın tarihi**  | ✅      | Bugünün tarihi hazır gelir; ileri/geri alabilirsin.                       |
-| **Özet**          | ✅      | 1–2 cümle. Kartlarda, Google'da ve paylaşım önizlemesinde bu görünür.     |
-| **Kapak görseli** | ✅      | Yatay (16:9) görsel. Altındaki **Alternatif metin** de zorunlu.           |
-| **Yazar**         | ✅      | Listeden seç. Yoksa önce yazar oluştur (aşağıda).                         |
-| **Etiketler**     | —       | En fazla dört tane, örn. `etkinlik`, `ethereum`.                          |
-| **İçerik**        | ✅      | Yazının gövdesi.                                                          |
+| Alan              | Zorunlu | Ne yazılır                                                                   |
+| ----------------- | ------- | ---------------------------------------------------------------------------- |
+| **Başlık**        | ✅      | Yazının başlığı. En fazla 90 karakter.                                       |
+| **Adres**         | ✅      | Yazının site üzerindeki adresi. **Generate düğmesine bas** — aşağıya bak.    |
+| **Yayın tarihi**  | ✅      | Bugünün tarihi hazır gelir; ileri/geri alabilirsin.                          |
+| **Özet**          | ✅      | 1–2 cümle. Kartlarda, Google'da ve paylaşım önizlemesinde bu görünür.        |
+| **Kapak görseli** | ✅      | Yatay (16:9) görsel. Altındaki **Alternatif metin** de zorunlu.              |
+| **Yazar**         | ✅      | Listeden seç. Yoksa önce yazar oluştur (aşağıda).                            |
+| **Kategori**      | ✅      | **Duyurular** ya da **Hackathonlar**. Blog listesindeki süzgeç bundan gelir. |
+| **İçerik**        | ✅      | Yazının gövdesi.                                                             |
+
+> Serbest **etiket** alanı yok: kategori kapalı bir liste. Yeni bir kategori
+> gerekiyorsa koda eklenmesi gerekir (`src/sanity/categories.ts` + iki dildeki
+> etiket), çünkü süzgeç şeridi ancak sabit bir kümeyle öngörülebilir kalıyor.
 
 ### 3. Adres alanına dikkat
 

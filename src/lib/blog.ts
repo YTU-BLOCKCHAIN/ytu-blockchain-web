@@ -43,6 +43,26 @@ type PostTranslation = {
 } | null;
 
 /**
+ * Bir yazının BAŞKA bir dildeki karşılığının adresi (`blokzincir-nedir`).
+ *
+ * TR ve EN sürümler ayrı dokümanlar ve slug'ları farklı, yani "aynı yolu öbür
+ * dille kur" yaklaşımı 404 verir. Yazı sayfasındaki "İngilizce oku" bağlantısı
+ * ve site haritası bu eşlemeden besleniyor.
+ *
+ * Karşılığı yoksa `null` — bağlantı o zaman hiç çizilmiyor.
+ */
+export function postTranslationSlug(
+  translations: PostTranslation[] | null | undefined,
+  locale: Locale,
+): string | null {
+  const match = (translations ?? []).find(
+    (entry) => entry?.language === locale && entry.slug,
+  );
+
+  return match?.slug ?? null;
+}
+
+/**
  * Bir yazının çeviri bağlarını hreflang eşlemesine çevirir
  * (`{ tr: '/tr/blog/…', en: '/en/blog/…', 'x-default': … }`).
  *

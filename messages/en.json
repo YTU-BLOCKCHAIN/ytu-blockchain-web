@@ -7,6 +7,16 @@
     "blog": "Blog",
     "contact": "Contact",
     "join": "Join us",
+    "homeLabel": "YTÜ Blockchain — home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to content",
+    "languageLabel": "Language",
+    "switchTo": "Switch to {language}",
+    "language": {
+      "tr": "Turkish",
+      "en": "English"
+    },
     "sections": {
       "about": {
         "mission": "Mission",
@@ -65,7 +75,7 @@
     },
     "blog": {
       "title": "Blog",
-      "description": "Event announcements, club news and writing on blockchain from YTU Blockchain Club."
+      "description": "Event announcements, club news and writing on blockchain from YTÜ Blockchain Club."
     },
     "contact": {
       "title": "Contact",
@@ -116,10 +126,9 @@
       "previous": "Previous slide",
       "next": "Next slide",
       "slideLabel": "Go to slide {index}",
-      "link": "Read the announcement",
-      "placeholder": "photo goes here",
-      "placeholderTitle": "Hackathon photos coming soon",
-      "placeholderNote": "Photos and placements from the hackathons we've won will show up here."
+      "slideRoleDescription": "slide",
+      "slidePosition": "{index} of {total}",
+      "link": "Read the announcement"
     },
     "sponsors": {
       "heading": "Sponsors & Partners",
@@ -138,7 +147,7 @@
     },
     "sticker": {
       "hint": "Peel it from the edge, spin it from the middle.",
-      "label": "YTU Blockchain stickers",
+      "label": "YTÜ Blockchain stickers",
       "previous": "Previous sticker",
       "next": "Next sticker",
       "slideLabel": "Sticker {index}"
@@ -287,10 +296,11 @@
       "message": "Your message",
       "submit": "Send message"
     },
+    "bookCall": "Book a call",
     "sponsorship": {
       "heading": "Sponsorships",
       "body": "To sponsor our events or explore a partnership, pick a time that works for you from our calendar.",
-      "button": "Book a call"
+      "button": "Book a sponsorship call"
     }
   },
   "Community": {
@@ -312,6 +322,26 @@
         "name": "Instagram",
         "description": "Moments from our events and the latest news.",
         "cta": "Follow"
+      },
+      "whatsapp": {
+        "name": "WhatsApp",
+        "description": "Our most active channel: questions, event chatter and day-to-day talk.",
+        "cta": "Join the group"
+      },
+      "medium": {
+        "name": "Medium",
+        "description": "Longer pieces and write-ups from our members.",
+        "cta": "Read"
+      },
+      "spotify": {
+        "name": "Podcast",
+        "description": "Our conversations on blockchain, on Spotify.",
+        "cta": "Listen"
+      },
+      "roadmap": {
+        "name": "Web3 roadmap",
+        "description": "A learning path for starting from scratch, on Notion.",
+        "cta": "Open the roadmap"
       }
     },
     "cta": {
@@ -327,7 +357,8 @@
     "filters": {
       "label": "Filter by topic",
       "all": "All",
-      "empty": "No posts in this category yet."
+      "empty": "No posts in this category yet.",
+      "onlyFeatured": "The only post in this category is the one featured above."
     },
     "empty": "No posts yet. We will be here soon.",
     "categories": {
@@ -335,7 +366,8 @@
       "hackathons": "Hackathons"
     },
     "breadcrumb": "Blog",
-    "postedBy": "Posted by {name}"
+    "postedBy": "Posted by {name}",
+    "readInOtherLanguage": "Read this post in Turkish"
   },
   "Join": {
     "eyebrow": "Join",
@@ -385,16 +417,12 @@
       }
     }
   },
-  "Common": {
-    "comingSoon": "Coming Soon",
-    "comingSoonBody": "The template for this page is ready; content will be here very soon."
-  },
   "Footer": {
     "tagline": "Building the decentralized future together.",
     "exploreHeading": "Explore",
     "socialHeading": "Social media",
     "status": "Always decentralized",
-    "rights": "© 2026 YTÜ Blockchain Club. All rights reserved.",
+    "rights": "© {year} YTÜ Blockchain Club. All rights reserved.",
     "privacy": "Privacy Notice",
     "developedBy": "Developed by",
     "developer": "Erdem Aşık"
@@ -454,6 +482,12 @@
   "NotFound": {
     "title": "Page not found",
     "description": "The page you are looking for may have moved or never existed.",
+    "back": "Back to home"
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "description": "This page could not be loaded. It is usually temporary — please try again.",
+    "retry": "Try again",
     "back": "Back to home"
   }
 }

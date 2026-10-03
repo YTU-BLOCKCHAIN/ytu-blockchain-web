@@ -7,6 +7,16 @@
     "blog": "Blog",
     "contact": "İletişim",
     "join": "Bize Katıl",
+    "homeLabel": "YTÜ Blockchain — anasayfa",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "skipToContent": "İçeriğe geç",
+    "languageLabel": "Dil",
+    "switchTo": "{language} diline geç",
+    "language": {
+      "tr": "Türkçe",
+      "en": "İngilizce"
+    },
     "sections": {
       "about": {
         "mission": "Misyonumuz",
@@ -116,10 +126,9 @@
       "previous": "Önceki kare",
       "next": "Sonraki kare",
       "slideLabel": "{index}. kareye git",
-      "link": "Haberi oku",
-      "placeholder": "görsel buraya",
-      "placeholderTitle": "Hackathon kareleri yolda",
-      "placeholderNote": "Kazandığımız hackathon'lardan fotoğraflar ve derecelerimiz buraya gelecek."
+      "slideRoleDescription": "kare",
+      "slidePosition": "{total} kareden {index}.",
+      "link": "Haberi oku"
     },
     "sponsors": {
       "heading": "Sponsorlar & Partnerler",
@@ -287,10 +296,11 @@
       "message": "Mesajınız",
       "submit": "Gönder"
     },
+    "bookCall": "Görüşme ayarla",
     "sponsorship": {
       "heading": "Sponsorluklar",
       "body": "Etkinliklerimize sponsor olmak ve iş birliği olanaklarını konuşmak için takvimimizden size uygun bir zamanı seçin.",
-      "button": "Görüşme ayarla"
+      "button": "Sponsorluk görüşmesi ayarla"
     }
   },
   "Community": {
@@ -312,6 +322,26 @@
         "name": "Instagram",
         "description": "Etkinliklerimizden kareler ve güncel haberler.",
         "cta": "Takip et"
+      },
+      "whatsapp": {
+        "name": "WhatsApp",
+        "description": "En hareketli kanalımız: sorular, etkinlik sohbeti ve günlük muhabbet.",
+        "cta": "Gruba katıl"
+      },
+      "medium": {
+        "name": "Medium",
+        "description": "Üyelerimizin uzun yazıları ve anlatıları.",
+        "cta": "Oku"
+      },
+      "spotify": {
+        "name": "Podcast",
+        "description": "Blockchain üzerine sohbetlerimiz, Spotify'da.",
+        "cta": "Dinle"
+      },
+      "roadmap": {
+        "name": "Web3 Yol Haritası",
+        "description": "Sıfırdan başlayanlar için öğrenme rehberi, Notion'da.",
+        "cta": "Yol haritasını aç"
       }
     },
     "cta": {
@@ -327,7 +357,8 @@
     "filters": {
       "label": "Konuya göre süz",
       "all": "Tümü",
-      "empty": "Bu kategoride henüz yazı yok."
+      "empty": "Bu kategoride henüz yazı yok.",
+      "onlyFeatured": "Bu kategorideki tek yazı yukarıda öne çıkarıldı."
     },
     "empty": "Henüz yazı yok. Yakında burada olacağız.",
     "categories": {
@@ -335,7 +366,8 @@
       "hackathons": "Hackathonlar"
     },
     "breadcrumb": "Blog",
-    "postedBy": "Yazan {name}"
+    "postedBy": "Yazan {name}",
+    "readInOtherLanguage": "Bu yazıyı İngilizce oku"
   },
   "Join": {
     "eyebrow": "Üye Ol",
@@ -385,16 +417,12 @@
       }
     }
   },
-  "Common": {
-    "comingSoon": "Çok Yakında",
-    "comingSoonBody": "Bu sayfanın şablonu hazır; içerik çok yakında burada olacak."
-  },
   "Footer": {
     "tagline": "Merkeziyetsiz geleceği birlikte inşa ediyoruz.",
     "exploreHeading": "Keşfet",
     "socialHeading": "Sosyal Medya",
     "status": "Daima merkeziyetsiz",
-    "rights": "© 2026 YTÜ Blockchain Kulübü. Tüm hakları saklıdır.",
+    "rights": "© {year} YTÜ Blockchain Kulübü. Tüm hakları saklıdır.",
     "privacy": "Aydınlatma Metni",
     "developedBy": "Geliştiren",
     "developer": "Erdem Aşık"
@@ -454,6 +482,12 @@
   "NotFound": {
     "title": "Sayfa bulunamadı",
     "description": "Aradığınız sayfa taşınmış ya da hiç var olmamış olabilir.",
+    "back": "Anasayfaya dön"
+  },
+  "Error": {
+    "title": "Bir şeyler ters gitti",
+    "description": "Bu sayfa yüklenemedi. Genellikle geçici bir durumdur — tekrar denemeyi deneyin.",
+    "retry": "Tekrar dene",
     "back": "Anasayfaya dön"
   }
 }

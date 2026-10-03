@@ -3,7 +3,8 @@ import Image from 'next/image';
 
 import { Container } from '@/components/container';
 import { Link } from '@/i18n/navigation';
-import { formatPostDate } from '@/lib/blog';
+import { formatPostDate, postTranslationSlug } from '@/lib/blog';
+import { routing } from '@/i18n/routing';
 import { CATEGORY_LABEL_KEY, isPostCategory } from '@/sanity/categories';
 import { imageUrl } from '@/sanity/lib/image';
 import type { PostQueryResult } from '@/sanity/types';
@@ -21,6 +22,15 @@ export function PostArticle({
   const date = formatPostDate(post.publishedAt, locale);
   const category = isPostCategory(post.category) ? post.category : null;
 
+  /* Yazının öbür dildeki karşılığı. Çeviri bağları zaten çekiliyordu ama
+     yalnızca hreflang'e gidiyordu: okuyucu öbür sürümün VARLIĞINI göremiyordu.
+     Slug'lar dile göre farklı olduğu için adres bağlardan çözülüyor; karşılığı
+     olmayan yazıda bağlantı hiç çizilmiyor. */
+  const otherLocale = routing.locales.find((candidate) => candidate !== locale);
+  const otherSlug = otherLocale
+    ? postTranslationSlug(post.translations, otherLocale)
+    : null;
+
   // Yazar künyesi — adı olmayan yazarda hiç basılmıyor, çünkü tek başına bir
   // profil fotoğrafı kimin yazdığını söylemiyor.
   const byline = post.author?.name ? (
@@ -36,7 +46,18 @@ export function PostArticle({
           className="ring-border-illustration bg-card size-6 shrink-0 rounded-full object-cover ring-1"
         />
       ) : null}
-      <span>{t('postedBy', { name: post.author.name })}</span>
+      <span>
+        {t('postedBy', { name: post.author.name })}
+        {/* Rol şemada toplanıyordu ve sorguya dahildi ama hiçbir yerde
+            görünmüyordu — oysa "Developer Lead" gibi bir satır, yazıyı kimin
+            yazdığı kadar neden yazdığını da anlatıyor. */}
+        {post.author.role ? (
+          <span className="text-muted-foreground/70">
+            {' '}
+            · {post.author.role}
+          </span>
+        ) : null}
+      </span>
     </>
   ) : null;
 
@@ -110,6 +131,19 @@ export function PostArticle({
             ) : null}
 
             {post.body ? <PostBody value={post.body} /> : null}
+
+            {otherSlug && otherLocale ? (
+              <p className="mt-10">
+                <Link
+                  href={`/blog/${otherSlug}`}
+                  locale={otherLocale}
+                  lang={otherLocale}
+                  className="text-primary text-sm duration-150 hover:underline"
+                >
+                  {t('readInOtherLanguage')}
+                </Link>
+              </p>
+            ) : null}
 
             {byline ? (
               <footer className="mt-12 border-t pt-6">

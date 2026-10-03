@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { Container, Separator } from '@/components/container';
+import { LanguageSwitcher } from '@/components/language-switcher';
 import { Logo } from '@/components/logo';
 import {
   Accordion,
@@ -106,7 +107,10 @@ export default function Header() {
 
   React.useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
+    // `passive`: dinleyici yalnızca `scrollY` okuyor, `preventDefault`
+    // çağırmıyor. İşaretlenmezse tarayıcı her kaydırma karesinde handler'ın
+    // dönmesini beklemek zorunda kalıyor ve mobilde kaydırma takılabiliyor.
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -140,14 +144,18 @@ export default function Header() {
           <Container className="backdrop-blur">
             <div className="relative flex flex-wrap items-center justify-between px-6 lg:px-12 lg:py-5">
               <div className="z-51 relative flex justify-between gap-8 max-lg:h-14 max-lg:w-full">
-                <Link href="/" aria-label="home" className="flex items-center">
+                <Link
+                  href="/"
+                  aria-label={t('homeLabel')}
+                  className="flex items-center"
+                >
                   <Logo />
                 </Link>
 
                 <button
                   type="button"
                   onClick={() => setIsMobileMenuOpen((v) => !v)}
-                  aria-label={isMobileMenuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+                  aria-label={isMobileMenuOpen ? t('closeMenu') : t('openMenu')}
                   aria-expanded={isMobileMenuOpen}
                   className="text-foreground relative z-20 -m-2.5 -mr-3 block cursor-pointer p-2.5 lg:hidden"
                 >
@@ -170,7 +178,8 @@ export default function Header() {
               {/* Yalnızca masaüstü CTA — mobilde MobileMenu kendi "Bize Katıl"
                   butonunu render ediyor (o, tıklanınca menüyü de kapatıyor).
                   Burayı mobilde göstermek iki özdeş buton demek. */}
-              <div className="z-51 relative hidden items-center justify-end lg:flex">
+              <div className="z-51 relative hidden items-center justify-end gap-3 lg:flex">
+                <LanguageSwitcher />
                 <ButtonLink href="/join" size="sm">
                   {t('join')}
                 </ButtonLink>
@@ -352,6 +361,10 @@ function MobileMenu({ closeMenu }: { closeMenu: () => void }) {
       <ButtonLink href="/join" onClick={closeMenu} className="mt-4 w-full">
         {t('join')}
       </ButtonLink>
+
+      {/* Mobilde dil seçimi menünün sonunda: CTA'nın önüne geçmemeli ama
+          masaüstündeki gibi her sayfadan erişilebilir olmalı. */}
+      <LanguageSwitcher className="mt-6 w-fit" />
     </nav>
   );
 }

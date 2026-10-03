@@ -6,7 +6,7 @@ import { imageUrl } from '@/sanity/lib/image';
 import { type HackathonSlide, HackathonsCarousel } from './hackathons-carousel';
 
 /**
- * "Kazandığımız hackathonlar" bölümünün veri katmanı.
+ * "Katıldığımız hackathonlar" bölümünün veri katmanı.
  *
  * Karusel istemci bileşeni (kaydırma durumu tarayıcıda) olduğu için verisini
  * kendisi çekemiyor — `LandingPosts` gibi tek parça olamamasının sebebi bu.
@@ -25,19 +25,31 @@ export async function LandingHackathons() {
 
   const locale = await getLocale();
 
-  const items: HackathonSlide[] = hackathons.map((hackathon) => ({
-    key: hackathon._id,
-    event: hackathon.event ?? undefined,
-    year: hackathon.year ?? undefined,
-    // Şema iki dili de zorunlu kılıyor; yine de `?.` ile geçiyoruz çünkü
-    // üretilen tipler alanları isteğe bağlı sayıyor: doğrulama Studio'da
-    // çalışıyor, Content Lake'te eski/eksik bir kayıt bulunması mümkün.
-    award: hackathon.award?.[locale] ?? undefined,
-    detail: hackathon.detail?.[locale] ?? undefined,
-    // 16:10 — kartın mobildeki en/boy oranı. 2× ölçü retina ekran için.
-    image: hackathon.image ? imageUrl(hackathon.image, 1200, 750) : undefined,
-    url: hackathon.url ?? undefined,
-  }));
+  /* Eksik kayıt elenir: `event` ve `year` şemada zorunlu ama üretilen tipler
+     alanları isteğe bağlı sayıyor (doğrulama Studio'da çalışır, Content
+     Lake'te eski bir kayıt eksik olabilir). Eskiden böyle bir kayıt karta
+     "yer tutucu başlık" olarak düşüyordu; artık hiç çizilmiyor — yayındaki
+     bölüm yarım görünmesin. */
+  const items: HackathonSlide[] = hackathons.flatMap((hackathon) => {
+    if (!hackathon.event || !hackathon.year) return [];
+
+    return [
+      {
+        key: hackathon._id,
+        event: hackathon.event,
+        year: hackathon.year,
+        award: hackathon.award?.[locale] ?? undefined,
+        detail: hackathon.detail?.[locale] ?? undefined,
+        // 16:10 — kartın mobildeki en/boy oranı. 2× ölçü retina ekran için.
+        image: hackathon.image
+          ? imageUrl(hackathon.image, 1200, 750)
+          : undefined,
+        url: hackathon.url ?? undefined,
+      },
+    ];
+  });
+
+  if (items.length === 0) return null;
 
   return <HackathonsCarousel items={items} />;
 }

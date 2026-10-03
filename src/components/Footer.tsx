@@ -4,8 +4,11 @@ import { ConsentPreferencesButton } from '@/components/analytics/consent-prefere
 import {
   GithubIcon,
   InstagramIcon,
+  WhatsappIcon,
   XIcon,
 } from '@/components/community/brand-icons';
+import { BookText, Podcast } from 'lucide-react';
+
 import { Container, Separator } from '@/components/container';
 import { Logo } from '@/components/logo';
 import { buttonClasses } from '@/components/ui/button';
@@ -24,9 +27,12 @@ const EXPLORE = [
 
 /** Sosyal medya sütunu — marka adları çevrilmez, olduğu gibi gösterilir. */
 const SOCIALS = [
-  { name: 'GitHub', Icon: GithubIcon, href: siteConfig.social.github },
-  { name: 'X', Icon: XIcon, href: siteConfig.social.x },
+  { name: 'WhatsApp', Icon: WhatsappIcon, href: siteConfig.social.whatsapp },
   { name: 'Instagram', Icon: InstagramIcon, href: siteConfig.social.instagram },
+  { name: 'X', Icon: XIcon, href: siteConfig.social.x },
+  { name: 'GitHub', Icon: GithubIcon, href: siteConfig.social.github },
+  { name: 'Medium', Icon: BookText, href: siteConfig.social.medium },
+  { name: 'Podcast', Icon: Podcast, href: siteConfig.social.spotify },
 ] as const;
 
 export default function Footer() {
@@ -47,7 +53,11 @@ export default function Footer() {
             görünüyordu. @4xl (masaüstü) düzeni değişmedi. */}
         <div className="@4xl:grid-cols-4 grid grid-cols-2 gap-px">
           <div data-grid-content className="col-span-2 space-y-6 p-6 lg:p-12">
-            <Link href="/" aria-label="home" className="block size-fit">
+            <Link
+              href="/"
+              aria-label={tNav('homeLabel')}
+              className="block size-fit"
+            >
               <Logo />
             </Link>
             <p className="text-muted-foreground text-balance">{t('tagline')}</p>
@@ -107,7 +117,7 @@ export default function Footer() {
           >
             <div className="text-muted-foreground flex flex-col gap-1 text-sm">
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                <span>{t('rights')}</span>
+                <span>{t('rights', { year: new Date().getFullYear() })}</span>
                 <Link
                   href="/privacy"
                   className="hover:text-primary duration-150"

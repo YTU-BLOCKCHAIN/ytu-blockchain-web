@@ -1,7 +1,7 @@
 import { defineField, defineType } from 'sanity';
 
 /**
- * Ana sayfadaki "Kazandığımız hackathonlar" karuselinin bir karesi.
+ * Ana sayfadaki "Katıldığımız hackathonlar" karuselinin bir karesi.
  *
  * Dil **alan seviyesinde**: tek doküman, `award` ve `detail` içinde dil alt
  * alanları (gerekçe: `localized.ts`). `event`, `year`, görsel ve bağlantı
