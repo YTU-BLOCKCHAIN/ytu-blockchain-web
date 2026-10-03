@@ -106,7 +106,10 @@ export default function Header() {
 
   React.useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
+    // `passive`: dinleyici yalnızca `scrollY` okuyor, `preventDefault`
+    // çağırmıyor. İşaretlenmezse tarayıcı her kaydırma karesinde handler'ın
+    // dönmesini beklemek zorunda kalıyor ve mobilde kaydırma takılabiliyor.
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
