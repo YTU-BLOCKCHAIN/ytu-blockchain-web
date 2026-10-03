@@ -98,7 +98,16 @@ export default async function LocaleLayout({
                     '@type': 'CollegeOrUniversity',
                     name: 'Yıldız Teknik Üniversitesi',
                   },
-                  sameAs: Object.values(siteConfig.social),
+                  /* `sameAs` = kulübün KİMLİĞİNİ taşıyan profiller. WhatsApp
+                     bilerek dışarıda: o bir grup davet bağlantısı, kulübün
+                     profili değil. */
+                  sameAs: [
+                    siteConfig.social.github,
+                    siteConfig.social.x,
+                    siteConfig.social.instagram,
+                    siteConfig.social.medium,
+                    siteConfig.social.spotify,
+                  ],
                 },
                 {
                   '@type': 'WebSite',

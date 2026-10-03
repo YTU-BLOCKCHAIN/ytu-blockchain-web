@@ -4,8 +4,11 @@ import { ConsentPreferencesButton } from '@/components/analytics/consent-prefere
 import {
   GithubIcon,
   InstagramIcon,
+  WhatsappIcon,
   XIcon,
 } from '@/components/community/brand-icons';
+import { BookText, Podcast } from 'lucide-react';
+
 import { Container, Separator } from '@/components/container';
 import { Logo } from '@/components/logo';
 import { buttonClasses } from '@/components/ui/button';
@@ -24,9 +27,12 @@ const EXPLORE = [
 
 /** Sosyal medya sütunu — marka adları çevrilmez, olduğu gibi gösterilir. */
 const SOCIALS = [
-  { name: 'GitHub', Icon: GithubIcon, href: siteConfig.social.github },
-  { name: 'X', Icon: XIcon, href: siteConfig.social.x },
+  { name: 'WhatsApp', Icon: WhatsappIcon, href: siteConfig.social.whatsapp },
   { name: 'Instagram', Icon: InstagramIcon, href: siteConfig.social.instagram },
+  { name: 'X', Icon: XIcon, href: siteConfig.social.x },
+  { name: 'GitHub', Icon: GithubIcon, href: siteConfig.social.github },
+  { name: 'Medium', Icon: BookText, href: siteConfig.social.medium },
+  { name: 'Podcast', Icon: Podcast, href: siteConfig.social.spotify },
 ] as const;
 
 export default function Footer() {

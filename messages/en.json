@@ -321,6 +321,26 @@
         "name": "Instagram",
         "description": "Moments from our events and the latest news.",
         "cta": "Follow"
+      },
+      "whatsapp": {
+        "name": "WhatsApp",
+        "description": "Our most active channel: questions, event chatter and day-to-day talk.",
+        "cta": "Join the group"
+      },
+      "medium": {
+        "name": "Medium",
+        "description": "Longer pieces and write-ups from our members.",
+        "cta": "Read"
+      },
+      "spotify": {
+        "name": "Podcast",
+        "description": "Our conversations on blockchain, on Spotify.",
+        "cta": "Listen"
+      },
+      "roadmap": {
+        "name": "Web3 roadmap",
+        "description": "A learning path for starting from scratch, on Notion.",
+        "cta": "Open the roadmap"
       }
     },
     "cta": {
