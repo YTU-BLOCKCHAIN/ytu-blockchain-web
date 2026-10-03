@@ -178,13 +178,23 @@ export default function LinksPage() {
     /* Telefonda tam ekran: yatay padding yok, kartlar kenardan kenara. Yatay
        boşluk ve üst nefes payı yalnızca sm'den itibaren (orada liste `max-w-md`
        ile ortalanıyor). Alt padding, son satırı sabit kaydırma şeridinin
-       yoğun kısmından kurtarır. */
-    <main className="flex flex-1 flex-col items-center pb-24 sm:px-4 sm:pt-14">
-      <div className="w-full max-w-md">
+       yoğun kısmından kurtarır. md'den itibaren içerik dikeyde de ortalanır:
+       geniş ekranda sayfa tek karttan ibaret, tepeye yapışınca altı boş bir
+       kuyu gibi kalıyordu. (İçerik taşarsa main zaten içerikle uzar,
+       justify-center etkisiz kalır — kırpma riski yok.) */
+    <main className="flex flex-1 flex-col items-center pb-24 sm:px-4 sm:pt-14 md:justify-center md:py-16">
+      <div className="w-full max-w-md md:max-w-4xl">
         {/* `gap-px`: kartlar arasındaki 1px boşluklardan zemin (tam siyah)
-            sızar, ayraç çizgisi bu. Kartlar siyahın üstünde hafif yükselti. */}
-        <div className="grid gap-px">
-          <header className="bg-card relative overflow-hidden px-6 py-10 text-center sm:rounded">
+            sızar, ayraç çizgisi bu. Kartlar siyahın üstünde hafif yükselti.
+
+            md'den itibaren iki panel: solda profil (header), sağda bağlantı
+            listesi. Telefondaki dar sütun geniş ekranda siyah boşlukta ince
+            bir şerit gibi kaybolmasın diye. Aradaki 1px boşluk da satır
+            araları ile aynı ayraç dili. */}
+        <div className="grid gap-px md:grid-cols-[minmax(0,4fr)_minmax(0,5fr)]">
+          {/* md'de header sol kolonun tamamını kaplar (grid stretch) ve içerik
+              dikeyde ortalanır; mask zaten absolute, flex'ten etkilenmez. */}
+          <header className="bg-card relative overflow-hidden px-6 py-10 text-center sm:rounded md:flex md:flex-col md:justify-center md:px-10 md:py-16">
             {/* Sitedeki hero'larla aynı teknik: CSS mask + bg-foreground →
                 görsel metin rengini alır. Sayfa her zaman koyu olduğu için
                 opaklık tek değer (`dark:` varyantı OS temasına bakardı, bu
@@ -205,21 +215,26 @@ export default function LinksPage() {
             />
             <div className="relative flex flex-col items-center">
               <h1 className="flex items-center justify-center">
-                <Logo className="scale-110" />
+                <Logo className="scale-110 md:scale-125" />
                 <span className="sr-only">{profile.title}</span>
               </h1>
-              <span className="text-primary mt-6 font-mono text-xs tracking-widest lowercase">
+              <span className="text-primary mt-6 font-display text-xs tracking-widest uppercase">
                 {'//'} bağlantılar
               </span>
-              <p className="text-muted-foreground mt-3 text-balance text-sm">
+              <p className="text-muted-foreground mt-3 text-balance text-sm md:text-base">
                 {profile.tagline}
               </p>
             </div>
           </header>
 
-          {rows.map((row) => (
-            <LinkRow key={`${row.link.label}-${row.link.url}`} {...row} />
-          ))}
+          {/* İç grid de `gap-px`: telefonda dıştaki ile aynı ayraçlar, yani
+              görünüm eskisiyle birebir. md'de sağ kolon soldan kısaysa
+              satırlar stretch ile eşit büyüyüp paneli doldurur. */}
+          <div className="grid gap-px">
+            {rows.map((row) => (
+              <LinkRow key={`${row.link.label}-${row.link.url}`} {...row} />
+            ))}
+          </div>
         </div>
       </div>
 
