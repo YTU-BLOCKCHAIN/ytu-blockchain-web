@@ -9,7 +9,7 @@ export default function ComingSoon({ title }: ComingSoonProps) {
 
   return (
     <section className="mx-auto flex min-h-[50vh] max-w-6xl flex-col items-center justify-center gap-4 px-4 py-24 text-center">
-      <span className="font-mono text-xs tracking-widest text-emerald-500 uppercase">
+      <span className="text-primary font-display text-xs tracking-widest uppercase">
         {'//'} {t('comingSoon')}
       </span>
       <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">

@@ -38,7 +38,7 @@ export function JoinHero() {
               }}
             />
             <div className="relative">
-              <span className="text-primary font-mono text-xs tracking-widest lowercase">
+              <span className="text-primary font-display text-xs tracking-widest uppercase">
                 {'//'} {t('eyebrow')}
               </span>
               <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
@@ -119,7 +119,7 @@ export function JoinApplication() {
           <ul className="mt-4 space-y-3">
             {expect.map((item) => (
               <li key={item} className="flex items-center gap-3">
-                <CheckCircle2 className="size-4 shrink-0 fill-emerald-400/25 text-emerald-600 dark:text-emerald-500" />
+                <CheckCircle2 className="size-4 shrink-0 fill-primary/25 text-primary" />
                 <span className="text-sm">{item}</span>
               </li>
             ))}

@@ -7,7 +7,7 @@ export default function NotFound() {
 
   return (
     <section className="mx-auto flex min-h-[60vh] max-w-6xl flex-col items-center justify-center gap-4 px-4 text-center">
-      <span className="font-mono text-6xl font-bold text-emerald-500">404</span>
+      <span className="text-primary font-display text-6xl">404</span>
       <h1 className="text-2xl font-semibold">{t('title')}</h1>
       <p className="text-foreground/60">{t('description')}</p>
       <Link

@@ -2,10 +2,35 @@
 @import 'tw-animate-css';
 
 @theme {
-  /* Gövde fontu Inter (yerel @fontsource-variable/inter — build ağdan
-     bağımsız). Mono rolü (eyebrow'lar) Geist Mono'da kalır. */
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), 'Fira Code', monospace;
+  /* Marka kitinin iki fontu (`ytu-brand/design.md`): display + gövde, üçüncüsü
+     yok. Yüzler `src/fonts/index.ts` içinde `next/font/local` ile yükleniyor ve
+     <html> üzerine `--font-*-face` olarak basılıyor; buradaki iki katman ayrı
+     tutuluyor çünkü Tailwind `--font-display`'i `.font-display` yardımcısına
+     çeviriyor ve aynı adı next/font'a da verseydik değişken kendini işaret
+     ederdi (`var(--font-display)` içinde `--font-display`) — kural sessizce
+     düşer, başlıklar yedek yüzde kalırdı.
+
+     `--font-mono` KOD İÇİN kalıyor. Kit iki fontla sınırlı ama bu bir sunum
+     sistemi; kod bloğunda hizalama işlevsel bir gereklilik. Üçüncü bir dosya
+     indirilmiyor — sistem monospace'i kullanılıyor, yani kitin "üçüncü font
+     ekleme" yasağı (ek yüz yüklemek) fiilen korunuyor. */
+  --font-sans: var(--font-body-face), 'Helvetica Neue', Arial, sans-serif;
+  --font-display: var(--font-display-face), 'Courier New', monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /*
+    Tailwind'in `text-5xl` ve `text-6xl` varsayılan satır yüksekliği 1.0.
+    Kit display yüzü için EN AZ 1.10 şart koşuyor ve gerekçesini ölçüyle
+    veriyor: fontun dikey sınırları (em cinsinden) büyük harf tepesi 0.823,
+    İ noktası / Ğ breve tepesi 1.000, Ş/Ç sedilla dibi -0.235. 1.0'da bir
+    satırın sedillası alttaki satırın aksanına giriyor — "geleceği YTÜ'de"
+    gibi bir başlıkta ğ ve Ü üstteki satıra değiyor.
+
+    Yalnız bu iki kademe düzeltiliyor; text-4xl zaten 1.111, geri kalanı daha
+    açık. Değer kitin `.d-chapter`'ı ile aynı (1.12).
+  */
+  --text-5xl--line-height: 1.12;
+  --text-6xl--line-height: 1.12;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -215,33 +240,66 @@
     border-color: var(--color-border, currentColor);
   }
 
+  /*
+    === MARKA İLKELLERİ (ytu-brand/design.md) ==============================
+    Kitin tüm paleti bu dört değerden ibaret. Aşağıdaki tema blokları YALNIZ
+    bunlardan türetir; ham hex hiçbir yerde ikinci kez yazılmaz.
+
+    Kit koyu-tek-tema bir SUNUM sistemi ("Açık tema yok"); site ise OS temasını
+    takip ediyor. Açık temanın karşılığı kitte tanımlı değil, o yüzden burada
+    türetildi: yüzey ilişkileri (zemin < kart) korunur, renkler marka ailesine
+    çekilir.
+  */
+  :root {
+    --brand-void: #0a0a0c; /* ana koyu yüzey — nötr siyah değil, mavi yanlı */
+    --brand-signal: #0e6cff; /* marka mavisi — vurgu, aksiyon */
+    --brand-deep: #000560; /* marka laciverti — ikincil koyu yüzey */
+    --brand-ink: #ffffff;
+  }
+
   :root {
     --radius: 0.625rem;
 
+    /*
+      Zemin ve mürekkep BİLEREK marka tokenlarına bağlanmadı: `--grid-line`
+      bu ikisinden türüyor (aşağıdaki color-mix) ve sitedeki bütün hairline'lar
+      ondan besleniyor. Marka mavisine yatık bir zemin ızgaranın tonunu da
+      kaydırıyordu; ayarlanmış nötr değerler korunuyor.
+    */
     --background: var(--color-zinc-50);
     --foreground: var(--color-zinc-950);
 
-    --card: var(--color-white);
-    --illustration: var(--color-white);
-    --card-foreground: var(--color-zinc-950);
+    --card: #fff;
+    --illustration: #fff;
+    --card-foreground: var(--brand-void);
 
-    --popover: var(--color-white);
-    --popover-foreground: var(--color-zinc-950);
+    --popover: #fff;
+    --popover-foreground: var(--brand-void);
 
-    /* Lacivert (navy) marka aksanı. Butonla (blue-700) uyumlu; koyu temada
-       okunabilirlik için blue-500'e açılır (aşağıdaki .dark bloğu). */
-    --primary: var(--color-blue-700);
-    --primary-foreground: var(--color-white);
+    --primary: var(--brand-signal);
+    --primary-foreground: #fff;
 
-    --secondary: var(--color-sky-100);
-    --secondary-foreground: var(--color-sky-600);
+    --secondary: color-mix(in oklab, var(--brand-signal) 12%, #fff);
+    --secondary-foreground: var(--brand-deep);
 
-    --muted: --alpha(var(--color-foreground) / 5%);
-    --muted-foreground: var(--color-zinc-600);
+    /*
+      Kademeler kitteki gibi SAYDAMLIKLA kuruluyor, gri tonlarıyla değil
+      (--ink-dim .58 / --ink-faint .34). Aynı oranlar açık ve koyu temada aynı
+      algısal kademeyi verdiği için iki blokta da tekrar edilebiliyor; zinc-600
+      gibi sabit bir gri koyu temada yeniden seçilmek zorundaydı.
+    */
+    --muted: --alpha(var(--foreground) / 5%);
+    --muted-foreground: --alpha(var(--foreground) / 62%);
 
-    --accent: var(--color-zinc-100);
-    --accent-foreground: var(--color-zinc-800);
+    --accent: color-mix(in oklab, var(--brand-deep) 7%, #fff);
+    --accent-foreground: var(--brand-deep);
 
+    /*
+      Kit kırmızıyı yasaklıyor ("Palette kırmızı, yeşil, sarı yoktur") ama orası
+      bir sunum yüzeyi: form yok, hata durumu yok. Burada `--destructive` form
+      doğrulamasında kullanılıyor ve hatayı yalnız punto/etiketle anlatmak
+      erişilebilirlik açısından yetersiz. Bilerek korunan tek palet dışı renk.
+    */
     --destructive: var(--color-red-600);
     --destructive-foreground: var(--color-white);
 
@@ -261,37 +319,61 @@
     */
     --grid-line: color-mix(in srgb, var(--foreground) 10%, var(--background));
 
-    --chart-1: var(--color-blue-500);
-    --chart-2: var(--color-indigo-500);
-    --chart-3: var(--color-purple-500);
-    --chart-4: var(--color-indigo-400);
-    --chart-5: var(--color-red-500);
+    /* Kitte mor/kırmızı yok; seri ayrımı ton değil AÇIKLIK farkıyla kuruluyor:
+       signal'dan deep'e tek eksende beş kademe. */
+    --chart-1: var(--brand-signal);
+    --chart-2: color-mix(in oklab, var(--brand-signal) 72%, var(--brand-deep));
+    --chart-3: color-mix(in oklab, var(--brand-signal) 46%, var(--brand-deep));
+    --chart-4: color-mix(in oklab, var(--brand-signal) 22%, var(--brand-deep));
+    --chart-5: var(--brand-deep);
   }
 
   /* Karanlık mod artık kullanıcının OS temasını takip eder (manuel toggle yok).
      `dark:` varyantı da Tailwind v4 varsayılanı olan bu media-query'ye döner. */
   @media (prefers-color-scheme: dark) {
     :root {
+      /* Zemin/mürekkep nötr kalıyor (bkz. açık tema notu — ızgara rengi buradan
+         türüyor). Zaten void #0a0a0c ile zinc-950 #09090b arasında gözle
+         ayırt edilir bir fark yok; marka kimliği yüzeylerden değil mavi ve
+         tipografiden geliyor. */
       --background: var(--color-zinc-950);
       --foreground: var(--color-white);
 
-      --card: color-mix(in oklab, var(--color-zinc-800) 55%, #000);
-      --illustration: color-mix(in oklab, var(--color-zinc-800) 60%, #000);
-      --card-foreground: var(--color-white);
+      /* Yükseltilmiş yüzeyler void'in üstüne DEEP karıştırılarak kuruluyor,
+         gri açılarak değil — kart kenarı zeminle aynı aileden kalıyor. Kit
+         deep'i "seyrek" kullanmayı söylüyor, o yüzden oran düşük: kart mavi
+         görünmüyor, yalnızca nötr griden ayrılıyor. */
+      --card: color-mix(in oklab, var(--brand-deep) 14%, var(--brand-void));
+      --illustration: color-mix(
+        in oklab,
+        var(--brand-deep) 20%,
+        var(--brand-void)
+      );
+      --card-foreground: var(--brand-ink);
 
-      --popover: var(--color-zinc-950);
-      --popover-foreground: var(--color-white);
+      --popover: color-mix(in oklab, var(--brand-deep) 14%, var(--brand-void));
+      --popover-foreground: var(--brand-ink);
 
-      --primary: var(--color-blue-500);
-      --primary-foreground: var(--color-white);
+      /*
+        Ham signal (#0E6CFF) void üzerinde 4.27:1 veriyor — eyebrow'lar
+        `text-xs` olduğu için AA'nın 4.5 eşiğinin ALTINDA kalıyordu. Beyazla
+        %18 karıştırılınca ~5.9:1'e çıkıyor ve küçük punto da geçiyor.
+        Açık temada bu gerekmiyor: signal beyaz üzerinde zaten 4.53:1.
+      */
+      --primary: color-mix(in oklab, var(--brand-signal) 82%, #fff);
+      --primary-foreground: var(--brand-void);
 
-      --secondary: var(--color-zinc-800);
-      --secondary-foreground: var(--color-white);
+      --secondary: color-mix(
+        in oklab,
+        var(--brand-deep) 34%,
+        var(--brand-void)
+      );
+      --secondary-foreground: var(--brand-ink);
 
-      --muted: var(--color-zinc-800);
-      --muted-foreground: var(--color-zinc-400);
-      --accent: var(--color-zinc-800);
-      --accent-foreground: var(--color-white);
+      --muted: color-mix(in oklab, var(--brand-deep) 14%, var(--brand-void));
+      --muted-foreground: --alpha(var(--foreground) / 58%);
+      --accent: color-mix(in oklab, var(--brand-deep) 24%, var(--brand-void));
+      --accent-foreground: var(--brand-ink);
 
       --destructive: var(--color-red-700);
       --destructive-foreground: var(--color-white);
@@ -299,14 +381,14 @@
       --border: --alpha(var(--foreground) / 10%);
       --border-illustration: --alpha(var(--foreground) / 10%);
       --input: --alpha(var(--foreground) / 7.5%);
-      --ring: var(--color-zinc-600);
+      --ring: --alpha(var(--foreground) / 34%);
     }
   }
 
   /*
     `/links` (linktree) paleti. Bu sayfa Instagram biyografisinden açılıyor ve
     herkeste birebir aynı görünmeli, o yüzden OS temasını TAKİP ETMEZ: her zaman
-    koyu. Değerler koyu temanınkiyle aynı, tek fark zemin — zinc-950 değil TAM
+    koyu. Değerler koyu temanınkiyle aynı, tek fark zemin — void değil TAM
     SİYAH. Kartlar (`--card`) siyahın üstünde hafif bir yükselti olarak durur,
     aralarındaki 1px boşluklar zemini gösterir, yani ayraçlar da siyahtır.
     Seçici `html.links-theme` (0,1,1): yukarıdaki `:root` bloklarını sırasından
@@ -318,20 +400,22 @@
     --background: #000;
     --foreground: var(--color-white);
 
-    --card: color-mix(in oklab, var(--color-zinc-800) 55%, #000);
-    --card-foreground: var(--color-white);
+    /* Zemin TAM SİYAH kalıyor (yukarıdaki nota bakın) ama üstündeki kademeler
+       koyu temayla aynı marka türevleri; kartlar deep karışımı, gri değil. */
+    --card: color-mix(in oklab, var(--brand-deep) 16%, #000);
+    --card-foreground: var(--brand-ink);
 
-    --primary: var(--color-blue-500);
-    --primary-foreground: var(--color-white);
+    --primary: color-mix(in oklab, var(--brand-signal) 82%, #fff);
+    --primary-foreground: var(--brand-void);
 
-    --muted: var(--color-zinc-800);
-    --muted-foreground: var(--color-zinc-400);
-    --accent: var(--color-zinc-800);
-    --accent-foreground: var(--color-white);
+    --muted: color-mix(in oklab, var(--brand-deep) 16%, #000);
+    --muted-foreground: --alpha(var(--foreground) / 58%);
+    --accent: color-mix(in oklab, var(--brand-deep) 26%, #000);
+    --accent-foreground: var(--brand-ink);
 
     --border: --alpha(var(--foreground) / 10%);
     --input: --alpha(var(--foreground) / 7.5%);
-    --ring: var(--color-zinc-600);
+    --ring: --alpha(var(--foreground) / 34%);
     --grid-line: var(--background);
   }
 
@@ -343,15 +427,35 @@
     @apply bg-background text-foreground font-sans;
   }
 
-  /* Tüm başlıklar sıkı harf aralığı (tracking-tight, -0.025em) — büyük
-     puntolarda daha derli toplu görünüm. */
+  /*
+    Başlıklar marka display fontunda (EAS VHS TR), gövde metni Clash Grotesk'te
+    — kitin iş bölümü. Yüz gerçek küçük harf glifleri taşıyor (a-z tam ve
+    büyük harflerden ayrı çizilmiş), o yüzden başlıklar DOĞAL yazımında
+    kalıyor: `text-transform: uppercase` verilseydi lang="tr" altında
+    "Blockchain" → "BLOCKCHAİN" olurdu.
+  */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    letter-spacing: -0.025em;
+    font-family: var(--font-display);
+
+    /*
+      EAS VHS tek ağırlıklı (usWeightClass 400). Bileşenlerdeki `font-semibold`
+      / `font-bold` yardımcıları taban kuralını geçtiği için ağırlığı burada
+      geri almak işe yaramıyor; onun yerine tarayıcının SAHTE kalın üretmesi
+      kapatılıyor. Sentetik kalın harfleri yatay smear ile şişiriyor ve
+      pikselli yüzün ızgarası dağılıyordu.
+    */
+    font-synthesis-weight: none;
+
+    /*
+      -0.025em Inter için ayarlanmıştı. Bu yüz zaten dar ve kendi yan boşluğunu
+      taşıyor; negatif aralıkta harfler birbirine giriyor.
+    */
+    letter-spacing: 0;
   }
 
   /* Dropdown/anchor tıklamalarında ilgili bölüme yumuşak kayma. Hareket

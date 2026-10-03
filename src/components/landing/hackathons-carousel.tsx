@@ -210,7 +210,7 @@ export function HackathonsCarousel({
                       ) : (
                         <div className="text-muted-foreground/60 absolute inset-0 flex flex-col items-center justify-center gap-3">
                           <Trophy className="size-8" />
-                          <span className="font-mono text-xs tracking-widest lowercase">
+                          <span className="font-display text-xs tracking-widest uppercase">
                             {t('placeholder')}
                           </span>
                         </div>
@@ -218,7 +218,7 @@ export function HackathonsCarousel({
                     </div>
 
                     <div className="@4xl:p-12 flex flex-1 flex-col justify-center gap-4 p-6">
-                      <span className="text-primary font-mono text-xs tracking-widest lowercase">
+                      <span className="text-primary font-display text-xs tracking-widest uppercase">
                         {slide.year
                           ? `${'//'} ${slide.year}`
                           : `${'//'} hackathon`}
@@ -236,7 +236,7 @@ export function HackathonsCarousel({
                           koyultup açmak yazıyı zeminden ayırıyor; renk yine aynı
                           mavi ailesinden, rozetin kimliği bozulmuyor. */}
                       {slide.award && (
-                        <span className="bg-primary/10 w-fit rounded-full px-3 py-1 font-mono text-xs text-blue-800 dark:text-blue-300">
+                        <span className="bg-primary/10 dark:text-primary w-fit rounded-full px-3 py-1 font-display text-xs uppercase text-[var(--brand-deep)]">
                           {slide.award}
                         </span>
                       )}

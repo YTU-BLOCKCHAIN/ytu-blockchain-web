@@ -49,8 +49,8 @@ export function LandingHero() {
                 }}
               />
               <div className="relative mx-auto max-w-3xl">
-                <div className="text-primary font-mono text-xs tracking-widest lowercase">
-                  {'//'} blockchain · defi · zk · open-source
+                <div className="text-primary font-display text-xs tracking-widest uppercase">
+                  {'//'} BLOCKCHAIN · DEFI · ZK · OPEN-SOURCE
                 </div>
                 <h1 className="text-foreground mt-4 text-balance text-4xl font-semibold sm:text-6xl">
                   {t('title')}
@@ -119,7 +119,7 @@ export function LandingFeatures() {
 
           <div className="@2xl:grid-cols-2 col-span-full grid gap-px sm:col-span-8">
             <div data-grid-content className="@4xl:p-12 col-span-full p-6">
-              <h2 className="text-muted-foreground text-balance">
+              <h2 className="text-muted-foreground font-display text-balance text-xs tracking-widest uppercase">
                 {t('heading')}
               </h2>
               <p className="text-foreground mt-6 max-w-2xl text-balance text-xl font-medium">
@@ -164,7 +164,7 @@ export function LandingManifesto() {
 
           <div className="col-span-full sm:col-span-8">
             <div data-grid-content className="@4xl:p-12 p-6">
-              <h2 className="text-muted-foreground text-balance">
+              <h2 className="text-muted-foreground font-display text-balance text-xs tracking-widest uppercase">
                 {t('heading')}
               </h2>
               <p className="text-foreground mt-6 max-w-2xl text-balance text-xl leading-relaxed font-medium">
@@ -198,7 +198,7 @@ export function LandingSponsors() {
 
           <div className="@md:grid-cols-3 col-span-full grid grid-cols-2 gap-px sm:col-span-8">
             <div data-grid-content className="@4xl:p-12 col-span-full p-6">
-              <h2 className="text-muted-foreground text-balance">
+              <h2 className="text-muted-foreground font-display text-balance text-xs tracking-widest uppercase">
                 {t('heading')}
               </h2>
               <p className="text-foreground mt-6 max-w-2xl text-balance text-xl font-medium">

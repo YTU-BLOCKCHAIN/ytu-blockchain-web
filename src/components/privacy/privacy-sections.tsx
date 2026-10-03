@@ -30,7 +30,7 @@ export function PrivacySection() {
             çocuğu, `*:p-[0.5px]` kuralını da alıyorlar ve düz `p-6` ona
             sıralamada yeniliyor → mobilde dolgu 1px'e düşüyordu. */}
         <div data-grid-content className="@4xl:p-12 @max-4xl:p-6">
-          <span className="text-primary font-mono text-xs tracking-widest lowercase">
+          <span className="text-primary font-display text-xs tracking-widest uppercase">
             {'//'} {t('eyebrow')}
           </span>
           <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -39,7 +39,7 @@ export function PrivacySection() {
           <p className="text-muted-foreground mt-6 max-w-2xl text-balance text-lg">
             {t('subtitle')}
           </p>
-          <p className="text-muted-foreground mt-6 font-mono text-xs">
+          <p className="text-muted-foreground font-display mt-6 text-xs uppercase">
             {t('updated')}
           </p>
         </div>
