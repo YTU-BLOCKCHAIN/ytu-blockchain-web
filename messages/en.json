@@ -459,5 +459,11 @@
     "title": "Page not found",
     "description": "The page you are looking for may have moved or never existed.",
     "back": "Back to home"
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "description": "This page could not be loaded. It is usually temporary — please try again.",
+    "retry": "Try again",
+    "back": "Back to home"
   }
 }

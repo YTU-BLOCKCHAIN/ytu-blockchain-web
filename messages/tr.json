@@ -459,5 +459,11 @@
     "title": "Sayfa bulunamadı",
     "description": "Aradığınız sayfa taşınmış ya da hiç var olmamış olabilir.",
     "back": "Anasayfaya dön"
+  },
+  "Error": {
+    "title": "Bir şeyler ters gitti",
+    "description": "Bu sayfa yüklenemedi. Genellikle geçici bir durumdur — tekrar denemeyi deneyin.",
+    "retry": "Tekrar dene",
+    "back": "Anasayfaya dön"
   }
 }
