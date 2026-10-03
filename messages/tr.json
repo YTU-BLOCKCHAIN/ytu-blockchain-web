@@ -345,7 +345,8 @@
       "hackathons": "Hackathonlar"
     },
     "breadcrumb": "Blog",
-    "postedBy": "Yazan {name}"
+    "postedBy": "Yazan {name}",
+    "readInOtherLanguage": "Bu yazıyı İngilizce oku"
   },
   "Join": {
     "eyebrow": "Üye Ol",

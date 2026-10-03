@@ -50,7 +50,18 @@ export function LanguageSwitcher({
         return;
       }
 
-      // `params` olmadan dinamik segmentli yollar ("/blog/[slug]") çözülemez.
+      /* Blog yazısı, karşılığı BİLİNMEDEN çevrilemez: TR ve EN sürümler ayrı
+         dokümanlar ve slug'ları farklı, yani aynı slug'ı öbür dille kurmak
+         doğrudan 404 demek. Header bu sayfanın verisini görmediği için güvenli
+         tarafa düşüyoruz: ziyaretçi öbür dilin blog listesine iniyor. Yazının
+         kendi karşılığına giden bağlantı sayfanın içinde (post-sections.tsx),
+         orada slug gerçekten biliniyor. */
+      if (/^\/blog\/.+/.test(pathname)) {
+        router.replace('/blog', { locale });
+        return;
+      }
+
+      // `params` olmadan dinamik segmentli yollar çözülemez.
       router.replace(
         // @ts-expect-error -- pathname dinamik segment taşıyabilir; değerler
         // `params` ile veriliyor, next-intl'in tipi bu ikiliyi birlikte

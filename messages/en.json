@@ -345,7 +345,8 @@
       "hackathons": "Hackathons"
     },
     "breadcrumb": "Blog",
-    "postedBy": "Posted by {name}"
+    "postedBy": "Posted by {name}",
+    "readInOtherLanguage": "Read this post in Turkish"
   },
   "Join": {
     "eyebrow": "Join",
