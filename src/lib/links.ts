@@ -15,7 +15,7 @@ export type LinkItem = {
   label: string;
   url: string;
   note: string | null;
-  /** Dolu/vurgulu çizilir; listede en fazla bir tane olması beklenir. */
+  /** Dolu/vurgulu çizilir; yalnızca başvuru satırlarında kullanılır. */
   featured: boolean;
   /** `https://` ile başlayan adresler yeni sekmede açılır. */
   external: boolean;

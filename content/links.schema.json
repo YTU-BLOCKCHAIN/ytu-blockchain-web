@@ -53,7 +53,7 @@
           },
           "featured": {
             "type": "boolean",
-            "description": "true ise buton dolu/vurgulu çizilir. En fazla bir bağlantıda kullanın."
+            "description": "true ise buton dolu/vurgulu çizilir. Yalnızca başvuru satırlarında (en üstte, art arda) kullanın."
           },
           "hidden": {
             "type": "boolean",
