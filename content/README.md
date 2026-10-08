@@ -52,13 +52,13 @@ bloktan sonra virgül **olmamalı**:
 
 ### Alanlar
 
-| Alan       | Zorunlu | Ne işe yarar                                                             |
-| ---------- | ------- | ------------------------------------------------------------------------ |
-| `label`    | ✅      | Butonun üzerindeki yazı.                                                 |
-| `url`      | ✅      | Dış bağlantı `https://` ile, kendi sayfamız `/` ile başlar (`/tr/join`). |
-| `note`     | —       | Butonun altındaki küçük gri açıklama.                                    |
-| `featured` | —       | `true` yaparsan buton dolu/vurgulu çizilir. **Yalnızca bir tanede.**     |
-| `hidden`   | —       | `true` yaparsan link sayfada görünmez. Silmeden gizlemek için.           |
+| Alan       | Zorunlu | Ne işe yarar                                                                   |
+| ---------- | ------- | ------------------------------------------------------------------------------ |
+| `label`    | ✅      | Butonun üzerindeki yazı.                                                       |
+| `url`      | ✅      | Dış bağlantı `https://` ile, kendi sayfamız `/` ile başlar (`/tr/join`).       |
+| `note`     | —       | Butonun altındaki küçük gri açıklama.                                          |
+| `featured` | —       | `true` yaparsan buton dolu/vurgulu çizilir. **Yalnızca başvuru satırlarında.** |
+| `hidden`   | —       | `true` yaparsan link sayfada görünmez. Silmeden gizlemek için.                 |
 
 ### Sıralama
 

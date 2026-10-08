@@ -6,6 +6,7 @@ import {
   FolderGit2,
   Globe,
   Mail,
+  Network,
   Palette,
   Podcast,
   UserPlus,
@@ -60,6 +61,12 @@ type RowIconSpec = { Icon: RowIcon; tone: string };
  */
 function iconForLink(link: LinkItem): RowIconSpec {
   const url = link.url.toLowerCase();
+
+  // Departman seçim formu da Google Forms'ta, adresi başvuru formundan
+  // ayırt edilemiyor; bu yüzden etiketten tanınıyor ve ekip yapısını anlatan
+  // kendi ikonunu alıyor.
+  if (link.label.toLocaleLowerCase('tr').includes('departman'))
+    return { Icon: Network, tone: 'text-primary' };
 
   if (link.external) {
     if (url.includes('cal.com'))
