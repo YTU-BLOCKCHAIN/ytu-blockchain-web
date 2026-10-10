@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+import type { Locale } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 import {
   ArrowUpRight,
   BookText,
@@ -20,11 +23,34 @@ import {
   XIcon,
 } from '@/components/community/brand-icons';
 import { Logo } from '@/components/logo';
-import { type LinkItem, linksContent } from '@/lib/links';
-import { siteConfig, xHandle } from '@/lib/site';
+import { routing } from '@/i18n/routing';
+import { type LinkItem, linksContentFor } from '@/lib/links';
+import { linksPath, resolveLinksLocale } from '@/lib/routes';
+import { ogLocales, siteConfig, xHandle } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
-const { profile, links } = linksContent;
+/**
+ * Her dilin kanonik adresi (`/links/tr`, `/links/en`) ve dil öneksiz `/links`
+ * build'de üretiliyor — Instagram biyografisinden açılan bir sayfanın isteği
+ * beklemesi için sebep yok.
+ *
+ * `/links` normalde proxy tarafından yukarıdakilerden birine rewrite ediliyor;
+ * yine de üretiliyor, çünkü rewrite çalışmazsa biyografideki adres 404
+ * vermemeli (bkz. `resolveLinksLocale`).
+ */
+export function generateStaticParams(): { locale: string[] }[] {
+  return [
+    // Dil öneksiz adres (`/links`): boş segment listesi.
+    { locale: [] },
+    ...routing.locales.map((locale) => ({ locale: [locale] })),
+  ];
+}
+
+/**
+ * Yukarıdakilerin dışında kalan her şey (`/links/de`, `/links/en/x`) 404.
+ * Böylece sayfa isteğe göre üretilen bir rota olmaktan çıkıyor.
+ */
+export const dynamicParams = false;
 
 /**
  * Satır ikonu. Hem lucide ikonları hem de kendi marka logolarımız bu imzaya
@@ -58,14 +84,22 @@ type RowIconSpec = { Icon: RowIcon; tone: string };
 /**
  * Her bağlantıya kanalını anlatan bir ikon. Eşleşme adresten türetilir; içerik
  * dosyasına ekstra bir alan gerekmez. Bilinmeyen adres nötr `Globe`'a düşer.
+ *
+ * Eşleşme `url` (içerik dosyasındaki dil öneksiz hâli) ile yapılıyor, `href`
+ * ile değil: önek eklendikten sonra da çalışırdı ama ikon seçimi dilin
+ * bilinmesini gerektirmeyen bir karar, o yüzden ham adresle kalıyor.
  */
 function iconForLink(link: LinkItem): RowIconSpec {
   const url = link.url.toLowerCase();
 
-  // Departman seçim formu da Google Forms'ta, adresi başvuru formundan
-  // ayırt edilemiyor; bu yüzden etiketten tanınıyor ve ekip yapısını anlatan
-  // kendi ikonunu alıyor.
-  if (link.label.toLocaleLowerCase('tr').includes('departman'))
+  /* Departman seçim formu da Google Forms'ta, adresi başvuru formundan
+     ayırt edilemiyor; bu yüzden etiketten tanınıyor ve ekip yapısını anlatan
+     kendi ikonunu alıyor.
+
+     Gövde bilerek kısa (`departm`): etiket artık dile göre değişiyor
+     ("Departmanını Seç" / "Choose Your Department") ve bu iki kelimenin ortak
+     kökü bu. Tam kelimeyle eşleştirilse ikon yalnızca bir dilde çıkardı. */
+  if (link.label.toLocaleLowerCase('tr').includes('departm'))
     return { Icon: Network, tone: 'text-primary' };
 
   if (link.external) {
@@ -103,7 +137,7 @@ function iconForLink(link: LinkItem): RowIconSpec {
   if (url.includes('/brand')) return { Icon: Palette, tone: 'text-pink-400' };
   if (url.includes('/roadmap'))
     return { Icon: MapFilledIcon, tone: 'text-amber-400' };
-  // "Web Sitemiz" (/tr) ve tanımsız iç sayfalar
+  // "Web Sitemiz" (`/`) ve tanımsız iç sayfalar
   return { Icon: Globe, tone: 'text-sky-400' };
 }
 
@@ -118,6 +152,9 @@ function handleFromUrl(url: string): string | null {
  * listenin devamında teker teker kendi satırları. Adresler `siteConfig.social`
  * ile tek kaynaktan, kullanıcı adı da adresten türetiliyor — elle yazılmış
  * ikinci bir kopya `siteConfig` değişince eskimiş olurdu.
+ *
+ * Çevrilecek bir yanı yok (hesap adları ve kullanıcı adları her dilde aynı),
+ * bu yüzden iki dilde de bu liste kullanılıyor.
  */
 const socialLinks: LinkItem[] = [
   { label: 'Instagram', url: siteConfig.social.instagram },
@@ -126,72 +163,88 @@ const socialLinks: LinkItem[] = [
 ].map(({ label, url }) => ({
   label,
   url,
+  href: url,
   note: handleFromUrl(url),
   featured: false,
   external: true,
 }));
 
-// Kart görselini bu segmentteki `opengraph-image.tsx` üretiyor; adresi
-// `buildMetadata`daki ile aynı gerekçeyle buradan açıkça veriyoruz.
-const ogImages = [
-  {
-    url: '/links/opengraph-image',
-    width: 1200,
-    height: 630,
-    alt: `${siteConfig.name} — Bağlantılar`,
-  },
-];
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale?: string[] }>;
+}): Promise<Metadata> {
+  const locale = resolveLinksLocale((await params).locale);
+  if (!locale) notFound();
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: { absolute: `${profile.title} · Bağlantılar` },
-  description: profile.tagline,
-  alternates: { canonical: '/links' },
-  openGraph: {
-    type: 'website',
-    siteName: siteConfig.name,
-    locale: 'tr_TR',
-    title: `${profile.title} · Bağlantılar`,
+  const t = await getTranslations({ locale, namespace: 'Links' });
+  const { profile } = linksContentFor(locale);
+  const title = `${profile.title} · ${t('titleSuffix')}`;
+  /* Kanonik adres her zaman dilin kendi adresi (`/links/en`), ziyaretçinin
+     girdiği adres (`/links`) değil: `/links` tarayıcı diline göre iki farklı
+     sayfa sunan bir kapı, kanonik olamaz. */
+  const pathname = linksPath(locale);
+
+  /* hreflang: iki adres birbirini işaret ediyor, böylece arama motoru ikisini
+     kopya değil çeviri olarak görür ve ziyaretçiye dilini sunar. `x-default`
+     sitenin geri kalanıyla aynı mantıkta (`buildMetadata`): dil tercihi
+     eşleşmeyen ziyaretçi öntanımlı dile (EN) düşer. */
+  const languages: Record<string, string> = {};
+  for (const candidate of routing.locales) {
+    languages[candidate] = linksPath(candidate);
+  }
+  languages['x-default'] = linksPath(routing.defaultLocale);
+
+  /* Kart görselini bir üst segmentteki `opengraph-image.tsx` üretiyor (orada
+     neden orada olduğu yazılı); adresi `buildMetadata`daki ile aynı gerekçeyle
+     buradan açıkça veriyoruz. İki dil de aynı görseli kullanıyor, değişen
+     yalnızca alt metni. */
+  const ogImages = [
+    {
+      url: '/links/opengraph-image',
+      width: 1200,
+      height: 630,
+      alt: `${siteConfig.name} — ${t('titleSuffix')}`,
+    },
+  ];
+
+  return {
+    metadataBase: new URL(siteConfig.url),
+    title: { absolute: title },
     description: profile.tagline,
-    url: '/links',
-    images: ogImages,
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: xHandle,
-    title: `${profile.title} · Bağlantılar`,
-    description: profile.tagline,
-    images: ogImages,
-  },
-};
-
-/**
- * Sosyal hesaplar "Projelerimiz" (`/tr/projects`) satırının hemen üstüne girer
- * (yani "Web Sitemiz" ve WhatsApp topluluğunun altına); o satır içerik
- * dosyasından kaldırılırsa listenin sonuna düşer.
- */
-const projectsAt = links.findIndex((link) => link.url === '/tr/projects');
-const socialsAt = projectsAt === -1 ? links.length : projectsAt;
-
-/**
- * Ekranda görünen satırlar: içerik bağlantıları, araya sosyal hesaplar.
- * İkon eşleşmesi adresten türetildiği ve iki liste de sabit olduğu için render
- * sırasında değil, modül yüklenirken bir kez hesaplanıyor.
- */
-const rows: { link: LinkItem; LeadingIcon: RowIcon; tone: string }[] = [
-  ...links.slice(0, socialsAt),
-  ...socialLinks,
-  ...links.slice(socialsAt),
-].map((link) => {
-  const { Icon, tone } = iconForLink(link);
-  return { link, LeadingIcon: Icon, tone };
-});
+    alternates: { canonical: pathname, languages },
+    openGraph: {
+      type: 'website',
+      siteName: siteConfig.name,
+      locale: ogLocales[locale],
+      title,
+      description: profile.tagline,
+      url: pathname,
+      images: ogImages,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: xHandle,
+      title,
+      description: profile.tagline,
+      images: ogImages,
+    },
+  };
+}
 
 /** Listenin tek satırı — içerik bağlantıları ve sosyal hesaplar aynı kart. */
-function LinkRow({ link, LeadingIcon, tone }: (typeof rows)[number]) {
+function LinkRow({
+  link,
+  LeadingIcon,
+  tone,
+}: {
+  link: LinkItem;
+  LeadingIcon: RowIcon;
+  tone: string;
+}) {
   return (
     <a
-      href={link.url}
+      href={link.href}
       {...(link.external
         ? { target: '_blank', rel: 'noreferrer noopener' }
         : {})}
@@ -247,7 +300,88 @@ function LinkRow({ link, LeadingIcon, tone }: (typeof rows)[number]) {
   );
 }
 
-export default function LinksPage() {
+/**
+ * TR / EN geçişi — sayfanın kendi sürümü.
+ *
+ * Header'daki `LanguageSwitcher` burada kullanılamıyor: o bileşen next-intl'in
+ * `useRouter`/`usePathname`ine dayanıyor, bu sayfa ise o ağacın (ve
+ * proxy'nin) dışında. Düz `<a>` zaten doğru araç — iki adres iki ayrı kök
+ * layout, aralarındaki geçiş her hâlükârda tam sayfa yüklemesi.
+ *
+ * Adresler dilin **kanonik** adresi (`/links/tr`, `/links/en`), kapı (`/links`)
+ * değil: kapı tarayıcı diline bakıyor, yani İngilizce bir tarayıcıda "TR"
+ * düğmesi `/links`e gitseydi ziyaretçiyi yine İngilizceye döndürürdü. Açık
+ * adres bu yüzden tarayıcı tercihini ezebilen tek şey.
+ *
+ * Düğme yazıları ve erişilebilirlik etiketleri `Nav` mesajlarından geliyor,
+ * yani site genelindeki geçişle aynı kelimeler.
+ */
+async function LinksLanguageSwitcher({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: 'Nav' });
+
+  return (
+    <div
+      className="border-foreground/15 mt-6 flex items-center rounded-full border p-0.5 text-xs"
+      role="group"
+      aria-label={t('languageLabel')}
+    >
+      {routing.locales.map((candidate) => {
+        const selected = candidate === locale;
+
+        return (
+          <a
+            key={candidate}
+            href={linksPath(candidate)}
+            lang={candidate}
+            hrefLang={candidate}
+            // Bunlar gerçek adresler (düğme değil), o yüzden açık olan sayfa
+            // `aria-current="page"` ile duyuruluyor.
+            aria-current={selected ? 'page' : undefined}
+            aria-label={t('switchTo', { language: t(`language.${candidate}`) })}
+            className={cn(
+              'rounded-full px-2.5 py-1 font-medium uppercase transition-colors',
+              selected
+                ? 'bg-foreground/10 text-foreground'
+                : 'text-muted-foreground hover:text-foreground',
+            )}
+          >
+            {candidate}
+          </a>
+        );
+      })}
+    </div>
+  );
+}
+
+export default async function LinksPage({
+  params,
+}: {
+  params: Promise<{ locale?: string[] }>;
+}) {
+  const locale = resolveLinksLocale((await params).locale);
+  if (!locale) notFound();
+
+  const t = await getTranslations({ locale, namespace: 'Links' });
+  const { profile, links } = linksContentFor(locale);
+
+  /**
+   * Sosyal hesaplar "Projelerimiz" (`/projects`) satırının hemen üstüne girer
+   * (yani "Web Sitemiz" ve WhatsApp topluluğunun altına); o satır içerik
+   * dosyasından kaldırılırsa listenin sonuna düşer.
+   */
+  const projectsAt = links.findIndex((link) => link.url === '/projects');
+  const socialsAt = projectsAt === -1 ? links.length : projectsAt;
+
+  /** Ekranda görünen satırlar: içerik bağlantıları, araya sosyal hesaplar. */
+  const rows = [
+    ...links.slice(0, socialsAt),
+    ...socialLinks,
+    ...links.slice(socialsAt),
+  ].map((link) => {
+    const { Icon, tone } = iconForLink(link);
+    return { link, LeadingIcon: Icon, tone };
+  });
+
   return (
     /* Telefonda tam ekran: yatay padding yok, kartlar kenardan kenara. Yatay
        boşluk ve üst nefes payı yalnızca sm'den itibaren (orada liste `max-w-md`
@@ -293,11 +427,16 @@ export default function LinksPage() {
                 <span className="sr-only">{profile.title}</span>
               </h1>
               <span className="text-primary mt-6 font-display text-xs tracking-widest uppercase">
-                {'//'} bağlantılar
+                {'//'} {t('kicker')}
               </span>
               <p className="text-muted-foreground mt-3 text-balance text-sm md:text-base">
                 {profile.tagline}
               </p>
+              {/* Dil geçişi profilin altında: tarayıcı dili doğru tahmini
+                  vermediğinde (ortak bilgisayar, İngilizce kurulmuş telefon)
+                  ziyaretçinin ilk ekranda görebileceği bir düzeltme olmalı.
+                  Listenin altında kalsa kaydırmadan görünmezdi. */}
+              <LinksLanguageSwitcher locale={locale} />
             </div>
           </header>
 
@@ -306,7 +445,7 @@ export default function LinksPage() {
               satırlar stretch ile eşit büyüyüp paneli doldurur. */}
           <div className="grid gap-px">
             {rows.map((row) => (
-              <LinkRow key={`${row.link.label}-${row.link.url}`} {...row} />
+              <LinkRow key={`${row.link.label}-${row.link.href}`} {...row} />
             ))}
           </div>
         </div>

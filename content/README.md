@@ -3,10 +3,10 @@
 Bu klasördeki dosyalar sitenin **sık değişen içeriğini** tutar. Kod bilmeye gerek
 yok; GitHub üzerinden düzenlenebilirler.
 
-| Dosya        | Nereyi besler                                   |
-| ------------ | ----------------------------------------------- |
-| `links.json` | `ytublockchain.com/links` sayfasındaki linkler  |
-| `posts.json` | Ana sayfadaki "öne çıkan X paylaşımları" bölümü |
+| Dosya        | Nereyi besler                                        |
+| ------------ | ---------------------------------------------------- |
+| `links.json` | `/links` (linktree) sayfasındaki butonlar, iki dilde |
+| `posts.json` | Ana sayfadaki "öne çıkan X paylaşımları" bölümü      |
 
 Her ikisinde de akış aynı: GitHub'da dosyayı düzenle → pull request aç → kontrol
 yeşile dönünce birleştirilir.
@@ -21,8 +21,18 @@ yeşile dönünce birleştirilir.
 
 ## `links.json` nasıl güncellenir?
 
-`/links`, Instagram biyografisine koyduğumuz "linktree" sayfasıdır. Oradaki
-butonları değiştirmek için:
+`/links`, Instagram biyografisine koyduğumuz "linktree" sayfasıdır. **İki dilde
+yayınlanıyor** ve ziyaretçi hangi dili göreceğine karar vermek zorunda değil:
+[`ytublockchain.com/links`](https://ytublockchain.com/links) adresi tarayıcının
+diline bakıp Türkçeyi ya da İngilizceyi gösteriyor. Yani linki paylaşırken tek
+bir adres yetiyor — Türk bir öğrenciye de yabancı bir sponsora da aynı link
+gidiyor, ikisi de kendi dilinde açıyor. (Sayfanın üstündeki TR/EN düğmesi de
+duruyor: tahmin tutmazsa ziyaretçi elle değiştirebiliyor.)
+
+Her iki dil de bu dosyadan besleniyor, yani bir butonu eklerken **iki dilde de**
+yazman gerekiyor.
+
+Oradaki butonları değiştirmek için:
 
 1. GitHub'da bu dosyayı aç:
    [`content/links.json`](https://github.com/YTU-BLOCKCHAIN/ytu-blockchain-web/blob/dev/content/links.json)
@@ -44,21 +54,47 @@ bloktan sonra virgül **olmamalı**:
 
 ```json
 {
-  "label": "Etkinlik Kaydı",
+  "label": { "tr": "Etkinlik Kaydı", "en": "Event Registration" },
   "url": "https://lu.ma/ytublockchain",
-  "note": "12 Şubat, YTÜ Davutpaşa"
+  "note": {
+    "tr": "12 Şubat, YTÜ Davutpaşa",
+    "en": "February 12, YTÜ Davutpaşa"
+  }
 }
 ```
+
+Gözünü korkutmasın: `tr` Türkçe sayfada, `en` İngilizce sayfada görünen yazı.
+**İkisi de zorunlu** — biri eksik kalırsa pull request kontrolü kırmızı yanar ve
+hangi satırda hangi dilin eksik olduğunu yazar. (Bu kasıtlı: yarım çevrilmiş bir
+sayfa, Türkçe bilmeyen ziyaretçinin anlamadığı bir butona basması demek.)
+İngilizcesinden emin değilsen Türkçesini yaz, pull request'te sor — kimse
+makine çevirisi beklemiyor.
 
 ### Alanlar
 
 | Alan       | Zorunlu | Ne işe yarar                                                                   |
 | ---------- | ------- | ------------------------------------------------------------------------------ |
-| `label`    | ✅      | Butonun üzerindeki yazı.                                                       |
-| `url`      | ✅      | Dış bağlantı `https://` ile, kendi sayfamız `/` ile başlar (`/tr/join`).       |
-| `note`     | —       | Butonun altındaki küçük gri açıklama.                                          |
+| `label`    | ✅      | Butonun üzerindeki yazı. İki dilde: `{ "tr": "...", "en": "..." }`             |
+| `url`      | ✅      | Adres. Tek bir değer — dile göre değişmiyor, aşağıya bakın.                    |
+| `note`     | —       | Butonun altındaki küçük gri açıklama. Yazılacaksa iki dilde de.                |
 | `featured` | —       | `true` yaparsan buton dolu/vurgulu çizilir. **Yalnızca başvuru satırlarında.** |
 | `hidden`   | —       | `true` yaparsan link sayfada görünmez. Silmeden gizlemek için.                 |
+
+### `url` nasıl yazılır?
+
+- **Dış bağlantı** `https://` ile başlar: `https://lu.ma/ytublockchain`
+- **Kendi sitemizdeki sayfa** `/` ile başlar ve **dil öneki ALMAZ**:
+  `/projects`, `/contact`, `/join`, anasayfa için yalnızca `/`.
+
+Öneki bilerek yazmıyorsun: sayfa ziyaretçinin diline göre kendisi koyuyor
+(Türkçe sayfadaki buton `/tr/projects`e, İngilizce sayfadaki `/en/projects`e
+gidiyor). Yanlışlıkla `/tr/projects` yazarsan kontrol kırmızı yanar ve ne
+yazman gerektiğini söyler — eskiden öyle yazılıydı ve İngilizce sayfadan gelen
+ziyaretçi Türkçe siteye düşüyordu.
+
+> **İstisna:** `/roadmap`, `/brand` ve `/logos` birer sayfa değil,
+> yönlendirme (hedefleri Notion ve Drive). Onlar dil öneki almıyor, olduğu gibi
+> yazılıyor.
 
 ### Sıralama
 
@@ -73,6 +109,8 @@ yazar — panik yok, düzeltip tekrar commit'le. Site bozulmaz.
 - Tırnak işaretini kapatmamak.
 - `url` alanını `www.` veya `http://` ile başlatmak → `https://` olmalı.
 - Türkçe tırnak (`"`) kullanmak → düz tırnak (`"`) olmalı.
+- `label` veya `note`u tek dilde bırakmak → `tr` ve `en` birlikte yazılmalı.
+- İç adrese dil öneki yazmak (`/tr/projects`) → öneksiz yazılmalı (`/projects`).
 
 ### Sosyal medya hesapları
 
@@ -80,6 +118,13 @@ Instagram / X / GitHub satırları (listenin en altındaki üç bağlantı) bu d
 **değil**, `src/lib/site.ts` içindeki `siteConfig.social` alanından gelir — çünkü aynı adresler sitenin başka
 yerlerinde de kullanılıyor ve tek yerden yönetilmesi gerekiyor. Hesap adresi
 değişirse orayı güncellemek lazım (kod dosyası, bir geliştiriciye söyleyin).
+
+### Sayfanın geri kalan yazıları
+
+Logonun altındaki `// bağlantılar` satırı ve sekme başlığındaki "Bağlantılar"
+kelimesi bu dosyada değil, sitenin diğer bütün arayüz metinleriyle birlikte
+`messages/tr.json` ve `messages/en.json` içindeki `Links` bölümünde. Buton
+metinleri burada, kabuk orada.
 
 ---
 
