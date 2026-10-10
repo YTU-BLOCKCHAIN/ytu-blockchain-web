@@ -424,6 +424,10 @@
     "developedBy": "Geliştiren",
     "developer": "Erdem Aşık"
   },
+  "Links": {
+    "kicker": "bağlantılar",
+    "titleSuffix": "Bağlantılar"
+  },
   "Consent": {
     "title": "Çerezler",
     "body": "Siteyi nasıl kullandığını anlamak için Google Analytics kullanmak istiyoruz. Kabul etmezsen hiçbir ölçüm çerezi yazılmaz ve Google’a hiçbir istek gitmez.",

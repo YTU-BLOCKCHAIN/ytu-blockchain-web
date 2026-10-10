@@ -4,6 +4,24 @@
   "type": "object",
   "required": ["profile", "links"],
   "additionalProperties": false,
+  "definitions": {
+    "localizedText": {
+      "type": "object",
+      "description": "İki dilde metin. İkisi de zorunlu: /links adresi ziyaretçinin tarayıcı diline göre Türkçeyi (/links/tr) ya da İngilizceyi (/links/en) gösteriyor.",
+      "required": ["tr", "en"],
+      "additionalProperties": false,
+      "properties": {
+        "tr": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
   "properties": {
     "$schema": {
       "type": "string"
@@ -17,39 +35,70 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 60,
-          "description": "Sayfanın başlığı (ekran okuyucu ve sekme başlığı için)."
+          "description": "Sayfanın başlığı (ekran okuyucu ve sekme başlığı için). Marka adı olduğu için çevrilmiyor."
         },
         "tagline": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 140,
-          "description": "Logonun altındaki tek satırlık tanıtım cümlesi."
+          "allOf": [
+            {
+              "$ref": "#/definitions/localizedText"
+            }
+          ],
+          "properties": {
+            "tr": {
+              "maxLength": 140
+            },
+            "en": {
+              "maxLength": 140
+            }
+          },
+          "description": "Logonun altındaki tek satırlık tanıtım cümlesi. Her dilde en fazla 140 karakter."
         }
       }
     },
     "links": {
       "type": "array",
-      "description": "Sayfada alt alta görünecek butonlar. Sıralama buradaki sıradır.",
+      "description": "Sayfada alt alta görünecek butonlar. Sıralama buradaki sıradır ve iki dilde aynıdır.",
       "items": {
         "type": "object",
         "required": ["label", "url"],
         "additionalProperties": false,
         "properties": {
           "label": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 60,
-            "description": "Butonun üzerindeki yazı."
+            "allOf": [
+              {
+                "$ref": "#/definitions/localizedText"
+              }
+            ],
+            "properties": {
+              "tr": {
+                "maxLength": 60
+              },
+              "en": {
+                "maxLength": 60
+              }
+            },
+            "description": "Butonun üzerindeki yazı. Her dilde en fazla 60 karakter."
           },
           "url": {
             "type": "string",
             "pattern": "^(https://|/)",
-            "description": "Dış bağlantı 'https://' ile, kendi sitemizdeki sayfa '/' ile başlar."
+            "description": "Dış bağlantı 'https://' ile, kendi sitemizdeki sayfa '/' ile başlar. Dil öneki YAZMA: '/tr/projects' değil '/projects' — sayfa ziyaretçinin diline göre ekini kendi koyar."
           },
           "note": {
-            "type": "string",
-            "maxLength": 80,
-            "description": "Butonun altındaki küçük açıklama. İsteğe bağlı."
+            "allOf": [
+              {
+                "$ref": "#/definitions/localizedText"
+              }
+            ],
+            "properties": {
+              "tr": {
+                "maxLength": 80
+              },
+              "en": {
+                "maxLength": 80
+              }
+            },
+            "description": "Butonun altındaki küçük açıklama. İsteğe bağlı; yazılacaksa iki dilde de yazılmalı. Her dilde en fazla 80 karakter."
           },
           "featured": {
             "type": "boolean",
