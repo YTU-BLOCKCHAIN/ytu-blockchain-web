@@ -2,59 +2,71 @@
   "$schema": "./links.schema.json",
   "profile": {
     "title": "YTÜ Blockchain",
-    "tagline": "Yıldız Teknik Üniversitesi Blockchain Kulübü"
+    "tagline": {
+      "tr": "Yıldız Teknik Üniversitesi Blockchain Kulübü",
+      "en": "Yıldız Technical University Blockchain Club"
+    }
   },
   "links": [
     {
-      "label": "Bize Katıl",
+      "label": { "tr": "Bize Katıl", "en": "Join Us" },
       "url": "https://forms.gle/i4SwuLnFhFcEEGQP9",
-      "note": "Başvurular açık",
+      "note": { "tr": "Başvurular açık", "en": "Applications open" },
       "featured": true
     },
     {
-      "label": "Departmanını Seç",
+      "label": {
+        "tr": "Departmanını Seç",
+        "en": "Choose Your Department"
+      },
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSeVG0PPu5gqy4nLj-NJebKgEpOr46w_rL-YVr2HArLzZQod4Q/viewform",
       "featured": true
     },
     {
-      "label": "Web Sitemiz",
-      "url": "/tr"
+      "label": { "tr": "Web Sitemiz", "en": "Our Website" },
+      "url": "/"
     },
     {
-      "label": "Topluluğumuza Katıl",
+      "label": { "tr": "Topluluğumuza Katıl", "en": "Join Our Community" },
       "url": "https://chat.whatsapp.com/JpClE5mXx8sJQ6ERIIrx0n"
     },
     {
-      "label": "Web3 Yol Haritası",
+      "label": { "tr": "Web3 Yol Haritası", "en": "Web3 Roadmap" },
       "url": "/roadmap",
-      "note": "Sıfırdan başlayanlar için öğrenme rehberi"
+      "note": {
+        "tr": "Sıfırdan başlayanlar için öğrenme rehberi",
+        "en": "A learning guide for complete beginners"
+      }
     },
     {
-      "label": "Projelerimiz",
-      "url": "/tr/projects"
+      "label": { "tr": "Projelerimiz", "en": "Our Projects" },
+      "url": "/projects"
     },
     {
-      "label": "İletişim",
-      "url": "/tr/contact"
+      "label": { "tr": "İletişim", "en": "Contact" },
+      "url": "/contact"
     },
     {
-      "label": "Sponsorluk Görüşmesi",
+      "label": { "tr": "Sponsorluk Görüşmesi", "en": "Sponsorship Call" },
       "url": "https://cal.com/ytublockchain",
-      "note": "Takvimden randevu al"
+      "note": {
+        "tr": "Takvimden randevu al",
+        "en": "Book a time on our calendar"
+      }
     },
     {
-      "label": "Marka Kılavuzu",
+      "label": { "tr": "Marka Kılavuzu", "en": "Brand Guide" },
       "url": "/brand",
-      "note": "Logo, renk ve font"
+      "note": { "tr": "Logo, renk ve font", "en": "Logo, colors and type" }
     },
     {
-      "label": "Medium'da Yazılarımız",
+      "label": { "tr": "Medium'da Yazılarımız", "en": "Our Writing on Medium" },
       "url": "https://medium.com/ytublockchain"
     },
     {
-      "label": "Podcast'imiz",
+      "label": { "tr": "Podcast'imiz", "en": "Our Podcast" },
       "url": "https://open.spotify.com/show/5bA9wkC2zxASZCOKzu5EOX",
-      "note": "Spotify'da dinle"
+      "note": { "tr": "Spotify'da dinle", "en": "Listen on Spotify" }
     }
   ]
 }
