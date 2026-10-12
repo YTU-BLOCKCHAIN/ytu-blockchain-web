@@ -251,7 +251,7 @@ function LinkRow({
       className={cn(
         // Köşeler yalnızca sm'den itibaren: telefonda kartlar ekranın iki
         // kenarına dayanıyor, orada yuvarlatma kırpılmış gibi duruyordu.
-        'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none sm:rounded',
+        'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none sm:rounded md:rounded-none',
         link.featured
           ? 'bg-foreground text-background hover:bg-foreground/90'
           : 'bg-card hover:bg-accent',
@@ -386,23 +386,31 @@ export default async function LinksPage({
     /* Telefonda tam ekran: yatay padding yok, kartlar kenardan kenara. Yatay
        boşluk ve üst nefes payı yalnızca sm'den itibaren (orada liste `max-w-md`
        ile ortalanıyor). Alt padding, son satırı sabit kaydırma şeridinin
-       yoğun kısmından kurtarır. md'den itibaren içerik dikeyde de ortalanır:
-       geniş ekranda sayfa tek karttan ibaret, tepeye yapışınca altı boş bir
-       kuyu gibi kalıyordu. (İçerik taşarsa main zaten içerikle uzar,
-       justify-center etkisiz kalır — kırpma riski yok.) */
-    <main className="flex flex-1 flex-col items-center pb-24 sm:px-4 sm:pt-14 md:justify-center md:py-16">
-      <div className="w-full max-w-md md:max-w-4xl">
+       yoğun kısmından kurtarır.
+
+       md'den itibaren sayfa TAM EKRANA sabitleniyor (`h-dvh` + `overflow-hidden`)
+       ve kaydırma yalnızca sağ kolonun içinde kalıyor: masaüstünde profil
+       paneli ekranla birlikte kayıp gidiyordu, yani liste uzadıkça ziyaretçi
+       logoyu ve dil düğmesini kaybediyordu. Artık sol panel sabit duruyor.
+       Telefon bundan etkilenmiyor — orada sayfanın tamamı kayıyor. */
+    <main className="flex flex-1 flex-col items-center pb-24 sm:px-4 sm:pt-14 md:h-dvh md:flex-none md:justify-center md:overflow-hidden md:px-0 md:pt-0 md:pb-0">
+      <div className="w-full max-w-md md:h-full md:max-w-none">
         {/* `gap-px`: kartlar arasındaki 1px boşluklardan zemin (tam siyah)
             sızar, ayraç çizgisi bu. Kartlar siyahın üstünde hafif yükselti.
 
-            md'den itibaren iki panel: solda profil (header), sağda bağlantı
-            listesi. Telefondaki dar sütun geniş ekranda siyah boşlukta ince
-            bir şerit gibi kaybolmasın diye. Aradaki 1px boşluk da satır
-            araları ile aynı ayraç dili. */}
-        <div className="grid gap-px md:grid-cols-[minmax(0,4fr)_minmax(0,5fr)]">
+            md'den itibaren iki eşit panel: solda profil (header), sağda
+            bağlantı listesi. Telefondaki dar sütun geniş ekranda siyah
+            boşlukta ince bir şerit gibi kaybolmasın diye. Aradaki 1px boşluk
+            da satır araları ile aynı ayraç dili.
+
+            `grid-template-rows: minmax(0,1fr)`: tek satır kapsayıcının
+            yüksekliğini AŞMASIN. Öntanımlı `auto` satır, içerik ekrandan
+            uzun olduğunda büyüyüp taşardı; o zaman sağ kolondaki
+            `overflow-y-auto` hiç devreye girmez, sayfa yine kayardı. */}
+        <div className="grid gap-px md:h-full md:grid-cols-2 md:[grid-template-rows:minmax(0,1fr)]">
           {/* md'de header sol kolonun tamamını kaplar (grid stretch) ve içerik
               dikeyde ortalanır; mask zaten absolute, flex'ten etkilenmez. */}
-          <header className="bg-card relative overflow-hidden px-6 py-10 text-center sm:rounded md:flex md:flex-col md:justify-center md:px-10 md:py-16">
+          <header className="bg-card relative overflow-hidden px-6 py-10 text-center sm:rounded md:flex md:flex-col md:justify-center md:rounded-none md:px-10 md:py-16">
             {/* Sitedeki hero'larla aynı teknik: CSS mask + bg-foreground →
                 görsel metin rengini alır. Sayfa her zaman koyu olduğu için
                 opaklık tek değer (`dark:` varyantı OS temasına bakardı, bu
@@ -440,13 +448,29 @@ export default async function LinksPage({
             </div>
           </header>
 
-          {/* İç grid de `gap-px`: telefonda dıştaki ile aynı ayraçlar, yani
-              görünüm eskisiyle birebir. md'de sağ kolon soldan kısaysa
-              satırlar stretch ile eşit büyüyüp paneli doldurur. */}
-          <div className="grid gap-px">
-            {rows.map((row) => (
-              <LinkRow key={`${row.link.label}-${row.link.href}`} {...row} />
-            ))}
+          {/* Sağ kolon: md'de sayfanın tek kayan parçası. Sarmalayıcı
+              `relative`, çünkü alt kenardaki eriyiş şeridi listeye göre
+              konumlanıyor (sayfaya göre değil). */}
+          <div className="relative md:min-h-0">
+            {/* İç grid de `gap-px`: telefonda dıştaki ile aynı ayraçlar, yani
+                görünüm eskisiyle birebir. md'de sağ kolon soldan kısaysa
+                satırlar stretch ile eşit büyüyüp paneli doldurur; uzunsa
+                `overflow-y-auto` ile kendi içinde kayar. */}
+            <div className="grid gap-px md:h-full md:overflow-y-auto">
+              {rows.map((row) => (
+                <LinkRow key={`${row.link.label}-${row.link.href}`} {...row} />
+              ))}
+            </div>
+
+            {/* Listenin alt kenarındaki eriyiş — telefondaki sabit şeridin
+                md karşılığı, ama bu kez yalnızca kayan kolonun üstünde.
+                `backdrop-blur` yok: sabit şeritte amaç ekranın altındaki
+                içeriği yumuşatmaktı, burada kolon zaten kendi sınırında
+                bitiyor. */}
+            <div
+              aria-hidden
+              className="from-background pointer-events-none absolute inset-x-0 bottom-0 hidden h-20 bg-linear-to-t to-transparent md:block [mask-image:linear-gradient(to_top,#000_15%,transparent)]"
+            />
           </div>
         </div>
       </div>
@@ -454,12 +478,17 @@ export default async function LinksPage({
       {/* Alt kenarda hafif blur + karartma: içerik bu şeridin altında eriyerek
           sayfanın devam ettiğini, yani kaydırılabildiğini belli eder. Zemin
           siyah olduğu için altında içerik kalmadığında kendiliğinden görünmez
-          olur — kısa ekranda gizlemek için ayrıca JS gerekmiyor. */}
+          olur — kısa ekranda gizlemek için ayrıca JS gerekmiyor.
+
+          `md:hidden`: orada sayfa kaymıyor, kayan şey sağ kolon. Ekranın
+          tamamına yayılan bir şerit sol panelin de altını karartır ve
+          olmayan bir kaydırmayı ima ederdi; md'deki eriyiş listenin
+          kendi içinde. */}
       <div
         aria-hidden
         // Maske yalnızca en alttaki ~%15'i tam opak bırakır, kalanı uzun bir
         // rampayla söner: kısa/sert bir bant yerine yumuşak bir eriyiş.
-        className="from-background pointer-events-none fixed inset-x-0 bottom-0 h-32 bg-linear-to-t to-transparent backdrop-blur-[2px] [mask-image:linear-gradient(to_top,#000_15%,transparent)]"
+        className="from-background pointer-events-none fixed inset-x-0 bottom-0 h-32 bg-linear-to-t to-transparent backdrop-blur-[2px] md:hidden [mask-image:linear-gradient(to_top,#000_15%,transparent)]"
       />
     </main>
   );
