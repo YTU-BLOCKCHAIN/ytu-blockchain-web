@@ -31,6 +31,14 @@
       "url": "https://chat.whatsapp.com/JpClE5mXx8sJQ6ERIIrx0n"
     },
     {
+      "label": { "tr": "Etkinliklerimiz", "en": "Our Events" },
+      "url": "https://luma.com/user/ytublockchain",
+      "note": {
+        "tr": "Luma'da takvimi takip et",
+        "en": "Follow our calendar on Luma"
+      }
+    },
+    {
       "label": { "tr": "Web3 Yol Haritası", "en": "Web3 Roadmap" },
       "url": "/roadmap",
       "note": {
