@@ -3,6 +3,7 @@ import { revalidateTag } from 'next/cache';
 import type { NextRequest } from 'next/server';
 
 import { POST_TAG } from '@/lib/blog';
+import { EVENT_TAG } from '@/lib/events';
 import { HACKATHON_TAG } from '@/lib/hackathons';
 
 /**
@@ -12,11 +13,15 @@ import { HACKATHON_TAG } from '@/lib/hackathons';
  * yazı sayfalarının tazelenmesi gerekiyor. Listede olmayan bir tip (ör.
  * eklentinin `translation.metadata` dokümanı) hiçbir şeyi tazelemez — eskiden
  * her webhook körlemesine blog etiketini geçersiz kılıyordu.
+ *
+ * `partner` etkinlik etiketine düşüyor: kurum adı etkinlik sayfalarında basılıyor.
  */
 const TAGS_BY_TYPE: Record<string, string> = {
   post: POST_TAG,
   author: POST_TAG,
   hackathon: HACKATHON_TAG,
+  event: EVENT_TAG,
+  partner: EVENT_TAG,
 };
 
 /**

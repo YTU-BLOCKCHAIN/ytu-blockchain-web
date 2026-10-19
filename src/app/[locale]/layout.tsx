@@ -81,6 +81,7 @@ export default async function LocaleLayout({
       Nav                 → Header, LanguageSwitcher
       Forms               → SiteForm
       Blog                → BlogFeed, PostCard
+      Events (bir kısmı)  → EventsFeed, EventCard (detay sayfası metinleri sunucuda)
       Error               → error.tsx (hata sınırı layout'un içinde çiziliyor)
       Landing.hackathons  → HackathonsCarousel
       Landing.sticker     → LandingSticker
@@ -93,6 +94,12 @@ export default async function LocaleLayout({
     Nav: messages.Nav,
     Forms: messages.Forms,
     Blog: messages.Blog,
+    Events: {
+      filters: messages.Events.filters,
+      types: messages.Events.types,
+      stats: messages.Events.stats,
+      register: messages.Events.register,
+    },
     Error: messages.Error,
     Landing: {
       hackathons: messages.Landing.hackathons,
