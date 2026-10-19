@@ -12,6 +12,7 @@ import {
   Network,
   Palette,
   Podcast,
+  Ticket,
   UserPlus,
 } from 'lucide-react';
 import type { ComponentType, SVGProps } from 'react';
@@ -105,6 +106,11 @@ function iconForLink(link: LinkItem): RowIconSpec {
   if (link.external) {
     if (url.includes('cal.com'))
       return { Icon: CalendarClock, tone: 'text-violet-400' };
+    /* Etkinlik takvimimiz Luma'da. `lu.ma` eski kısa adres, ikisi de aynı
+       yere gider, o yüzden ikisi de eşleşiyor. Bilet ikonu bilerek `cal.com`'un
+       takviminden ayrı: biri etkinliklerimiz, diğeri sponsorluk randevusu. */
+    if (url.includes('luma.com') || url.includes('lu.ma'))
+      return { Icon: Ticket, tone: 'text-red-400' };
     // Başvuru formu dışarıda (Google Forms) barınıyor ama satır hâlâ bir
     // başvuru satırı: ikon `/join` sayfasınınkiyle aynı kalsın.
     if (url.includes('forms.gle') || url.includes('docs.google.com/forms'))
