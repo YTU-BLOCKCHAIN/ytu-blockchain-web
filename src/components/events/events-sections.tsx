@@ -11,7 +11,7 @@ import {
 } from '@/lib/events';
 import { cn } from '@/lib/utils';
 import { isEventType } from '@/sanity/event-types';
-import { imageUrl } from '@/sanity/lib/image';
+import { imageUrlByWidth } from '@/sanity/lib/image';
 import type { EventsQueryResult } from '@/sanity/types';
 
 import { EventCard, type EventCardData } from './event-card';
@@ -43,8 +43,10 @@ function toCard(
     place: event.online
       ? onlineLabel
       : eventPlace([event.city, countryName(event.country, locale)]),
-    // 16:10, kartın oranı; 2× ölçü retina ekran için.
-    coverUrl: event.cover?.asset ? imageUrl(event.cover, 800, 500) : null,
+    // Kırpılmadan sığdırılıyor (bkz. `EventCover`): yalnız genişlik veriliyor,
+    // 2× ölçü retina ekran için.
+    coverUrl: event.cover?.asset ? imageUrlByWidth(event.cover, 800) : null,
+    coverBlurUrl: event.cover?.asset ? imageUrlByWidth(event.cover, 48) : null,
     coverAlt: event.cover?.alt ?? '',
     academicYear: academicYear(event.date),
     lumaUrl: event.lumaUrl,
