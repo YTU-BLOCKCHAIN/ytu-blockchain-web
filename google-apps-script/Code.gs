@@ -17,7 +17,7 @@
 /** Kurulumda kulübün kendi değerleriyle güncellenir. */
 const CONFIG = {
   /** Yeni kayıt bildirimlerinin düşeceği kulüp adresi. */
-  NOTIFY_EMAIL: 'dev@ytublockchain.com',
+  NOTIFY_EMAIL: 'contact@ytublockchain.com',
   /** Onay e-postasında görünen gönderen adı. */
   SENDER_NAME: 'YTÜ Blockchain',
   /** Onay e-postasındaki site linki. */
