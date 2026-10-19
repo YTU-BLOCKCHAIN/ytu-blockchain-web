@@ -4,6 +4,7 @@
     "about": "Hakkımızda",
     "projects": "Projeler",
     "community": "Topluluk",
+    "events": "Etkinlikler",
     "blog": "Blog",
     "contact": "İletişim",
     "join": "Bize Katıl",
@@ -72,6 +73,10 @@
     "community": {
       "title": "Topluluk",
       "description": "GitHub, X ve Instagram üzerinden YTÜ Blockchain topluluğuna katılın."
+    },
+    "events": {
+      "title": "Etkinlikler",
+      "description": "YTÜ Blockchain Kulübü'nün eğitimleri, meetup'ları, hackathon ve konferans katılımları — yaklaşan etkinlikler ve 2022'den bugüne arşiv."
     },
     "blog": {
       "title": "Blog",
@@ -272,6 +277,57 @@
     "empty": {
       "title": "Projeler çok yakında",
       "body": "İlk projelerimizi hazırlıyoruz. Sen de bir şeyler geliştirmek istersen aramıza katıl."
+    }
+  },
+  "Events": {
+    "eyebrow": "Etkinlikler",
+    "title": "Birlikte öğrendiğimiz, ürettiğimiz yerler",
+    "intro": "Kampüsteki eğitimlerden yurt dışındaki hackathonlara, 2022'den bu yana yaptığımız her şey. Bir etkinliğe tıkla, ne olduğunu oku.",
+    "stats": {
+      "events": "{count} etkinlik",
+      "countries": "{count} ülke",
+      "partners": "{count} partner"
+    },
+    "upcoming": "Yaklaşan",
+    "past": "Geçmiş etkinlikler",
+    "empty": "Henüz etkinlik eklenmedi.",
+    "register": "Kayıt ol",
+    "online": "Online",
+    "filters": {
+      "label": "Türe göre süz",
+      "all": "Tümü",
+      "empty": "Bu türde etkinlik yok."
+    },
+    "types": {
+      "training": "Eğitim",
+      "workshop": "Workshop",
+      "meetup": "Meetup",
+      "talk": "Söyleşi / Panel",
+      "social": "Sosyal",
+      "stand": "Stant",
+      "conference": "Konferans",
+      "hackathon": "Hackathon",
+      "online": "Online"
+    },
+    "detail": {
+      "breadcrumb": "Etkinlikler",
+      "when": "Tarih",
+      "where": "Yer",
+      "series": "Seri",
+      "partners": "Partnerler",
+      "speakers": "Konuşmacılar",
+      "ecosystems": "Ekosistemler",
+      "attendees": "Katılımcı",
+      "links": "Bağlantılar",
+      "luma": "Luma sayfası",
+      "instagram": "Instagram paylaşımı",
+      "x": "X paylaşımı",
+      "report": "Rapor",
+      "reportNone": "Bu etkinlik için rapor bulunmuyor.",
+      "reportUpcoming": "Etkinlik henüz gerçekleşmedi. Rapor etkinlikten sonra eklenecek.",
+      "summaryNote": "Bu özet etkinliğin paylaşımlarından derlendi.",
+      "gallery": "Fotoğraflar",
+      "seriesEvents": "Serinin diğer etkinlikleri"
     }
   },
   "Contact": {

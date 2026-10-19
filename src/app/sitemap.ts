@@ -3,6 +3,7 @@ import { hasLocale } from 'next-intl';
 
 import { routing } from '@/i18n/routing';
 import { getPostRoutes, postLanguageAlternates } from '@/lib/blog';
+import { getEventRoutes } from '@/lib/events';
 import { linksPath, LOCALIZED_PATHS } from '@/lib/routes';
 import { siteConfig } from '@/lib/site';
 
@@ -76,5 +77,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ];
   });
 
-  return [...localized, ...links, ...posts];
+  /*
+    Etkinlikler. Yazıların aksine adres bütün dillerde aynı (çeviri alan
+    seviyesinde, bkz. `schemaTypes/event.ts`), yani hreflang kümesi sabit
+    sayfalardaki gibi kurulabiliyor.
+  */
+  const eventRoutes = await getEventRoutes();
+  const events = eventRoutes.flatMap((route): MetadataRoute.Sitemap => {
+    if (!route.slug) return [];
+    const path = `/events/${route.slug}`;
+
+    const languages: Record<string, string> = {};
+    for (const locale of routing.locales) {
+      languages[locale] = `${base}/${locale}${path}`;
+    }
+    languages['x-default'] = `${base}/${routing.defaultLocale}${path}`;
+
+    return [
+      {
+        url: `${base}/${routing.defaultLocale}${path}`,
+        lastModified: new Date(route._updatedAt),
+        changeFrequency: 'yearly',
+        alternates: { languages },
+      },
+    ];
+  });
+
+  return [...localized, ...links, ...posts, ...events];
 }

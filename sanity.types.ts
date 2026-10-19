@@ -15,6 +15,12 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type LocalizedBlockContent = {
+  _type: 'localizedBlockContent';
+  tr?: BlockContent;
+  en?: BlockContent;
+};
+
 export type LocalizedText = {
   _type: 'localizedText';
   tr?: string;
@@ -65,6 +71,120 @@ export type BlockContent = Array<
     }
 >;
 
+export type Partner = {
+  _id: string;
+  _type: 'partner';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  url?: string;
+  logo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+};
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop';
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot';
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type PartnerReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'partner';
+};
+
+export type Event = {
+  _id: string;
+  _type: 'event';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: LocalizedString;
+  date?: string;
+  endDate?: string;
+  time?: string;
+  slug?: Slug;
+  type?:
+    | 'training'
+    | 'workshop'
+    | 'meetup'
+    | 'talk'
+    | 'social'
+    | 'stand'
+    | 'conference'
+    | 'hackathon'
+    | 'online';
+  series?: string;
+  ecosystems?: Array<string>;
+  partners?: Array<
+    {
+      _key: string;
+    } & PartnerReference
+  >;
+  speakers?: Array<string>;
+  online?: boolean;
+  venue?: string;
+  city?: string;
+  country?: string;
+  attendees?: number;
+  summary?: LocalizedText;
+  reportType?: 'full' | 'summary' | 'none';
+  report?: LocalizedBlockContent;
+  summarySource?: 'manual' | 'instagram';
+  cover?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  };
+  gallery?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+    _key: string;
+  }>;
+  lumaUrl?: string;
+  instagramUrls?: Array<string>;
+  xUrls?: Array<string>;
+  resources?: Array<{
+    label?: string;
+    url?: string;
+    _type: 'resource';
+    _key: string;
+  }>;
+  featured?: boolean;
+  hidden?: boolean;
+};
+
+export type Slug = {
+  _type: 'slug';
+  current?: string;
+  source?: string;
+};
+
 export type Hackathon = {
   _id: string;
   _type: 'hackathon';
@@ -83,22 +203,6 @@ export type Hackathon = {
     _type: 'image';
   };
   url?: string;
-};
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop';
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot';
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
 };
 
 export type TranslationMetadata = {
@@ -177,12 +281,6 @@ export type Author = {
     _type: 'image';
   };
   url?: string;
-};
-
-export type Slug = {
-  _type: 'slug';
-  current?: string;
-  source?: string;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -283,13 +381,18 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | LocalizedBlockContent
   | LocalizedText
   | LocalizedString
   | SanityImageAssetReference
   | BlockContent
-  | Hackathon
+  | Partner
   | SanityImageCrop
   | SanityImageHotspot
+  | PartnerReference
+  | Event
+  | Slug
+  | Hackathon
   | TranslationMetadata
   | InternationalizedArrayReference
   | PostReference
@@ -297,7 +400,6 @@ export type AllSanitySchemaTypes =
   | AuthorReference
   | Post
   | Author
-  | Slug
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -408,6 +510,128 @@ export type HackathonsQueryResult = Array<{
   url: string | null;
 }>;
 
+// Source: src/sanity/queries.ts
+// Variable: eventsQuery
+// Query: *[_type == "event" && defined(slug.current) && defined(date) && hidden != true]    | order(date desc, time desc) {      _id,      "slug": slug.current,      title,      date,      endDate,      time,      type,      series,      online,      city,      country,      summary,      cover,      featured,      lumaUrl,      "partners": partners[]->name    }
+export type EventsQueryResult = Array<{
+  _id: string;
+  slug: string | null;
+  title: LocalizedString | null;
+  date: string | null;
+  endDate: string | null;
+  time: string | null;
+  type:
+    | 'conference'
+    | 'hackathon'
+    | 'meetup'
+    | 'online'
+    | 'social'
+    | 'stand'
+    | 'talk'
+    | 'training'
+    | 'workshop'
+    | null;
+  series: string | null;
+  online: boolean | null;
+  city: string | null;
+  country: string | null;
+  summary: LocalizedText | null;
+  cover: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  } | null;
+  featured: boolean | null;
+  lumaUrl: string | null;
+  partners: Array<string | null> | null;
+}>;
+
+// Source: src/sanity/queries.ts
+// Variable: eventQuery
+// Query: *[_type == "event" && slug.current == $slug && hidden != true][0] {    _id,    _updatedAt,    "slug": slug.current,    title,    date,    endDate,    time,    type,    series,    ecosystems,    speakers,    online,    venue,    city,    country,    attendees,    summary,    reportType,    report,    summarySource,    cover,    gallery,    lumaUrl,    instagramUrls,    xUrls,    resources,    "partners": partners[]->{ _id, name, url },    "seriesEvents": select(      defined(series) => *[        _type == "event" && series == ^.series && _id != ^._id          && defined(slug.current) && hidden != true      ] | order(date desc) { _id, "slug": slug.current, title, date },      []    )  }
+export type EventQueryResult = {
+  _id: string;
+  _updatedAt: string;
+  slug: string | null;
+  title: LocalizedString | null;
+  date: string | null;
+  endDate: string | null;
+  time: string | null;
+  type:
+    | 'conference'
+    | 'hackathon'
+    | 'meetup'
+    | 'online'
+    | 'social'
+    | 'stand'
+    | 'talk'
+    | 'training'
+    | 'workshop'
+    | null;
+  series: string | null;
+  ecosystems: Array<string> | null;
+  speakers: Array<string> | null;
+  online: boolean | null;
+  venue: string | null;
+  city: string | null;
+  country: string | null;
+  attendees: number | null;
+  summary: LocalizedText | null;
+  reportType: 'full' | 'none' | 'summary' | null;
+  report: LocalizedBlockContent | null;
+  summarySource: 'instagram' | 'manual' | null;
+  cover: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  } | null;
+  gallery: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+    _key: string;
+  }> | null;
+  lumaUrl: string | null;
+  instagramUrls: Array<string> | null;
+  xUrls: Array<string> | null;
+  resources: Array<{
+    label?: string;
+    url?: string;
+    _type: 'resource';
+    _key: string;
+  }> | null;
+  partners: Array<{
+    _id: string;
+    name: string | null;
+    url: string | null;
+  }> | null;
+  seriesEvents:
+    | Array<{
+        _id: string;
+        slug: string | null;
+        title: LocalizedString | null;
+        date: string | null;
+      }>
+    | Array<never>;
+} | null;
+
+// Source: src/sanity/queries.ts
+// Variable: eventRoutesQuery
+// Query: *[_type == "event" && defined(slug.current) && hidden != true] {    "slug": slug.current,    _updatedAt  }
+export type EventRoutesQueryResult = Array<{
+  slug: string | null;
+  _updatedAt: string;
+}>;
+
 // Query TypeMap
 import '@sanity/client';
 declare module '@sanity/client' {
@@ -416,5 +640,8 @@ declare module '@sanity/client' {
     '\n  *[_type == "post" && language == $language && slug.current == $slug][0] {\n    _id,\n    _updatedAt,\n    title,\n    "slug": slug.current,\n    excerpt,\n    publishedAt,\n    coverImage,\n    category,\n    body,\n    author->{ name, role, avatar, url },\n    \n  "translations": *[_type == "translation.metadata" && references(^._id)][0]\n    .translations[]{\n      "slug": value->slug.current,\n      "language": value->language\n    }\n\n  }\n': PostQueryResult;
     '\n  *[_type == "post" && defined(slug.current) && defined(language)] {\n    "slug": slug.current,\n    language,\n    _updatedAt,\n    \n  "translations": *[_type == "translation.metadata" && references(^._id)][0]\n    .translations[]{\n      "slug": value->slug.current,\n      "language": value->language\n    }\n\n  }\n': PostRoutesQueryResult;
     '\n  *[_type == "hackathon"] | order(year desc, _createdAt desc) {\n    _id,\n    event,\n    year,\n    award,\n    detail,\n    image,\n    url\n  }\n': HackathonsQueryResult;
+    '\n  *[_type == "event" && defined(slug.current) && defined(date) && hidden != true]\n    | order(date desc, time desc) {\n      _id,\n      "slug": slug.current,\n      title,\n      date,\n      endDate,\n      time,\n      type,\n      series,\n      online,\n      city,\n      country,\n      summary,\n      cover,\n      featured,\n      lumaUrl,\n      "partners": partners[]->name\n    }\n': EventsQueryResult;
+    '\n  *[_type == "event" && slug.current == $slug && hidden != true][0] {\n    _id,\n    _updatedAt,\n    "slug": slug.current,\n    title,\n    date,\n    endDate,\n    time,\n    type,\n    series,\n    ecosystems,\n    speakers,\n    online,\n    venue,\n    city,\n    country,\n    attendees,\n    summary,\n    reportType,\n    report,\n    summarySource,\n    cover,\n    gallery,\n    lumaUrl,\n    instagramUrls,\n    xUrls,\n    resources,\n    "partners": partners[]->{ _id, name, url },\n    "seriesEvents": select(\n      defined(series) => *[\n        _type == "event" && series == ^.series && _id != ^._id\n          && defined(slug.current) && hidden != true\n      ] | order(date desc) { _id, "slug": slug.current, title, date },\n      []\n    )\n  }\n': EventQueryResult;
+    '\n  *[_type == "event" && defined(slug.current) && hidden != true] {\n    "slug": slug.current,\n    _updatedAt\n  }\n': EventRoutesQueryResult;
   }
 }

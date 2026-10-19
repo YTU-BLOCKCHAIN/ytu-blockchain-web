@@ -6,6 +6,7 @@ dahil her şey Studio'dan giriliyor.
 
 > Blog yazısı yazacaksan farklı bir rehber var:
 > **[`docs/blog.md`](blog.md)**.
+> Etkinlik eklemek için: **[`docs/events.md`](events.md)**.
 
 ## İlk kez giriyorsan
 

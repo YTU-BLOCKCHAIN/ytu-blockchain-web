@@ -16,6 +16,7 @@ export function pageCard(
   key:
     | 'about'
     | 'projects'
+    | 'events'
     | 'community'
     | 'blog'
     | 'contact'

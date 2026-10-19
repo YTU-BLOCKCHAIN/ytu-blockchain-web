@@ -1,0 +1,338 @@
+import { ArrowUpRight } from 'lucide-react';
+import { type Locale, useTranslations } from 'next-intl';
+import Image from 'next/image';
+import type { ReactNode } from 'react';
+
+import { PostBody } from '@/components/blog/post-body';
+import { Container } from '@/components/container';
+import { buttonClasses } from '@/components/ui/button';
+import { Link } from '@/i18n/navigation';
+import {
+  countryName,
+  eventPlace,
+  formatEventDate,
+  isUpcoming,
+} from '@/lib/events';
+import { EVENT_TYPE_LABEL_KEY, isEventType } from '@/sanity/event-types';
+import { imageDimensions, imageUrl, imageUrlByWidth } from '@/sanity/lib/image';
+import type { EventQueryResult } from '@/sanity/types';
+
+type EventRecord = NonNullable<EventQueryResult>;
+
+/** Künye satırı: solda etiket, sağda değer. Değeri olmayan satır hiç çizilmez. */
+function Fact({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="grid gap-1 sm:grid-cols-[9rem_1fr] sm:gap-4">
+      <dt className="text-muted-foreground text-sm">{label}</dt>
+      <dd className="text-foreground text-sm">{children}</dd>
+    </div>
+  );
+}
+
+const externalLink =
+  'text-primary inline-flex items-center gap-1 text-sm duration-150 hover:underline';
+
+export function EventArticle({
+  event,
+  locale,
+}: {
+  event: EventRecord;
+  locale: Locale;
+}) {
+  const t = useTranslations('Events');
+
+  const title = event.title?.[locale] ?? '';
+  const summary = event.summary?.[locale] ?? '';
+  const date = formatEventDate(event.date, event.endDate, locale);
+  const upcoming = isUpcoming(event);
+  const type = isEventType(event.type) ? event.type : null;
+  const place = event.online
+    ? t('online')
+    : eventPlace([event.venue, event.city, countryName(event.country, locale)]);
+  const partners = (event.partners ?? []).filter((partner) => partner.name);
+  const report = event.report?.[locale];
+
+  /*
+    Rapor bölümünün üç hâli (bkz. `REPORT_TYPES`). "Tam rapor" seçili ama bu
+    dilde gövde yoksa özete düşüyoruz: Studio doğrulaması iki dili de istiyor,
+    yine de eski bir kayıtta boş başlıklı bir bölüm göstermektense özet iyidir.
+
+    Yaklaşan etkinlikte "rapor yok" yazmak yanlış bir izlenim verir (henüz
+    olmadı); onun yerine raporun sonradan geleceği söyleniyor.
+  */
+  const reportType =
+    event.reportType === 'full' && !report?.length
+      ? 'summary'
+      : (event.reportType ?? 'none');
+
+  // Özet, rapor olarak gösterilmiyorsa giriş paragrafı olur — etkinliğin ne
+  // olduğunu her sayfa söylemeli.
+  const leadIsSummary = reportType !== 'summary';
+
+  const gallery = (event.gallery ?? []).filter((image) => image.asset);
+  const resources = (event.resources ?? []).filter(
+    (resource) => resource.url && resource.label,
+  );
+  const links = [
+    ...(event.lumaUrl
+      ? [{ href: event.lumaUrl, label: t('detail.luma') }]
+      : []),
+    ...(event.instagramUrls ?? []).map((href, i, all) => ({
+      href,
+      label:
+        all.length > 1
+          ? `${t('detail.instagram')} ${i + 1}`
+          : t('detail.instagram'),
+    })),
+    ...(event.xUrls ?? []).map((href, i, all) => ({
+      href,
+      label: all.length > 1 ? `${t('detail.x')} ${i + 1}` : t('detail.x'),
+    })),
+    ...resources.map((resource) => ({
+      href: resource.url as string,
+      label: resource.label as string,
+    })),
+  ];
+
+  return (
+    <article>
+      <Container asGrid>
+        <div data-grid-content className="@4xl:p-12 p-6">
+          <div className="mx-auto max-w-2xl">
+            <nav
+              aria-label={t('detail.breadcrumb')}
+              className="text-muted-foreground text-center text-sm"
+            >
+              <Link
+                href="/events"
+                className="hover:text-foreground duration-150"
+              >
+                {t('detail.breadcrumb')}
+              </Link>
+              {type ? (
+                <>
+                  <span aria-hidden className="px-2">
+                    /
+                  </span>
+                  <span>{t(EVENT_TYPE_LABEL_KEY[type])}</span>
+                </>
+              ) : null}
+            </nav>
+
+            <h1 className="text-foreground mt-6 text-balance text-center text-3xl font-semibold tracking-tight sm:text-4xl">
+              {title}
+            </h1>
+
+            {date ? (
+              <p className="text-muted-foreground mt-4 text-center text-sm">
+                <time dateTime={event.date ?? undefined}>{date}</time>
+                {event.time ? ` · ${event.time}` : null}
+                {upcoming ? (
+                  <span className="bg-primary/10 dark:text-primary ml-2 inline-flex rounded-full px-2 py-0.5 text-xs font-medium text-[var(--brand-deep)]">
+                    {t('upcoming')}
+                  </span>
+                ) : null}
+              </p>
+            ) : null}
+
+            {upcoming && event.lumaUrl ? (
+              <div className="mt-6 flex justify-center">
+                <a
+                  href={event.lumaUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className={buttonClasses()}
+                >
+                  {t('register')}
+                  <ArrowUpRight aria-hidden className="size-4" />
+                </a>
+              </div>
+            ) : null}
+
+            {event.cover?.asset ? (
+              <div className="before:border-foreground/10 before:inset-ring-background/10 relative mt-10 aspect-video overflow-hidden rounded-[10px] shadow-md shadow-black/10 before:absolute before:inset-0 before:rounded-[10px] before:border before:inset-ring-1">
+                <Image
+                  src={imageUrl(event.cover, 1600, 900)}
+                  alt={event.cover.alt ?? ''}
+                  width={1600}
+                  height={900}
+                  priority
+                  sizes="(min-width: 1024px) 42rem, 100vw"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            ) : null}
+
+            {leadIsSummary && summary ? (
+              <p className="text-foreground mt-8 text-balance text-lg">
+                {summary}
+              </p>
+            ) : null}
+
+            <dl className="mt-8 space-y-3 border-y py-6">
+              {date ? (
+                <Fact label={t('detail.when')}>
+                  {date}
+                  {event.time ? ` · ${event.time}` : null}
+                </Fact>
+              ) : null}
+              {place ? <Fact label={t('detail.where')}>{place}</Fact> : null}
+              {event.series ? (
+                <Fact label={t('detail.series')}>{event.series}</Fact>
+              ) : null}
+              {partners.length > 0 ? (
+                <Fact label={t('detail.partners')}>
+                  {partners.map((partner, i) => (
+                    <span key={partner._id}>
+                      {i > 0 ? ', ' : null}
+                      {partner.url ? (
+                        <a
+                          href={partner.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="hover:text-primary underline-offset-4 hover:underline"
+                        >
+                          {partner.name}
+                        </a>
+                      ) : (
+                        partner.name
+                      )}
+                    </span>
+                  ))}
+                </Fact>
+              ) : null}
+              {event.speakers?.length ? (
+                <Fact label={t('detail.speakers')}>
+                  {event.speakers.join(', ')}
+                </Fact>
+              ) : null}
+              {event.ecosystems?.length ? (
+                <Fact label={t('detail.ecosystems')}>
+                  {event.ecosystems.join(', ')}
+                </Fact>
+              ) : null}
+              {typeof event.attendees === 'number' ? (
+                <Fact label={t('detail.attendees')}>{event.attendees}</Fact>
+              ) : null}
+            </dl>
+
+            <section aria-labelledby="event-report" className="mt-12">
+              <h2
+                id="event-report"
+                className="text-foreground text-2xl font-semibold tracking-tight"
+              >
+                {t('detail.report')}
+              </h2>
+
+              {reportType === 'full' && report ? (
+                <PostBody value={report} />
+              ) : reportType === 'summary' ? (
+                <>
+                  <p className="text-muted-foreground mt-6 leading-relaxed">
+                    {summary}
+                  </p>
+                  {event.summarySource === 'instagram' ? (
+                    <p className="text-muted-foreground/70 mt-4 text-xs">
+                      {t('detail.summaryNote')}
+                    </p>
+                  ) : null}
+                </>
+              ) : (
+                <p className="text-muted-foreground mt-6">
+                  {upcoming
+                    ? t('detail.reportUpcoming')
+                    : t('detail.reportNone')}
+                </p>
+              )}
+            </section>
+
+            {gallery.length > 0 ? (
+              <section aria-labelledby="event-gallery" className="mt-12">
+                <h2
+                  id="event-gallery"
+                  className="text-foreground text-2xl font-semibold tracking-tight"
+                >
+                  {t('detail.gallery')}
+                </h2>
+                <div className="mt-6 grid grid-cols-2 gap-3">
+                  {gallery.map((image) => {
+                    const dimensions = imageDimensions(image.asset?._ref);
+                    return (
+                      <Image
+                        key={image._key}
+                        src={imageUrlByWidth(image, 800)}
+                        alt={image.alt ?? ''}
+                        width={dimensions?.width ?? 800}
+                        height={dimensions?.height ?? 800}
+                        sizes="(min-width: 1024px) 21rem, 50vw"
+                        className="h-auto w-full rounded"
+                      />
+                    );
+                  })}
+                </div>
+              </section>
+            ) : null}
+
+            {links.length > 0 ? (
+              <section aria-labelledby="event-links" className="mt-12">
+                <h2
+                  id="event-links"
+                  className="text-foreground text-2xl font-semibold tracking-tight"
+                >
+                  {t('detail.links')}
+                </h2>
+                <ul className="mt-6 space-y-2">
+                  {links.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className={externalLink}
+                      >
+                        {link.label}
+                        <ArrowUpRight aria-hidden className="size-3.5" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+
+            {event.seriesEvents.length > 0 ? (
+              <section
+                aria-labelledby="event-series"
+                className="mt-12 border-t pt-6"
+              >
+                <h2
+                  id="event-series"
+                  className="text-muted-foreground text-sm font-medium"
+                >
+                  {t('detail.seriesEvents')}
+                </h2>
+                <ul className="mt-4 space-y-2">
+                  {event.seriesEvents.map((other) =>
+                    other.slug ? (
+                      <li key={other._id} className="text-sm">
+                        <Link
+                          href={`/events/${other.slug}`}
+                          className="text-foreground hover:text-primary duration-150"
+                        >
+                          {other.title?.[locale]}
+                        </Link>
+                        <span className="text-muted-foreground">
+                          {' · '}
+                          {formatEventDate(other.date, null, locale)}
+                        </span>
+                      </li>
+                    ) : null,
+                  )}
+                </ul>
+              </section>
+            ) : null}
+          </div>
+        </div>
+      </Container>
+    </article>
+  );
+}

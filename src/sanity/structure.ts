@@ -57,5 +57,21 @@ export const structure: StructureResolver = (S) =>
             .title('Hackathonlar')
             .defaultOrdering([{ field: 'year', direction: 'desc' }]),
         ),
+      // Etkinlikler de dile göre bölünmüyor (alan seviyesinde çeviri, bkz.
+      // schemaTypes/event.ts).
+      S.documentTypeListItem('event')
+        .title('Etkinlikler')
+        .child(
+          S.documentTypeList('event')
+            .title('Etkinlikler')
+            .defaultOrdering([{ field: 'date', direction: 'desc' }]),
+        ),
+      S.documentTypeListItem('partner')
+        .title('Partnerler')
+        .child(
+          S.documentTypeList('partner')
+            .title('Partnerler')
+            .defaultOrdering([{ field: 'name', direction: 'asc' }]),
+        ),
       S.documentTypeListItem('author').title('Yazarlar'),
     ]);

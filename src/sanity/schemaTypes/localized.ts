@@ -47,3 +47,23 @@ export const localizedText = defineType({
   type: 'object',
   fields: localizedFields(3),
 });
+
+/**
+ * Dile bağlı zengin metin (ör. etkinlik raporu).
+ *
+ * Yukarıdakilerden farkı: alt alanlar **zorunlu değil**. Rapor her etkinlikte
+ * olmuyor; zorunluluk etkinlik şemasında, yalnızca "Tam rapor" seçildiğinde
+ * devreye giriyor (bkz. `event.ts`).
+ */
+export const localizedBlockContent = defineType({
+  name: 'localizedBlockContent',
+  title: 'Dile bağlı zengin metin',
+  type: 'object',
+  fields: sanityLanguages.map((language) =>
+    defineField({
+      name: language.id,
+      title: language.title,
+      type: 'blockContent',
+    }),
+  ),
+});
