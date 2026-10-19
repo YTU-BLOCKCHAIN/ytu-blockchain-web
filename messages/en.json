@@ -4,6 +4,7 @@
     "about": "About",
     "projects": "Projects",
     "community": "Community",
+    "events": "Events",
     "blog": "Blog",
     "contact": "Contact",
     "join": "Join us",
@@ -72,6 +73,10 @@
     "community": {
       "title": "Community",
       "description": "Join the YTÜ Blockchain community on GitHub, X and Instagram."
+    },
+    "events": {
+      "title": "Events",
+      "description": "Trainings, meetups, hackathons and conferences of the YTÜ Blockchain Club — upcoming events and an archive going back to 2022."
     },
     "blog": {
       "title": "Blog",
@@ -272,6 +277,57 @@
     "empty": {
       "title": "Projects coming soon",
       "body": "We're preparing our first projects. Want to build something too? Come join us."
+    }
+  },
+  "Events": {
+    "eyebrow": "Events",
+    "title": "Where we learn and build together",
+    "intro": "From campus trainings to hackathons abroad, everything we have done since 2022. Open an event to read what happened.",
+    "stats": {
+      "events": "{count, plural, one {# event} other {# events}}",
+      "countries": "{count, plural, one {# country} other {# countries}}",
+      "partners": "{count, plural, one {# partner} other {# partners}}"
+    },
+    "upcoming": "Upcoming",
+    "past": "Past events",
+    "empty": "No events yet.",
+    "register": "Register",
+    "online": "Online",
+    "filters": {
+      "label": "Filter by type",
+      "all": "All",
+      "empty": "No events of this type."
+    },
+    "types": {
+      "training": "Training",
+      "workshop": "Workshop",
+      "meetup": "Meetup",
+      "talk": "Talk / Panel",
+      "social": "Social",
+      "stand": "Stand",
+      "conference": "Conference",
+      "hackathon": "Hackathon",
+      "online": "Online"
+    },
+    "detail": {
+      "breadcrumb": "Events",
+      "when": "Date",
+      "where": "Place",
+      "series": "Series",
+      "partners": "Partners",
+      "speakers": "Speakers",
+      "ecosystems": "Ecosystems",
+      "attendees": "Attendees",
+      "links": "Links",
+      "luma": "Luma page",
+      "instagram": "Instagram post",
+      "x": "X post",
+      "report": "Report",
+      "reportNone": "There is no report for this event.",
+      "reportUpcoming": "This event has not happened yet. A report will be added afterwards.",
+      "summaryNote": "This summary was compiled from the event's posts.",
+      "gallery": "Photos",
+      "seriesEvents": "More from this series"
     }
   },
   "Contact": {
