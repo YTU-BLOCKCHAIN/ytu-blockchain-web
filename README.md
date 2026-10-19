@@ -73,7 +73,7 @@ src/
       layout.tsx         # Header + Footer + i18n sağlayıcı
       page.tsx           # Anasayfa
       not-found.tsx      # 404
-      about/ projects/ blog/ community/ contact/ join/ privacy/
+      about/ projects/ events/ blog/ community/ contact/ join/ privacy/
     studio/[[...tool]]/  # gömülü Sanity Studio (kendi kök layout'u var)
     api/revalidate/      # Sanity webhook'u → sayfaları tazeler
     globals.css
@@ -88,6 +88,7 @@ src/
 messages/               # tr.json, en.json (tüm metinler burada)
 docs/blog.md            # editörler için: blog yazısı nasıl yazılır
 docs/hackathons.md      # editörler için: hackathon derecesi nasıl eklenir
+docs/events.md          # editörler için: etkinlik ve rapor nasıl eklenir
 google-apps-script/     # form arka ucu (Sheets + e-posta)
 sanity.config.ts        # Studio yapılandırması
 sanity.types.ts         # şemadan üretilen tipler (elle düzenlenmez)
