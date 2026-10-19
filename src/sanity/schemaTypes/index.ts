@@ -2,8 +2,14 @@ import type { SchemaTypeDefinition } from 'sanity';
 
 import { author } from './author';
 import { blockContent } from './blockContent';
+import { event } from './event';
 import { hackathon } from './hackathon';
-import { localizedString, localizedText } from './localized';
+import {
+  localizedBlockContent,
+  localizedString,
+  localizedText,
+} from './localized';
+import { partner } from './partner';
 import { post } from './post';
 
 /**
@@ -11,15 +17,18 @@ import { post } from './post';
  * `translation.metadata` listede yok — onu `documentInternationalization`
  * eklentisi kendisi ekliyor.
  *
- * `localizedString` / `localizedText` doküman değil, `hackathon` alanlarının
- * kullandığı yeniden kullanılabilir nesne tipleri; kayıtlı olmaları şart,
- * yoksa şema çözümlenmez.
+ * `localizedString` / `localizedText` / `localizedBlockContent` doküman değil,
+ * `hackathon` ve `event` alanlarının kullandığı yeniden kullanılabilir nesne
+ * tipleri; kayıtlı olmaları şart, yoksa şema çözümlenmez.
  */
 export const schemaTypes: SchemaTypeDefinition[] = [
   post,
   author,
   hackathon,
+  event,
+  partner,
   blockContent,
   localizedString,
   localizedText,
+  localizedBlockContent,
 ];

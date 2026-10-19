@@ -90,3 +90,83 @@ export const hackathonsQuery = defineQuery(`
     url
   }
 `);
+
+/**
+ * `/events` listesi: gizlenmemiş bütün etkinlikler, yeniden eskiye.
+ *
+ * Dile göre süzülmüyor (alan seviyesinde çeviri, hackathon'larla aynı);
+ * indirgeme sunucu bileşeninde yapılıyor. Rapor gövdesi ve galeri bilerek
+ * çekilmiyor — liste yüz küsur kayıt taşıyor, kartta ikisi de görünmüyor.
+ *
+ * `hidden != true`: alan eski kayıtlarda hiç tanımlı olmayabilir; `== false`
+ * yazılsaydı o kayıtlar listeden sessizce düşerdi.
+ */
+export const eventsQuery = defineQuery(`
+  *[_type == "event" && defined(slug.current) && defined(date) && hidden != true]
+    | order(date desc, time desc) {
+      _id,
+      "slug": slug.current,
+      title,
+      date,
+      endDate,
+      time,
+      type,
+      series,
+      online,
+      city,
+      country,
+      summary,
+      cover,
+      featured,
+      lumaUrl,
+      "partners": partners[]->name
+    }
+`);
+
+/** Tek etkinlik — adres ile. Aynı serideki diğer etkinlikler de geliyor. */
+export const eventQuery = defineQuery(`
+  *[_type == "event" && slug.current == $slug && hidden != true][0] {
+    _id,
+    _updatedAt,
+    "slug": slug.current,
+    title,
+    date,
+    endDate,
+    time,
+    type,
+    series,
+    ecosystems,
+    speakers,
+    online,
+    venue,
+    city,
+    country,
+    attendees,
+    summary,
+    reportType,
+    report,
+    summarySource,
+    cover,
+    gallery,
+    lumaUrl,
+    instagramUrls,
+    xUrls,
+    resources,
+    "partners": partners[]->{ _id, name, url },
+    "seriesEvents": select(
+      defined(series) => *[
+        _type == "event" && series == ^.series && _id != ^._id
+          && defined(slug.current) && hidden != true
+      ] | order(date desc) { _id, "slug": slug.current, title, date },
+      []
+    )
+  }
+`);
+
+/** Bütün etkinlik adresleri — `generateStaticParams` ve site haritası için. */
+export const eventRoutesQuery = defineQuery(`
+  *[_type == "event" && defined(slug.current) && hidden != true] {
+    "slug": slug.current,
+    _updatedAt
+  }
+`);
