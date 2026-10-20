@@ -24,7 +24,7 @@ type EventRecord = EventsQueryResult[number];
  * olmayan kayıt çizilemez (sorgu zaten süzüyor; bu kapı tipteki `null`ları
  * kapatmak için). Dil burada indirgeniyor — kayıt iki dili birden taşıyor.
  */
-function toCard(
+export function toCard(
   event: EventRecord,
   locale: Locale,
   onlineLabel: string,
@@ -179,16 +179,7 @@ export function EventsList({
       ) : null}
 
       {past.length > 0 ? (
-        <>
-          <section>
-            <Container>
-              <h2 className="@4xl:px-12 text-foreground px-6 pt-10 text-2xl font-semibold tracking-tight">
-                {t('past')}
-              </h2>
-            </Container>
-          </section>
-          <EventsFeed events={past} />
-        </>
+        <EventsFeed events={past} heading={t('past')} />
       ) : null}
     </>
   );
