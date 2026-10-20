@@ -1,3 +1,4 @@
+import { ArrowUpRight, CalendarDays } from 'lucide-react';
 import { type Locale, useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
@@ -10,6 +11,7 @@ import {
   isUpcoming,
   todayInClubTimeZone,
 } from '@/lib/events';
+import { siteConfig } from '@/lib/site';
 import { cn } from '@/lib/utils';
 import { isEventType } from '@/sanity/event-types';
 import { imageUrlByWidth } from '@/sanity/lib/image';
@@ -80,8 +82,8 @@ export function EventsHero({ events }: { events: EventsQueryResult }) {
 
   return (
     <section>
-      <Container className="@4xl:py-12 pb-6 pt-12">
-        <div className="@4xl:px-12 max-w-2xl px-6">
+      <Container className="@4xl:py-12 @4xl:px-12 flex flex-col gap-8 px-6 pb-6 pt-12 md:flex-row md:items-end md:justify-between">
+        <div className="max-w-2xl">
           <span className="text-primary font-display text-xs tracking-widest uppercase">
             {'//'} {t('eyebrow')}
           </span>
@@ -100,6 +102,30 @@ export function EventsHero({ events }: { events: EventsQueryResult }) {
             </p>
           ) : null}
         </div>
+
+        {/* Yeni etkinlikler önce Luma'da açılıyor; buradan takip edilebilsin. */}
+        <a
+          href={siteConfig.social.luma}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="group border-foreground/10 hover:border-primary/40 hover:bg-muted flex shrink-0 items-center gap-4 rounded-xl border p-4 duration-150 md:max-w-xs"
+        >
+          <span className="bg-primary/10 text-primary flex size-10 shrink-0 items-center justify-center rounded-lg">
+            <CalendarDays aria-hidden className="size-5" />
+          </span>
+          <span className="flex flex-col">
+            <span className="text-foreground inline-flex items-center gap-1 font-medium">
+              {t('luma.label')}
+              <ArrowUpRight
+                aria-hidden
+                className="size-4 duration-150 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </span>
+            <span className="text-muted-foreground text-sm">
+              {t('luma.hint')}
+            </span>
+          </span>
+        </a>
       </Container>
     </section>
   );
