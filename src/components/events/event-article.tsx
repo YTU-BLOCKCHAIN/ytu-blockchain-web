@@ -14,8 +14,10 @@ import {
   isUpcoming,
 } from '@/lib/events';
 import { EVENT_TYPE_LABEL_KEY, isEventType } from '@/sanity/event-types';
-import { imageDimensions, imageUrl, imageUrlByWidth } from '@/sanity/lib/image';
+import { imageDimensions, imageUrlByWidth } from '@/sanity/lib/image';
 import type { EventQueryResult } from '@/sanity/types';
+
+import { EventCover } from './event-cover';
 
 type EventRecord = NonNullable<EventQueryResult>;
 
@@ -149,18 +151,18 @@ export function EventArticle({
               </div>
             ) : null}
 
+            {/* 4:3 kutu: 16:9 dikey afişleri ve reel kapaklarını sayfada
+                küçücük bırakıyordu; kırpılmadığı için yatay fotoğraf da
+                tamamıyla görünüyor (bkz. `EventCover`). */}
             {event.cover?.asset ? (
-              <div className="before:border-foreground/10 before:inset-ring-background/10 relative mt-10 aspect-video overflow-hidden rounded-[10px] shadow-md shadow-black/10 before:absolute before:inset-0 before:rounded-[10px] before:border before:inset-ring-1">
-                <Image
-                  src={imageUrl(event.cover, 1600, 900)}
-                  alt={event.cover.alt ?? ''}
-                  width={1600}
-                  height={900}
-                  priority
-                  sizes="(min-width: 1024px) 42rem, 100vw"
-                  className="h-full w-full object-cover"
-                />
-              </div>
+              <EventCover
+                src={imageUrlByWidth(event.cover, 1600)}
+                blurSrc={imageUrlByWidth(event.cover, 48)}
+                alt={event.cover.alt ?? ''}
+                priority
+                sizes="(min-width: 1024px) 42rem, 100vw"
+                className="mt-10 aspect-[4/3] rounded-[10px] shadow-md shadow-black/10"
+              />
             ) : null}
 
             {leadIsSummary && summary ? (

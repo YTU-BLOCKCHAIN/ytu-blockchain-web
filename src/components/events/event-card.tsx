@@ -1,11 +1,12 @@
 import { ArrowUpRight, MapPin } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
 
 import { buttonClasses } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { EVENT_TYPE_LABEL_KEY, type EventType } from '@/sanity/event-types';
+
+import { EventCover } from './event-cover';
 
 /**
  * Bir kartın çizilmesi için gereken her şey — sunucuda hazırlanmış düz veri
@@ -26,6 +27,8 @@ export type EventCardData = {
   type: EventType | null;
   place: string | null;
   coverUrl: string | null;
+  /** Kapağın arkasındaki bulanık zemin için küçük kopya (bkz. `EventCover`). */
+  coverBlurUrl: string | null;
   coverAlt: string;
   /** "2025–2026" — geçmiş etkinlikler bu başlıklar altında gruplanıyor. */
   academicYear: string;
@@ -66,17 +69,14 @@ export function EventCard({
         data-grid-content
         className="@4xl:p-8 hover:bg-muted! flex flex-col gap-4 p-6 shadow-xl shadow-transparent transition duration-200 hover:shadow-[var(--brand-deep)]/5"
       >
-        {event.coverUrl ? (
-          <div className="before:border-foreground/10 relative aspect-[16/10] overflow-hidden rounded-[10px] before:absolute before:inset-0 before:z-1 before:rounded-[10px] before:border">
-            <Image
-              src={event.coverUrl}
-              alt={event.coverAlt}
-              width={800}
-              height={500}
-              sizes="(min-width: 1024px) 22rem, (min-width: 640px) 50vw, 100vw"
-              className="h-full w-full object-cover"
-            />
-          </div>
+        {event.coverUrl && event.coverBlurUrl ? (
+          <EventCover
+            src={event.coverUrl}
+            blurSrc={event.coverBlurUrl}
+            alt={event.coverAlt}
+            sizes="(min-width: 1024px) 22rem, (min-width: 640px) 50vw, 100vw"
+            className="aspect-[16/10] rounded-[10px]"
+          />
         ) : null}
 
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
