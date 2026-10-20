@@ -26,11 +26,16 @@ export const Container = ({
     sınır olduğu için 1024px'lik pencerede bile 1104px dayatıp sayfayı 95px
     yatay kaydırıyordu. minmax ile geniş ekranda ölçü aynı, dar ekranda sütun
     küçülüp yan raylar (1fr) sıfırlanıyor.
+
+    Mobilde de orta sütun `minmax(0,1fr)`, düz `1fr` değil: `1fr`in alt sınırı
+    içeriğin min-content genişliği. Yatay kayan bir şerit (etkinlik türü
+    süzgeci) kendi içinde kaymak yerine sütunu ve bütün sayfayı 843px'e
+    genişletiyordu.
   */
   return (
     <div
       {...props}
-      className="@container grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_minmax(0,69rem)_1fr]"
+      className="@container grid grid-cols-[auto_minmax(0,1fr)_auto] lg:grid-cols-[1fr_minmax(0,69rem)_1fr]"
     >
       {/* `overflow-hidden`: ray sıfır genişliğe indiğinde Decorator'ın
           `p-[0.5px]` dolgusu border-box'ta 1px'lik bir taban yaratıp sayfayı
