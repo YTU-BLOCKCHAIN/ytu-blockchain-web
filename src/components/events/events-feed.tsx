@@ -27,7 +27,15 @@ const ALL = '';
  * arşivden doğuyor ve hiç etkinliği olmayan bir türün düğmesi yalnızca boş
  * sonuç üretirdi.
  */
-export function EventsFeed({ events }: { events: EventCardData[] }) {
+export function EventsFeed({
+  events,
+  heading,
+}: {
+  events: EventCardData[];
+  /** Bölüm başlığı — sunucudan metin olarak geliyor; istemciye ayrıca
+      çeviri anahtarı indirmeye gerek kalmıyor. */
+  heading: string;
+}) {
   const t = useTranslations('Events');
   const [active, setActive] = useState<EventType | typeof ALL>(ALL);
 
@@ -57,8 +65,17 @@ export function EventsFeed({ events }: { events: EventCardData[] }) {
 
   return (
     <>
-      <section>
-        <Container className="@4xl:px-12 py-4 md:px-6">
+      {/* Başlık süzgeçle aynı hücrede ve "Yaklaşan" ile aynı biçimde: eskiden
+          ayrı bir şeritte, alt çizgiye yapışık duruyordu ve süzgeçle bağı
+          kopuk görünüyordu. */}
+      <section aria-labelledby="events-past">
+        <Container className="@4xl:px-12 pt-6 pb-2 md:px-6">
+          <h2
+            id="events-past"
+            className="text-primary font-display text-sm tracking-widest uppercase max-md:px-6"
+          >
+            {heading}
+          </h2>
           {/* `role="group"` + `aria-pressed`: gerekçe `blog-feed.tsx`. */}
           <div
             role="group"
@@ -113,12 +130,12 @@ export function EventsFeed({ events }: { events: EventCardData[] }) {
                   data-grid-content
                   className="@4xl:px-12 flex items-baseline justify-between gap-4 px-6 py-4"
                 >
-                  <h2
+                  <h3
                     id={`events-${year}`}
                     className="text-foreground font-display text-sm tracking-widest"
                   >
                     {year}
-                  </h2>
+                  </h3>
                   <span className="text-muted-foreground text-sm">
                     {t('stats.events', { count: items.length })}
                   </span>
@@ -129,10 +146,41 @@ export function EventsFeed({ events }: { events: EventCardData[] }) {
               {items.map((event) => (
                 <EventCard key={event.id} event={event} />
               ))}
+              <GridFillers count={items.length} />
             </Container>
           </section>
         ))
       )}
     </>
+  );
+}
+
+/**
+ * Son satırdaki boş hücreleri kart zeminiyle doldurur.
+ *
+ * Izgaranın arka planı çizgi rengi (`bg-grid-line`, bkz. `Container`): kart
+ * sayısı sütun sayısının katı değilse son satırda kalan hücreler o gri renkte
+ * çıplak görünüyordu. Sütun sayısı ekran genişliğine göre değiştiği için (1 /
+ * `sm` 2 / `lg` 3) kaç dolgu gerektiği de genişliğe göre değişiyor; her dolgu
+ * yalnızca gerektiği genişlikte görünür.
+ */
+function GridFillers({ count }: { count: number }) {
+  const sm = count % 2 === 0 ? 0 : 1;
+  const lg = (3 - (count % 3)) % 3;
+
+  const fillers = [
+    // İlk dolgu: iki sütunda tek kart kaldıysa ve/veya üç sütunda en az bir
+    // hücre boşsa.
+    cn('hidden', sm && 'sm:block', lg >= 1 ? 'lg:block' : 'lg:hidden'),
+    // İkinci dolgu yalnızca üç sütunda iki hücre boşsa.
+    lg === 2 ? 'hidden lg:block' : null,
+  ];
+
+  return fillers.map((className, i) =>
+    className ? (
+      <div key={i} aria-hidden className={className}>
+        <div data-grid-content />
+      </div>
+    ) : null,
   );
 }

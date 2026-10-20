@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
+import { LandingEvents } from '@/components/landing/landing-events';
 import { LandingHackathons } from '@/components/landing/landing-hackathons';
 import { LandingPosts } from '@/components/landing/landing-posts';
 import { LandingSticker } from '@/components/landing/landing-sticker';
@@ -44,6 +45,7 @@ export default async function LandingPage({
       <LandingHero />
       <LandingFeatures />
       <LandingManifesto />
+      <LandingEvents />
       <LandingHackathons />
       {/* Gerçek sponsor/partner logoları hazır olana kadar gizlendi; bileşen
           `landing-sections.tsx` içinde duruyor, geri açmak için yorumu kaldırın. */}
