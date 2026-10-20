@@ -31,6 +31,8 @@ export const siteConfig = {
   social: {
     github: 'https://github.com/YTU-BLOCKCHAIN',
     x: 'https://x.com/BlockchainYtu',
+    // Etkinliklerin yayımlandığı Luma profili; etkinlikler sayfasından bağlı.
+    luma: 'https://luma.com/user/ytublockchain',
     instagram: 'https://www.instagram.com/ytu_blockchain/',
     whatsapp: 'https://chat.whatsapp.com/JpClE5mXx8sJQ6ERIIrx0n',
     medium: 'https://medium.com/ytublockchain',

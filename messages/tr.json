@@ -288,6 +288,10 @@
     "eyebrow": "Etkinlikler",
     "title": "Birlikte öğrendiğimiz, ürettiğimiz yerler",
     "intro": "Kampüsteki eğitimlerden yurt dışındaki hackathonlara, 2022'den bu yana yaptığımız her şey. Bir etkinliğe tıkla, ne olduğunu oku.",
+    "luma": {
+      "label": "Etkinliklerimiz",
+      "hint": "Yeni etkinlikleri Luma’da takip et"
+    },
     "stats": {
       "events": "{count} etkinlik",
       "countries": "{count} ülke",
