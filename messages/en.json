@@ -124,6 +124,11 @@
       "heading": "Why we're here",
       "body": "We make blockchain something students at YTÜ can learn, build and share. No experience required — we learn and build together."
     },
+    "events": {
+      "heading": "Events",
+      "intro": "From campus trainings to hackathons abroad: {count, plural, one {# event} other {# events}} since 2022.",
+      "all": "All events"
+    },
     "hackathons": {
       "heading": "Hackathons",
       "intro": "Moments from the hackathons our teams took part in.",

@@ -124,6 +124,11 @@
       "heading": "Neden buradayız",
       "body": "Blockchain'i YTÜ'de öğrenilebilir, üretilebilir ve paylaşılabilir kılıyoruz. Deneyim şart değil — birlikte öğreniyor, birlikte üretiyoruz."
     },
+    "events": {
+      "heading": "Etkinlikler",
+      "intro": "Kampüsteki eğitimlerden yurt dışındaki hackathonlara, 2022'den bu yana {count} etkinlik.",
+      "all": "Tüm etkinlikler"
+    },
     "hackathons": {
       "heading": "Hackathonlar",
       "intro": "Takımlarımızın yer aldığı hackathon'lardan kareler.",
