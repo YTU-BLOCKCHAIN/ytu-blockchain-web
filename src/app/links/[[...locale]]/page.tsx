@@ -243,10 +243,13 @@ function LinkRow({
   link,
   LeadingIcon,
   tone,
+  wide = false,
 }: {
   link: LinkItem;
   LeadingIcon: RowIcon;
   tone: string;
+  /** Geniş ekrandaki iki sütunlu listede tam satır kaplar. */
+  wide?: boolean;
 }) {
   return (
     <a
@@ -257,7 +260,8 @@ function LinkRow({
       className={cn(
         // Köşeler yalnızca sm'den itibaren: telefonda kartlar ekranın iki
         // kenarına dayanıyor, orada yuvarlatma kırpılmış gibi duruyordu.
-        'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none sm:rounded',
+        'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none sm:rounded md:min-h-20',
+        wide && 'lg:col-span-2',
         link.featured
           ? 'bg-foreground text-background hover:bg-foreground/90'
           : 'bg-card hover:bg-accent',
@@ -385,8 +389,13 @@ export default async function LinksPage({
     ...links.slice(socialsAt),
   ].map((link) => {
     const { Icon, tone } = iconForLink(link);
-    return { link, LeadingIcon: Icon, tone };
+    return { link, LeadingIcon: Icon, tone, wide: Boolean(link.featured) };
   });
+  // Geniş ekranda iki sütun: öne çıkan (başvuru) satırları tam satır; geri
+  // kalanların sayısı tekse sonuncusu da, yoksa sağ altta boş bir hücre kalır.
+  const regular = rows.filter((row) => !row.wide);
+  const last = regular.at(-1);
+  if (regular.length % 2 === 1 && last) last.wide = true;
 
   return (
     /* Telefonda tam ekran: yatay padding yok, kartlar kenardan kenara. Yatay
@@ -395,9 +404,13 @@ export default async function LinksPage({
        yoğun kısmından kurtarır. md'den itibaren içerik dikeyde de ortalanır:
        geniş ekranda sayfa tek karttan ibaret, tepeye yapışınca altı boş bir
        kuyu gibi kalıyordu. (İçerik taşarsa main zaten içerikle uzar,
-       justify-center etkisiz kalır — kırpma riski yok.) */
-    <main className="flex flex-1 flex-col items-center pb-24 sm:px-4 sm:pt-14 md:justify-center md:py-16">
-      <div className="w-full max-w-md md:max-w-4xl">
+       justify-center etkisiz kalır — kırpma riski yok.)
+
+       md'den itibaren tam ekran: ortada 4xl'lik bir kutu siyah boşlukta
+       küçük kalıyordu. Solda ekrana sabitlenmiş profil paneli, sağda iki
+       sütunlu bağlantı listesi; telefondaki görünüm değişmedi. */
+    <main className="flex flex-1 flex-col items-center pb-24 sm:px-4 sm:pt-14 md:items-stretch md:p-0">
+      <div className="w-full max-w-md md:min-h-dvh md:max-w-none">
         {/* `gap-px`: kartlar arasındaki 1px boşluklardan zemin (tam siyah)
             sızar, ayraç çizgisi bu. Kartlar siyahın üstünde hafif yükselti.
 
@@ -405,10 +418,10 @@ export default async function LinksPage({
             listesi. Telefondaki dar sütun geniş ekranda siyah boşlukta ince
             bir şerit gibi kaybolmasın diye. Aradaki 1px boşluk da satır
             araları ile aynı ayraç dili. */}
-        <div className="grid gap-px md:grid-cols-[minmax(0,4fr)_minmax(0,5fr)]">
+        <div className="grid gap-px md:min-h-dvh md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
           {/* md'de header sol kolonun tamamını kaplar (grid stretch) ve içerik
               dikeyde ortalanır; mask zaten absolute, flex'ten etkilenmez. */}
-          <header className="bg-card relative overflow-hidden px-6 py-10 text-center sm:rounded md:flex md:flex-col md:justify-center md:px-10 md:py-16">
+          <header className="bg-card relative overflow-hidden px-6 py-10 text-center sm:rounded md:sticky md:top-0 md:flex md:h-dvh md:flex-col md:justify-center md:rounded-none md:px-10 md:py-16">
             {/* Sitedeki hero'larla aynı teknik: CSS mask + bg-foreground →
                 görsel metin rengini alır. Sayfa her zaman koyu olduğu için
                 opaklık tek değer (`dark:` varyantı OS temasına bakardı, bu
@@ -449,7 +462,7 @@ export default async function LinksPage({
           {/* İç grid de `gap-px`: telefonda dıştaki ile aynı ayraçlar, yani
               görünüm eskisiyle birebir. md'de sağ kolon soldan kısaysa
               satırlar stretch ile eşit büyüyüp paneli doldurur. */}
-          <div className="grid gap-px">
+          <div className="grid content-center gap-px md:p-8 lg:grid-cols-2 lg:p-16">
             {rows.map((row) => (
               <LinkRow key={`${row.link.label}-${row.link.href}`} {...row} />
             ))}

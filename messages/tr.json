@@ -28,8 +28,6 @@
         "teamDesc": "Kulübü birlikte yürüten komiteler"
       },
       "community": {
-        "channels": "Kanallar",
-        "channelsDesc": "GitHub, X ve Instagram'da bize katıl",
         "join": "Katıl",
         "joinDesc": "Üye ol, topluluğun parçası ol",
         "projects": "Projeler",
@@ -85,10 +83,6 @@
     "contact": {
       "title": "İletişim",
       "description": "Sorularınız ve iş birlikleri için YTÜ Blockchain Kulübü ile iletişime geçin."
-    },
-    "join": {
-      "title": "Üye Ol",
-      "description": "YTÜ Blockchain Kulübü'ne üye olun; öğrenin, üretin ve toplulukta yer alın."
     },
     "privacy": {
       "title": "Aydınlatma Metni",
@@ -280,8 +274,11 @@
       "live": "Canlı"
     },
     "empty": {
+      "eyebrow": "Yakında",
       "title": "Projeler çok yakında",
-      "body": "İlk projelerimizi hazırlıyoruz. Sen de bir şeyler geliştirmek istersen aramıza katıl."
+      "body": "Hackathonlarda ve kulüp içinde geliştirdiğimiz projeleri burada topluyoruz. O zamana kadar kodlarımız GitHub'da.",
+      "github": "GitHub'da incele",
+      "join": "Bize Katıl"
     }
   },
   "Events": {
@@ -372,43 +369,6 @@
     "eyebrow": "Topluluk",
     "title": "Topluluğa katıl",
     "subtitle": "Online kanallarımızda ve etkinliklerimizde bir aradayız. Takip et, sorular sor, üretime katıl.",
-    "channels": {
-      "github": {
-        "name": "GitHub",
-        "description": "Açık kaynak projelerimize göz at ve katkı ver.",
-        "cta": "Projelere git"
-      },
-      "x": {
-        "name": "X",
-        "description": "Duyurular, etkinlikler ve paylaşımlar için takip et.",
-        "cta": "Takip et"
-      },
-      "instagram": {
-        "name": "Instagram",
-        "description": "Etkinliklerimizden kareler ve güncel haberler.",
-        "cta": "Takip et"
-      },
-      "whatsapp": {
-        "name": "WhatsApp",
-        "description": "En hareketli kanalımız: sorular, etkinlik sohbeti ve günlük muhabbet.",
-        "cta": "Gruba katıl"
-      },
-      "medium": {
-        "name": "Medium",
-        "description": "Üyelerimizin uzun yazıları ve anlatıları.",
-        "cta": "Oku"
-      },
-      "spotify": {
-        "name": "Podcast",
-        "description": "Blockchain üzerine sohbetlerimiz, Spotify'da.",
-        "cta": "Dinle"
-      },
-      "roadmap": {
-        "name": "Web3 Yol Haritası",
-        "description": "Sıfırdan başlayanlar için öğrenme rehberi, Notion'da.",
-        "cta": "Yol haritasını aç"
-      }
-    },
     "cta": {
       "heading": "Aramıza katılmak ister misin?",
       "body": "Üyelik birkaç dakika sürer; her seviye için açığız.",
@@ -425,32 +385,19 @@
       "empty": "Bu kategoride henüz yazı yok.",
       "onlyFeatured": "Bu kategorideki tek yazı yukarıda öne çıkarıldı."
     },
-    "empty": "Henüz yazı yok. Yakında burada olacağız.",
     "categories": {
       "announcements": "Duyurular",
       "hackathons": "Hackathonlar"
     },
     "breadcrumb": "Blog",
     "postedBy": "Yazan {name}",
-    "readInOtherLanguage": "Bu yazıyı İngilizce oku"
-  },
-  "Join": {
-    "eyebrow": "Üye Ol",
-    "title": "Aramıza katıl",
-    "subtitle": "Deneyim aramıyoruz — merak yeterli.",
-    "expectHeading": "Seni ne bekliyor?",
-    "expect": {
-      "learn": "Uygulamalı atölyeler ve birlikte öğrenme",
-      "build": "Açık kaynak projelerde birlikte üretim",
-      "community": "Aktif bir topluluk ve etkinlikler",
-      "open": "Her bölümden, her seviyeden herkese açık"
-    },
-    "apply": {
-      "status": "Başvurular açık",
-      "heading": "Başvuru formu",
-      "intro": "Formu doldurman birkaç dakika sürüyor. Başvurular Google Forms üzerinden alınıyor; formu gönderdikten sonra seninle e-postadan iletişime geçiyoruz.",
-      "button": "Başvuru formunu aç",
-      "note": "Bağlantı Google Forms'ta yeni sekmede açılır."
+    "readInOtherLanguage": "Bu yazıyı İngilizce oku",
+    "emptyState": {
+      "eyebrow": "Yakında",
+      "title": "İlk yazılar yolda",
+      "body": "Blockchain üzerine yazdıklarımızı ve kulüpten haberleri burada paylaşacağız. Şimdilik eski yazılarımız Medium'da.",
+      "medium": "Medium'da oku",
+      "events": "Etkinliklere göz at"
     }
   },
   "Forms": {

@@ -84,7 +84,7 @@ makine çevirisi beklemiyor.
 
 - **Dış bağlantı** `https://` ile başlar: `https://lu.ma/ytublockchain`
 - **Kendi sitemizdeki sayfa** `/` ile başlar ve **dil öneki ALMAZ**:
-  `/projects`, `/contact`, `/join`, anasayfa için yalnızca `/`.
+  `/projects`, `/contact`, anasayfa için yalnızca `/`.
 
 Öneki bilerek yazmıyorsun: sayfa ziyaretçinin diline göre kendisi koyuyor
 (Türkçe sayfadaki buton `/tr/projects`e, İngilizce sayfadaki `/en/projects`e

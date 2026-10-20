@@ -32,7 +32,6 @@ export const LOCALIZED_PATHS = [
   '/community',
   '/blog',
   '/contact',
-  '/join',
   '/privacy',
 ] as const;
 
