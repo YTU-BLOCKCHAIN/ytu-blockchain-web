@@ -86,6 +86,8 @@ export type Partner = {
     crop?: SanityImageCrop;
     _type: 'image';
   };
+  description?: LocalizedString;
+  ecosystem?: string;
 };
 
 export type SanityImageCrop = {
@@ -512,7 +514,7 @@ export type HackathonsQueryResult = Array<{
 
 // Source: src/sanity/queries.ts
 // Variable: eventsQuery
-// Query: *[_type == "event" && defined(slug.current) && defined(date) && hidden != true]    | order(date desc, time desc) {      _id,      "slug": slug.current,      title,      date,      endDate,      time,      type,      series,      online,      city,      country,      summary,      cover,      featured,      lumaUrl,      "partners": partners[]->name    }
+// Query: *[_type == "event" && defined(slug.current) && defined(date) && hidden != true]    | order(date desc, time desc) {      _id,      "slug": slug.current,      title,      date,      endDate,      time,      type,      series,      online,      city,      country,      summary,      cover,      featured,      lumaUrl,      "partners": partners[]->name,      "orgs": {        "partners": partners[]->{ _id, name, url, description, logo, ecosystem },        "ecosystems": *[_type == "partner" && defined(ecosystem) && ecosystem in ^.ecosystems] { _id, name, url, description, logo, ecosystem }      }    }
 export type EventsQueryResult = Array<{
   _id: string;
   slug: string | null;
@@ -547,11 +549,41 @@ export type EventsQueryResult = Array<{
   featured: boolean | null;
   lumaUrl: string | null;
   partners: Array<string | null> | null;
+  orgs: {
+    partners: Array<{
+      _id: string;
+      name: string | null;
+      url: string | null;
+      description: LocalizedString | null;
+      logo: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: 'image';
+      } | null;
+      ecosystem: string | null;
+    }> | null;
+    ecosystems: Array<{
+      _id: string;
+      name: string | null;
+      url: string | null;
+      description: LocalizedString | null;
+      logo: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: 'image';
+      } | null;
+      ecosystem: string | null;
+    }>;
+  };
 }>;
 
 // Source: src/sanity/queries.ts
 // Variable: eventQuery
-// Query: *[_type == "event" && slug.current == $slug && hidden != true][0] {    _id,    _updatedAt,    "slug": slug.current,    title,    date,    endDate,    time,    type,    series,    ecosystems,    speakers,    online,    venue,    city,    country,    attendees,    summary,    reportType,    report,    summarySource,    cover,    gallery,    lumaUrl,    instagramUrls,    xUrls,    resources,    "partners": partners[]->{ _id, name, url },    "seriesEvents": select(      defined(series) => *[        _type == "event" && series == ^.series && _id != ^._id          && defined(slug.current) && hidden != true      ] | order(date desc) { _id, "slug": slug.current, title, date },      []    )  }
+// Query: *[_type == "event" && slug.current == $slug && hidden != true][0] {    _id,    _updatedAt,    "slug": slug.current,    title,    date,    endDate,    time,    type,    series,    ecosystems,    speakers,    online,    venue,    city,    country,    attendees,    summary,    reportType,    report,    summarySource,    cover,    gallery,    lumaUrl,    instagramUrls,    xUrls,    resources,    "partners": partners[]->{ _id, name, url, description, logo, ecosystem },    "ecosystemOrgs": *[_type == "partner" && defined(ecosystem) && ecosystem in ^.ecosystems] { _id, name, url, description, logo, ecosystem },    "seriesEvents": select(      defined(series) => *[        _type == "event" && series == ^.series && _id != ^._id          && defined(slug.current) && hidden != true      ] | order(date desc) { _id, "slug": slug.current, title, date },      []    )  }
 export type EventQueryResult = {
   _id: string;
   _updatedAt: string;
@@ -613,7 +645,30 @@ export type EventQueryResult = {
     _id: string;
     name: string | null;
     url: string | null;
+    description: LocalizedString | null;
+    logo: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+    } | null;
+    ecosystem: string | null;
   }> | null;
+  ecosystemOrgs: Array<{
+    _id: string;
+    name: string | null;
+    url: string | null;
+    description: LocalizedString | null;
+    logo: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+    } | null;
+    ecosystem: string | null;
+  }>;
   seriesEvents:
     | Array<{
         _id: string;
@@ -640,8 +695,8 @@ declare module '@sanity/client' {
     '\n  *[_type == "post" && language == $language && slug.current == $slug][0] {\n    _id,\n    _updatedAt,\n    title,\n    "slug": slug.current,\n    excerpt,\n    publishedAt,\n    coverImage,\n    category,\n    body,\n    author->{ name, role, avatar, url },\n    \n  "translations": *[_type == "translation.metadata" && references(^._id)][0]\n    .translations[]{\n      "slug": value->slug.current,\n      "language": value->language\n    }\n\n  }\n': PostQueryResult;
     '\n  *[_type == "post" && defined(slug.current) && defined(language)] {\n    "slug": slug.current,\n    language,\n    _updatedAt,\n    \n  "translations": *[_type == "translation.metadata" && references(^._id)][0]\n    .translations[]{\n      "slug": value->slug.current,\n      "language": value->language\n    }\n\n  }\n': PostRoutesQueryResult;
     '\n  *[_type == "hackathon"] | order(year desc, _createdAt desc) {\n    _id,\n    event,\n    year,\n    award,\n    detail,\n    image,\n    url\n  }\n': HackathonsQueryResult;
-    '\n  *[_type == "event" && defined(slug.current) && defined(date) && hidden != true]\n    | order(date desc, time desc) {\n      _id,\n      "slug": slug.current,\n      title,\n      date,\n      endDate,\n      time,\n      type,\n      series,\n      online,\n      city,\n      country,\n      summary,\n      cover,\n      featured,\n      lumaUrl,\n      "partners": partners[]->name\n    }\n': EventsQueryResult;
-    '\n  *[_type == "event" && slug.current == $slug && hidden != true][0] {\n    _id,\n    _updatedAt,\n    "slug": slug.current,\n    title,\n    date,\n    endDate,\n    time,\n    type,\n    series,\n    ecosystems,\n    speakers,\n    online,\n    venue,\n    city,\n    country,\n    attendees,\n    summary,\n    reportType,\n    report,\n    summarySource,\n    cover,\n    gallery,\n    lumaUrl,\n    instagramUrls,\n    xUrls,\n    resources,\n    "partners": partners[]->{ _id, name, url },\n    "seriesEvents": select(\n      defined(series) => *[\n        _type == "event" && series == ^.series && _id != ^._id\n          && defined(slug.current) && hidden != true\n      ] | order(date desc) { _id, "slug": slug.current, title, date },\n      []\n    )\n  }\n': EventQueryResult;
+    '\n  *[_type == "event" && defined(slug.current) && defined(date) && hidden != true]\n    | order(date desc, time desc) {\n      _id,\n      "slug": slug.current,\n      title,\n      date,\n      endDate,\n      time,\n      type,\n      series,\n      online,\n      city,\n      country,\n      summary,\n      cover,\n      featured,\n      lumaUrl,\n      "partners": partners[]->name,\n      "orgs": {\n        "partners": partners[]->{ _id, name, url, description, logo, ecosystem },\n        "ecosystems": *[_type == "partner" && defined(ecosystem) && ecosystem in ^.ecosystems] { _id, name, url, description, logo, ecosystem }\n      }\n    }\n': EventsQueryResult;
+    '\n  *[_type == "event" && slug.current == $slug && hidden != true][0] {\n    _id,\n    _updatedAt,\n    "slug": slug.current,\n    title,\n    date,\n    endDate,\n    time,\n    type,\n    series,\n    ecosystems,\n    speakers,\n    online,\n    venue,\n    city,\n    country,\n    attendees,\n    summary,\n    reportType,\n    report,\n    summarySource,\n    cover,\n    gallery,\n    lumaUrl,\n    instagramUrls,\n    xUrls,\n    resources,\n    "partners": partners[]->{ _id, name, url, description, logo, ecosystem },\n    "ecosystemOrgs": *[_type == "partner" && defined(ecosystem) && ecosystem in ^.ecosystems] { _id, name, url, description, logo, ecosystem },\n    "seriesEvents": select(\n      defined(series) => *[\n        _type == "event" && series == ^.series && _id != ^._id\n          && defined(slug.current) && hidden != true\n      ] | order(date desc) { _id, "slug": slug.current, title, date },\n      []\n    )\n  }\n': EventQueryResult;
     '\n  *[_type == "event" && defined(slug.current) && hidden != true] {\n    "slug": slug.current,\n    _updatedAt\n  }\n': EventRoutesQueryResult;
   }
 }

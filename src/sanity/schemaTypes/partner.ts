@@ -8,7 +8,12 @@ import { defineField, defineType } from 'sanity';
  * listeyi bölüyordu) ve logo/bağlantı tek yerden güncellenebilmeli. İleride
  * bir sponsorlar bölümü de buradan beslenebilir.
  *
- * Dilden bağımsız: kurum adı markadır, çevrilmez.
+ * Ad markadır, çevrilmez; yalnız kısa açıklama iki dilli.
+ *
+ * Bir zincirin ya da protokolün kendisi de (Ethereum, Solana) burada tutulur
+ * ve `ecosystem` alanıyla etkinliklerdeki ekosistem etiketine bağlanır: kart
+ * ve etkinlik sayfası o etiketin logosunu buradan bulur. Böyle bir kayıt
+ * etkinliğin "Partnerler" satırında görünmez, yalnız logo şeridinde çıkar.
  */
 export const partner = defineType({
   name: 'partner',
@@ -33,8 +38,23 @@ export const partner = defineType({
     defineField({
       name: 'logo',
       title: 'Logo',
-      description: 'İsteğe bağlı. Şimdilik sitede kullanılmıyor.',
+      description:
+        'Kare, sade bir ikon en iyisi; kartta 24px, üzerine gelince 40px gösteriliyor. Kapağı olmayan etkinlikte kapak yerine de bu kullanılır.',
       type: 'image',
+    }),
+    defineField({
+      name: 'description',
+      title: 'Kısa açıklama',
+      description:
+        'Logonun üzerine gelince çıkan tek cümle. Ör. "Move dilini kullanan bir Layer 1 blokzincir."',
+      type: 'localizedString',
+    }),
+    defineField({
+      name: 'ecosystem',
+      title: 'Ekosistem etiketi',
+      description:
+        'Bu kurum bir etkinlikteki "Ekosistemler" etiketinin karşılığıysa o etiket, harfi harfine (ör. "Sui", "Ethereum"). O etiketi taşıyan etkinlikler bu logoyu da gösterir.',
+      type: 'string',
     }),
   ],
   orderings: [

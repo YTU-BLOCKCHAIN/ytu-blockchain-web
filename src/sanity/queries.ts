@@ -119,7 +119,11 @@ export const eventsQuery = defineQuery(`
       cover,
       featured,
       lumaUrl,
-      "partners": partners[]->name
+      "partners": partners[]->name,
+      "orgs": {
+        "partners": partners[]->{ _id, name, url, description, logo, ecosystem },
+        "ecosystems": *[_type == "partner" && defined(ecosystem) && ecosystem in ^.ecosystems] { _id, name, url, description, logo, ecosystem }
+      }
     }
 `);
 
@@ -152,7 +156,8 @@ export const eventQuery = defineQuery(`
     instagramUrls,
     xUrls,
     resources,
-    "partners": partners[]->{ _id, name, url },
+    "partners": partners[]->{ _id, name, url, description, logo, ecosystem },
+    "ecosystemOrgs": *[_type == "partner" && defined(ecosystem) && ecosystem in ^.ecosystems] { _id, name, url, description, logo, ecosystem },
     "seriesEvents": select(
       defined(series) => *[
         _type == "event" && series == ^.series && _id != ^._id
