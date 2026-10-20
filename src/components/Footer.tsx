@@ -12,7 +12,7 @@ import { BookText, Podcast } from 'lucide-react';
 import { Container, Separator } from '@/components/container';
 import { Logo } from '@/components/logo';
 import { buttonClasses } from '@/components/ui/button';
-import { Link } from '@/i18n/navigation';
+import { JOIN_HREF, SiteLink } from '@/components/site-link';
 import { siteConfig } from '@/lib/site';
 
 /** Keşfet sütunu — sitenin tüm ana sayfaları tek listede. */
@@ -23,7 +23,7 @@ const EXPLORE = [
   { key: 'events', href: '/events' },
   { key: 'blog', href: '/blog' },
   { key: 'contact', href: '/contact' },
-  { key: 'join', href: '/join' },
+  { key: 'join', href: JOIN_HREF },
 ] as const;
 
 /** Sosyal medya sütunu — marka adları çevrilmez, olduğu gibi gösterilir. */
@@ -54,13 +54,13 @@ export default function Footer() {
             görünüyordu. @4xl (masaüstü) düzeni değişmedi. */}
         <div className="@4xl:grid-cols-4 grid grid-cols-2 gap-px">
           <div data-grid-content className="col-span-2 space-y-6 p-6 lg:p-12">
-            <Link
+            <SiteLink
               href="/"
               aria-label={tNav('homeLabel')}
               className="block size-fit"
             >
               <Logo />
-            </Link>
+            </SiteLink>
             <p className="text-muted-foreground text-balance">{t('tagline')}</p>
           </div>
 
@@ -99,13 +99,13 @@ export default function Footer() {
                 satır başına ~34px dokunma yüksekliği. */}
             <div className="flex flex-col gap-1 sm:gap-4">
               {EXPLORE.map((item) => (
-                <Link
+                <SiteLink
                   key={item.key}
                   href={item.href}
                   className="text-muted-foreground hover:text-primary block duration-150 max-sm:py-1.5"
                 >
                   {tNav(item.key)}
-                </Link>
+                </SiteLink>
               ))}
             </div>
           </div>
@@ -119,12 +119,12 @@ export default function Footer() {
             <div className="text-muted-foreground flex flex-col gap-1 text-sm">
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                 <span>{t('rights', { year: new Date().getFullYear() })}</span>
-                <Link
+                <SiteLink
                   href="/privacy"
                   className="hover:text-primary duration-150"
                 >
                   {t('privacy')}
-                </Link>
+                </SiteLink>
                 <ConsentPreferencesButton label={tConsent('manage')} />
               </div>
               {/* Geliştirici künyesi. Adres kulübe ait olmadığı için

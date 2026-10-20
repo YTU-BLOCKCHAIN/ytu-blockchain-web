@@ -69,7 +69,7 @@ Gövde alanında kullanabileceklerin:
 - **Paragraf**, **Başlık**, **Alt başlık**, **Alıntı**
 - Madde işaretli ve numaralı liste
 - **Kalın**, _italik_, `satır içi kod`
-- Bağlantı (metni seç → zincir ikonu). Kendi sayfalarımız için `/join` gibi
+- Bağlantı (metni seç → zincir ikonu). Kendi sayfalarımız için `/events` gibi
   yaz, dış siteler için `https://` ile başla.
 - Görsel (satır aralarına eklenebilir; **alternatif metin** zorunlu, açıklama
   isteğe bağlı)

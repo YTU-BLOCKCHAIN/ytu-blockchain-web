@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { Container } from '@/components/container';
 import { ButtonLink } from '@/components/ui/button';
-import { Link } from '@/i18n/navigation';
+import { JOIN_HREF, SiteLink } from '@/components/site-link';
 
 export function AboutHero() {
   const t = useTranslations('About.hero');
@@ -286,13 +286,13 @@ export function AboutSponsors() {
               <p className="text-foreground mt-6 max-w-2xl text-balance text-xl font-medium">
                 {t('intro')}
               </p>
-              <Link
+              <SiteLink
                 href="/contact"
                 className="text-foreground mt-6 inline-flex items-center gap-1 text-sm font-medium underline-offset-4 hover:underline"
               >
                 {t('cta')}
                 <ArrowRight className="size-4" />
-              </Link>
+              </SiteLink>
             </div>
 
             {Array.from({ length: SPONSOR_SLOTS }).map((_, i) => (
@@ -359,12 +359,12 @@ export function AboutJoin() {
                   data-grid-content
                   className="@4xl:px-12 hover:bg-card! hover:z-1 group relative flex items-center gap-2 rounded-xl p-4 px-6 shadow-lg shadow-transparent transition-shadow hover:shadow-[var(--brand-deep)]/5"
                 >
-                  <Link
-                    href="/join"
+                  <SiteLink
+                    href={JOIN_HREF}
                     className="font-medium after:absolute after:inset-0"
                   >
                     {track}
-                  </Link>
+                  </SiteLink>
                   <div className="ring-border bg-card ml-auto flex h-6 items-center rounded-full px-2 shadow shadow-black/[0.06] ring-1">
                     <ArrowRight className="not-group-hover:opacity-50 group-hover:text-primary size-3.5" />
                   </div>
@@ -375,18 +375,18 @@ export function AboutJoin() {
             <div data-grid-content className="@4xl:p-12 p-6">
               <p className="text-muted-foreground">
                 {t('note')}{' '}
-                <Link
+                <SiteLink
                   href="/contact"
                   className="text-foreground inline-flex items-center gap-1 underline underline-offset-4"
                 >
                   {t('contactCta')}
                   <ArrowRight className="size-3.5" />
-                </Link>
+                </SiteLink>
               </p>
             </div>
 
             <div data-grid-content className="@4xl:p-12 p-6">
-              <ButtonLink href="/join" withArrow>
+              <ButtonLink href={JOIN_HREF} withArrow>
                 {t('button')}
               </ButtonLink>
             </div>

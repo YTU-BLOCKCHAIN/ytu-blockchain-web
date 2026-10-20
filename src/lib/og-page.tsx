@@ -20,7 +20,6 @@ export function pageCard(
     | 'community'
     | 'blog'
     | 'contact'
-    | 'join'
     | 'privacy',
 ) {
   return async function Image({

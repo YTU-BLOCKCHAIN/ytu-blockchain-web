@@ -23,7 +23,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
-import { Link } from '@/i18n/navigation';
+import { JOIN_HREF, SiteLink } from '@/components/site-link';
 import { cn } from '@/lib/utils';
 
 /**
@@ -38,7 +38,7 @@ const NAV = [
     href: '/about',
     heading: 'menu.about.heading',
     promo: {
-      href: '/join',
+      href: JOIN_HREF,
       title: 'menu.about.promo.title',
       desc: 'menu.about.promo.desc',
     },
@@ -67,16 +67,12 @@ const NAV = [
     href: '/community',
     heading: 'menu.community.heading',
     promo: {
-      href: '/join',
+      href: JOIN_HREF,
       title: 'menu.community.promo.title',
       desc: 'menu.community.promo.desc',
     },
     sections: [
-      {
-        href: '/community#channels',
-        label: 'sections.community.channels',
-        desc: 'sections.community.channelsDesc',
-      },
+      // Kanallar bölümü kaldırıldı: hepsi `/links` sayfasında bir arada.
       {
         href: '/community#join',
         label: 'sections.community.join',
@@ -145,13 +141,13 @@ export default function Header() {
           <Container className="backdrop-blur">
             <div className="relative flex flex-wrap items-center justify-between px-6 lg:px-12 lg:py-5">
               <div className="z-51 relative flex justify-between gap-8 max-lg:h-14 max-lg:w-full">
-                <Link
+                <SiteLink
                   href="/"
                   aria-label={t('homeLabel')}
                   className="flex items-center"
                 >
                   <Logo />
-                </Link>
+                </SiteLink>
 
                 <button
                   type="button"
@@ -181,7 +177,7 @@ export default function Header() {
                   Burayı mobilde göstermek iki özdeş buton demek. */}
               <div className="z-51 relative hidden items-center justify-end gap-3 lg:flex">
                 <LanguageSwitcher />
-                <ButtonLink href="/join" size="sm">
+                <ButtonLink href={JOIN_HREF} size="sm">
                   {t('join')}
                 </ButtonLink>
               </div>
@@ -215,7 +211,7 @@ function NavMenu() {
                   handler'ı açık menüyü kapatıyor (onItemSelect toggle), Next
                   Link de ardından yönlendiriyor — ikisi çakışmıyor. */}
               <NavigationMenuTrigger asChild>
-                <Link href={item.href}>{t(item.key)}</Link>
+                <SiteLink href={item.href}>{t(item.key)}</SiteLink>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="w-[38rem] max-w-[calc(100vw-4rem)]">
@@ -242,12 +238,12 @@ function NavMenu() {
                       className="bg-linear-to-br inset-ring-foreground/10 inset-ring-1 size-11 shrink-0 rounded-xl from-[var(--brand-signal)] to-[var(--brand-deep)]"
                     />
                     <div className="space-y-0.5">
-                      <Link
+                      <SiteLink
                         href={item.promo.href}
                         className="text-foreground text-sm font-medium before:absolute before:inset-0"
                       >
                         {t(item.promo.title)}
-                      </Link>
+                      </SiteLink>
                       <p className="text-foreground/60 line-clamp-1 text-sm">
                         {t(item.promo.desc)}
                       </p>
@@ -262,7 +258,7 @@ function NavMenu() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href={item.href}>{t(item.key)}</Link>
+                <SiteLink href={item.href}>{t(item.key)}</SiteLink>
               </NavigationMenuLink>
             </NavigationMenuItem>
           ),
@@ -284,7 +280,7 @@ function ListItem({
   return (
     <li>
       <NavigationMenuLink asChild className="group rounded-xl p-3">
-        <Link href={href} className="grid gap-1">
+        <SiteLink href={href} className="grid gap-1">
           <span className="text-foreground flex items-center gap-2 text-sm font-medium">
             {title}
             <ArrowRight
@@ -296,7 +292,7 @@ function ListItem({
           <p className="text-muted-foreground line-clamp-1 text-sm">
             {description}
           </p>
-        </Link>
+        </SiteLink>
       </NavigationMenuLink>
     </li>
   );
@@ -330,13 +326,13 @@ function MobileMenu({ closeMenu }: { closeMenu: () => void }) {
                 <ul>
                   {item.sections.map((section) => (
                     <li key={section.label}>
-                      <Link
+                      <SiteLink
                         href={section.href}
                         onClick={closeMenu}
                         className="text-muted-foreground block gap-2.5 px-4 py-3 text-lg"
                       >
                         {t(section.label)}
-                      </Link>
+                      </SiteLink>
                     </li>
                   ))}
                 </ul>
@@ -348,18 +344,18 @@ function MobileMenu({ closeMenu }: { closeMenu: () => void }) {
 
       {NAV.map((item) =>
         'sections' in item ? null : (
-          <Link
+          <SiteLink
             key={item.key}
             href={item.href}
             onClick={closeMenu}
             className="group relative block py-4 text-lg"
           >
             {t(item.key)}
-          </Link>
+          </SiteLink>
         ),
       )}
 
-      <ButtonLink href="/join" onClick={closeMenu} className="mt-4 w-full">
+      <ButtonLink href={JOIN_HREF} onClick={closeMenu} className="mt-4 w-full">
         {t('join')}
       </ButtonLink>
 

@@ -28,8 +28,6 @@
         "teamDesc": "The committees that run the club together"
       },
       "community": {
-        "channels": "Channels",
-        "channelsDesc": "Join us on GitHub, X and Instagram",
         "join": "Join",
         "joinDesc": "Become a member and take part",
         "projects": "Projects",
@@ -85,10 +83,6 @@
     "contact": {
       "title": "Contact",
       "description": "Get in touch with YTÜ Blockchain Club for questions and collaborations."
-    },
-    "join": {
-      "title": "Join",
-      "description": "Become a member of YTÜ Blockchain Club — learn, build and be part of the community."
     },
     "privacy": {
       "title": "Privacy Notice",
@@ -280,8 +274,11 @@
       "live": "Live site"
     },
     "empty": {
+      "eyebrow": "Coming soon",
       "title": "Projects coming soon",
-      "body": "We're preparing our first projects. Want to build something too? Come join us."
+      "body": "We are gathering the projects we build at hackathons and inside the club. Until then, our code is on GitHub.",
+      "github": "Browse on GitHub",
+      "join": "Join Us"
     }
   },
   "Events": {
@@ -372,43 +369,6 @@
     "eyebrow": "Community",
     "title": "Join the community",
     "subtitle": "We come together on our online channels and at our events. Follow along, ask questions and start building.",
-    "channels": {
-      "github": {
-        "name": "GitHub",
-        "description": "Explore our open-source projects and contribute.",
-        "cta": "Go to projects"
-      },
-      "x": {
-        "name": "X",
-        "description": "Follow for announcements, events and updates.",
-        "cta": "Follow"
-      },
-      "instagram": {
-        "name": "Instagram",
-        "description": "Moments from our events and the latest news.",
-        "cta": "Follow"
-      },
-      "whatsapp": {
-        "name": "WhatsApp",
-        "description": "Our most active channel: questions, event chatter and day-to-day talk.",
-        "cta": "Join the group"
-      },
-      "medium": {
-        "name": "Medium",
-        "description": "Longer pieces and write-ups from our members.",
-        "cta": "Read"
-      },
-      "spotify": {
-        "name": "Podcast",
-        "description": "Our conversations on blockchain, on Spotify.",
-        "cta": "Listen"
-      },
-      "roadmap": {
-        "name": "Web3 roadmap",
-        "description": "A learning path for starting from scratch, on Notion.",
-        "cta": "Open the roadmap"
-      }
-    },
     "cta": {
       "heading": "Want to join us?",
       "body": "Becoming a member takes a few minutes; we welcome all levels.",
@@ -425,32 +385,19 @@
       "empty": "No posts in this category yet.",
       "onlyFeatured": "The only post in this category is the one featured above."
     },
-    "empty": "No posts yet. We will be here soon.",
     "categories": {
       "announcements": "Announcements",
       "hackathons": "Hackathons"
     },
     "breadcrumb": "Blog",
     "postedBy": "Posted by {name}",
-    "readInOtherLanguage": "Read this post in Turkish"
-  },
-  "Join": {
-    "eyebrow": "Join",
-    "title": "Become a member",
-    "subtitle": "We're not looking for experience — curiosity is enough.",
-    "expectHeading": "What to expect",
-    "expect": {
-      "learn": "Hands-on workshops and learning together",
-      "build": "Building on open-source projects together",
-      "community": "An active community and events",
-      "open": "Open to everyone, every department and level"
-    },
-    "apply": {
-      "status": "Applications are open",
-      "heading": "Application form",
-      "intro": "The form takes a few minutes. Applications are collected through Google Forms; once you submit it we get in touch by email.",
-      "button": "Open the application form",
-      "note": "The link opens in Google Forms in a new tab."
+    "readInOtherLanguage": "Read this post in Turkish",
+    "emptyState": {
+      "eyebrow": "Coming soon",
+      "title": "First posts on the way",
+      "body": "This is where our writing on blockchain and club news will live. For now, our earlier posts are on Medium.",
+      "medium": "Read on Medium",
+      "events": "See our events"
     }
   },
   "Forms": {
