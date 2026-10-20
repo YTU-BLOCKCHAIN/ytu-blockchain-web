@@ -288,6 +288,10 @@
     "eyebrow": "Events",
     "title": "Where we learn and build together",
     "intro": "From campus trainings to hackathons abroad, everything we have done since 2022. Open an event to read what happened.",
+    "luma": {
+      "label": "Our events",
+      "hint": "Follow new events on Luma"
+    },
     "stats": {
       "events": "{count, plural, one {# event} other {# events}}",
       "countries": "{count, plural, one {# country} other {# countries}}",
