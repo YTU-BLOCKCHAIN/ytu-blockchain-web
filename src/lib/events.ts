@@ -1,6 +1,9 @@
 import type { Locale } from 'next-intl';
 
+import type { SanityImageSource } from '@sanity/image-url';
+
 import { sanityClient } from '@/sanity/lib/client';
+import { imageUrlByWidth } from '@/sanity/lib/image';
 import { eventQuery, eventRoutesQuery, eventsQuery } from '@/sanity/queries';
 
 /**
@@ -125,4 +128,61 @@ export function eventPlace(
 ): string | null {
   const filled = parts.filter((part): part is string => Boolean(part?.trim()));
   return filled.length > 0 ? [...new Set(filled)].join(' · ') : null;
+}
+
+/** Logo şeridindeki bir kurum — sunucuda dile indirgenmiş düz veri. */
+export type EventOrg = {
+  id: string;
+  name: string;
+  url: string | null;
+  description: string | null;
+  /** Kare logo; kartta küçük, bilgi kutusunda biraz büyük gösteriliyor. */
+  logoUrl: string;
+};
+
+type OrgRecord = {
+  _id: string;
+  name: string | null;
+  url: string | null;
+  description: { tr?: string | null; en?: string | null } | null;
+  logo: SanityImageSource | null;
+} | null;
+
+/**
+ * "Sui Network: Move dilini…" → "Move dilini…". Bilgi kutusunda ad zaten
+ * başlık olarak duruyor; açıklamaların bir kısmı adla başlıyor.
+ */
+function withoutNamePrefix(text: string | null | undefined, name: string) {
+  if (!text) return null;
+  const prefix = `${name}:`;
+  return text.startsWith(prefix) ? text.slice(prefix.length).trim() : text;
+}
+
+/**
+ * Etkinliğin partnerleri ve ekosistem etiketlerinin kurumları, tek liste.
+ *
+ * Önce partnerler (etkinliği asıl onlar yaptı), sonra ekosistemler; aynı kurum
+ * iki yoldan da gelebiliyor (Sui Network hem partner hem "Sui" etiketi), o
+ * yüzden kimliğe göre tekilleştiriliyor. Logosu olmayan kurum şeritte boş bir
+ * daire olarak durmasın diye atlanıyor — adı "Partnerler" satırında zaten var.
+ */
+export function eventOrgs(
+  groups: (OrgRecord[] | null | undefined)[],
+  locale: Locale,
+): EventOrg[] {
+  const seen = new Set<string>();
+  const orgs: EventOrg[] = [];
+  for (const org of groups.flatMap((group) => group ?? [])) {
+    if (!org?.name || !org.logo || seen.has(org._id)) continue;
+    seen.add(org._id);
+    orgs.push({
+      id: org._id,
+      name: org.name,
+      url: org.url,
+      description: withoutNamePrefix(org.description?.[locale], org.name),
+      // 2× ölçü: şeritte 24px, bilgi kutusunda 40px, yer tutucu kapakta ~96px.
+      logoUrl: imageUrlByWidth(org.logo, 192),
+    });
+  }
+  return orgs;
 }

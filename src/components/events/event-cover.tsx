@@ -63,3 +63,53 @@ export function EventCover({
     </div>
   );
 }
+
+/**
+ * Kapağı olmayan etkinliğin yer tutucusu — kartlar aynı hizada dursun, boş
+ * gri bir kutu da görünmesin. Etkinliğin ilk kurumunun (partner ya da
+ * ekosistem) logosu ortada; hiç kurum yoksa kulübün amblemi.
+ *
+ * Kurum logoları kare ve çoğu beyaz zemine göre çizilmiş; o yüzden beyaz bir
+ * daire içinde, zemin ise sitenin ızgara dokusunu taşıyan sakin bir yüzey.
+ */
+export function EventPlaceholder({
+  logoUrl,
+  label,
+  className,
+}: {
+  /** Ortadaki logo; yoksa kulübün amblemi. */
+  logoUrl: string | null;
+  /** Logonun altındaki küçük yazı — kurum adı ya da etkinlik türü. */
+  label: string | null;
+  className?: string;
+}) {
+  return (
+    <div
+      aria-hidden
+      className={cn(
+        'before:border-foreground/10 bg-muted relative flex flex-col items-center justify-center gap-3 overflow-hidden before:absolute before:inset-0 before:rounded-[inherit] before:border',
+        'bg-[radial-gradient(circle_at_center,var(--color-foreground)_1px,transparent_1px)] bg-[length:16px_16px]',
+        className,
+      )}
+    >
+      <div className="bg-muted/85 absolute inset-0" />
+      {/* Kare köşeli kutu: logoların çoğu kendi zeminiyle kare çizilmiş, daire
+          onları köşelerinden kesiyordu. */}
+      <span className="ring-foreground/10 relative flex size-20 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-sm ring-1">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={logoUrl ?? '/logo/mark.svg'}
+          alt=""
+          className="size-full object-contain"
+        />
+      </span>
+      {label ? (
+        // Büyük harfe çevrilmiyor: kurum adı marka ("Sui Hub Türkiye" →
+        // "SUİ HUB" olurdu).
+        <span className="text-muted-foreground relative text-sm font-medium">
+          {label}
+        </span>
+      ) : null}
+    </div>
+  );
+}

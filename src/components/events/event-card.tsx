@@ -4,9 +4,11 @@ import { useTranslations } from 'next-intl';
 import { buttonClasses } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
+import type { EventOrg } from '@/lib/events';
 import { EVENT_TYPE_LABEL_KEY, type EventType } from '@/sanity/event-types';
 
-import { EventCover } from './event-cover';
+import { EventCover, EventPlaceholder } from './event-cover';
+import { OrgLogos } from './org-logos';
 
 /**
  * Bir kartın çizilmesi için gereken her şey — sunucuda hazırlanmış düz veri
@@ -33,6 +35,8 @@ export type EventCardData = {
   /** "2025–2026" — geçmiş etkinlikler bu başlıklar altında gruplanıyor. */
   academicYear: string;
   lumaUrl: string | null;
+  /** Partnerler + ekosistemler, logosu olanlar (bkz. `eventOrgs`). */
+  orgs: EventOrg[];
 };
 
 export function EventTypeBadge({ type }: { type: EventType | null }) {
@@ -77,7 +81,16 @@ export function EventCard({
             sizes="(min-width: 1024px) 22rem, (min-width: 640px) 50vw, 100vw"
             className="aspect-[16/10] rounded-[10px]"
           />
-        ) : null}
+        ) : (
+          <EventPlaceholder
+            logoUrl={event.orgs[0]?.logoUrl ?? null}
+            label={
+              event.orgs[0]?.name ??
+              (event.type ? t(EVENT_TYPE_LABEL_KEY[event.type]) : null)
+            }
+            className="aspect-[16/10] rounded-[10px]"
+          />
+        )}
 
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           {event.date ? (
@@ -111,6 +124,8 @@ export function EventCard({
 
           <p className="text-muted-foreground line-clamp-3">{event.summary}</p>
         </div>
+
+        <OrgLogos orgs={event.orgs} />
 
         {upcoming && event.lumaUrl ? (
           <div className="mt-auto pt-2">

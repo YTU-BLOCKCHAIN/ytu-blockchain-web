@@ -9,6 +9,7 @@ import { buttonClasses } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 import {
   countryName,
+  eventOrgs,
   eventPlace,
   formatEventDate,
   isUpcoming,
@@ -17,7 +18,8 @@ import { EVENT_TYPE_LABEL_KEY, isEventType } from '@/sanity/event-types';
 import { imageDimensions, imageUrlByWidth } from '@/sanity/lib/image';
 import type { EventQueryResult } from '@/sanity/types';
 
-import { EventCover } from './event-cover';
+import { EventCover, EventPlaceholder } from './event-cover';
+import { OrgChip } from './org-logos';
 
 type EventRecord = NonNullable<EventQueryResult>;
 
@@ -51,7 +53,24 @@ export function EventArticle({
   const place = event.online
     ? t('online')
     : eventPlace([event.venue, event.city, countryName(event.country, locale)]);
-  const partners = (event.partners ?? []).filter((partner) => partner.name);
+  // Silinmiş bir partnere kalan referans `null` döner; sayfa çökmesin.
+  const partners = (event.partners ?? []).filter(
+    (partner): partner is NonNullable<typeof partner> => Boolean(partner?.name),
+  );
+  // Logosu olan kurumlar etiket olarak, olmayanlar eskisi gibi düz ad.
+  const partnerOrgs = new Map(
+    eventOrgs([event.partners], locale).map((org) => [org.id, org]),
+  );
+  const ecosystemOrgs = new Map(
+    (event.ecosystemOrgs ?? []).flatMap((record) => {
+      const [org] = eventOrgs([[record]], locale);
+      return org && record.ecosystem ? [[record.ecosystem, org] as const] : [];
+    }),
+  );
+  const placeholderOrg = eventOrgs(
+    [event.partners, event.ecosystemOrgs],
+    locale,
+  )[0];
   const report = event.report?.[locale];
 
   /*
@@ -163,7 +182,16 @@ export function EventArticle({
                 sizes="(min-width: 1024px) 42rem, 100vw"
                 className="mt-10 aspect-[4/3] rounded-[10px] shadow-md shadow-black/10"
               />
-            ) : null}
+            ) : (
+              <EventPlaceholder
+                logoUrl={placeholderOrg?.logoUrl ?? null}
+                label={
+                  placeholderOrg?.name ??
+                  (type ? t(EVENT_TYPE_LABEL_KEY[type]) : null)
+                }
+                className="mt-10 aspect-[16/7] rounded-[10px]"
+              />
+            )}
 
             {leadIsSummary && summary ? (
               <p className="text-foreground mt-8 text-balance text-lg">
@@ -184,11 +212,13 @@ export function EventArticle({
               ) : null}
               {partners.length > 0 ? (
                 <Fact label={t('detail.partners')}>
-                  {partners.map((partner, i) => (
-                    <span key={partner._id}>
-                      {i > 0 ? ', ' : null}
-                      {partner.url ? (
+                  <span className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
+                    {partners.map((partner) => {
+                      const org = partnerOrgs.get(partner._id);
+                      if (org) return <OrgChip key={partner._id} org={org} />;
+                      return partner.url ? (
                         <a
+                          key={partner._id}
                           href={partner.url}
                           target="_blank"
                           rel="noreferrer noopener"
@@ -197,10 +227,10 @@ export function EventArticle({
                           {partner.name}
                         </a>
                       ) : (
-                        partner.name
-                      )}
-                    </span>
-                  ))}
+                        <span key={partner._id}>{partner.name}</span>
+                      );
+                    })}
+                  </span>
                 </Fact>
               ) : null}
               {event.speakers?.length ? (
@@ -210,7 +240,16 @@ export function EventArticle({
               ) : null}
               {event.ecosystems?.length ? (
                 <Fact label={t('detail.ecosystems')}>
-                  {event.ecosystems.join(', ')}
+                  <span className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
+                    {event.ecosystems.map((name) => {
+                      const org = ecosystemOrgs.get(name);
+                      return org ? (
+                        <OrgChip key={name} org={org} />
+                      ) : (
+                        <span key={name}>{name}</span>
+                      );
+                    })}
+                  </span>
                 </Fact>
               ) : null}
               {typeof event.attendees === 'number' ? (

@@ -69,6 +69,20 @@ Katılım ve öne çıkanlar · Partnerler · Materyaller**.
 **Özetin kaynağı** "Paylaşımlardan derlendi" ise sayfada küçük bir not çıkar.
 Etkinlik sonrası özeti elle düzelttiysen "Elle yazıldı"ya çevir.
 
+## Partner ve ekosistem logoları
+
+Kartın altındaki küçük logolar ve etkinlik sayfasındaki etiketler **Partnerler**
+listesinden geliyor. Üzerine gelince kurumun adı, kısa açıklaması ve sitesi
+çıkar; dokunmatik ekranda logoya dokunmak siteye götürür.
+
+- Bir etkinliğe partner eklemek yeterli; logosu olan partner kendiliğinden görünür.
+- Zincirlerin kendisi de (Ethereum, Solana…) partner kaydı olarak duruyor.
+  **Ekosistem etiketi** alanı, etkinlikteki "Ekosistemler" etiketiyle harfi
+  harfine aynı olmalı (ör. `Sui`), yoksa logo eşleşmez.
+- Kapağı olmayan etkinlikte kapak yerine ilk kurumun logosu gösterilir; hiç
+  kurum yoksa kulübün amblemi.
+- Logo kare ve sade olsun; açıklama tek cümle, kurum adını tekrar etmesin.
+
 ## Bu kayıtlar herkese açık
 
 Sanity'deki her şey herkes tarafından okunabilir. **Bütçe, katılımcı isim

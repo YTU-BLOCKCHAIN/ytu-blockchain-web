@@ -4,6 +4,7 @@ import { Container } from '@/components/container';
 import {
   academicYear,
   countryName,
+  eventOrgs,
   eventPlace,
   formatEventDate,
   isUpcoming,
@@ -50,6 +51,7 @@ export function toCard(
     coverAlt: event.cover?.alt ?? '',
     academicYear: academicYear(event.date),
     lumaUrl: event.lumaUrl,
+    orgs: eventOrgs([event.orgs?.partners, event.orgs?.ecosystems], locale),
   };
 }
 
