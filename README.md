@@ -73,7 +73,7 @@ src/
       layout.tsx         # Header + Footer + i18n sağlayıcı
       page.tsx           # Anasayfa
       not-found.tsx      # 404
-      about/ projects/ events/ blog/ community/ contact/ join/ privacy/
+      about/ projects/ events/ blog/ community/ contact/ privacy/
     studio/[[...tool]]/  # gömülü Sanity Studio (kendi kök layout'u var)
     api/revalidate/      # Sanity webhook'u → sayfaları tazeler
     globals.css
@@ -258,7 +258,7 @@ src/
       layout.tsx         # Header + Footer + i18n provider
       page.tsx           # Landing
       not-found.tsx      # 404
-      about/ projects/ blog/ community/ contact/ join/ privacy/
+      about/ projects/ blog/ community/ contact/ privacy/
     studio/[[...tool]]/  # embedded Sanity Studio (has its own root layout)
     api/revalidate/      # Sanity webhook → refreshes the pages
     globals.css

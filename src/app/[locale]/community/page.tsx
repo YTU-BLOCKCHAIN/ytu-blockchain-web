@@ -3,7 +3,6 @@ import type { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import {
-  CommunityChannels,
   CommunityCta,
   CommunityHero,
 } from '@/components/community/community-sections';
@@ -37,7 +36,6 @@ export default async function CommunityPage({
   return (
     <>
       <CommunityHero />
-      <CommunityChannels />
       <CommunityCta />
     </>
   );

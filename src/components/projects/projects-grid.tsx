@@ -4,6 +4,9 @@ import { useLocale, useTranslations } from 'next-intl';
 import type { ProjectStatus } from '@/data/projects';
 import { cn } from '@/lib/utils';
 import { Container } from '@/components/container';
+import { EmptyState } from '@/components/empty-state';
+import { JOIN_HREF } from '@/components/site-link';
+import { siteConfig } from '@/lib/site';
 import { getProjects } from '@/lib/content';
 import { localize } from '@/lib/localized';
 
@@ -77,31 +80,17 @@ export function ProjectsGrid() {
 
   if (projects.length === 0) {
     return (
-      <section>
-        <Container asGrid>
-          <div className="grid grid-cols-10 gap-px">
-            <div aria-hidden className="max-sm:hidden">
-              <div data-grid-content />
-            </div>
-
-            <div
-              data-grid-content
-              className="col-span-full flex flex-col items-center gap-3 p-12 text-center max-sm:p-8 sm:col-span-8"
-            >
-              <h2 className="text-foreground text-balance text-xl font-medium">
-                {t('empty.title')}
-              </h2>
-              <p className="text-muted-foreground max-w-md text-balance">
-                {t('empty.body')}
-              </p>
-            </div>
-
-            <div aria-hidden className="max-sm:hidden">
-              <div data-grid-content />
-            </div>
-          </div>
-        </Container>
-      </section>
+      <EmptyState
+        Icon={Code2}
+        eyebrow={t('empty.eyebrow')}
+        title={t('empty.title')}
+        body={t('empty.body')}
+        primary={{
+          label: t('empty.github'),
+          external: siteConfig.social.github,
+        }}
+        secondary={{ label: t('empty.join'), href: JOIN_HREF }}
+      />
     );
   }
 

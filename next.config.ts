@@ -31,6 +31,19 @@ const nextConfig: NextConfig = {
   // takılı kalmasın.
   async redirects() {
     return [
+      // Ayrı bir katılım sayfası yok: başvuru formu, WhatsApp ve kanallar
+      // `/links`te bir arada. Eski adresler (paylaşılmış linkler, afişlerdeki
+      // QR'lar) kırılmasın diye oraya yönleniyor.
+      {
+        source: '/:locale(tr|en)/join',
+        destination: '/links/:locale',
+        permanent: false,
+      },
+      {
+        source: '/join',
+        destination: '/links',
+        permanent: false,
+      },
       {
         source: '/logos',
         destination:

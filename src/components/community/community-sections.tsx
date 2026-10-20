@@ -1,11 +1,8 @@
-import { ArrowUpRight, BookText, Map, Podcast } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
+import { JOIN_HREF } from '@/components/site-link';
 import { ButtonLink } from '@/components/ui/button';
-import { siteConfig } from '@/lib/site';
-
-import { GithubIcon, InstagramIcon, WhatsappIcon, XIcon } from './brand-icons';
 
 export function CommunityHero() {
   const t = useTranslations('Community');
@@ -62,98 +59,6 @@ export function CommunityHero() {
   );
 }
 
-export function CommunityChannels() {
-  const t = useTranslations('Community');
-
-  const channels = [
-    {
-      Icon: GithubIcon,
-      name: t('channels.github.name'),
-      description: t('channels.github.description'),
-      cta: t('channels.github.cta'),
-      href: siteConfig.social.github,
-    },
-    {
-      Icon: XIcon,
-      name: t('channels.x.name'),
-      description: t('channels.x.description'),
-      cta: t('channels.x.cta'),
-      href: siteConfig.social.x,
-    },
-    {
-      Icon: InstagramIcon,
-      name: t('channels.instagram.name'),
-      description: t('channels.instagram.description'),
-      cta: t('channels.instagram.cta'),
-      href: siteConfig.social.instagram,
-    },
-    /* Aşağıdaki dördü eskiden YALNIZCA `/links` sayfasında yaşıyordu: ana
-       siteye arama ya da paylaşılan bir bağlantıyla gelen ziyaretçi kulübün
-       en aktif kanalını (WhatsApp) ve öğrenme kaynaklarını hiç görmüyordu. */
-    {
-      Icon: WhatsappIcon,
-      name: t('channels.whatsapp.name'),
-      description: t('channels.whatsapp.description'),
-      cta: t('channels.whatsapp.cta'),
-      href: siteConfig.social.whatsapp,
-    },
-    {
-      Icon: Map,
-      name: t('channels.roadmap.name'),
-      description: t('channels.roadmap.description'),
-      cta: t('channels.roadmap.cta'),
-      href: siteConfig.roadmapPath,
-    },
-    {
-      Icon: BookText,
-      name: t('channels.medium.name'),
-      description: t('channels.medium.description'),
-      cta: t('channels.medium.cta'),
-      href: siteConfig.social.medium,
-    },
-    {
-      Icon: Podcast,
-      name: t('channels.spotify.name'),
-      description: t('channels.spotify.description'),
-      cta: t('channels.spotify.cta'),
-      href: siteConfig.social.spotify,
-    },
-  ];
-
-  return (
-    <section id="channels" className="scroll-mt-24">
-      <Container asGrid className="sm:grid-cols-2 lg:grid-cols-3">
-        {channels.map((channel) => (
-          <a
-            key={channel.name}
-            href={channel.href}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="group relative"
-          >
-            <div
-              data-grid-content
-              className="@4xl:p-8 hover:bg-card! flex h-full flex-col gap-3 p-6 transition-colors"
-            >
-              <div className="flex items-center justify-between gap-2">
-                <channel.Icon className="text-foreground size-7" />
-                <ArrowUpRight className="text-muted-foreground group-hover:text-primary size-4 transition-colors" />
-              </div>
-              <h2 className="text-foreground font-semibold">{channel.name}</h2>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {channel.description}
-              </p>
-              <span className="text-primary mt-auto text-sm font-medium">
-                {channel.cta}
-              </span>
-            </div>
-          </a>
-        ))}
-      </Container>
-    </section>
-  );
-}
-
 export function CommunityCta() {
   const t = useTranslations('Community.cta');
 
@@ -176,7 +81,7 @@ export function CommunityCta() {
               <p className="text-muted-foreground max-w-xl text-balance">
                 {t('body')}
               </p>
-              <ButtonLink href="/join" withArrow>
+              <ButtonLink href={JOIN_HREF} withArrow>
                 {t('button')}
               </ButtonLink>
             </div>

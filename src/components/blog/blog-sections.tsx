@@ -1,9 +1,12 @@
+import { PenLine } from 'lucide-react';
 import { type Locale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 import { Container } from '@/components/container';
+import { EmptyState } from '@/components/empty-state';
 import { Link } from '@/i18n/navigation';
 import { formatPostDate } from '@/lib/blog';
+import { siteConfig } from '@/lib/site';
 import { cn } from '@/lib/utils';
 import { isPostCategory } from '@/sanity/categories';
 import { imageUrl } from '@/sanity/lib/image';
@@ -172,24 +175,17 @@ export function BlogList({
   const [featured, ...rest] = posts;
   if (!featured) {
     return (
-      <section>
-        <Container asGrid>
-          {/* Boş sarmalayıcı şart: `*:p-[0.5px]` yalnızca DOĞRUDAN çocuğa iner.
-              Kart doğrudan çocukken öneksiz `p-6` o kurala sıralamada yeniliyor
-              (yalnızca `@4xl:p-12` kazanıyor) → dar ekranda dolgu 0.5px'e düşüp
-              bölüm bir şeride iniyordu. Sarmalayıcıyla dolgu her ölçüde çalışıyor
-              ve kartın ızgara çizgisi de çıkıyor.
-
-              Dolgu bilerek diğer kartlarla aynı: bu blok yalnızca hiç yazı
-              yokken çiziliyor, kalıcı bir bölüm değil — abartılı bir yükseklik
-              vermeye gerek yok. */}
-          <div>
-            <div data-grid-content className="@4xl:p-12 p-6 text-center">
-              <p className="text-muted-foreground">{t('empty')}</p>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <EmptyState
+        Icon={PenLine}
+        eyebrow={t('emptyState.eyebrow')}
+        title={t('emptyState.title')}
+        body={t('emptyState.body')}
+        primary={{
+          label: t('emptyState.medium'),
+          external: siteConfig.social.medium,
+        }}
+        secondary={{ label: t('emptyState.events'), href: '/events' }}
+      />
     );
   }
 

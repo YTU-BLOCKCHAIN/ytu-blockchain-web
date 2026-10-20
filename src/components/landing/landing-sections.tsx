@@ -1,4 +1,5 @@
 import { Code2, Handshake, Lightbulb, Users } from 'lucide-react';
+import { JOIN_HREF } from '@/components/site-link';
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/container';
@@ -59,7 +60,7 @@ export function LandingHero() {
                   {t('subtitle')}
                 </p>
                 <div className="mt-9 flex flex-wrap justify-center gap-3">
-                  <ButtonLink href="/join" withArrow>
+                  <ButtonLink href={JOIN_HREF} withArrow>
                     {t('cta')}
                   </ButtonLink>
                   <ButtonLink href="/projects" variant="outline">
@@ -247,7 +248,7 @@ export function LandingCta() {
               <h2 className="text-foreground text-balance text-2xl font-semibold sm:text-3xl">
                 {t('heading')}
               </h2>
-              <ButtonLink href="/join" withArrow>
+              <ButtonLink href={JOIN_HREF} withArrow>
                 {t('button')}
               </ButtonLink>
             </div>

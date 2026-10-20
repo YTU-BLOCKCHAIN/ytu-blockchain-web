@@ -17,7 +17,7 @@ export const siteConfig = {
   /**
    * Üyelik başvuru formu. Başvurular **yalnızca** buradan alınıyor: site
    * içinde ikinci bir form YOK, böylece başvurular tek bir yerde toplanıyor.
-   * `/join` sayfası ve `/links` satırı aynı adrese gidiyor.
+   * Sitedeki "Bize Katıl" düğmeleri `/links`e gidiyor; oradaki ilk satır bu form.
    */
   applicationFormUrl: 'https://forms.gle/i4SwuLnFhFcEEGQP9',
   /**

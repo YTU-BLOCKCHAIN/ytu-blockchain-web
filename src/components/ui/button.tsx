@@ -2,7 +2,8 @@ import type { ComponentProps, ReactNode } from 'react';
 import { ArrowRight } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
-import { Link } from '@/i18n/navigation';
+import { SiteLink } from '@/components/site-link';
+import type { Link } from '@/i18n/navigation';
 
 type ButtonVariant = 'primary' | 'outline';
 type ButtonSize = 'default' | 'sm';
@@ -57,7 +58,7 @@ export function ButtonLink({
   className?: string;
 } & Omit<ComponentProps<typeof Link>, 'href' | 'className' | 'children'>) {
   return (
-    <Link
+    <SiteLink
       href={href}
       className={buttonClasses({ variant, size, className })}
       {...props}
@@ -66,6 +67,6 @@ export function ButtonLink({
       {withArrow && (
         <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" />
       )}
-    </Link>
+    </SiteLink>
   );
 }
