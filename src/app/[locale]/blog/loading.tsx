@@ -19,7 +19,7 @@ export default function BlogLoading() {
       {/* Öne çıkan yazının yeri */}
       <section>
         <Container asGrid>
-          <div data-grid-content className="@4xl:p-12 p-6">
+          <div data-grid-content className="@4xl:p-12 @max-4xl:p-6">
             <div className="bg-foreground/5 aspect-video w-full animate-pulse rounded-[10px]" />
           </div>
         </Container>
@@ -29,7 +29,11 @@ export default function BlogLoading() {
       <section>
         <Container asGrid className="sm:grid-cols-2 lg:grid-cols-3">
           {[0, 1, 2].map((i) => (
-            <div key={i} data-grid-content className="@4xl:p-12 space-y-4 p-6">
+            <div
+              key={i}
+              data-grid-content
+              className="@4xl:p-12 @max-4xl:p-6 space-y-4"
+            >
               <div className="bg-foreground/5 h-4 w-24 animate-pulse rounded" />
               <div className="bg-foreground/5 h-6 w-full animate-pulse rounded" />
               <div className="bg-foreground/5 h-6 w-2/3 animate-pulse rounded" />

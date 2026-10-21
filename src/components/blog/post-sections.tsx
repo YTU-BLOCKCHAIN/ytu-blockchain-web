@@ -64,7 +64,7 @@ export function PostArticle({
   return (
     <article>
       <Container asGrid>
-        <div data-grid-content className="@4xl:p-12 p-6">
+        <div data-grid-content className="@4xl:p-12 @max-4xl:p-6">
           {/* Okuma genişliği: hücrenin tamamı (~55rem) satır başına çok fazla
               karakter düşürüyor, göz satır sonunda kayboluyor. */}
           <div className="mx-auto max-w-2xl">
