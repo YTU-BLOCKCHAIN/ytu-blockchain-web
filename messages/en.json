@@ -20,7 +20,7 @@
     },
     "sections": {
       "about": {
-        "mission": "Mission",
+        "mission": "Vision & Mission",
         "missionDesc": "Our goal to make blockchain accessible on campus",
         "values": "Values",
         "valuesDesc": "The principles behind every decision",
@@ -178,6 +178,37 @@
       "firsts": "FIRST PLACES",
       "awardsNote": "Hackathon placings and first places: the last two years."
     },
+    "vision": {
+      "heading": "WHO WE ARE",
+      "title": "VISION AND MISSION.",
+      "visionLabel": "VISION",
+      "vision": "We want to make blockchain accessible on campus — opening up a space where students turn theory into practice and learn and build together.",
+      "missionLabel": "MISSION",
+      "mission": "Our goal is to shrink the distance between idea and execution. Through workshops, open-source projects and technical content, we help our members ship real work in days, not months."
+    },
+    "values": {
+      "heading": "OUR VALUES",
+      "title": "THE PRINCIPLES BEHIND EVERY DECISION.",
+      "intro": "The principles that guide every decision we make, from welcoming members to shipping projects.",
+      "items": {
+        "curiosity": {
+          "title": "Curiosity & Learning",
+          "description": "We ask questions, test assumptions and turn learning into a habit. Curiosity at every level is welcome here."
+        },
+        "community": {
+          "title": "Community",
+          "description": "Great work comes from diverse perspectives. We build an environment where everyone has a voice and collaboration is the default."
+        },
+        "building": {
+          "title": "Building",
+          "description": "We don't stop at slides — we write code. We turn what we learn into open-source projects and working applications."
+        },
+        "openness": {
+          "title": "Openness",
+          "description": "We want knowledge, resources and process to stay open. Transparency and open source are at the heart of how we work."
+        }
+      }
+    },
     "featuresTitle": "FROM LEARNING TO BUILDING.",
     "manifestoTitle": "WHY WE'RE HERE",
     "manifestoRich": "We make blockchain something students at YTÜ can learn, build and share. <hl>No experience required, just curiosity.</hl> We learn and build together.",
@@ -208,33 +239,6 @@
         "founded": {
           "value": "2021",
           "label": "founded"
-        }
-      }
-    },
-    "mission": {
-      "heading": "Our Mission",
-      "body1": "We want to make blockchain accessible on campus — opening up a space where students turn theory into practice and learn and build together.",
-      "body2": "Our goal is to shrink the distance between idea and execution. Through workshops, open-source projects and technical content, we help our members ship real work in days, not months."
-    },
-    "values": {
-      "heading": "Our Values",
-      "intro": "The principles that guide every decision we make, from welcoming members to shipping projects.",
-      "items": {
-        "curiosity": {
-          "title": "Curiosity & Learning",
-          "description": "We ask questions, test assumptions and turn learning into a habit. Curiosity at every level is welcome here."
-        },
-        "community": {
-          "title": "Community",
-          "description": "Great work comes from diverse perspectives. We build an environment where everyone has a voice and collaboration is the default."
-        },
-        "building": {
-          "title": "Building",
-          "description": "We don't stop at slides — we write code. We turn what we learn into open-source projects and working applications."
-        },
-        "openness": {
-          "title": "Openness",
-          "description": "We want knowledge, resources and process to stay open. Transparency and open source are at the heart of how we work."
         }
       }
     },

@@ -12,6 +12,8 @@ import {
   LandingManifesto,
   LandingStats,
   LandingTicker,
+  LandingValues,
+  LandingVision,
   // Sponsorlar & Partnerler bölümü şimdilik yayında değil (aşağıya bakın).
   // LandingSponsors,
 } from '@/components/landing/landing-sections';
@@ -45,6 +47,8 @@ export default async function LandingPage({
     <>
       <LandingHero />
       <LandingFeatures />
+      <LandingVision />
+      <LandingValues />
       <LandingStats />
       <LandingManifesto />
       <LandingTicker />

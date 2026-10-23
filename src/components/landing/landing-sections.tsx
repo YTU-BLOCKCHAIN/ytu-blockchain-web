@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Code2, Lightbulb, Unlock, Users } from 'lucide-react';
 import type { Locale } from 'next-intl';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { useLocale, useTranslations } from 'next-intl';
@@ -233,6 +233,106 @@ export function LandingFeatures() {
           <div aria-hidden className="max-sm:hidden">
             <div data-grid-content />
           </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/**
+ * Vizyon ve misyon — eskiden Hakkımızda sayfasındaydı, kulübü ilk kez gören
+ * biri aramadan okusun diye ana sayfaya taşındı. Header'daki "Vizyon ve
+ * Misyon" bağlantısı `/#vision`a iniyor.
+ */
+export function LandingVision() {
+  const t = useTranslations('Landing.vision');
+
+  const items = [
+    { label: t('visionLabel'), body: t('vision') },
+    { label: t('missionLabel'), body: t('mission') },
+  ];
+
+  return (
+    <section id="vision" className="scroll-mt-24">
+      <Container asGrid>
+        <div className="grid grid-cols-10 gap-px">
+          <GridRail />
+
+          <div className="@2xl:grid-cols-2 col-span-full grid gap-px sm:col-span-8">
+            <div data-grid-content className="@4xl:p-12 col-span-full p-6">
+              <Eyebrow>{t('heading')}</Eyebrow>
+              <h2 className="@4xl:text-5xl mt-5 text-3xl leading-[1.12] sm:text-4xl">
+                {t('title')}
+              </h2>
+            </div>
+
+            {items.map((item) => (
+              <div
+                key={item.label}
+                data-grid-content
+                className="@4xl:p-12 flex flex-col items-start gap-6 p-6"
+              >
+                <Chip>{item.label}</Chip>
+                <p className="text-foreground text-xl leading-relaxed font-medium text-balance">
+                  {item.body}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <GridRail />
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/** Değerler — vizyon/misyonun hemen altında, dört ilke yan yana. */
+export function LandingValues() {
+  const t = useTranslations('Landing.values');
+
+  const items = [
+    { key: 'curiosity', Icon: Lightbulb },
+    { key: 'community', Icon: Users },
+    { key: 'building', Icon: Code2 },
+    { key: 'openness', Icon: Unlock },
+  ] as const;
+
+  return (
+    <section id="values" className="scroll-mt-24">
+      <Container asGrid>
+        <div className="grid grid-cols-10 gap-px">
+          <GridRail />
+
+          <div className="@2xl:grid-cols-2 @4xl:grid-cols-4 col-span-full grid gap-px sm:col-span-8">
+            <div data-grid-content className="@4xl:p-12 col-span-full p-6">
+              <Eyebrow>{t('heading')}</Eyebrow>
+              <h2 className="@4xl:text-5xl mt-5 text-3xl leading-[1.12] sm:text-4xl">
+                {t('title')}
+              </h2>
+              <p className="text-muted-foreground mt-6 max-w-2xl text-lg text-balance">
+                {t('intro')}
+              </p>
+            </div>
+
+            {items.map(({ key, Icon }) => (
+              <div
+                key={key}
+                data-grid-content
+                className="@4xl:p-8 flex flex-col gap-3 p-6"
+              >
+                <Icon aria-hidden className="text-primary size-6" />
+                <h3 className="text-foreground mt-2 text-lg leading-tight font-semibold">
+                  {t(`items.${key}.title`)}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {t(`items.${key}.description`)}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <GridRail />
         </div>
       </Container>
     </section>

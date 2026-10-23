@@ -45,12 +45,12 @@ const NAV = [
     },
     sections: [
       {
-        href: '/about#mission',
+        href: '/#vision',
         label: 'sections.about.mission',
         desc: 'sections.about.missionDesc',
       },
       {
-        href: '/about#values',
+        href: '/#values',
         label: 'sections.about.values',
         desc: 'sections.about.valuesDesc',
       },
