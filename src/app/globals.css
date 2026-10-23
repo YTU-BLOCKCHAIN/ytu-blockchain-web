@@ -245,10 +245,10 @@
     Kitin tüm paleti bu dört değerden ibaret. Aşağıdaki tema blokları YALNIZ
     bunlardan türetir; ham hex hiçbir yerde ikinci kez yazılmaz.
 
-    Kit koyu-tek-tema bir SUNUM sistemi ("Açık tema yok"); site ise OS temasını
-    takip ediyor. Açık temanın karşılığı kitte tanımlı değil, o yüzden burada
-    türetildi: yüzey ilişkileri (zemin < kart) korunur, renkler marka ailesine
-    çekilir.
+    Kit koyu-tek-tema bir sistem ("Açık tema yok") ve site de artık öyle:
+    afiş, deck, /links ve site aynı yüzeyde duruyor. Önceden site OS temasını
+    takip ediyordu; açık temada zemin gri, butonlar siyahtı ve site marka
+    işlerinin hiçbirine benzemiyordu.
   */
   :root {
     --brand-void: #0a0a0c; /* ana koyu yüzey — nötr siyah değil, mavi yanlı */
@@ -258,41 +258,49 @@
   }
 
   :root {
-    --radius: 0.625rem;
+    color-scheme: dark;
+
+    /* Kit "köşeli her şey" diyor: etiket, kutu, buton. */
+    --radius: 0;
+
+    --background: var(--brand-void);
+    --foreground: var(--brand-ink);
+
+    /* Yükseltilmiş yüzeyler void'in üstüne DEEP karıştırılarak kuruluyor,
+       gri açılarak değil — kart kenarı zeminle aynı aileden kalıyor. Kit
+       deep'i "seyrek" kullanmayı söylüyor, o yüzden oran düşük: kart mavi
+       görünmüyor, yalnızca nötr griden ayrılıyor. */
+    --card: color-mix(in oklab, var(--brand-deep) 14%, var(--brand-void));
+    --illustration: color-mix(
+      in oklab,
+      var(--brand-deep) 20%,
+      var(--brand-void)
+    );
+    --card-foreground: var(--brand-ink);
+
+    --popover: color-mix(in oklab, var(--brand-deep) 14%, var(--brand-void));
+    --popover-foreground: var(--brand-ink);
 
     /*
-      Zemin ve mürekkep BİLEREK marka tokenlarına bağlanmadı: `--grid-line`
-      bu ikisinden türüyor (aşağıdaki color-mix) ve sitedeki bütün hairline'lar
-      ondan besleniyor. Marka mavisine yatık bir zemin ızgaranın tonunu da
-      kaydırıyordu; ayarlanmış nötr değerler korunuyor.
+      Ham signal (#0E6CFF) void üzerinde 4.27:1 veriyor — eyebrow'lar
+      `text-xs` olduğu için AA'nın 4.5 eşiğinin ALTINDA kalıyordu. Beyazla
+      %18 karıştırılınca ~5.9:1'e çıkıyor ve küçük punto da geçiyor.
     */
-    --background: var(--color-zinc-50);
-    --foreground: var(--color-zinc-950);
+    --primary: color-mix(in oklab, var(--brand-signal) 82%, #fff);
+    --primary-foreground: var(--brand-void);
 
-    --card: #fff;
-    --illustration: #fff;
-    --card-foreground: var(--brand-void);
-
-    --popover: #fff;
-    --popover-foreground: var(--brand-void);
-
-    --primary: var(--brand-signal);
-    --primary-foreground: #fff;
-
-    --secondary: color-mix(in oklab, var(--brand-signal) 12%, #fff);
-    --secondary-foreground: var(--brand-deep);
+    --secondary: color-mix(in oklab, var(--brand-deep) 34%, var(--brand-void));
+    --secondary-foreground: var(--brand-ink);
 
     /*
       Kademeler kitteki gibi SAYDAMLIKLA kuruluyor, gri tonlarıyla değil
-      (--ink-dim .58 / --ink-faint .34). Aynı oranlar açık ve koyu temada aynı
-      algısal kademeyi verdiği için iki blokta da tekrar edilebiliyor; zinc-600
-      gibi sabit bir gri koyu temada yeniden seçilmek zorundaydı.
+      (--ink-dim .58 / --ink-faint .34).
     */
-    --muted: --alpha(var(--foreground) / 5%);
-    --muted-foreground: --alpha(var(--foreground) / 62%);
+    --muted: color-mix(in oklab, var(--brand-deep) 14%, var(--brand-void));
+    --muted-foreground: --alpha(var(--foreground) / 58%);
 
-    --accent: color-mix(in oklab, var(--brand-deep) 7%, #fff);
-    --accent-foreground: var(--brand-deep);
+    --accent: color-mix(in oklab, var(--brand-deep) 24%, var(--brand-void));
+    --accent-foreground: var(--brand-ink);
 
     /*
       Kit kırmızıyı yasaklıyor ("Palette kırmızı, yeşil, sarı yoktur") ama orası
@@ -300,22 +308,20 @@
       doğrulamasında kullanılıyor ve hatayı yalnız punto/etiketle anlatmak
       erişilebilirlik açısından yetersiz. Bilerek korunan tek palet dışı renk.
     */
-    --destructive: var(--color-red-600);
+    --destructive: var(--color-red-700);
     --destructive-foreground: var(--color-white);
 
-    --border: --alpha(var(--foreground) / 7.5%);
-    --border-illustration: --alpha(var(--foreground) / 7.5%);
+    --border: --alpha(var(--foreground) / 10%);
+    --border-illustration: --alpha(var(--foreground) / 10%);
     --input: --alpha(var(--foreground) / 7.5%);
-    --ring: var(--color-primary);
+    --ring: --alpha(var(--foreground) / 34%);
 
     /*
       Grid çizgisi — sayfadaki TÜM hairline'ların tek kaynağı (header bandı,
       <main> zemini, `asGrid` hücre araları, footer). OPAK olması şart: yarı
       saydam bir sınıf (`bg-foreground/10`, `bg-border`) altındaki katmana göre
-      farklı gri üretiyordu — main içinde ikinci kez üst üste binip açılıyor
-      (34 → 51), footer'da doğrudan body üstünde koyulaşıyordu (27).
-      `in srgb` kasıtlı: sonuç `bg-foreground/10`'un alfa harmanıyla birebir
-      aynı tonu verir, yani mevcut görünüm değişmez, sadece her yerde eşitlenir.
+      farklı gri üretiyordu — main içinde ikinci kez üst üste binip açılıyor,
+      footer'da doğrudan body üstünde koyulaşıyordu.
     */
     --grid-line: color-mix(in srgb, var(--foreground) 10%, var(--background));
 
@@ -328,68 +334,9 @@
     --chart-5: var(--brand-deep);
   }
 
-  /* Karanlık mod artık kullanıcının OS temasını takip eder (manuel toggle yok).
-     `dark:` varyantı da Tailwind v4 varsayılanı olan bu media-query'ye döner. */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      /* Zemin/mürekkep nötr kalıyor (bkz. açık tema notu — ızgara rengi buradan
-         türüyor). Zaten void #0a0a0c ile zinc-950 #09090b arasında gözle
-         ayırt edilir bir fark yok; marka kimliği yüzeylerden değil mavi ve
-         tipografiden geliyor. */
-      --background: var(--color-zinc-950);
-      --foreground: var(--color-white);
-
-      /* Yükseltilmiş yüzeyler void'in üstüne DEEP karıştırılarak kuruluyor,
-         gri açılarak değil — kart kenarı zeminle aynı aileden kalıyor. Kit
-         deep'i "seyrek" kullanmayı söylüyor, o yüzden oran düşük: kart mavi
-         görünmüyor, yalnızca nötr griden ayrılıyor. */
-      --card: color-mix(in oklab, var(--brand-deep) 14%, var(--brand-void));
-      --illustration: color-mix(
-        in oklab,
-        var(--brand-deep) 20%,
-        var(--brand-void)
-      );
-      --card-foreground: var(--brand-ink);
-
-      --popover: color-mix(in oklab, var(--brand-deep) 14%, var(--brand-void));
-      --popover-foreground: var(--brand-ink);
-
-      /*
-        Ham signal (#0E6CFF) void üzerinde 4.27:1 veriyor — eyebrow'lar
-        `text-xs` olduğu için AA'nın 4.5 eşiğinin ALTINDA kalıyordu. Beyazla
-        %18 karıştırılınca ~5.9:1'e çıkıyor ve küçük punto da geçiyor.
-        Açık temada bu gerekmiyor: signal beyaz üzerinde zaten 4.53:1.
-      */
-      --primary: color-mix(in oklab, var(--brand-signal) 82%, #fff);
-      --primary-foreground: var(--brand-void);
-
-      --secondary: color-mix(
-        in oklab,
-        var(--brand-deep) 34%,
-        var(--brand-void)
-      );
-      --secondary-foreground: var(--brand-ink);
-
-      --muted: color-mix(in oklab, var(--brand-deep) 14%, var(--brand-void));
-      --muted-foreground: --alpha(var(--foreground) / 58%);
-      --accent: color-mix(in oklab, var(--brand-deep) 24%, var(--brand-void));
-      --accent-foreground: var(--brand-ink);
-
-      --destructive: var(--color-red-700);
-      --destructive-foreground: var(--color-white);
-
-      --border: --alpha(var(--foreground) / 10%);
-      --border-illustration: --alpha(var(--foreground) / 10%);
-      --input: --alpha(var(--foreground) / 7.5%);
-      --ring: --alpha(var(--foreground) / 34%);
-    }
-  }
-
   /*
-    `/links` (linktree) paleti. Bu sayfa Instagram biyografisinden açılıyor ve
-    herkeste birebir aynı görünmeli, o yüzden OS temasını TAKİP ETMEZ: her zaman
-    koyu. Değerler koyu temanınkiyle aynı, tek fark zemin — void değil TAM
-    SİYAH. Kartlar (`--card`) siyahın üstünde hafif bir yükselti olarak durur,
+    `/links` (linktree) paleti. Değerler sitenin temasıyla aynı, tek fark
+    zemin — void değil TAM SİYAH. Kartlar (`--card`) siyahın üstünde hafif bir yükselti olarak durur,
     aralarındaki 1px boşluklar zemini gösterir, yani ayraçlar da siyahtır.
     Seçici `html.links-theme` (0,1,1): yukarıdaki `:root` bloklarını sırasından
     bağımsız olarak geçer.
@@ -425,6 +372,23 @@
 
   body {
     @apply bg-background text-foreground font-sans;
+  }
+
+  /*
+    Film grain — deck kitindeki `.stage::after` ile aynı doku (ytu-brand/
+    brand.src.css). Harman modu bilerek `normal`: `overlay` void'in ~0.04'lük
+    tabanında taneciği yok ediyor. `fixed` olduğu için sayfa uzadıkça yeniden
+    boyanmıyor; tıklamaları geçirsin diye pointer-events kapalı. Kitteki .09
+    tam ekran slayt için; uzun okunan sayfada .06 metni kirletmiyor.
+  */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   /*
