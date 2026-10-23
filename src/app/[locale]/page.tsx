@@ -5,7 +5,6 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LandingEvents } from '@/components/landing/landing-events';
 import { LandingHackathons } from '@/components/landing/landing-hackathons';
 import { LandingPosts } from '@/components/landing/landing-posts';
-import { LandingSticker } from '@/components/landing/landing-sticker';
 import {
   LandingCta,
   LandingFeatures,
@@ -56,7 +55,6 @@ export default async function LandingPage({
       {/* <LandingSponsors /> */}
       <LandingPosts />
       <LandingCta />
-      <LandingSticker />
     </>
   );
 }

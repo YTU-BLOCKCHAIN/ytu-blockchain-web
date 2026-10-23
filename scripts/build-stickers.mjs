@@ -3,7 +3,7 @@
 // `assets/stickers/` içindeki şeffaf zeminli her görseli kırpar, boyutlar ve
 // `public/stickers/<ad>.webp` olarak yazar. Sticker şekli görselin kendi
 // silueti; etrafına kenar eklenmez. Holo/sim maskeleri çalışma anında
-// üretilir (bkz. src/components/landing/sticker).
+// üretilir (bkz. src/components/stickers/sticker).
 //
 // Kullanım: node scripts/build-stickers.mjs
 import { readdir } from 'node:fs/promises';

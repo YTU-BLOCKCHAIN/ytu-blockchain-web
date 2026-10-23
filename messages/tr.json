@@ -33,7 +33,9 @@
         "projects": "Projeler",
         "projectsDesc": "Birlikte ürettiğimiz açık kaynak projeler",
         "sponsors": "Sponsorlar",
-        "sponsorsDesc": "Topluluğumuzu mümkün kılan kurumlar"
+        "sponsorsDesc": "Topluluğumuzu mümkün kılan kurumlar",
+        "stickers": "Stickerlar",
+        "stickersDesc": "Kulübün sticker seti"
       }
     },
     "menu": {
@@ -51,7 +53,8 @@
           "desc": "Topluluğun bir parçası ol"
         }
       }
-    }
+    },
+    "stickers": "Stickerlar"
   },
   "Meta": {
     "defaultTitle": "YTÜ Blockchain Kulübü",
@@ -87,6 +90,10 @@
     "privacy": {
       "title": "Aydınlatma Metni",
       "description": "YTÜ Blockchain Kulübü form kayıtlarında kişisel verilerin nasıl işlendiğine dair aydınlatma metni."
+    },
+    "stickers": {
+      "title": "Stickerlar",
+      "description": "YTÜ Blockchain Kulübü'nün sticker seti: dither, VHS ve biraz meme."
     }
   },
   "Landing": {
@@ -148,13 +155,6 @@
     "callToAction": {
       "heading": "Merakın mı var? Aramıza katıl.",
       "button": "Bize Katıl"
-    },
-    "sticker": {
-      "hint": "Kenarından tutup soy, ortasından çevir.",
-      "label": "YTU Blockchain stickerları",
-      "previous": "Önceki sticker",
-      "next": "Sonraki sticker",
-      "slideLabel": "{index}. sticker"
     },
     "hero": {
       "season": {
@@ -535,5 +535,33 @@
     "description": "Bu sayfa yüklenemedi. Genellikle geçici bir durumdur — tekrar denemeyi deneyin.",
     "retry": "Tekrar dene",
     "back": "Anasayfaya dön"
+  },
+  "Stickers": {
+    "hero": {
+      "eyebrow": "STICKERLAR",
+      "title": "Kulübün sticker seti",
+      "subtitle": "Hepsi kulübün tasarım dilinden: dither, VHS ve biraz meme. Aşağıda kenarından tutup soyabilir, ortasından çevirebilirsin."
+    },
+    "viewerTitle": "SOY, ÇEVİR, İNCELE.",
+    "galleryTitle": "TÜM SET",
+    "galleryIntro": "{count} sticker.",
+    "names": {
+      "sell": "sell.exe",
+      "satoshi": "Satoshi",
+      "own-keys": "Kendi anahtarı",
+      "money-printer": "money_printer.exe",
+      "banknote": "Banknot",
+      "big-type": "YTU BLOCKCHAIN",
+      "cat": "Kedi",
+      "mouse": "Fare",
+      "laptop": "Laptop"
+    },
+    "viewer": {
+      "hint": "Kenarından tutup soy, ortasından çevir.",
+      "label": "YTU Blockchain stickerları",
+      "previous": "Önceki sticker",
+      "next": "Sonraki sticker",
+      "slideLabel": "{index}. sticker"
+    }
   }
 }

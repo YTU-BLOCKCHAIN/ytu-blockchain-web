@@ -84,7 +84,7 @@ export default async function LocaleLayout({
       Events (bir kısmı)  → EventsFeed, EventCard (detay sayfası metinleri sunucuda)
       Error               → error.tsx (hata sınırı layout'un içinde çiziliyor)
       Landing.hackathons  → HackathonsCarousel
-      Landing.sticker     → LandingSticker
+      Stickers.viewer     → StickerViewer
 
     Yeni bir istemci bileşeni başka bir ad alanı okursa buraya eklenmeli,
     yoksa çalışma zamanında "missing message" hatası verir.
@@ -103,7 +103,9 @@ export default async function LocaleLayout({
     Error: messages.Error,
     Landing: {
       hackathons: messages.Landing.hackathons,
-      sticker: messages.Landing.sticker,
+    },
+    Stickers: {
+      viewer: messages.Stickers.viewer,
     },
   };
 

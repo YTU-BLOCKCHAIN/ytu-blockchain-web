@@ -33,7 +33,9 @@
         "projects": "Projects",
         "projectsDesc": "The open-source projects we build together",
         "sponsors": "Sponsors",
-        "sponsorsDesc": "The organizations that make our community possible"
+        "sponsorsDesc": "The organizations that make our community possible",
+        "stickers": "Stickers",
+        "stickersDesc": "The club's sticker set"
       }
     },
     "menu": {
@@ -51,7 +53,8 @@
           "desc": "Be part of the community"
         }
       }
-    }
+    },
+    "stickers": "Stickers"
   },
   "Meta": {
     "defaultTitle": "YTÜ Blockchain Club",
@@ -87,6 +90,10 @@
     "privacy": {
       "title": "Privacy Notice",
       "description": "How the YTÜ Blockchain Club processes personal data submitted through the site forms."
+    },
+    "stickers": {
+      "title": "Stickers",
+      "description": "YTÜ Blockchain Club's sticker set: dither, VHS and a bit of meme."
     }
   },
   "Landing": {
@@ -148,13 +155,6 @@
     "callToAction": {
       "heading": "Curious? Come join us.",
       "button": "Join us"
-    },
-    "sticker": {
-      "hint": "Peel it from the edge, spin it from the middle.",
-      "label": "YTÜ Blockchain stickers",
-      "previous": "Previous sticker",
-      "next": "Next sticker",
-      "slideLabel": "Sticker {index}"
     },
     "hero": {
       "season": {
@@ -535,5 +535,33 @@
     "description": "This page could not be loaded. It is usually temporary — please try again.",
     "retry": "Try again",
     "back": "Back to home"
+  },
+  "Stickers": {
+    "hero": {
+      "eyebrow": "STICKERS",
+      "title": "The club's sticker set",
+      "subtitle": "All drawn from the club's design language: dither, VHS and a bit of meme. Peel one from the edge below, spin it from the middle."
+    },
+    "viewerTitle": "PEEL, SPIN, LOOK CLOSER.",
+    "galleryTitle": "THE FULL SET",
+    "galleryIntro": "{count, plural, one {# sticker} other {# stickers}}.",
+    "names": {
+      "sell": "sell.exe",
+      "satoshi": "Satoshi",
+      "own-keys": "Own keys",
+      "money-printer": "money_printer.exe",
+      "banknote": "Banknote",
+      "big-type": "YTU BLOCKCHAIN",
+      "cat": "Cat",
+      "mouse": "Mouse",
+      "laptop": "Laptop"
+    },
+    "viewer": {
+      "hint": "Peel it from the edge, spin it from the middle.",
+      "label": "YTÜ Blockchain stickers",
+      "previous": "Previous sticker",
+      "next": "Next sticker",
+      "slideLabel": "Sticker {index}"
+    }
   }
 }
