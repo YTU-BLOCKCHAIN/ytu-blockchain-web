@@ -265,8 +265,8 @@ function LinkRow({
       className={cn(
         // Köşeler yalnızca sm'den itibaren: telefonda kartlar ekranın iki
         // kenarına dayanıyor, orada yuvarlatma kırpılmış gibi duruyordu.
-        'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none md:min-h-20',
-        wide && 'lg:col-span-2',
+        'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none md:min-h-0 md:py-2 lg:px-8',
+        wide && 'md:col-span-2',
         link.featured
           ? 'bg-action text-action-foreground hover:bg-action/90'
           : 'bg-card hover:bg-accent',
@@ -396,13 +396,16 @@ export default async function LinksPage({
     ...links.slice(socialsAt),
   ].map((link) => {
     const { Icon, tone } = iconForLink(link);
-    return { link, LeadingIcon: Icon, tone, wide: Boolean(link.featured) };
+    return { link, LeadingIcon: Icon, tone, wide: false };
   });
-  // Geniş ekranda iki sütun: öne çıkan (başvuru) satırları tam satır; geri
-  // kalanların sayısı tekse sonuncusu da, yoksa sağ altta boş bir hücre kalır.
-  const regular = rows.filter((row) => !row.wide);
-  const last = regular.at(-1);
-  if (regular.length % 2 === 1 && last) last.wide = true;
+  // Geniş ekranda iki sütunlu ızgara: öne çıkan (başvuru) satırları da
+  // normal satırlar da ikişer yan yana. Bir grubun sayısı tekse sonuncusu tam
+  // satır olur; yoksa grubun sonunda boş bir hücre kalırdı.
+  for (const featured of [true, false]) {
+    const group = rows.filter((row) => Boolean(row.link.featured) === featured);
+    const last = group.at(-1);
+    if (group.length % 2 === 1 && last) last.wide = true;
+  }
 
   return (
     /* Telefonda tam ekran: yatay padding yok, kartlar kenardan kenara. Yatay
@@ -413,11 +416,12 @@ export default async function LinksPage({
        kuyu gibi kalıyordu. (İçerik taşarsa main zaten içerikle uzar,
        justify-center etkisiz kalır — kırpma riski yok.)
 
-       md'den itibaren tam ekran: ortada 4xl'lik bir kutu siyah boşlukta
-       küçük kalıyordu. Solda ekrana sabitlenmiş profil paneli, sağda iki
-       sütunlu bağlantı listesi; telefondaki görünüm değişmedi. */
-    <main className="flex flex-1 flex-col items-center pb-24 sm:px-4 sm:pt-14 md:items-stretch md:p-0">
-      <div className="w-full max-w-md md:min-h-dvh md:max-w-none">
+       md'den itibaren sayfa tam olarak bir ekran (`h-dvh`, kaydırma yok):
+       solda profil paneli, sağda paneli kenarsız dolduran bağlantı ızgarası.
+       Satırlar ekran yüksekliğini eşit bölüşüyor. Kaydırma yalnızca
+       telefonda; telefondaki görünüm değişmedi. */
+    <main className="flex flex-1 flex-col items-center pb-24 sm:px-4 sm:pt-14 md:h-dvh md:flex-none md:items-stretch md:overflow-hidden md:p-0">
+      <div className="w-full max-w-md md:h-full md:max-w-none">
         {/* `gap-px`: kartlar arasındaki 1px boşluklardan zemin (tam siyah)
             sızar, ayraç çizgisi bu. Kartlar siyahın üstünde hafif yükselti.
 
@@ -425,17 +429,17 @@ export default async function LinksPage({
             listesi. Telefondaki dar sütun geniş ekranda siyah boşlukta ince
             bir şerit gibi kaybolmasın diye. Aradaki 1px boşluk da satır
             araları ile aynı ayraç dili. */}
-        <div className="grid gap-px md:min-h-dvh md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+        <div className="grid gap-px md:h-full md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
           {/* md'de header sol kolonun tamamını kaplar (grid stretch) ve içerik
               dikeyde ortalanır; mask zaten absolute, flex'ten etkilenmez. */}
           {/* Sol panel postların mavi yüzeyi, altta Tanışma afişindeki evrim
               dizisi (dither); sağdaki bağlantılar beyaz — postlardaki mavi
               üst + beyaz bant kompozisyonu. */}
-          <header className="surface-signal relative overflow-hidden px-6 py-10 text-center md:sticky md:top-0 md:flex md:h-dvh md:flex-col md:justify-center md:px-10 md:py-16">
-            <div className="absolute inset-x-10 bottom-0 hidden md:block">
-              <Evolution you={t('you')} />
-            </div>
-            <div className="relative flex flex-col items-center">
+          {/* md'de iki satır: üstte profil (kalan alanda ortalı), altta evrim
+              dizisi. Dizinin genişliği ekran yüksekliğine bağlı; kısa ekranda
+              küçülüyor, profilin üstüne binmiyor. */}
+          <header className="surface-signal relative overflow-hidden px-6 py-10 text-center md:grid md:h-full md:grid-rows-[minmax(0,1fr)_auto] md:px-10 md:pt-16 md:pb-0">
+            <div className="relative flex flex-col items-center md:justify-center">
               <h1 className="flex items-center justify-center">
                 <Logo className="scale-110 md:scale-125" />
                 <span className="sr-only">{profile.title}</span>
@@ -452,19 +456,19 @@ export default async function LinksPage({
                   Listenin altında kalsa kaydırmadan görünmezdi. */}
               <LinksLanguageSwitcher locale={locale} />
             </div>
+            <div className="mx-auto hidden w-full max-w-[calc((100dvh-20rem)*2)] pt-8 md:block">
+              <Evolution you={t('you')} />
+            </div>
           </header>
 
-          {/* İç grid `gap-px` + `bg-grid-line`: satır aralarındaki 1px
-              boşluk ızgara çizgisini gösteriyor (sitedeki `asGrid` dili).
-              Zemin ve kartlar aynı signal mavisi olduğu için çizgi zeminden
-              değil bu katmandan gelmeli. Dolgu dış sarmalayıcıda; içte olsa
-              dolgu alanı da çizgi renginde boyanırdı. */}
-          <div className="grid content-center md:p-8 lg:p-16">
-            <div className="bg-grid-line grid gap-px lg:grid-cols-2">
-              {rows.map((row) => (
-                <LinkRow key={`${row.link.label}-${row.link.href}`} {...row} />
-              ))}
-            </div>
+          {/* `gap-px` + `bg-grid-line`: hücre aralarındaki 1px boşluk ızgara
+              çizgisini gösteriyor (sitedeki `asGrid` dili). md'den itibaren
+              ızgara sağ paneli kenarsız dolduruyor; `auto-rows` satırlara
+              ekranı eşit bölüştürüyor. */}
+          <div className="bg-grid-line grid gap-px md:h-full md:auto-rows-[minmax(0,1fr)] md:grid-cols-2">
+            {rows.map((row) => (
+              <LinkRow key={`${row.link.label}-${row.link.href}`} {...row} />
+            ))}
           </div>
         </div>
       </div>
@@ -477,7 +481,7 @@ export default async function LinksPage({
         aria-hidden
         // Maske yalnızca en alttaki ~%15'i tam opak bırakır, kalanı uzun bir
         // rampayla söner: kısa/sert bir bant yerine yumuşak bir eriyiş.
-        className="from-background pointer-events-none fixed inset-x-0 bottom-0 h-32 md:left-[41.667%] bg-linear-to-t to-transparent backdrop-blur-[2px] [mask-image:linear-gradient(to_top,#000_15%,transparent)]"
+        className="from-background pointer-events-none fixed inset-x-0 bottom-0 h-32 md:hidden bg-linear-to-t to-transparent backdrop-blur-[2px] [mask-image:linear-gradient(to_top,#000_15%,transparent)]"
       />
     </main>
   );
