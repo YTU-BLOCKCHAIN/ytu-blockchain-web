@@ -155,7 +155,37 @@
       "previous": "Previous sticker",
       "next": "Next sticker",
       "slideLabel": "Sticker {index}"
-    }
+    },
+    "hero": {
+      "season": {
+        "fall": "FALL {year}",
+        "spring": "SPRING {year}",
+        "summer": "SUMMER {year}"
+      },
+      "title": "BUILDING THE DECENTRALIZED FUTURE TOGETHER AT YTÜ",
+      "next": "NEXT EVENT",
+      "register": "Register",
+      "details": "Details",
+      "you": "YOU",
+      "fallbackTitle": "YOU'RE THE NEXT BLOCK.",
+      "fallbackText": "Trainings, hackathons and teams. No experience needed, curiosity is enough."
+    },
+    "stats": {
+      "heading": "BY THE NUMBERS",
+      "events": "EVENTS",
+      "countries": "COUNTRIES",
+      "awards": "HACKATHON PLACINGS",
+      "firsts": "FIRST PLACES",
+      "awardsNote": "Spring 2026: Bi-ThonGO, Monad Blitz Çanakkale, Build on Stellar."
+    },
+    "featuresTitle": "FROM LEARNING TO BUILDING.",
+    "manifestoTitle": "WHY WE'RE HERE",
+    "manifestoRich": "We make blockchain something students at YTÜ can learn, build and share. <hl>No experience required, just curiosity.</hl> We learn and build together.",
+    "eventsTitle": "EVENTS",
+    "ctaTitle": "CURIOUS? COME JOIN US.",
+    "ctaText": "Our WhatsApp community, application form and every link in one place.",
+    "ctaCommand": "$ ytu join",
+    "ctaOutput": "Opening links..."
   },
   "About": {
     "hero": {
@@ -278,7 +308,8 @@
       "title": "Projects coming soon",
       "body": "We are gathering the projects we build at hackathons and inside the club. Until then, our code is on GitHub.",
       "github": "Browse on GitHub",
-      "join": "Join Us"
+      "join": "Join Us",
+      "folder": "projects/"
     }
   },
   "Events": {
@@ -397,7 +428,8 @@
       "title": "First posts on the way",
       "body": "This is where our writing on blockchain and club news will live. For now, our earlier posts are on Medium.",
       "medium": "Read on Medium",
-      "events": "See our events"
+      "events": "See our events",
+      "folder": "blog/"
     }
   },
   "Forms": {
@@ -438,7 +470,8 @@
   },
   "Links": {
     "kicker": "links",
-    "titleSuffix": "Links"
+    "titleSuffix": "Links",
+    "you": "YOU"
   },
   "Consent": {
     "title": "Cookies",

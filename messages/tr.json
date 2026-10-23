@@ -155,7 +155,37 @@
       "previous": "Önceki sticker",
       "next": "Sonraki sticker",
       "slideLabel": "{index}. sticker"
-    }
+    },
+    "hero": {
+      "season": {
+        "fall": "GÜZ {year}",
+        "spring": "BAHAR {year}",
+        "summer": "YAZ {year}"
+      },
+      "title": "MERKEZİYETSİZ GELECEĞİ YTÜ'DE BİRLİKTE İNŞA EDİYORUZ",
+      "next": "SIRADAKİ ETKİNLİK",
+      "register": "Kayıt ol",
+      "details": "Ayrıntılar",
+      "you": "SEN",
+      "fallbackTitle": "SIRADAKİ BLOK SENSİN.",
+      "fallbackText": "Eğitimler, hackathonlar ve ekipler. Ön bilgi gerekmez, merak yeter."
+    },
+    "stats": {
+      "heading": "RAKAMLARLA",
+      "events": "ETKİNLİK",
+      "countries": "ÜLKE",
+      "awards": "HACKATHON DERECESİ",
+      "firsts": "BİRİNCİLİK",
+      "awardsNote": "Bahar 2026: Bi-ThonGO, Monad Blitz Çanakkale, Build on Stellar."
+    },
+    "featuresTitle": "ÖĞRENMEKTEN ÜRETMEYE.",
+    "manifestoTitle": "NEDEN BURADAYIZ",
+    "manifestoRich": "Blockchain'i YTÜ'de öğrenilebilir, üretilebilir ve paylaşılabilir kılıyoruz. <hl>Deneyim şart değil, merak şart.</hl> Birlikte öğreniyor, birlikte üretiyoruz.",
+    "eventsTitle": "ETKİNLİKLER",
+    "ctaTitle": "MERAKIN MI VAR? ARAMIZA KATIL.",
+    "ctaText": "WhatsApp topluluğu, başvuru formu ve tüm bağlantılarımız tek adreste.",
+    "ctaCommand": "$ ytu katil",
+    "ctaOutput": "Bağlantılar açılıyor..."
   },
   "About": {
     "hero": {
@@ -278,7 +308,8 @@
       "title": "Projeler çok yakında",
       "body": "Hackathonlarda ve kulüp içinde geliştirdiğimiz projeleri burada topluyoruz. O zamana kadar kodlarımız GitHub'da.",
       "github": "GitHub'da incele",
-      "join": "Bize Katıl"
+      "join": "Bize Katıl",
+      "folder": "projeler/"
     }
   },
   "Events": {
@@ -397,7 +428,8 @@
       "title": "İlk yazılar yolda",
       "body": "Blockchain üzerine yazdıklarımızı ve kulüpten haberleri burada paylaşacağız. Şimdilik eski yazılarımız Medium'da.",
       "medium": "Medium'da oku",
-      "events": "Etkinliklere göz at"
+      "events": "Etkinliklere göz at",
+      "folder": "blog/"
     }
   },
   "Forms": {
@@ -438,7 +470,8 @@
   },
   "Links": {
     "kicker": "bağlantılar",
-    "titleSuffix": "Bağlantılar"
+    "titleSuffix": "Bağlantılar",
+    "you": "SEN"
   },
   "Consent": {
     "title": "Çerezler",

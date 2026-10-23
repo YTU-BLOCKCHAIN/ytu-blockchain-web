@@ -23,6 +23,7 @@ export async function LandingEvents() {
   if (events.length === 0) return null;
 
   const t = await getTranslations('Landing.events');
+  const tLanding = await getTranslations('Landing');
   const tEvents = await getTranslations('Events');
   const locale = await getLocale();
 
@@ -41,10 +42,10 @@ export async function LandingEvents() {
 
           <div className="@2xl:grid-cols-3 col-span-full grid gap-px sm:col-span-8">
             <div data-grid-content className="@4xl:p-12 col-span-full p-6">
-              <h2 className="text-muted-foreground text-balance">
-                {t('heading')}
+              <h2 className="@4xl:text-5xl text-3xl leading-[1.12] sm:text-4xl">
+                {tLanding('eventsTitle')}
               </h2>
-              <p className="text-foreground mt-6 max-w-2xl text-balance text-xl font-medium">
+              <p className="text-muted-foreground mt-4 max-w-2xl text-balance">
                 {t('intro', { count: events.length })}
               </p>
               <Link

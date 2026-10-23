@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Trophy } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 import { Container } from '@/components/container';
@@ -50,6 +50,7 @@ export function HackathonsCarousel({
   items: HackathonSlide[];
 }) {
   const t = useTranslations('Landing.hackathons');
+  const locale = useLocale();
 
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
@@ -134,10 +135,10 @@ export function HackathonsCarousel({
               className="@4xl:p-12 flex flex-wrap items-end justify-between gap-6 p-6"
             >
               <div>
-                <h2 className="text-muted-foreground text-balance">
-                  {t('heading')}
+                <h2 className="@4xl:text-5xl text-3xl leading-[1.12] sm:text-4xl">
+                  {t('heading').toLocaleUpperCase(locale)}
                 </h2>
-                <p className="text-foreground mt-6 max-w-2xl text-balance text-xl font-medium">
+                <p className="text-muted-foreground mt-4 max-w-2xl text-balance">
                   {t('intro')}
                 </p>
               </div>
