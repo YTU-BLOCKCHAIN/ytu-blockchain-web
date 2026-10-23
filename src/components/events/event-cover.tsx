@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 
 /**
  * Etkinlik kapağı — görsel KIRPILMADAN sabit oranlı bir kutuya sığdırılır,
- * kalan boşluk aynı görselin bulanık kopyasıyla dolar.
+ * kalan boşluk düz signal mavisi.
  *
  * Neden kırpmıyoruz: kapakların çoğu Instagram'dan geliyor ve oranları
  * karışık (arşivde 101 kapağın ~35'i kare, ~22'si 4:5/3:4 dikey afiş, 16'sı
@@ -13,13 +13,13 @@ import { cn } from '@/lib/utils';
  * yeni afişte tekrarlanan bir iş. Kutuya sığdırmak kartların düzenini
  * bozmadan her oranı olduğu gibi gösteriyor.
  *
- * Bulanık zemin için ayrı, çok küçük bir kaynak (`blurSrc`, ~48px) iniyor:
- * zaten bulanıklaştırılacağı için çözünürlüğün önemi yok, sayfaya yük
- * bindirmiyor. Dekoratif olduğu için ekran okuyucudan gizli.
+ * Zemin neden signal: kapakların çoğu kulübün #0154FF zeminli afişleri; afiş
+ * kutunun kenarına kadar uzuyormuş gibi kesintisiz duruyor. Eskiden aynı
+ * görselin bulanık kopyası vardı — fiilen bir gradient'ti ve kit gradient'i
+ * yasaklıyor.
  */
 export function EventCover({
   src,
-  blurSrc,
   alt,
   sizes,
   priority = false,
@@ -27,31 +27,14 @@ export function EventCover({
 }: {
   /** Kırpılmamış, yalnızca genişliği sınırlanmış görsel adresi. */
   src: string;
-  blurSrc: string;
   alt: string;
   sizes: string;
   priority?: boolean;
-  /** Kutunun oranı ve köşeleri, ör. `aspect-[16/10] rounded-[10px]`. */
+  /** Kutunun oranı, ör. `aspect-[16/10]`. */
   className?: string;
 }) {
   return (
-    <div
-      className={cn(
-        'before:border-foreground/10 bg-muted relative overflow-hidden before:absolute before:inset-0 before:z-10 before:rounded-[inherit] before:border',
-        className,
-      )}
-    >
-      <Image
-        aria-hidden
-        alt=""
-        src={blurSrc}
-        fill
-        sizes="48px"
-        className="scale-125 object-cover opacity-70 blur-2xl"
-      />
-      {/* Zemini koyulaştırır: açık renkli bir afişin bulanık kopyası öndeki
-          görselle yarışmasın, kenarı belli olsun. */}
-      <div aria-hidden className="absolute inset-0 bg-black/25" />
+    <div className={cn('bg-signal relative overflow-hidden', className)}>
       <Image
         src={src}
         alt={alt}
@@ -70,7 +53,7 @@ export function EventCover({
  * ekosistem) logosu ortada; hiç kurum yoksa kulübün amblemi.
  *
  * Kurum logoları kare ve çoğu beyaz zemine göre çizilmiş; o yüzden beyaz bir
- * daire içinde, zemin ise sitenin ızgara dokusunu taşıyan sakin bir yüzey.
+ * kare içinde, zemin kapaklarla aynı signal mavisi.
  */
 export function EventPlaceholder({
   logoUrl,
@@ -87,15 +70,13 @@ export function EventPlaceholder({
     <div
       aria-hidden
       className={cn(
-        'before:border-foreground/10 bg-muted relative flex flex-col items-center justify-center gap-3 overflow-hidden before:absolute before:inset-0 before:rounded-[inherit] before:border',
-        'bg-[radial-gradient(circle_at_center,var(--color-foreground)_1px,transparent_1px)] bg-[length:16px_16px]',
+        'surface-signal relative flex flex-col items-center justify-center gap-3 overflow-hidden',
         className,
       )}
     >
-      <div className="bg-muted/85 absolute inset-0" />
       {/* Kare köşeli kutu: logoların çoğu kendi zeminiyle kare çizilmiş, daire
           onları köşelerinden kesiyordu. */}
-      <span className="ring-foreground/10 relative flex size-20 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-sm ring-1">
+      <span className="relative flex size-20 items-center justify-center overflow-hidden bg-white">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={logoUrl ?? '/logo/mark.svg'}
@@ -106,7 +87,7 @@ export function EventPlaceholder({
       {label ? (
         // Büyük harfe çevrilmiyor: kurum adı marka ("Sui Hub Türkiye" →
         // "SUİ HUB" olurdu).
-        <span className="text-muted-foreground relative text-sm font-medium">
+        <span className="font-display relative text-sm text-white">
           {label}
         </span>
       ) : null}

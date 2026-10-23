@@ -44,6 +44,18 @@ const nextConfig: NextConfig = {
         destination: '/links',
         permanent: false,
       },
+      // Topluluk sayfası kaldırıldı: kanallar header'ın "Topluluk" menüsünde
+      // ve `/links`te. Eski adres oraya yönleniyor.
+      {
+        source: '/:locale(tr|en)/community',
+        destination: '/links/:locale',
+        permanent: false,
+      },
+      {
+        source: '/community',
+        destination: '/links',
+        permanent: false,
+      },
       {
         source: '/logos',
         destination:

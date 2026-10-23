@@ -13,7 +13,7 @@
  *   oturur. `go()` ile geçişte de sticker yandan soyulup çıkar.
  *
  * `three` ağır olduğu için bu modül yalnızca istemcide, dinamik import ile
- * yüklenir (bkz. `landing-sticker.tsx`).
+ * yüklenir (bkz. `sticker-viewer.tsx`).
  */
 import {
   DoubleSide,

@@ -18,7 +18,7 @@ export function OrgMark({
   return (
     <span
       className={cn(
-        'ring-foreground/10 inline-flex shrink-0 items-center justify-center overflow-hidden rounded-md bg-white ring-1',
+        'ring-foreground/10 inline-flex shrink-0 items-center justify-center overflow-hidden bg-white ring-1',
         className,
       )}
     >
@@ -58,7 +58,7 @@ export function OrgHover({
       target="_blank"
       rel="noreferrer noopener"
       aria-label={org.name}
-      className="relative z-10 inline-flex rounded-full"
+      className="relative z-10 inline-flex"
     >
       {children}
     </a>
@@ -66,7 +66,7 @@ export function OrgHover({
     <span
       tabIndex={0}
       aria-label={org.name}
-      className="relative z-10 inline-flex rounded-full"
+      className="relative z-10 inline-flex"
     >
       {children}
     </span>
@@ -80,7 +80,7 @@ export function OrgHover({
           side="top"
           sideOffset={8}
           collisionPadding={16}
-          className="bg-background text-foreground ring-foreground/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 z-50 w-64 rounded-xl p-4 shadow-lg ring-1"
+          className="bg-background text-foreground ring-foreground/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 z-50 w-64 p-4 ring-1"
         >
           <div className="flex items-center gap-3">
             <OrgMark org={org} className="size-10" />
@@ -143,7 +143,7 @@ export function OrgLogos({
 export function OrgChip({ org }: { org: EventOrg }) {
   return (
     <OrgHover org={org}>
-      <span className="bg-foreground/5 hover:bg-foreground/10 inline-flex items-center gap-1.5 rounded-full py-0.5 pl-0.5 pr-2.5 text-sm duration-150">
+      <span className="bg-foreground/5 hover:bg-foreground/10 inline-flex items-center gap-1.5 py-0.5 pl-0.5 pr-2.5 text-sm duration-150">
         <OrgMark org={org} className="size-5" />
         {org.name}
       </span>

@@ -75,7 +75,7 @@ export function LanguageSwitcher({
   return (
     <div
       className={cn(
-        'border-foreground/15 flex items-center rounded-full border p-0.5 text-xs',
+        'border-foreground/15 flex items-center border p-0.5 text-xs',
         isPending && 'opacity-60',
         className,
       )}
@@ -96,7 +96,7 @@ export function LanguageSwitcher({
             aria-label={t('switchTo', { language: t(`language.${locale}`) })}
             onClick={() => switchTo(locale)}
             className={cn(
-              'cursor-pointer rounded-full px-2.5 py-1 font-medium uppercase transition-colors',
+              'cursor-pointer px-2.5 py-1 font-medium uppercase transition-colors',
               selected
                 ? 'bg-foreground/10 text-foreground'
                 : 'text-muted-foreground hover:text-foreground',

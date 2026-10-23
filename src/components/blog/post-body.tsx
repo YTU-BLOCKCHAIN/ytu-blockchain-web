@@ -58,7 +58,7 @@ const components: PortableTextComponents = {
     ),
     em: ({ children }) => <em className="italic">{children}</em>,
     code: ({ children }) => (
-      <code className="bg-grid-line text-foreground rounded px-1.5 py-0.5 font-mono text-[0.9em]">
+      <code className="bg-grid-line text-foreground px-1.5 py-0.5 font-mono text-[0.9em]">
         {children}
       </code>
     ),
@@ -107,7 +107,7 @@ const components: PortableTextComponents = {
             width={dimensions.width}
             height={dimensions.height}
             sizes="(min-width: 1024px) 44rem, 100vw"
-            className="h-auto w-full rounded"
+            className="h-auto w-full"
           />
           {caption ? (
             <figcaption className="text-muted-foreground mt-3 text-center text-sm">

@@ -19,9 +19,9 @@ import { siteConfig } from '@/lib/site';
 const EXPLORE = [
   { key: 'about', href: '/about' },
   { key: 'projects', href: '/projects' },
-  { key: 'community', href: '/community' },
   { key: 'events', href: '/events' },
   { key: 'blog', href: '/blog' },
+  { key: 'stickers', href: '/stickers' },
   { key: 'contact', href: '/contact' },
   { key: 'join', href: JOIN_HREF },
 ] as const;
@@ -143,13 +143,30 @@ export default function Footer() {
                 </a>
               </p>
             </div>
-            <div className="ring-foreground/5 bg-card flex items-center gap-2 rounded-full border border-transparent py-1 pr-4 pl-2 shadow ring-1">
+            <div className="ring-foreground/5 bg-card flex items-center gap-2 border border-transparent py-1 pr-4 pl-2 ring-1">
               <span className="relative flex size-3">
-                <span className="absolute inset-0 block size-full animate-pulse rounded-full bg-primary/40" />
-                <span className="relative m-auto block size-1 rounded-full bg-primary" />
+                <span className="absolute inset-0 block size-full animate-pulse bg-primary/40" />
+                <span className="relative m-auto block size-1 bg-primary" />
               </span>
               <span className="text-sm">{t('status')}</span>
             </div>
+          </div>
+        </div>
+
+        {/* Kapanış: postların beyaz bandında dev wordmark. Hücre kendi
+            `@container`'ı: `cqw` sayfaya değil hücrenin iç genişliğine göre,
+            yazı tek satırda kenardan kenara dolduruyor (VHS'te genişlik ≈
+            7.54 × font). Sayfanın konteyneri ölçü alınırsa geniş ekranda
+            yazı sütunu aşıp sayfayı yatayda taşırıyordu. Logo zaten yukarıda;
+            bu satır dekoratif. */}
+        <div aria-hidden>
+          <div
+            data-grid-content
+            className="surface-paper text-primary @container min-w-0 overflow-hidden px-6 pt-8 pb-4 lg:px-12"
+          >
+            <span className="font-display block text-[13.2cqw] leading-[0.85] whitespace-nowrap">
+              YTU BLOCKCHAIN
+            </span>
           </div>
         </div>
       </Container>

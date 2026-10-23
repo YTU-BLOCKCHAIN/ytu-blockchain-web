@@ -1,20 +1,14 @@
-import {
-  ArrowRight,
-  Code2,
-  Flame,
-  Lightbulb,
-  Unlock,
-  Users,
-} from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { ArrowRight, Flame } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 
-import { cn } from '@/lib/utils';
-import { Container } from '@/components/container';
+import { Stat } from '@/components/brand';
+import { Container, Rail } from '@/components/container';
 import { ButtonLink } from '@/components/ui/button';
 import { JOIN_HREF, SiteLink } from '@/components/site-link';
 
 export function AboutHero() {
   const t = useTranslations('About.hero');
+  const locale = useLocale();
 
   const stats = [
     { value: t('stats.members.value'), label: t('stats.members.label') },
@@ -24,13 +18,11 @@ export function AboutHero() {
   ];
 
   return (
-    <section id="home" className="overflow-hidden">
+    <section id="home" className="surface-signal overflow-hidden">
       {/* Hero metin bloğu — gerçek grid-2-about-one #home markup'ı birebir. */}
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <Rail rows={4} />
 
           <div
             data-grid-content
@@ -50,9 +42,7 @@ export function AboutHero() {
             </p>
           </div>
 
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <Rail rows={4} />
         </div>
       </Container>
 
@@ -73,10 +63,7 @@ export function AboutHero() {
             data-grid-content
             className="@4xl:p-12 @4xl:col-span-2 @max-4xl:p-6"
           >
-            <p className="text-muted-foreground">
-              <strong className="text-foreground font-medium">{s.value}</strong>{' '}
-              {s.label}
-            </p>
+            <Stat value={s.value} label={s.label.toLocaleUpperCase(locale)} />
           </div>
         ))}
         <div aria-hidden data-grid-content className="@max-4xl:hidden" />
@@ -84,118 +71,6 @@ export function AboutHero() {
     </section>
   );
 }
-
-export function AboutMission() {
-  const t = useTranslations('About.mission');
-
-  return (
-    <section id="mission" className="scroll-mt-24">
-      <Container asGrid>
-        <div className="grid grid-cols-10 gap-px">
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
-
-          <div className="col-span-full sm:col-span-8">
-            <div data-grid-content className="@4xl:p-12 p-6">
-              <h2 className="text-muted-foreground text-balance">
-                {t('heading')}
-              </h2>
-              <div className="text-muted-foreground mt-6 space-y-4 text-xl font-medium *:text-balance *:leading-relaxed">
-                <p>
-                  <span className="text-foreground">{t('body1')}</span>
-                </p>
-                <p>{t('body2')}</p>
-              </div>
-            </div>
-          </div>
-
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-export function AboutValues() {
-  const t = useTranslations('About.values');
-
-  const items = [
-    {
-      icon: Lightbulb,
-      title: t('items.curiosity.title'),
-      description: t('items.curiosity.description'),
-    },
-    {
-      icon: Users,
-      title: t('items.community.title'),
-      description: t('items.community.description'),
-    },
-    {
-      icon: Code2,
-      title: t('items.building.title'),
-      description: t('items.building.description'),
-    },
-    {
-      icon: Unlock,
-      title: t('items.openness.title'),
-      description: t('items.openness.description'),
-    },
-  ];
-
-  return (
-    <section id="values" className="scroll-mt-24">
-      <Container asGrid>
-        <div className="grid grid-cols-10 gap-px">
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
-
-          <div className="@4xl:grid-cols-2 col-span-full grid gap-px sm:col-span-8">
-            <div data-grid-content className="@4xl:p-12 col-span-full p-6">
-              <h2 className="text-muted-foreground text-balance">
-                {t('heading')}
-              </h2>
-              <p className="text-foreground mt-6 max-w-2xl text-balance text-xl font-medium">
-                {t('intro')}
-              </p>
-            </div>
-
-            {items.map((item) => (
-              <div
-                key={item.title}
-                data-grid-content
-                className="@4xl:p-12 flex flex-col gap-3 p-6"
-              >
-                <item.icon className="text-muted-foreground size-5" />
-                <h3 className="text-foreground font-medium">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-/** Ekip fotoğrafları Figma'dan gelene kadar boş slotlara canlılık veren nötr degradeler. */
-const TEAM_GRADIENTS = [
-  'from-[var(--brand-signal)] to-[var(--brand-deep)]',
-  'from-[var(--brand-deep)] to-[var(--brand-signal)]',
-  'from-[var(--brand-signal)] via-[var(--brand-deep)] to-[var(--brand-void)]',
-  'from-[var(--brand-void)] via-[var(--brand-deep)] to-[var(--brand-signal)]',
-  'from-[var(--brand-deep)] via-[var(--brand-signal)] to-[var(--brand-deep)]',
-  'from-[var(--brand-signal)] via-[var(--brand-signal)] to-[var(--brand-void)]',
-];
 
 export function AboutTeam() {
   const t = useTranslations('About.team');
@@ -230,7 +105,7 @@ export function AboutTeam() {
               </p>
             </div>
 
-            {members.map((member, index) => (
+            {members.map((member) => (
               <div
                 key={member.name}
                 data-grid-content
@@ -238,15 +113,9 @@ export function AboutTeam() {
                 // gizlemek son satırda tek kart + boş hücre bırakıyordu.
                 className="@4xl:p-12 p-6 max-sm:p-4"
               >
-                <div className="before:border-foreground/6.5 before:z-1 aspect-5/6 bg-muted relative w-24 overflow-hidden rounded-2xl shadow-md shadow-black/[0.03] before:absolute before:inset-0 before:rounded-2xl before:border max-sm:w-20">
-                  <div
-                    aria-hidden
-                    className={cn(
-                      'bg-linear-to-r z-1 pointer-events-none absolute inset-0 size-40 rounded-full opacity-25 mix-blend-overlay blur-2xl md:size-72',
-                      TEAM_GRADIENTS[index % TEAM_GRADIENTS.length],
-                    )}
-                  />
-                </div>
+                {/* Fotoğraflar gelene kadar düz yer tutucu; geldiğinde dither'dan
+                    geçmiş portre buraya (Brand > 05). */}
+                <div className="before:border-foreground/6.5 aspect-5/6 bg-muted relative w-24 overflow-hidden before:absolute before:inset-0 before:border max-sm:w-20" />
                 <div className="space-y-0.5 pt-3">
                   <p className="text-foreground font-medium">{member.name}</p>
                   <p className="text-muted-foreground text-sm">{member.role}</p>
@@ -357,7 +226,7 @@ export function AboutJoin() {
                 <div
                   key={track}
                   data-grid-content
-                  className="@4xl:px-12 hover:bg-card! hover:z-1 group relative flex items-center gap-2 rounded-xl p-4 px-6 shadow-lg shadow-transparent transition-shadow hover:shadow-[var(--brand-deep)]/5"
+                  className="@4xl:px-12 hover:bg-card! hover:z-1 group relative flex items-center gap-2 p-4 px-6 transition-shadow"
                 >
                   <SiteLink
                     href={JOIN_HREF}
@@ -365,7 +234,7 @@ export function AboutJoin() {
                   >
                     {track}
                   </SiteLink>
-                  <div className="ring-border bg-card ml-auto flex h-6 items-center rounded-full px-2 shadow shadow-black/[0.06] ring-1">
+                  <div className="ring-border bg-card ml-auto flex h-6 items-center px-2 ring-1">
                     <ArrowRight className="not-group-hover:opacity-50 group-hover:text-primary size-3.5" />
                   </div>
                 </div>

@@ -10,9 +10,9 @@ type ButtonSize = 'default' | 'sm';
 
 /**
  * Site geneli buton stili. Link / <button> / <a> fark etmeksizin tek kaynak.
- * primary = yüksek kontrast dolu buton (bg-foreground / text-background) →
- * light'ta siyah, dark'ta beyaz (Tailark grid-2 header buton deseni); outline =
- * kenarlıklı ikincil. Focus halkası ve zemin tema token'larından beslenir.
+ * primary = dolu aksiyon (`--color-action`): beyaz zeminde signal mavisi,
+ * `.surface-signal` içinde beyaz — postlardaki kayıt barı. outline =
+ * mürekkep kenarlıklı ikincil. Focus halkası ve zemin tema token'larından beslenir.
  */
 export function buttonClasses({
   variant = 'primary',
@@ -24,7 +24,7 @@ export function buttonClasses({
   className?: string;
 } = {}) {
   return cn(
-    'group inline-flex items-center justify-center gap-2 rounded-md font-medium whitespace-nowrap transition-all duration-200 focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
+    'group inline-flex items-center justify-center gap-2 font-semibold whitespace-nowrap transition-all duration-200 focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
     // Hover'da yarım adım yukarı kalkma her iki varyantta ortak: renk
     // değişimi varyanta özel (primary koyulaşır, outline zemin kazanır) ama
     // "kalkma" jesti site genelinde tek ve aynı. İstisnası olan çağıran
@@ -33,9 +33,9 @@ export function buttonClasses({
     size === 'default' && 'px-6 py-3 text-sm',
     size === 'sm' && 'px-4 py-2 text-sm',
     variant === 'primary' &&
-      'bg-foreground text-background shadow-sm hover:bg-foreground/90 active:bg-foreground/80',
+      'bg-action text-action-foreground hover:bg-action/90 active:bg-action/80',
     variant === 'outline' &&
-      'border-border hover:bg-accent border bg-transparent',
+      'border-foreground/40 hover:border-foreground hover:bg-foreground/10 border bg-transparent',
     className,
   );
 }

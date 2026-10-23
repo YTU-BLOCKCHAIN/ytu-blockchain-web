@@ -1,10 +1,10 @@
 import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { Container } from '@/components/container';
+import { Container, Rail } from '@/components/container';
 import { SiteForm } from '@/components/site-form';
+import { JOIN_HREF, SiteLink } from '@/components/site-link';
 import { buttonClasses } from '@/components/ui/button';
-import { Link } from '@/i18n/navigation';
 import { siteConfig } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
@@ -51,72 +51,72 @@ export function ContactSection() {
   ];
 
   return (
-    <section className="overflow-hidden">
-      <Container className="@4xl:px-12 px-6 py-3">
-        <span className="text-primary font-display text-xs tracking-widest uppercase">
-          {'//'} {t('eyebrow')}
-        </span>
-      </Container>
-
-      <Container asGrid className="@4xl:grid-cols-2">
-        {/* Dolgu `@max-4xl:` ile veriliyor: bu hücreler `Container asGrid`'in
+    <section className="surface-signal overflow-hidden">
+      <Container asGrid>
+        <div className="grid grid-cols-10 gap-px">
+          <Rail rows={6} />
+          <div className="@4xl:grid-cols-2 col-span-full grid gap-px sm:col-span-8">
+            {/* Dolgu `@max-4xl:` ile veriliyor: bu hücreler `Container asGrid`'in
             DOĞRUDAN çocuğu, yani `*:p-[0.5px]` sınıfını da yiyorlar. Düz `p-6`
             o kurala sıralamada yeniliyor (masaüstündeki `@4xl:p-12` yeniyor) →
             mobilde dolgu 1px'e düşüp metin kartın kenarına yapışıyordu. */}
-        <div
-          data-grid-content
-          className="@4xl:p-12 @max-4xl:p-6 relative overflow-hidden"
-        >
-          {/* Dekoratif pixel-ASCII Avrupa haritası. Diğer hero'lar ile aynı
+            <div
+              data-grid-content
+              className="@4xl:p-12 @max-4xl:p-6 relative overflow-hidden"
+            >
+              {/* Dekoratif pixel-ASCII Avrupa haritası. Diğer hero'lar ile aynı
               teknik: CSS mask + bg-foreground → görsel metin rengini alır
               (dark açık / light koyu). İçerik relative sarmalayıcıyla üstte. */}
-          <div
-            aria-hidden
-            className="bg-foreground pointer-events-none absolute inset-0 opacity-20 dark:opacity-15"
-            style={{
-              maskImage: 'url(/images/contact-bg.png)',
-              WebkitMaskImage: 'url(/images/contact-bg.png)',
-              maskSize: 'contain',
-              WebkitMaskSize: 'contain',
-              maskPosition: 'center',
-              WebkitMaskPosition: 'center',
-              maskRepeat: 'no-repeat',
-              WebkitMaskRepeat: 'no-repeat',
-            }}
-          />
-          <div className="relative">
-            <h1 className="text-foreground text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-              {t('title')}
-            </h1>
-            <p className="text-muted-foreground mt-6 text-balance text-lg">
-              {t('subtitle')}
-            </p>
+              <div
+                aria-hidden
+                className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
+                style={{
+                  maskImage: 'url(/images/contact-bg.png)',
+                  WebkitMaskImage: 'url(/images/contact-bg.png)',
+                  maskSize: 'contain',
+                  WebkitMaskSize: 'contain',
+                  maskPosition: 'center',
+                  WebkitMaskPosition: 'center',
+                  maskRepeat: 'no-repeat',
+                  WebkitMaskRepeat: 'no-repeat',
+                }}
+              />
+              <div className="relative">
+                <span className="text-primary font-display block text-xs tracking-widest uppercase">
+                  {'//'} {t('eyebrow')}
+                </span>
+                <h1 className="text-foreground mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+                  {t('title')}
+                </h1>
+                <p className="text-muted-foreground mt-6 text-balance text-lg">
+                  {t('subtitle')}
+                </p>
 
-            <h2 className="text-muted-foreground mt-10 text-sm">
-              {t('reasonsHeading')}
-            </h2>
-            <ul className="mt-4 space-y-3">
-              {reasons.map((reason) => (
-                <li key={reason} className="flex items-center gap-3">
-                  <CheckCircle2 className="size-4 shrink-0 fill-primary/25 text-primary" />
-                  <span className="text-sm">{reason}</span>
-                </li>
-              ))}
-            </ul>
+                <h2 className="text-muted-foreground mt-10 text-sm">
+                  {t('reasonsHeading')}
+                </h2>
+                <ul className="mt-4 space-y-3">
+                  {reasons.map((reason) => (
+                    <li key={reason} className="flex items-center gap-3">
+                      <CheckCircle2 className="size-4 shrink-0 fill-primary/25 text-primary" />
+                      <span className="text-sm">{reason}</span>
+                    </li>
+                  ))}
+                </ul>
 
-            <div className="mt-10 space-y-1">
-              <h3 className="text-muted-foreground text-sm">
-                {t('emailLabel')}
-              </h3>
-              <a
-                href={`mailto:${siteConfig.contactEmail}`}
-                className="text-foreground hover:decoration-primary text-sm font-medium hover:underline"
-              >
-                {siteConfig.contactEmail}
-              </a>
-            </div>
+                <div className="mt-10 space-y-1">
+                  <h3 className="text-muted-foreground text-sm">
+                    {t('emailLabel')}
+                  </h3>
+                  <a
+                    href={`mailto:${siteConfig.contactEmail}`}
+                    className="text-foreground hover:decoration-primary text-sm font-medium hover:underline"
+                  >
+                    {siteConfig.contactEmail}
+                  </a>
+                </div>
 
-            {/* E-postanın hemen altında: ikisi de doğrudan iletişim kanalı,
+                {/* E-postanın hemen altında: ikisi de doğrudan iletişim kanalı,
                 biri yazılı biri sözlü. Form zaten sağdaki kartta.
 
                 Etiketi aşağıdaki sponsorluk bölümününkinden AYRI: ikisi aynı
@@ -124,37 +124,42 @@ export function ContactSection() {
                 oradaki özel olarak sponsorluk görüşmesi. Aynı metni iki kez
                 basmak sayfada yanlışlıkla tekrarlanmış bir düğme gibi
                 görünüyordu. */}
-            <div className="mt-6">
-              <BookingButton label={t('bookCall')} />
+                <div className="mt-6">
+                  <BookingButton label={t('bookCall')} />
+                </div>
+
+                <p className="text-muted-foreground mt-8 text-sm">
+                  {t('communityNote')}{' '}
+                  <SiteLink
+                    href={JOIN_HREF}
+                    className="text-primary font-medium hover:underline"
+                  >
+                    {t('communityCta')}
+                  </SiteLink>
+                </p>
+              </div>
             </div>
 
-            <p className="text-muted-foreground mt-8 text-sm">
-              {t('communityNote')}{' '}
-              <Link
-                href="/community"
-                className="text-primary font-medium hover:underline"
-              >
-                {t('communityCta')}
-              </Link>
-            </p>
+            <div data-grid-content className="@4xl:p-12 @max-4xl:p-6">
+              <h2 className="text-foreground font-medium">
+                {t('form.heading')}
+              </h2>
+              <p className="text-muted-foreground mb-8 mt-2 text-sm">
+                {t('form.intro')}
+              </p>
+
+              <SiteForm
+                kind="contact"
+                labels={{
+                  name: t('form.name'),
+                  email: t('form.email'),
+                  message: t('form.message'),
+                }}
+                submitLabel={t('form.submit')}
+              />
+            </div>
           </div>
-        </div>
-
-        <div data-grid-content className="@4xl:p-12 @max-4xl:p-6">
-          <h2 className="text-foreground font-medium">{t('form.heading')}</h2>
-          <p className="text-muted-foreground mb-8 mt-2 text-sm">
-            {t('form.intro')}
-          </p>
-
-          <SiteForm
-            kind="contact"
-            labels={{
-              name: t('form.name'),
-              email: t('form.email'),
-              message: t('form.message'),
-            }}
-            submitLabel={t('form.submit')}
-          />
+          <Rail rows={6} />
         </div>
       </Container>
     </section>
@@ -192,7 +197,7 @@ export function SponsorshipSection() {
               (dark açık / light koyu), her iki temada aynı silik görsel. */}
             <div
               aria-hidden
-              className="bg-foreground pointer-events-none absolute inset-0 opacity-20 dark:opacity-15"
+              className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
               style={{
                 maskImage: 'url(/images/sponsorship-bg.png)',
                 WebkitMaskImage: 'url(/images/sponsorship-bg.png)',

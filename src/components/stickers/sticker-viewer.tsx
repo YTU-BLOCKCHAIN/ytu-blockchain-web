@@ -12,13 +12,13 @@ import { STICKERS } from './sticker/list';
 import type { StickerScene } from './sticker/scene';
 
 /**
- * Landing'in en altındaki interaktif sticker'lar. WebGL sahnesi (`three`
+ * `/stickers` sayfasındaki interaktif sticker'lar. WebGL sahnesi (`three`
  * dahil) ayrı bir chunk olarak yalnızca istemcide yüklenir; canvas yer
  * tutucusu SSR'da çizildiği için yüklenirken sayfa kaymaz. Oklar ve
  * noktalar sticker'lar arasında geçiş yapar.
  */
-export function LandingSticker() {
-  const t = useTranslations('Landing.sticker');
+export function StickerViewer() {
+  const t = useTranslations('Stickers.viewer');
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sceneRef = useRef<StickerScene | null>(null);
   const [ready, setReady] = useState(false);
@@ -80,7 +80,7 @@ export function LandingSticker() {
                 // touch-none: sticker'ın üstündeki sürükleme sayfayı kaydırmak
                 // yerine soyma/çevirme yapsın
                 className={cn(
-                  'aspect-square w-full max-w-80 cursor-grab touch-none transition-opacity duration-700 sm:max-w-96',
+                  'aspect-square w-full max-w-80 cursor-grab touch-none transition-opacity duration-700 sm:max-w-[28rem]',
                   ready ? 'opacity-100' : 'opacity-0',
                 )}
               />
@@ -106,7 +106,7 @@ export function LandingSticker() {
                       disabled={!ready}
                       onClick={() => sceneRef.current?.goTo(i)}
                       className={cn(
-                        'focus-visible:ring-ring focus-visible:ring-offset-background h-1.5 rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
+                        'focus-visible:ring-ring focus-visible:ring-offset-background h-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
                         i === active
                           ? 'bg-foreground w-6'
                           : 'bg-foreground/20 hover:bg-foreground/40 w-1.5',

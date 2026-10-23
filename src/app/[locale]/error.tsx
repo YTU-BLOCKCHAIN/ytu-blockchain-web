@@ -41,7 +41,7 @@ export default function LocaleError({
         <button
           type="button"
           onClick={reset}
-          className="border-foreground/20 hover:bg-foreground/5 cursor-pointer rounded-full border px-5 py-2 text-sm transition-colors"
+          className="border-foreground/20 hover:bg-foreground/5 cursor-pointer border px-5 py-2 text-sm transition-colors"
         >
           {t('retry')}
         </button>

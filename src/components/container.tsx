@@ -54,17 +54,14 @@ export const Container = ({
         {asGrid ? (
           <div
             className={cn(
-              'bg-grid-line **:data-grid-content:bg-card **:data-grid-content:h-full **:data-grid-content:rounded grid *:p-[0.5px]',
+              'bg-grid-line **:data-grid-content:bg-card **:data-grid-content:h-full grid *:p-[0.5px]',
               className,
             )}
           >
             {children}
           </div>
         ) : (
-          <div
-            data-slot="content"
-            className={cn('bg-card h-full rounded', className)}
-          >
+          <div data-slot="content" className={cn('bg-card h-full', className)}>
             {children}
           </div>
         )}
@@ -103,7 +100,35 @@ export const Separator = ({
 const Decorator = ({ className }: { className?: string }) => {
   return (
     <div aria-hidden className={cn('p-[0.5px]', className)}>
-      <div className="bg-card h-full w-2 rounded md:w-6 lg:w-full" />
+      <div className="bg-card h-full w-2 md:w-6 lg:w-full" />
+    </div>
+  );
+};
+
+/**
+ * Izgaranın yan rayı (10 sütunluk düzenin 1. ve 10. sütunu). Sayfa
+ * girişlerinde `rows` ile kare hücrelere bölünüyor — ana sayfa hero'su ve
+ * postlardaki ızgara gibi; düz bir şerit gibi durmasın. Satır sayısı elle:
+ * hücreler ~kare kalsın diye hero yüksekliği / ray genişliği (1440px'te).
+ */
+export const Rail = ({
+  rows = 1,
+  className = 'max-sm:hidden',
+}: {
+  rows?: number;
+  className?: string;
+}) => {
+  return (
+    <div
+      aria-hidden
+      className={cn('grid gap-px', className)}
+      style={{ gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))` }}
+    >
+      {Array.from({ length: rows }).map((_, i) => (
+        <div key={i}>
+          <div data-grid-content />
+        </div>
+      ))}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { useLocale, useTranslations } from 'next-intl';
 
 import type { ProjectStatus } from '@/data/projects';
 import { cn } from '@/lib/utils';
-import { Container } from '@/components/container';
+import { Container, Rail } from '@/components/container';
 import { EmptyState } from '@/components/empty-state';
 import { JOIN_HREF } from '@/components/site-link';
 import { siteConfig } from '@/lib/site';
@@ -14,12 +14,10 @@ export function ProjectsHeader() {
   const t = useTranslations('Projects');
 
   return (
-    <section className="overflow-hidden">
+    <section className="surface-signal overflow-hidden">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <Rail rows={3} />
 
           <div
             data-grid-content
@@ -33,7 +31,7 @@ export function ProjectsHeader() {
                 metin okunur kalır. */}
             <div
               aria-hidden
-              className="bg-foreground pointer-events-none absolute inset-0 opacity-20 dark:opacity-15"
+              className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
               style={{
                 maskImage: 'url(/images/projects-bg.png)',
                 WebkitMaskImage: 'url(/images/projects-bg.png)',
@@ -58,9 +56,7 @@ export function ProjectsHeader() {
             </div>
           </div>
 
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <Rail rows={3} />
         </div>
       </Container>
     </section>
@@ -68,7 +64,7 @@ export function ProjectsHeader() {
 }
 
 const STATUS_STYLES: Record<ProjectStatus, string> = {
-  live: 'bg-primary/10 text-[var(--brand-deep)] dark:text-primary',
+  live: 'bg-primary/10 text-primary',
   wip: 'bg-foreground/8 text-foreground/75',
   archived: 'bg-muted text-muted-foreground',
 };
@@ -81,7 +77,7 @@ export function ProjectsGrid() {
   if (projects.length === 0) {
     return (
       <EmptyState
-        Icon={Code2}
+        folder={t('empty.folder')}
         eyebrow={t('empty.eyebrow')}
         title={t('empty.title')}
         body={t('empty.body')}
@@ -112,7 +108,7 @@ export function ProjectsGrid() {
               <div>
                 <span
                   className={cn(
-                    'inline-flex rounded-full px-2 py-0.5 text-xs font-medium',
+                    'inline-flex px-2 py-0.5 text-xs font-medium',
                     STATUS_STYLES[project.status],
                   )}
                 >
@@ -134,7 +130,7 @@ export function ProjectsGrid() {
                   {project.tags.map((tag) => (
                     <li
                       key={tag}
-                      className="border-border text-muted-foreground rounded-full border px-2 py-0.5 text-xs"
+                      className="border-border text-muted-foreground border px-2 py-0.5 text-xs"
                     >
                       {tag}
                     </li>
