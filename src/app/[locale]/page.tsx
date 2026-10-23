@@ -46,11 +46,11 @@ export default async function LandingPage({
   return (
     <>
       <LandingHero />
+      <LandingManifesto />
       <LandingFeatures />
       <LandingVision />
       <LandingValues />
       <LandingStats />
-      <LandingManifesto />
       <LandingTicker />
       <LandingEvents />
       <LandingHackathons />
