@@ -252,7 +252,10 @@
         }
       },
       "shortcutTitle": "Sadece kullanmak mı istiyorsun?",
-      "shortcut": "Doğrudan 4. adıma geç."
+      "shortcut": "Doğrudan 4. adıma geç.",
+      "total": "~19",
+      "totalLabel": "SAATTE TEMELLER",
+      "shortcutChip": "KISAYOL"
     },
     "featuresTitle": "ÖĞRENMEKTEN ÜRETMEYE.",
     "manifestoTitle": "NEDEN BURADAYIZ",

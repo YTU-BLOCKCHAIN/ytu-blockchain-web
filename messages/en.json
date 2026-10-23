@@ -252,7 +252,10 @@
         }
       },
       "shortcutTitle": "Just want to use it?",
-      "shortcut": "Skip straight to step 4."
+      "shortcut": "Skip straight to step 4.",
+      "total": "~19",
+      "totalLabel": "HOURS OF BASICS",
+      "shortcutChip": "SHORTCUT"
     },
     "featuresTitle": "FROM LEARNING TO BUILDING.",
     "manifestoTitle": "WHY WE'RE HERE",

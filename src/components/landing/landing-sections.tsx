@@ -21,6 +21,7 @@ import { JOIN_HREF } from '@/components/site-link';
 import { ButtonLink, buttonClasses } from '@/components/ui/button';
 import { getEvents, isUpcoming, todayInClubTimeZone } from '@/lib/events';
 import { siteConfig } from '@/lib/site';
+import { cn } from '@/lib/utils';
 
 /*
   Ana sayfa, kulübün sosyal medya postlarının diliyle kuruldu: signal mavisi
@@ -344,7 +345,12 @@ export function LandingValues() {
  * Web3 yol haritası — Notion'daki rehberin (`/roadmap`) rotası: 6 temel adım
  * ve "kendi yolunu seç". Kaynaklar Notion'da kalıyor; burada yalnızca rota
  * görünüyor ki ziyaretçi rehberin varlığını aramadan fark etsin. Adımlar ve
- * süreler Notion sayfasındaki rota kutularıyla aynı; orası değişirse burası da.
+ * süreler Notion sayfasındaki rota kutularıyla aynı; orası değişirse burası da
+ * (toplam süre `total` de).
+ *
+ * Adımlar postlardaki kademeli barlar gibi merdiven: her satır bir öncekinden
+ * `--stair` kadar sağda, hepsi aynı genişlikte. Son basamak (7) yüzeyin tersi,
+ * rotanın varış noktası.
  */
 export function LandingRoadmap() {
   const t = useTranslations('Landing.roadmap');
@@ -356,97 +362,128 @@ export function LandingRoadmap() {
     'ecosystem',
     'useCases',
     'advanced',
+    'path',
   ] as const;
-
-  /* `/roadmap` bir yönlendirme (next.config.ts → Notion), sayfa değil: dil
-     öneki almamalı, bu yüzden i18n `Link` değil düz `<a>`. */
-  const open = (
-    <a
-      href={siteConfig.roadmapPath}
-      target="_blank"
-      rel="noreferrer noopener"
-      className={buttonClasses({ className: 'shrink-0' })}
-    >
-      {t('open')}
-      <ArrowUpRight aria-hidden className="size-4" />
-    </a>
-  );
+  const last = steps.length - 1;
 
   return (
-    <section id="roadmap" className="scroll-mt-24">
+    <section
+      id="roadmap"
+      className="surface-signal scroll-mt-24 overflow-hidden"
+    >
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
-          <GridRail />
+          <GridRail rows={8} />
 
-          <div className="@2xl:grid-cols-2 @4xl:grid-cols-3 col-span-full grid gap-px sm:col-span-8">
+          <div className="col-span-full grid gap-px sm:col-span-8">
             <div
               data-grid-content
-              className="@4xl:p-12 @4xl:flex-row @4xl:items-end @4xl:justify-between col-span-full flex flex-col gap-8 p-6"
+              className="@4xl:p-12 @4xl:flex-row @4xl:items-end @4xl:justify-between flex flex-col gap-8 p-6"
             >
               <div>
                 <Eyebrow>{t('heading')}</Eyebrow>
                 <h2 className="@4xl:text-5xl mt-5 text-3xl leading-[1.12] sm:text-4xl">
                   {t('title')}
                 </h2>
-                <p className="text-muted-foreground mt-6 max-w-2xl text-lg text-balance">
+                <p className="text-muted-foreground mt-6 max-w-xl text-lg text-balance">
                   {t('intro')}
                 </p>
-              </div>
-              {open}
-            </div>
-
-            {steps.map((key, i) => (
-              <div
-                key={key}
-                data-grid-content
-                className="@4xl:p-10 flex flex-col gap-4 p-6"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <Chip>{String(i + 1).padStart(2, '0')}</Chip>
-                  <span className="text-muted-foreground font-display text-xs tracking-widest">
-                    {t(`steps.${key}.time`)}
-                  </span>
-                </div>
-                <h3 className="text-foreground mt-2 text-lg leading-tight font-semibold">
-                  {t(`steps.${key}.title`)}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {t(`steps.${key}.description`)}
+                <p className="text-muted-foreground mt-4 text-sm">
+                  <span className="text-foreground font-semibold">
+                    {t('shortcutTitle')}
+                  </span>{' '}
+                  {t('shortcut')}
                 </p>
               </div>
-            ))}
-
-            {/* 7. adım rotanın sonu: signal yüzeyde, iki hücre genişliğinde. */}
-            <div
-              data-grid-content
-              className="surface-signal @4xl:col-span-2 @4xl:p-10 flex flex-col gap-4 p-6"
-            >
-              <div className="flex items-center justify-between gap-4">
-                <Chip>07</Chip>
-                <span className="text-muted-foreground font-display text-xs tracking-widest">
-                  {t('steps.path.time')}
-                </span>
+              <div className="flex shrink-0 flex-col items-start gap-6">
+                <Stat value={t('total')} label={t('totalLabel')} />
+                {/* `/roadmap` bir yönlendirme (next.config.ts → Notion), sayfa
+                    değil: dil öneki almamalı, bu yüzden i18n `Link` değil düz
+                    `<a>`. */}
+                <a
+                  href={siteConfig.roadmapPath}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className={buttonClasses()}
+                >
+                  {t('open')}
+                  <ArrowUpRight aria-hidden className="size-4" />
+                </a>
               </div>
-              <h3 className="text-foreground mt-2 text-lg leading-tight font-semibold">
-                {t('steps.path.title')}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {t('steps.path.description')}
-              </p>
             </div>
 
             <div
               data-grid-content
-              className="@4xl:p-10 flex flex-col justify-center gap-2 p-6"
+              className="@4xl:p-12 @4xl:[--stair:3rem] relative overflow-hidden p-6 [--stair:0.75rem] sm:[--stair:2rem]"
             >
-              <p className="text-foreground font-semibold">
-                {t('shortcutTitle')}
-              </p>
-              <p className="text-muted-foreground">{t('shortcut')}</p>
+              {/* Merdivenin altında kalan boş üçgende dither dağlar: tırmanılacak
+                  yol. Dekoratif, yalnızca geniş ekranda. */}
+              <Dither
+                name="bulut"
+                width={2200}
+                height={1725}
+                className="@4xl:block absolute bottom-0 left-0 hidden w-[42%] opacity-25"
+              />
+              <ol className="relative flex flex-col gap-2">
+                {steps.map((key, i) => {
+                  const final = i === last;
+                  return (
+                    <li
+                      key={key}
+                      style={{
+                        marginLeft: `calc(${i} * var(--stair))`,
+                        width: `calc(100% - ${last} * var(--stair))`,
+                      }}
+                      className={cn(
+                        'flex items-stretch',
+                        final
+                          ? 'bg-action text-action-foreground'
+                          : 'bg-muted text-foreground',
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          'font-display flex w-14 shrink-0 items-center justify-center text-xl sm:w-20 sm:text-3xl',
+                          final
+                            ? 'bg-foreground/0 border-action-foreground/30 border-r'
+                            : 'bg-action text-action-foreground',
+                        )}
+                      >
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <div className="flex min-w-0 flex-1 flex-col gap-1 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-6">
+                        <div className="min-w-0">
+                          <h3 className="flex flex-wrap items-center gap-x-3 gap-y-1 text-base leading-tight font-semibold sm:text-lg">
+                            {t(`steps.${key}.title`)}
+                            {key === 'ecosystem' && (
+                              <Chip tone="outline" className="h-6 px-2 text-xs">
+                                {t('shortcutChip')}
+                              </Chip>
+                            )}
+                          </h3>
+                          <p
+                            className={cn(
+                              'mt-1 text-sm leading-snug',
+                              final
+                                ? 'text-action-foreground/80'
+                                : 'text-muted-foreground',
+                            )}
+                          >
+                            {t(`steps.${key}.description`)}
+                          </p>
+                        </div>
+                        <span className="font-display shrink-0 text-xs tracking-widest opacity-80">
+                          {t(`steps.${key}.time`)}
+                        </span>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
             </div>
           </div>
 
-          <GridRail />
+          <GridRail rows={8} />
         </div>
       </Container>
     </section>
