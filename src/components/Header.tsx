@@ -24,6 +24,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { JOIN_HREF, SiteLink } from '@/components/site-link';
+import { usePathname } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
 /**
@@ -83,6 +84,11 @@ const NAV = [
         label: 'sections.community.projects',
         desc: 'sections.community.projectsDesc',
       },
+      {
+        href: '/stickers',
+        label: 'sections.community.stickers',
+        desc: 'sections.community.stickersDesc',
+      },
       // Destekçilerimiz bölümü about sayfasında gizli olduğu için menüden de
       // kaldırıldı; `<AboutSponsors />` geri açıldığında bu öğeyi de geri alın.
       // {
@@ -97,10 +103,80 @@ const NAV = [
   { key: 'contact', href: '/contact' },
 ] as const;
 
+/**
+ * Mavi girişi (`.surface-signal` hero) olan sayfalar. Header ilk çizimde bu
+ * listeye göre boyanıyor; yoksa hero'suz sayfada (etkinlik detayı, blog
+ * yazısı) hidrasyona kadar mavi görünüp beyaza atlardı.
+ */
+const SIGNAL_ENTRANCE = new Set([
+  '/',
+  '/about',
+  '/events',
+  '/community',
+  '/contact',
+  '/projects',
+  '/blog',
+  '/stickers',
+]);
+
+/**
+ * Header'ın hemen altındaki bölüm mavi mi? Header'ın alt kenarının bir
+ * piksel altındaki elemanlara bakılıyor (header'ın kendisi ve
+ * `pointer-events: none` katmanlar — film grain — atlanıyor) ve en yakın
+ * yüzey sınıfı okunuyor. Hero'nun içindeki beyaz bant `.surface-paper`
+ * olduğu için orada da doğru sonuç çıkıyor.
+ */
+function useOverSignal(
+  header: React.RefObject<HTMLElement | null>,
+  pathname: string,
+) {
+  const [overSignal, setOverSignal] = React.useState(() =>
+    SIGNAL_ENTRANCE.has(pathname),
+  );
+
+  React.useEffect(() => {
+    let frame = 0;
+    const check = () => {
+      frame = 0;
+      const el = header.current;
+      if (!el) return;
+      const y = el.getBoundingClientRect().bottom + 1;
+      const below = document
+        .elementsFromPoint(window.innerWidth / 2, y)
+        .find((node) => !el.contains(node));
+      const surface = below?.closest('.surface-signal, .surface-paper');
+      setOverSignal(surface?.classList.contains('surface-signal') ?? false);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(check);
+    };
+
+    check();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+    };
+  }, [header, pathname]);
+
+  return overSignal;
+}
+
 export default function Header() {
   const t = useTranslations('Nav');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const headerRef = React.useRef<HTMLElement>(null);
+  const pathname = usePathname();
+  const overSignal = useOverSignal(headerRef, pathname);
+  // Header altındaki yüzeyin rengini alıyor: mavi girişte mavi, beyaz
+  // bölümlerde beyaz. Renk değişkenleri anında, zemin yumuşak geçiyor.
+  const surface = cn(
+    overSignal ? 'surface-signal' : 'surface-paper',
+    'transition-[background-color] duration-300',
+  );
 
   React.useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -122,16 +198,19 @@ export default function Header() {
   return (
     <>
       {/* Üstte boşluk bandı — template gibi hafif zemin tonu (grid çizgileri).
-          Header ve bu bant signal yüzeyde: sayfanın mavi girişi buradan
-          başlıyor, ilk bölüm (hero) onu sürdürüyor. */}
-      <div aria-hidden className="surface-signal bg-grid-line">
+          Header ile aynı yüzeyi alıyor (bkz. `useOverSignal`). */}
+      <div aria-hidden className={cn(surface, 'bg-grid-line')}>
         <Separator className="h-6" />
       </div>
       <header
+        ref={headerRef}
         role="banner"
         data-state={isMobileMenuOpen ? 'active' : 'inactive'}
         {...(isScrolled && { 'data-scrolled': true })}
-        className="surface-signal lg:data-scrolled:pb-[0.5px] bg-grid-line sticky inset-x-0 top-0 z-50 max-lg:pb-px"
+        className={cn(
+          surface,
+          'lg:data-scrolled:pb-[0.5px] bg-grid-line sticky inset-x-0 top-0 z-50 max-lg:pb-px',
+        )}
       >
         <div
           className={cn(
