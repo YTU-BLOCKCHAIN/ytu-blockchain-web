@@ -64,7 +64,7 @@ export function BlogHero() {
             Netliği korumak için bu yüzde ~135'i geçmemeli. */}
         <div
           aria-hidden
-          className="bg-foreground pointer-events-none absolute inset-0 opacity-15 dark:opacity-15"
+          className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
           style={{
             maskImage: 'url(/images/blog-bg.png)',
             WebkitMaskImage: 'url(/images/blog-bg.png)',
@@ -117,7 +117,7 @@ function FeaturedPost({ post, locale }: { post: Post; locale: Locale }) {
               <div data-grid-content className="@4xl:p-12 p-6">
                 {/* `before`: görselin üstüne ince bir iç kenarlık koyar — açık
                     zeminde soluk bir kapak kartın içinde yüzer gibi durmasın. */}
-                <div className="before:border-foreground/10 before:inset-ring-background/10 relative aspect-video overflow-hidden rounded-[10px] shadow-md shadow-black/10 before:absolute before:inset-0 before:rounded-[10px] before:border before:inset-ring-1">
+                <div className="before:border-foreground/10 before:inset-ring-background/10 relative aspect-video overflow-hidden before:absolute before:inset-0 before:border before:inset-ring-1">
                   <Image
                     src={imageUrl(cover, 1200, 675)}
                     alt={cover.alt ?? ''}

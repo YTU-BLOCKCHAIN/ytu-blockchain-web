@@ -33,7 +33,7 @@ export function ProjectsHeader() {
                 metin okunur kalır. */}
             <div
               aria-hidden
-              className="bg-foreground pointer-events-none absolute inset-0 opacity-20 dark:opacity-15"
+              className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
               style={{
                 maskImage: 'url(/images/projects-bg.png)',
                 WebkitMaskImage: 'url(/images/projects-bg.png)',
@@ -68,7 +68,7 @@ export function ProjectsHeader() {
 }
 
 const STATUS_STYLES: Record<ProjectStatus, string> = {
-  live: 'bg-primary/10 text-[var(--brand-deep)] dark:text-primary',
+  live: 'bg-primary/10 text-primary',
   wip: 'bg-foreground/8 text-foreground/75',
   archived: 'bg-muted text-muted-foreground',
 };
@@ -112,7 +112,7 @@ export function ProjectsGrid() {
               <div>
                 <span
                   className={cn(
-                    'inline-flex rounded-full px-2 py-0.5 text-xs font-medium',
+                    'inline-flex px-2 py-0.5 text-xs font-medium',
                     STATUS_STYLES[project.status],
                   )}
                 >
@@ -134,7 +134,7 @@ export function ProjectsGrid() {
                   {project.tags.map((tag) => (
                     <li
                       key={tag}
-                      className="border-border text-muted-foreground rounded-full border px-2 py-0.5 text-xs"
+                      className="border-border text-muted-foreground border px-2 py-0.5 text-xs"
                     >
                       {tag}
                     </li>

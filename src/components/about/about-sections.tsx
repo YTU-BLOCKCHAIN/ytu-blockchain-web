@@ -8,7 +8,6 @@ import {
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { cn } from '@/lib/utils';
 import { Container } from '@/components/container';
 import { ButtonLink } from '@/components/ui/button';
 import { JOIN_HREF, SiteLink } from '@/components/site-link';
@@ -187,16 +186,6 @@ export function AboutValues() {
   );
 }
 
-/** Ekip fotoğrafları Figma'dan gelene kadar boş slotlara canlılık veren nötr degradeler. */
-const TEAM_GRADIENTS = [
-  'from-[var(--brand-signal)] to-[var(--brand-deep)]',
-  'from-[var(--brand-deep)] to-[var(--brand-signal)]',
-  'from-[var(--brand-signal)] via-[var(--brand-deep)] to-[var(--brand-void)]',
-  'from-[var(--brand-void)] via-[var(--brand-deep)] to-[var(--brand-signal)]',
-  'from-[var(--brand-deep)] via-[var(--brand-signal)] to-[var(--brand-deep)]',
-  'from-[var(--brand-signal)] via-[var(--brand-signal)] to-[var(--brand-void)]',
-];
-
 export function AboutTeam() {
   const t = useTranslations('About.team');
 
@@ -230,7 +219,7 @@ export function AboutTeam() {
               </p>
             </div>
 
-            {members.map((member, index) => (
+            {members.map((member) => (
               <div
                 key={member.name}
                 data-grid-content
@@ -238,15 +227,9 @@ export function AboutTeam() {
                 // gizlemek son satırda tek kart + boş hücre bırakıyordu.
                 className="@4xl:p-12 p-6 max-sm:p-4"
               >
-                <div className="before:border-foreground/6.5 before:z-1 aspect-5/6 bg-muted relative w-24 overflow-hidden rounded-2xl shadow-md shadow-black/[0.03] before:absolute before:inset-0 before:rounded-2xl before:border max-sm:w-20">
-                  <div
-                    aria-hidden
-                    className={cn(
-                      'bg-linear-to-r z-1 pointer-events-none absolute inset-0 size-40 rounded-full opacity-25 mix-blend-overlay blur-2xl md:size-72',
-                      TEAM_GRADIENTS[index % TEAM_GRADIENTS.length],
-                    )}
-                  />
-                </div>
+                {/* Fotoğraflar gelene kadar düz yer tutucu; geldiğinde dither'dan
+                    geçmiş portre buraya (Brand > 05). */}
+                <div className="before:border-foreground/6.5 aspect-5/6 bg-muted relative w-24 overflow-hidden before:absolute before:inset-0 before:border max-sm:w-20" />
                 <div className="space-y-0.5 pt-3">
                   <p className="text-foreground font-medium">{member.name}</p>
                   <p className="text-muted-foreground text-sm">{member.role}</p>
@@ -357,7 +340,7 @@ export function AboutJoin() {
                 <div
                   key={track}
                   data-grid-content
-                  className="@4xl:px-12 hover:bg-card! hover:z-1 group relative flex items-center gap-2 rounded-xl p-4 px-6 shadow-lg shadow-transparent transition-shadow hover:shadow-[var(--brand-deep)]/5"
+                  className="@4xl:px-12 hover:bg-card! hover:z-1 group relative flex items-center gap-2 p-4 px-6 transition-shadow"
                 >
                   <SiteLink
                     href={JOIN_HREF}
@@ -365,7 +348,7 @@ export function AboutJoin() {
                   >
                     {track}
                   </SiteLink>
-                  <div className="ring-border bg-card ml-auto flex h-6 items-center rounded-full px-2 shadow shadow-black/[0.06] ring-1">
+                  <div className="ring-border bg-card ml-auto flex h-6 items-center px-2 ring-1">
                     <ArrowRight className="not-group-hover:opacity-50 group-hover:text-primary size-3.5" />
                   </div>
                 </div>

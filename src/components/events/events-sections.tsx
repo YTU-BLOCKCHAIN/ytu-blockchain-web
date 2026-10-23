@@ -108,9 +108,9 @@ export function EventsHero({ events }: { events: EventsQueryResult }) {
           href={siteConfig.social.luma}
           target="_blank"
           rel="noreferrer noopener"
-          className="group border-foreground/10 hover:border-primary/40 hover:bg-muted flex shrink-0 items-center gap-4 rounded-xl border p-4 duration-150 md:max-w-xs"
+          className="group border-foreground/10 hover:border-primary/40 hover:bg-muted flex shrink-0 items-center gap-4 border p-4 duration-150 md:max-w-xs"
         >
-          <span className="bg-primary/10 text-primary flex size-10 shrink-0 items-center justify-center rounded-lg">
+          <span className="bg-primary/10 text-primary flex size-10 shrink-0 items-center justify-center">
             <CalendarDays aria-hidden className="size-5" />
           </span>
           <span className="flex flex-col">

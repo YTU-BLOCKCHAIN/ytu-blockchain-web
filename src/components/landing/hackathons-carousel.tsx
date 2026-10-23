@@ -243,15 +243,11 @@ export function HackathonsCarousel({
                         {slide.event}
                       </h3>
 
-                      {/* Derece rozeti. Metin rengi `text-primary` DEĞİL: rozet
-                          zaten mavi bir zemine (`bg-primary/10`) oturuyor,
-                          üstüne aynı tondaki metin gelince 12px mono yazı
-                          zeminde eriyordu — açık temada 5.8:1, koyuda 4.8:1,
-                          yani AA eşiğini ancak sıyırıyordu. Tonu temaya göre
-                          koyultup açmak yazıyı zeminden ayırıyor; renk yine aynı
-                          mavi ailesinden, rozetin kimliği bozulmuyor. */}
+                      {/* Derece rozeti. `text-primary` void üzerinde açıklaştırılmış signal
+                          (bkz. globals.css), `bg-primary/10` zeminde 12px mono
+                          yazı ~4.8:1 veriyor. */}
                       {slide.award && (
-                        <span className="bg-primary/10 dark:text-primary w-fit rounded-full px-3 py-1 font-display text-xs uppercase text-[var(--brand-deep)]">
+                        <span className="bg-primary/10 text-primary w-fit px-3 py-1 font-display text-xs uppercase">
                           {slide.award}
                         </span>
                       )}
@@ -291,7 +287,7 @@ export function HackathonsCarousel({
                   aria-controls="hackathon-carousel"
                   onClick={() => goTo(i)}
                   className={cn(
-                    'focus-visible:ring-ring focus-visible:ring-offset-background h-1.5 rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
+                    'focus-visible:ring-ring focus-visible:ring-offset-background h-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
                     i === active
                       ? 'bg-foreground w-6'
                       : 'bg-foreground/20 hover:bg-foreground/40 w-1.5',

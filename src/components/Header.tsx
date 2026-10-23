@@ -231,11 +231,12 @@ function NavMenu() {
                     ))}
                   </ul>
 
-                  {/* Tanıtım kartı (template: gradient ikon + başlık + açıklama). */}
+                  {/* Tanıtım kartı: düz signal karesi + başlık + açıklama. Kit gradient'i
+                      yasaklıyor; kare logonun 24px modülünü hatırlatıyor. */}
                   <div className="relative m-3 grid grid-cols-[auto_1fr] items-center gap-3 border-t pt-6">
                     <div
                       aria-hidden
-                      className="bg-linear-to-br inset-ring-foreground/10 inset-ring-1 size-11 shrink-0 rounded-xl from-[var(--brand-signal)] to-[var(--brand-deep)]"
+                      className="size-11 shrink-0 bg-[var(--brand-signal)]"
                     />
                     <div className="space-y-0.5">
                       <SiteLink
@@ -279,7 +280,7 @@ function ListItem({
 }) {
   return (
     <li>
-      <NavigationMenuLink asChild className="group rounded-xl p-3">
+      <NavigationMenuLink asChild className="group p-3">
         <SiteLink href={href} className="grid gap-1">
           <span className="text-foreground flex items-center gap-2 text-sm font-medium">
             {title}

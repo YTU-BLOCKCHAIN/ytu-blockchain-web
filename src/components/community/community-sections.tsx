@@ -25,7 +25,7 @@ export function CommunityHero() {
                 "Silik" şiddeti = opacity-*. Görsel: public/images/community-bg.png */}
             <div
               aria-hidden
-              className="bg-foreground pointer-events-none absolute inset-0 opacity-20 dark:opacity-15"
+              className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
               style={{
                 maskImage: 'url(/images/community-bg.png)',
                 WebkitMaskImage: 'url(/images/community-bg.png)',

@@ -149,7 +149,7 @@ export function EventArticle({
                 <time dateTime={event.date ?? undefined}>{date}</time>
                 {event.time ? ` · ${event.time}` : null}
                 {upcoming ? (
-                  <span className="bg-primary/10 dark:text-primary ml-2 inline-flex rounded-full px-2 py-0.5 text-xs font-medium text-[var(--brand-deep)]">
+                  <span className="bg-primary/10 text-primary ml-2 inline-flex px-2 py-0.5 text-xs font-medium">
                     {t('upcoming')}
                   </span>
                 ) : null}
@@ -180,7 +180,7 @@ export function EventArticle({
                 alt={event.cover.alt ?? ''}
                 priority
                 sizes="(min-width: 1024px) 42rem, 100vw"
-                className="mt-10 aspect-[4/3] rounded-[10px] shadow-md shadow-black/10"
+                className="mt-10 aspect-[4/3]"
               />
             ) : (
               <EventPlaceholder
@@ -189,7 +189,7 @@ export function EventArticle({
                   placeholderOrg?.name ??
                   (type ? t(EVENT_TYPE_LABEL_KEY[type]) : null)
                 }
-                className="mt-10 aspect-[16/7] rounded-[10px]"
+                className="mt-10 aspect-[16/7]"
               />
             )}
 
@@ -306,7 +306,7 @@ export function EventArticle({
                         width={dimensions?.width ?? 800}
                         height={dimensions?.height ?? 800}
                         sizes="(min-width: 1024px) 21rem, 50vw"
-                        className="h-auto w-full rounded"
+                        className="h-auto w-full"
                       />
                     );
                   })}

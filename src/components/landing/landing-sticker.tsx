@@ -106,7 +106,7 @@ export function LandingSticker() {
                       disabled={!ready}
                       onClick={() => sceneRef.current?.goTo(i)}
                       className={cn(
-                        'focus-visible:ring-ring focus-visible:ring-offset-background h-1.5 rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
+                        'focus-visible:ring-ring focus-visible:ring-offset-background h-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
                         i === active
                           ? 'bg-foreground w-6'
                           : 'bg-foreground/20 hover:bg-foreground/40 w-1.5',

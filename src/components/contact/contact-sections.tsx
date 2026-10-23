@@ -72,7 +72,7 @@ export function ContactSection() {
               (dark açık / light koyu). İçerik relative sarmalayıcıyla üstte. */}
           <div
             aria-hidden
-            className="bg-foreground pointer-events-none absolute inset-0 opacity-20 dark:opacity-15"
+            className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
             style={{
               maskImage: 'url(/images/contact-bg.png)',
               WebkitMaskImage: 'url(/images/contact-bg.png)',
@@ -192,7 +192,7 @@ export function SponsorshipSection() {
               (dark açık / light koyu), her iki temada aynı silik görsel. */}
             <div
               aria-hidden
-              className="bg-foreground pointer-events-none absolute inset-0 opacity-20 dark:opacity-15"
+              className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
               style={{
                 maskImage: 'url(/images/sponsorship-bg.png)',
                 WebkitMaskImage: 'url(/images/sponsorship-bg.png)',

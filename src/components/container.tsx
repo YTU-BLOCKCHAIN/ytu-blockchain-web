@@ -54,17 +54,14 @@ export const Container = ({
         {asGrid ? (
           <div
             className={cn(
-              'bg-grid-line **:data-grid-content:bg-card **:data-grid-content:h-full **:data-grid-content:rounded grid *:p-[0.5px]',
+              'bg-grid-line **:data-grid-content:bg-card **:data-grid-content:h-full grid *:p-[0.5px]',
               className,
             )}
           >
             {children}
           </div>
         ) : (
-          <div
-            data-slot="content"
-            className={cn('bg-card h-full rounded', className)}
-          >
+          <div data-slot="content" className={cn('bg-card h-full', className)}>
             {children}
           </div>
         )}
@@ -103,7 +100,7 @@ export const Separator = ({
 const Decorator = ({ className }: { className?: string }) => {
   return (
     <div aria-hidden className={cn('p-[0.5px]', className)}>
-      <div className="bg-card h-full w-2 rounded md:w-6 lg:w-full" />
+      <div className="bg-card h-full w-2 md:w-6 lg:w-full" />
     </div>
   );
 };

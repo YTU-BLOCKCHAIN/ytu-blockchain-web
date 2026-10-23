@@ -43,7 +43,7 @@ export function PostArticle({
           src={imageUrl(post.author.avatar, 64, 64)}
           width={32}
           height={32}
-          className="ring-border-illustration bg-card size-6 shrink-0 rounded-full object-cover ring-1"
+          className="ring-border-illustration bg-card size-6 shrink-0 object-cover ring-1"
         />
       ) : null}
       <span>
@@ -95,7 +95,7 @@ export function PostArticle({
             {post.coverImage ? (
               // `before`: görselin üstüne ince bir iç kenarlık koyar — açık
               // zeminde soluk bir kapak sayfanın içinde yüzer gibi durmasın.
-              <div className="before:border-foreground/10 before:inset-ring-background/10 relative mt-10 aspect-video overflow-hidden rounded-[10px] shadow-md shadow-black/10 before:absolute before:inset-0 before:rounded-[10px] before:border before:inset-ring-1">
+              <div className="before:border-foreground/10 before:inset-ring-background/10 relative mt-10 aspect-video overflow-hidden before:absolute before:inset-0 before:border before:inset-ring-1">
                 <Image
                   src={imageUrl(post.coverImage, 1600, 900)}
                   alt={post.coverImage.alt ?? ''}

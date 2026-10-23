@@ -46,7 +46,7 @@ export function EmptyState({
               aria-hidden
               className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,var(--color-foreground)_1px,transparent_1px)] bg-[length:16px_16px] opacity-[0.07] [mask-image:radial-gradient(ellipse_at_center,#000_30%,transparent_75%)]"
             />
-            <span className="bg-primary/10 text-primary ring-primary/20 relative flex size-14 items-center justify-center rounded-2xl ring-1">
+            <span className="bg-primary/10 text-primary ring-primary/20 relative flex size-14 items-center justify-center ring-1">
               <Icon className="size-6" />
             </span>
             <span className="text-primary font-display relative mt-6 text-xs tracking-widest uppercase">

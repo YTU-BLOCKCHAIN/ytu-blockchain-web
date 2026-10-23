@@ -162,7 +162,7 @@ export function ConsentBanner({
       aria-label={labels.title}
       className="fixed inset-x-0 bottom-0 z-50 p-4 sm:p-6"
     >
-      <div className="bg-card border-border mx-auto flex max-w-3xl flex-col gap-4 rounded-lg border p-5 shadow-lg sm:flex-row sm:items-center sm:justify-between">
+      <div className="bg-card border-border mx-auto flex max-w-3xl flex-col gap-4 border p-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <p className="text-foreground text-sm font-medium">{labels.title}</p>
           <p className="text-muted-foreground text-sm leading-relaxed">

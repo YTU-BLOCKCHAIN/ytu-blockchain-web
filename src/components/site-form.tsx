@@ -22,7 +22,7 @@ import { siteConfig } from '@/lib/site';
  * sm ve üstünde masaüstündeki ölçüler (14px / py-2) aynen geri geliyor.
  */
 const FIELD_CLASS =
-  'border-border bg-background focus-visible:ring-primary/40 aria-invalid:border-destructive w-full rounded-md border px-3 py-2.5 text-base focus-visible:ring-2 focus-visible:outline-none sm:py-2 sm:text-sm';
+  'border-border bg-background focus-visible:ring-primary/40 aria-invalid:border-destructive w-full border px-3 py-2.5 text-base focus-visible:ring-2 focus-visible:outline-none sm:py-2 sm:text-sm';
 
 /**
  * Cloudflare Turnstile site anahtarı. Tanımsızsa widget hiç basılmaz ve sunucu
@@ -126,10 +126,7 @@ export function SiteForm({
 
   if (state.status === 'success') {
     return (
-      <div
-        role="status"
-        className="border-border bg-background rounded-md border p-6"
-      >
+      <div role="status" className="border-border bg-background border p-6">
         <CheckCircle2 className="size-5 fill-primary/25 text-primary" />
         <h3 className="text-foreground mt-4 font-medium">
           {t(`success.${kind}.heading`)}
@@ -146,7 +143,7 @@ export function SiteForm({
       {state.status === 'error' && (
         <p
           role="alert"
-          className="border-destructive/40 text-destructive rounded-md border px-3 py-2.5 text-sm"
+          className="border-destructive/40 text-destructive border px-3 py-2.5 text-sm"
         >
           {t(`failure.${state.reason ?? 'upstream'}`, {
             email: siteConfig.contactEmail,
@@ -218,7 +215,7 @@ export function SiteForm({
               aria-describedby={
                 state.fieldErrors?.consent ? 'consent-error' : undefined
               }
-              className="peer border-border bg-background checked:border-foreground checked:bg-foreground focus-visible:ring-primary/40 aria-invalid:border-destructive size-4 appearance-none rounded border transition-colors focus-visible:ring-2 focus-visible:outline-none"
+              className="peer border-border bg-background checked:border-foreground checked:bg-foreground focus-visible:ring-primary/40 aria-invalid:border-destructive size-4 appearance-none border transition-colors focus-visible:ring-2 focus-visible:outline-none"
             />
             <Check
               aria-hidden

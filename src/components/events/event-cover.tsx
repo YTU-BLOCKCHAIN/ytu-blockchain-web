@@ -31,7 +31,7 @@ export function EventCover({
   alt: string;
   sizes: string;
   priority?: boolean;
-  /** Kutunun oranı ve köşeleri, ör. `aspect-[16/10] rounded-[10px]`. */
+  /** Kutunun oranı, ör. `aspect-[16/10]`. */
   className?: string;
 }) {
   return (
@@ -95,7 +95,7 @@ export function EventPlaceholder({
       <div className="bg-muted/85 absolute inset-0" />
       {/* Kare köşeli kutu: logoların çoğu kendi zeminiyle kare çizilmiş, daire
           onları köşelerinden kesiyordu. */}
-      <span className="ring-foreground/10 relative flex size-20 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-sm ring-1">
+      <span className="ring-foreground/10 relative flex size-20 items-center justify-center overflow-hidden bg-white ring-1">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={logoUrl ?? '/logo/mark.svg'}
