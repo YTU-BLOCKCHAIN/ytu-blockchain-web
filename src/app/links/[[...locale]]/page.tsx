@@ -89,6 +89,10 @@ type RowIconSpec = { Icon: RowIcon; tone: string };
  * Eşleşme `url` (içerik dosyasındaki dil öneksiz hâli) ile yapılıyor, `href`
  * ile değil: önek eklendikten sonra da çalışırdı ama ikon seçimi dilin
  * bilinmesini gerektirmeyen bir karar, o yüzden ham adresle kalıyor.
+ *
+ * Renk yalnız iki tonda: başvuru satırları marka mavisi, geri kalanı beyaz
+ * mürekkep. Marka kılavuzu yeni renk eklemeyi yasaklıyor (Brand > 08); platform
+ * renkleri (Instagram pembesi, WhatsApp yeşili) sayfayı yamalı gösteriyordu.
  */
 function iconForLink(link: LinkItem): RowIconSpec {
   const url = link.url.toLowerCase();
@@ -105,46 +109,46 @@ function iconForLink(link: LinkItem): RowIconSpec {
 
   if (link.external) {
     if (url.includes('cal.com'))
-      return { Icon: CalendarClock, tone: 'text-violet-400' };
+      return { Icon: CalendarClock, tone: 'text-foreground' };
     /* Etkinlik takvimimiz Luma'da. `lu.ma` eski kısa adres, ikisi de aynı
        yere gider, o yüzden ikisi de eşleşiyor. Bilet ikonu bilerek `cal.com`'un
        takviminden ayrı: biri etkinliklerimiz, diğeri sponsorluk randevusu. */
     if (url.includes('luma.com') || url.includes('lu.ma'))
-      return { Icon: Ticket, tone: 'text-red-400' };
+      return { Icon: Ticket, tone: 'text-foreground' };
     // Başvuru formu dışarıda (Google Forms) barınıyor ama satır hâlâ bir
     // başvuru satırı: ikon `/join` sayfasınınkiyle aynı kalsın.
     if (url.includes('forms.gle') || url.includes('docs.google.com/forms'))
       return { Icon: UserPlus, tone: 'text-primary' };
     if (url.includes('notion.site'))
-      return { Icon: MapFilledIcon, tone: 'text-amber-400' };
+      return { Icon: MapFilledIcon, tone: 'text-foreground' };
     if (url.includes('medium.com'))
-      return { Icon: BookText, tone: 'text-emerald-400' };
+      return { Icon: BookText, tone: 'text-foreground' };
     if (url.includes('spotify.com'))
-      return { Icon: Podcast, tone: 'text-[#1DB954]' };
+      return { Icon: Podcast, tone: 'text-foreground' };
     if (url.includes('instagram.com'))
-      return { Icon: InstagramIcon, tone: 'text-[#E4405F]' };
+      return { Icon: InstagramIcon, tone: 'text-foreground' };
     if (url.includes('whatsapp.com'))
-      return { Icon: WhatsappIcon, tone: 'text-[#25D366]' };
+      return { Icon: WhatsappIcon, tone: 'text-foreground' };
     // `//x.com` (yalnız "x.com" değil): adres hep `https://` ile başladığı için
     // bu kalıp host'u yakalar, içinde "x.com" geçen başka adreslere uymaz.
     if (url.includes('//x.com') || url.includes('twitter.com'))
       return { Icon: XIcon, tone: 'text-foreground' };
     if (url.includes('github.com'))
       return { Icon: GithubIcon, tone: 'text-foreground' };
-    return { Icon: Globe, tone: 'text-sky-400' };
+    return { Icon: Globe, tone: 'text-foreground' };
   }
 
   if (url.includes('/join')) return { Icon: UserPlus, tone: 'text-primary' };
   if (url.includes('/projects'))
-    return { Icon: FolderGit2, tone: 'text-orange-400' };
-  if (url.includes('/contact')) return { Icon: Mail, tone: 'text-rose-400' };
+    return { Icon: FolderGit2, tone: 'text-foreground' };
+  if (url.includes('/contact')) return { Icon: Mail, tone: 'text-foreground' };
   // `/brand` ve `/roadmap` Notion'a yönlenir (bkz. next.config.ts): satır içeride
   // görünür ama hedef dışarıda, o yüzden ikonları burada eşleşiyor.
-  if (url.includes('/brand')) return { Icon: Palette, tone: 'text-pink-400' };
+  if (url.includes('/brand')) return { Icon: Palette, tone: 'text-foreground' };
   if (url.includes('/roadmap'))
-    return { Icon: MapFilledIcon, tone: 'text-amber-400' };
+    return { Icon: MapFilledIcon, tone: 'text-foreground' };
   // "Web Sitemiz" (`/`) ve tanımsız iç sayfalar
-  return { Icon: Globe, tone: 'text-sky-400' };
+  return { Icon: Globe, tone: 'text-foreground' };
 }
 
 /** "https://x.com/BlockchainYtu" → "@BlockchainYtu". */
@@ -260,7 +264,7 @@ function LinkRow({
       className={cn(
         // Köşeler yalnızca sm'den itibaren: telefonda kartlar ekranın iki
         // kenarına dayanıyor, orada yuvarlatma kırpılmış gibi duruyordu.
-        'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none sm:rounded md:min-h-20',
+        'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none md:min-h-20',
         wide && 'lg:col-span-2',
         link.featured
           ? 'bg-foreground text-background hover:bg-foreground/90'
@@ -289,8 +293,8 @@ function LinkRow({
                   "başvurular açık" mesajını nabız gibi vurgular. */}
               {link.featured && (
                 <span aria-hidden className="relative flex size-1.5 shrink-0">
-                  <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
-                  <span className="bg-primary relative inline-flex size-1.5 rounded-full" />
+                  <span className="bg-primary absolute inline-flex h-full w-full animate-ping opacity-75" />
+                  <span className="bg-primary relative inline-flex size-1.5" />
                 </span>
               )}
               {link.note}
@@ -331,7 +335,7 @@ async function LinksLanguageSwitcher({ locale }: { locale: Locale }) {
 
   return (
     <div
-      className="border-foreground/15 mt-6 flex items-center rounded-full border p-0.5 text-xs"
+      className="border-foreground/15 mt-6 flex items-center border p-0.5 text-xs"
       role="group"
       aria-label={t('languageLabel')}
     >
@@ -349,7 +353,7 @@ async function LinksLanguageSwitcher({ locale }: { locale: Locale }) {
             aria-current={selected ? 'page' : undefined}
             aria-label={t('switchTo', { language: t(`language.${candidate}`) })}
             className={cn(
-              'rounded-full px-2.5 py-1 font-medium uppercase transition-colors',
+              'px-2.5 py-1 font-medium uppercase transition-colors',
               selected
                 ? 'bg-foreground/10 text-foreground'
                 : 'text-muted-foreground hover:text-foreground',
@@ -421,11 +425,9 @@ export default async function LinksPage({
         <div className="grid gap-px md:min-h-dvh md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
           {/* md'de header sol kolonun tamamını kaplar (grid stretch) ve içerik
               dikeyde ortalanır; mask zaten absolute, flex'ten etkilenmez. */}
-          <header className="bg-card relative overflow-hidden px-6 py-10 text-center sm:rounded md:sticky md:top-0 md:flex md:h-dvh md:flex-col md:justify-center md:rounded-none md:px-10 md:py-16">
+          <header className="bg-card relative overflow-hidden px-6 py-10 text-center md:sticky md:top-0 md:flex md:h-dvh md:flex-col md:justify-center md:rounded-none md:px-10 md:py-16">
             {/* Sitedeki hero'larla aynı teknik: CSS mask + bg-foreground →
-                görsel metin rengini alır. Sayfa her zaman koyu olduğu için
-                opaklık tek değer (`dark:` varyantı OS temasına bakardı, bu
-                sayfa ise ona bakmıyor). */}
+                görsel metin rengini alır. */}
             <div
               aria-hidden
               className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
