@@ -154,15 +154,18 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Kapanış: postların beyaz bandında dev wordmark. Genişlik konteynere
-            göre (`cqw`), tek satırda hücreyi kenardan kenara dolduruyor.
-            Logo zaten yukarıda; bu satır dekoratif. */}
+        {/* Kapanış: postların beyaz bandında dev wordmark. Hücre kendi
+            `@container`'ı: `cqw` sayfaya değil hücrenin iç genişliğine göre,
+            yazı tek satırda kenardan kenara dolduruyor (VHS'te genişlik ≈
+            7.54 × font). Sayfanın konteyneri ölçü alınırsa geniş ekranda
+            yazı sütunu aşıp sayfayı yatayda taşırıyordu. Logo zaten yukarıda;
+            bu satır dekoratif. */}
         <div aria-hidden>
           <div
             data-grid-content
-            className="surface-paper text-primary flex items-end justify-between gap-6 overflow-hidden px-6 pt-8 pb-4 lg:px-12"
+            className="surface-paper text-primary @container min-w-0 overflow-hidden px-6 pt-8 pb-4 lg:px-12"
           >
-            <span className="font-display text-[10.5cqw] leading-[0.85] whitespace-nowrap">
+            <span className="font-display block text-[13.2cqw] leading-[0.85] whitespace-nowrap">
               YTU BLOCKCHAIN
             </span>
           </div>
