@@ -5,8 +5,8 @@ import { cn } from '@/lib/utils';
 /*
   Kulübün sosyal medya postlarındaki parçaların site karşılıkları
   (Drive: design/sosyal-medya/<set>/kaynak/). Ölçüler postlardan geliyor,
-  renkler tema değişkenlerinden: aynı bileşen void, `.surface-signal` ve
-  `.surface-paper` üzerinde kendiliğinden doğru tona dönüyor.
+  renkler tema değişkenlerinden: aynı bileşen beyaz zeminde, `.surface-signal`
+  ve `.surface-paper` üzerinde kendiliğinden doğru tona dönüyor.
 
   VHS alanlarına gelen metin ÇAĞIRAN TARAFTA büyük harfle yazılmış olmalı.
   `text-transform: uppercase` lang="tr" altında BLOCKCHAIN'i "BLOCKCHAİN"
@@ -14,7 +14,8 @@ import { cn } from '@/lib/utils';
 */
 
 /**
- * Köşeli etiket. `solid`: postlardaki beyaz sezon chip'i (yüzeyin tersi),
+ * Köşeli etiket. `solid`: dolu aksiyon tonu — mavide postlardaki beyaz sezon
+ * chip'i, beyazda mavi chip,
  * `signal`: beyaz bant üzerindeki mavi chip, `outline`: sakin etiket.
  */
 export function Chip({
@@ -33,7 +34,7 @@ export function Chip({
       style={style}
       className={cn(
         'font-display inline-flex h-7 items-center px-2.5 text-sm leading-none whitespace-nowrap',
-        tone === 'solid' && 'bg-foreground text-background',
+        tone === 'solid' && 'bg-action text-action-foreground',
         tone === 'signal' && 'bg-signal text-white',
         tone === 'outline' && 'border-foreground/40 text-foreground border',
         className,
@@ -108,7 +109,9 @@ export function Terminal({
   className?: string;
 }) {
   return (
-    <div className={cn('bg-white', className)}>
+    <div
+      className={cn('border border-[var(--brand-void)] bg-white', className)}
+    >
       <div className="font-display flex items-center justify-between bg-[var(--brand-void)] px-4 py-2 text-xs text-white">
         <span>{path}</span>
         <span aria-hidden>x</span>
@@ -161,7 +164,7 @@ export function NumItem({
 }) {
   return (
     <div className={cn('flex items-start gap-4', className)}>
-      <span className="bg-foreground text-background font-display flex h-7 min-w-11 shrink-0 items-center justify-center px-2 text-sm leading-none">
+      <span className="bg-action text-action-foreground font-display flex h-7 min-w-11 shrink-0 items-center justify-center px-2 text-sm leading-none">
         {n}
       </span>
       <div className="space-y-1.5">
@@ -186,7 +189,7 @@ export function Stat({
 }) {
   return (
     <div className={className}>
-      <b className="font-display block text-6xl leading-[0.9] font-normal tabular-nums sm:text-7xl">
+      <b className="text-primary font-display block text-6xl leading-[0.9] font-normal tabular-nums sm:text-7xl">
         {value}
       </b>
       <span className="text-muted-foreground font-display mt-3 block text-xs tracking-widest">
@@ -198,7 +201,9 @@ export function Stat({
 
 /**
  * Dither'lı görsel (`public/images/dither/*`, `scripts/dither.py` üretir).
- * Beyaz nokta + şeffaf zemin; dekoratif, ekran okuyucudan gizli.
+ * Dosya beyaz nokta + şeffaf zemin; burada MASKE olarak kullanılıyor ve
+ * noktalar `currentColor` alıyor: mavi yüzeyde beyaz, beyaz zeminde
+ * `text-primary` ile signal mavisi. Dekoratif, ekran okuyucudan gizli.
  */
 export function Dither({
   name,
@@ -213,20 +218,19 @@ export function Dither({
   className?: string;
   style?: React.CSSProperties;
 }) {
+  const url = `url(/images/dither/${name}.png)`;
   return (
-    // next/image 2 renkli PNG'yi WebP'ye çevirip noktaları yumuşatıyordu;
-    // dosyalar zaten 1–4 KB.
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={`/images/dither/${name}.png`}
-      alt=""
+    <span
       aria-hidden
-      width={width}
-      height={height}
-      loading="lazy"
-      decoding="async"
-      className={cn('dither', className)}
-      style={style}
+      className={cn('dither block bg-current', className)}
+      style={{
+        aspectRatio: `${width} / ${height}`,
+        maskImage: url,
+        WebkitMaskImage: url,
+        maskSize: '100% 100%',
+        WebkitMaskSize: '100% 100%',
+        ...style,
+      }}
     />
   );
 }
@@ -247,12 +251,7 @@ export function Evolution({ you }: { you: string }) {
   return (
     <div aria-hidden className="flex items-end gap-[3%]">
       <div className="relative flex-1">
-        <Dither
-          name="evolution"
-          width={1600}
-          height={865}
-          className="block h-auto w-full"
-        />
+        <Dither name="evolution" width={1600} height={865} className="w-full" />
         {EVOLUTION_TAGS.map((tag) => (
           <Chip
             key={tag.label}
@@ -263,7 +262,7 @@ export function Evolution({ you }: { you: string }) {
           </Chip>
         ))}
       </div>
-      <div className="relative mb-[0.5%] flex aspect-[0.46] w-[18%] items-center justify-center border-2 border-dashed border-white/80">
+      <div className="border-foreground/80 relative mb-[0.5%] flex aspect-[0.46] w-[18%] items-center justify-center border-2 border-dashed">
         <span className="font-display text-4xl sm:text-6xl">?</span>
         <Chip className="absolute top-0 left-1/2 h-5 -translate-x-1/2 -translate-y-1/2 px-1.5 text-[10px] sm:h-6 sm:text-xs">
           {you}

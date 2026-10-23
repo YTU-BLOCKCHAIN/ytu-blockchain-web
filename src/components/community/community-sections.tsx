@@ -8,7 +8,7 @@ export function CommunityHero() {
   const t = useTranslations('Community');
 
   return (
-    <section className="overflow-hidden">
+    <section className="surface-signal overflow-hidden">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
           <div aria-hidden className="max-sm:hidden">

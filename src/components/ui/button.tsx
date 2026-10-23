@@ -10,9 +10,9 @@ type ButtonSize = 'default' | 'sm';
 
 /**
  * Site geneli buton stili. Link / <button> / <a> fark etmeksizin tek kaynak.
- * primary = dolu aksiyon (`--color-action`): void üzerinde signal mavisi,
- * `.surface-signal` içinde beyaz — postlardaki kayıt barı. outline = beyaz
- * kenarlıklı ikincil. Focus halkası ve zemin tema token'larından beslenir.
+ * primary = dolu aksiyon (`--color-action`): beyaz zeminde signal mavisi,
+ * `.surface-signal` içinde beyaz — postlardaki kayıt barı. outline =
+ * mürekkep kenarlıklı ikincil. Focus halkası ve zemin tema token'larından beslenir.
  */
 export function buttonClasses({
   variant = 'primary',

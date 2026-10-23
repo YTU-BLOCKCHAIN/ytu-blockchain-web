@@ -25,7 +25,7 @@ export function AboutHero() {
   ];
 
   return (
-    <section id="home" className="overflow-hidden">
+    <section id="home" className="surface-signal overflow-hidden">
       {/* Hero metin bloğu — gerçek grid-2-about-one #home markup'ı birebir. */}
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">

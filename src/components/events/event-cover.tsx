@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 
 /**
  * Etkinlik kapağı — görsel KIRPILMADAN sabit oranlı bir kutuya sığdırılır,
- * kalan boşluk düz void.
+ * kalan boşluk düz signal mavisi.
  *
  * Neden kırpmıyoruz: kapakların çoğu Instagram'dan geliyor ve oranları
  * karışık (arşivde 101 kapağın ~35'i kare, ~22'si 4:5/3:4 dikey afiş, 16'sı
@@ -13,10 +13,10 @@ import { cn } from '@/lib/utils';
  * yeni afişte tekrarlanan bir iş. Kutuya sığdırmak kartların düzenini
  * bozmadan her oranı olduğu gibi gösteriyor.
  *
- * Zemin neden void: sayfa signal mavisi ve kapakların çoğu kulübün yine
- * #0154FF zeminli afişleri; koyu çerçeve olmadan afiş karta karışıyordu.
- * Eskiden aynı görselin bulanık kopyası vardı — fiilen bir gradient'ti ve
- * kit gradient'i yasaklıyor.
+ * Zemin neden signal: kapakların çoğu kulübün #0154FF zeminli afişleri; afiş
+ * kutunun kenarına kadar uzuyormuş gibi kesintisiz duruyor. Eskiden aynı
+ * görselin bulanık kopyası vardı — fiilen bir gradient'ti ve kit gradient'i
+ * yasaklıyor.
  */
 export function EventCover({
   src,
@@ -34,7 +34,7 @@ export function EventCover({
   className?: string;
 }) {
   return (
-    <div className={cn('surface-void relative overflow-hidden', className)}>
+    <div className={cn('bg-signal relative overflow-hidden', className)}>
       <Image
         src={src}
         alt={alt}
@@ -53,7 +53,7 @@ export function EventCover({
  * ekosistem) logosu ortada; hiç kurum yoksa kulübün amblemi.
  *
  * Kurum logoları kare ve çoğu beyaz zemine göre çizilmiş; o yüzden beyaz bir
- * kare içinde, zemin kapaklarla aynı void.
+ * kare içinde, zemin kapaklarla aynı signal mavisi.
  */
 export function EventPlaceholder({
   logoUrl,
@@ -70,7 +70,7 @@ export function EventPlaceholder({
     <div
       aria-hidden
       className={cn(
-        'surface-void relative flex flex-col items-center justify-center gap-3 overflow-hidden',
+        'surface-signal relative flex flex-col items-center justify-center gap-3 overflow-hidden',
         className,
       )}
     >

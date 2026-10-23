@@ -45,7 +45,7 @@ export function BlogHero() {
   const t = useTranslations('Blog');
 
   return (
-    <section>
+    <section className="surface-signal">
       {/* `relative overflow-hidden` kartın kendisinde: leke kartın yuvarlatılmış
           sınırında kırpılsın, yan raylara taşmasın. */}
       <Container className="@4xl:py-12 relative overflow-hidden pb-6 pt-12">

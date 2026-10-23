@@ -80,7 +80,7 @@ export function EventsHero({ events }: { events: EventsQueryResult }) {
   ].filter(Boolean);
 
   return (
-    <section>
+    <section className="surface-signal">
       <Container className="@4xl:py-12 @4xl:px-12 flex flex-col gap-8 px-6 pb-6 pt-12 md:flex-row md:items-end md:justify-between">
         <div className="max-w-2xl">
           <span className="text-primary font-display text-xs tracking-widest uppercase">

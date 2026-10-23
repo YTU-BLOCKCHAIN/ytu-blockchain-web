@@ -51,7 +51,7 @@ export function ContactSection() {
   ];
 
   return (
-    <section className="overflow-hidden">
+    <section className="surface-signal overflow-hidden">
       <Container className="@4xl:px-12 px-6 py-3">
         <span className="text-primary font-display text-xs tracking-widest uppercase">
           {'//'} {t('eyebrow')}

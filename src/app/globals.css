@@ -270,14 +270,13 @@
     Kitin tüm paleti bu dört değerden ibaret. Aşağıdaki tema blokları YALNIZ
     bunlardan türetir; ham hex hiçbir yerde ikinci kez yazılmaz.
 
-    Site, kulübün sosyal medya postlarıyla aynı yüzeyde: ZEMİN SİGNAL MAVİSİ,
-    mürekkep beyaz. Postların ritmi de aynen taşındı — mavi esas yüzey, bilgi
-    için beyaz bant (`.surface-paper`), vurgu için koyu blok (`.surface-void`,
-    anma postlarındaki koyu zemin). Kit sunum yüzeyi için void'i esas alıyor;
-    site postların dilini izliyor.
+    Site, kulübün sosyal medya postlarının kompozisyonunu izliyor: ÜSTTE
+    SİGNAL MAVİSİ (header + her sayfanın ilk bölümü, `.surface-signal`),
+    ALTINDA BEYAZ (postlardaki beyaz bilgi bandı). Esas zemin beyaz; mavi
+    yalnız sayfanın girişinde.
   */
   :root {
-    --brand-void: #0a0a0c; /* koyu vurgu yüzeyi — nötr siyah değil, mavi yanlı */
+    --brand-void: #0a0a0c; /* koyu mürekkep — nötr siyah değil, mavi yanlı */
     /* Marka mavisi. Notion Brand'de #0E6CFF yazıyordu ama basılan ve
        paylaşılan her şey (postlar, stickerlar, kartvizit, NFC kart, tişört)
        #0154FF; site artık onlarla aynı mavi. */
@@ -287,89 +286,77 @@
   }
 
   :root {
-    color-scheme: dark;
+    color-scheme: light;
 
     /* Kit "köşeli her şey" diyor: etiket, kutu, buton. */
     --radius: 0;
 
-    --background: var(--brand-signal);
-    --foreground: var(--brand-ink);
+    --background: var(--brand-ink);
+    --foreground: var(--brand-void);
 
-    --card: var(--brand-signal);
-    --illustration: var(--brand-signal);
-    --card-foreground: var(--brand-ink);
+    --card: var(--brand-ink);
+    --illustration: var(--brand-ink);
+    --card-foreground: var(--brand-void);
 
-    /* Açılır menüler zeminden bir kademe koyu: menü, altındaki sayfadan
-       ayrılsın ama mavi aileden çıkmasın. */
-    --popover: color-mix(in oklab, var(--brand-signal) 80%, var(--brand-void));
-    --popover-foreground: var(--brand-ink);
+    --popover: var(--brand-ink);
+    --popover-foreground: var(--brand-void);
 
-    /* Bağlantı ve eyebrow'lar beyaz: signal üzerinde ikinci bir mavi
-       okunmuyor. Kitin `.stage--signal` kuralı da aynı (vurgu = ink). */
-    --primary: var(--brand-ink);
-    --primary-foreground: var(--brand-signal);
+    /* Bağlantı, eyebrow, rakam: signal. Beyaz üzerinde #0154FF ~6.5:1. */
+    --primary: var(--brand-signal);
+    --primary-foreground: var(--brand-ink);
 
-    --secondary: color-mix(
-      in oklab,
-      var(--brand-signal) 86%,
-      var(--brand-void)
-    );
-    --secondary-foreground: var(--brand-ink);
+    --secondary: color-mix(in oklab, var(--brand-signal) 8%, #fff);
+    --secondary-foreground: var(--brand-signal);
 
-    /*
-      Kademeler kitteki gibi SAYDAMLIKLA kuruluyor. Signal yüzeyde kitin
-      `--on-signal-dim` değeri (.76) küçük puntoda sönük kalıyordu; .82.
-      `--muted` hover zemini: zeminden bir kademe koyu.
-    */
-    --muted: color-mix(in oklab, var(--brand-signal) 88%, var(--brand-void));
-    --muted-foreground: --alpha(var(--foreground) / 82%);
+    /* Kademeler saydamlıkla (kit `--ink-dim`). `--muted` hover zemini. */
+    --muted: color-mix(in oklab, var(--brand-void) 4%, #fff);
+    --muted-foreground: --alpha(var(--foreground) / 66%);
 
-    --accent: color-mix(in oklab, var(--brand-signal) 86%, var(--brand-void));
-    --accent-foreground: var(--brand-ink);
+    --accent: color-mix(in oklab, var(--brand-signal) 8%, #fff);
+    --accent-foreground: var(--brand-signal);
 
     /*
-      Form hatası için bilerek korunan tek palet dışı renk (kit kırmızıyı
-      yasaklıyor ama orada form yok). Mavi zeminde koyu kırmızı okunmuyordu;
-      açık ton ~4.6:1.
+      Kit kırmızıyı yasaklıyor ama orası bir sunum yüzeyi: form yok, hata
+      durumu yok. Burada form doğrulamasında kullanılıyor; hatayı yalnız
+      punto/etiketle anlatmak erişilebilirlik açısından yetersiz. Bilerek
+      korunan tek palet dışı renk.
     */
-    --destructive: var(--color-red-200);
-    --destructive-foreground: var(--brand-void);
+    --destructive: var(--color-red-600);
+    --destructive-foreground: var(--color-white);
 
-    --border: --alpha(var(--foreground) / 30%);
-    --border-illustration: --alpha(var(--foreground) / 30%);
-    --input: --alpha(var(--foreground) / 35%);
-    --ring: var(--brand-ink);
+    --border: --alpha(var(--foreground) / 12%);
+    --border-illustration: --alpha(var(--foreground) / 12%);
+    --input: --alpha(var(--foreground) / 16%);
+    --ring: var(--brand-signal);
 
     /*
       Grid çizgisi — sayfadaki TÜM hairline'ların tek kaynağı (header bandı,
       <main> zemini, `asGrid` hücre araları, footer). OPAK olması şart: yarı
-      saydam bir sınıf altındaki katmana göre farklı ton üretiyordu. Mavi
-      zeminde beyazın %24'ü: ızgara bir plan çizimi gibi okunuyor, içeriği
-      bastırmıyor.
+      saydam bir sınıf altındaki katmana göre farklı ton üretiyordu.
+      `.surface-signal` kendi çizgisini taşıyor (mavinin içinde açık mavi).
     */
-    --grid-line: color-mix(in srgb, var(--foreground) 24%, var(--background));
+    --grid-line: color-mix(in srgb, var(--foreground) 10%, var(--background));
 
-    /* Seri ayrımı ton değil AÇIKLIK farkıyla: beyazdan deep'e. */
-    --chart-1: var(--brand-ink);
-    --chart-2: color-mix(in oklab, var(--brand-ink) 60%, var(--brand-signal));
-    --chart-3: color-mix(in oklab, var(--brand-ink) 30%, var(--brand-signal));
-    --chart-4: color-mix(in oklab, var(--brand-deep) 40%, var(--brand-signal));
+    /* Seri ayrımı ton değil AÇIKLIK farkıyla: signal'dan deep'e. */
+    --chart-1: var(--brand-signal);
+    --chart-2: color-mix(in oklab, var(--brand-signal) 72%, var(--brand-deep));
+    --chart-3: color-mix(in oklab, var(--brand-signal) 46%, var(--brand-deep));
+    --chart-4: color-mix(in oklab, var(--brand-signal) 22%, var(--brand-deep));
     --chart-5: var(--brand-deep);
 
-    /* Dolu aksiyon: mavi zeminde beyaz buton, signal yazı (postlardaki
-       beyaz chip/bar). */
-    --action: var(--brand-ink);
-    --action-foreground: var(--brand-signal);
+    /* Dolu aksiyon: beyazda signal buton; mavide beyaz buton + signal yazı. */
+    --action: var(--brand-signal);
+    --action-foreground: var(--brand-ink);
   }
 
   /*
     Kapsamlı yüzeyler. Tailwind'in `--color-*` değişkenleri :root'ta bir kez
     çözüldüğü için kapsamda `--primary` değil doğrudan `--color-*` eziliyor;
-    içerideki buton, bağlantı, sönük metin, kenarlık ve ızgara hücresi
-    (`bg-card`) kendiliğinden o yüzeye uyuyor.
+    içerideki buton, bağlantı, sönük metin, kenarlık, ızgara çizgisi ve
+    hücresi (`bg-card`) kendiliğinden o yüzeye uyuyor.
   */
 
-  /* Signal — iç içe kullanım için (ör. koyu bloğun içinde mavi kutu). */
+  /* Signal — header ve sayfa girişleri; postların mavi zemini. */
   .surface-signal {
     background-color: var(--brand-signal);
     color: var(--brand-ink);
@@ -377,14 +364,34 @@
     --color-background: var(--brand-signal);
     --color-foreground: var(--brand-ink);
     --color-primary: var(--brand-ink);
+    --color-muted: color-mix(
+      in oklab,
+      var(--brand-signal) 88%,
+      var(--brand-void)
+    );
     --color-muted-foreground: rgb(255 255 255 / 0.82);
+    --color-accent: color-mix(
+      in oklab,
+      var(--brand-signal) 86%,
+      var(--brand-void)
+    );
+    --color-accent-foreground: var(--brand-ink);
+    --color-popover: color-mix(
+      in oklab,
+      var(--brand-signal) 80%,
+      var(--brand-void)
+    );
+    --color-popover-foreground: var(--brand-ink);
     --color-border: rgb(255 255 255 / 0.3);
+    --color-input: rgb(255 255 255 / 0.35);
+    --color-grid-line: color-mix(in srgb, #fff 24%, var(--brand-signal));
     --color-action: var(--brand-ink);
     --color-action-foreground: var(--brand-signal);
     --color-ring: var(--brand-ink);
+    --color-destructive: var(--color-red-200);
   }
 
-  /* Postlardaki beyaz bilgi bandı: beyaz zemin, void metin, signal vurgu. */
+  /* Postlardaki beyaz bilgi bandı — mavi yüzeyin içinde beyaz şerit. */
   .surface-paper {
     background-color: var(--brand-ink);
     color: var(--brand-void);
@@ -392,30 +399,12 @@
     --color-background: var(--brand-ink);
     --color-foreground: var(--brand-void);
     --color-primary: var(--brand-signal);
-    --color-muted-foreground: rgb(10 10 12 / 0.7);
-    --color-border: rgb(10 10 12 / 0.16);
+    --color-muted-foreground: rgb(10 10 12 / 0.66);
+    --color-border: rgb(10 10 12 / 0.12);
+    --color-grid-line: color-mix(in srgb, var(--brand-void) 10%, #fff);
     --color-action: var(--brand-signal);
     --color-action-foreground: var(--brand-ink);
     --color-ring: var(--brand-signal);
-  }
-
-  /*
-    Koyu vurgu bloğu — anma postlarının zemini, deck'in void'i. Eyebrow ve
-    bağlantılar burada signal'ın açık tonu: ham #0154FF void üzerinde küçük
-    puntoda okunmuyor.
-  */
-  .surface-void {
-    background-color: var(--brand-void);
-    color: var(--brand-ink);
-    --color-card: var(--brand-void);
-    --color-background: var(--brand-void);
-    --color-foreground: var(--brand-ink);
-    --color-primary: color-mix(in oklab, var(--brand-signal) 55%, #fff);
-    --color-muted-foreground: rgb(255 255 255 / 0.62);
-    --color-border: rgb(255 255 255 / 0.16);
-    --color-action: var(--brand-signal);
-    --color-action-foreground: var(--brand-ink);
-    --color-ring: var(--brand-ink);
   }
 
   * {
@@ -431,11 +420,12 @@
     brand.src.css). Harman modu bilerek `normal`: `overlay` void'in ~0.04'lük
     tabanında taneciği yok ediyor. `fixed` olduğu için sayfa uzadıkça yeniden
     boyanmıyor; tıklamaları geçirsin diye pointer-events kapalı. Kitteki .09
-    tam ekran slayt için; uzun okunan sayfada .06 metni kirletmiyor.
+    tam ekran ve koyu zemin için; beyaz zeminde .035 kâğıt dokusu gibi
+    duruyor, metni kirletmiyor.
   */
   /*
-    Dither görselleri (`scripts/dither.py`) 2 renkli paletli PNG: kare
-    noktalar ölçeklenirken yumuşatılırsa gri lekeye döner.
+    Dither görselleri (`scripts/dither.py`) maske olarak çiziliyor (bkz.
+    `Dither`); seçilmesin, tıklamayı engellemesin.
   */
   .dither {
     image-rendering: pixelated;
@@ -449,7 +439,7 @@
     inset: 0;
     z-index: 60;
     pointer-events: none;
-    opacity: 0.06;
+    opacity: 0.035;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 

@@ -268,7 +268,7 @@ function LinkRow({
         'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none md:min-h-20',
         wide && 'lg:col-span-2',
         link.featured
-          ? 'bg-foreground text-background hover:bg-foreground/90'
+          ? 'bg-action text-action-foreground hover:bg-action/90'
           : 'bg-card hover:bg-accent',
       )}
     >
@@ -278,7 +278,7 @@ function LinkRow({
         <LeadingIcon
           className={cn(
             'size-5 shrink-0',
-            link.featured ? 'text-background' : tone,
+            link.featured ? 'text-action-foreground' : tone,
           )}
         />
         <span className="flex min-w-0 flex-col gap-0.5">
@@ -287,15 +287,17 @@ function LinkRow({
             <span
               className={cn(
                 'flex items-center gap-1.5 text-xs',
-                link.featured ? 'text-background/70' : 'text-muted-foreground',
+                link.featured
+                  ? 'text-action-foreground/75'
+                  : 'text-muted-foreground',
               )}
             >
               {/* "Canlı" işaret: yalnızca öne çıkan (başvuru) kartında,
                   "başvurular açık" mesajını nabız gibi vurgular. */}
               {link.featured && (
                 <span aria-hidden className="relative flex size-1.5 shrink-0">
-                  <span className="bg-background absolute inline-flex h-full w-full animate-ping opacity-75" />
-                  <span className="bg-background relative inline-flex size-1.5" />
+                  <span className="bg-action-foreground absolute inline-flex h-full w-full animate-ping opacity-75" />
+                  <span className="bg-action-foreground relative inline-flex size-1.5" />
                 </span>
               )}
               {link.note}
@@ -426,11 +428,10 @@ export default async function LinksPage({
         <div className="grid gap-px md:min-h-dvh md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
           {/* md'de header sol kolonun tamamını kaplar (grid stretch) ve içerik
               dikeyde ortalanır; mask zaten absolute, flex'ten etkilenmez. */}
-          {/* Sol panel koyu vurgu bloğu, altta Tanışma afişindeki evrim
-              dizisi (dither); sağdaki bağlantılar sayfanın signal mavisinde.
-              Instagram biyografisinden gelen ziyaretçi postlardaki yüzeye
-              iniyor. */}
-          <header className="surface-void relative overflow-hidden px-6 py-10 text-center md:sticky md:top-0 md:flex md:h-dvh md:flex-col md:justify-center md:px-10 md:py-16">
+          {/* Sol panel postların mavi yüzeyi, altta Tanışma afişindeki evrim
+              dizisi (dither); sağdaki bağlantılar beyaz — postlardaki mavi
+              üst + beyaz bant kompozisyonu. */}
+          <header className="surface-signal relative overflow-hidden px-6 py-10 text-center md:sticky md:top-0 md:flex md:h-dvh md:flex-col md:justify-center md:px-10 md:py-16">
             <div className="absolute inset-x-10 bottom-0 hidden md:block">
               <Evolution you={t('you')} />
             </div>

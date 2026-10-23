@@ -121,15 +121,17 @@ export default function Header() {
 
   return (
     <>
-      {/* Üstte boşluk bandı — template gibi hafif zemin tonu (grid çizgileri). */}
-      <div aria-hidden className="bg-grid-line">
+      {/* Üstte boşluk bandı — template gibi hafif zemin tonu (grid çizgileri).
+          Header ve bu bant signal yüzeyde: sayfanın mavi girişi buradan
+          başlıyor, ilk bölüm (hero) onu sürdürüyor. */}
+      <div aria-hidden className="surface-signal bg-grid-line">
         <Separator className="h-6" />
       </div>
       <header
         role="banner"
         data-state={isMobileMenuOpen ? 'active' : 'inactive'}
         {...(isScrolled && { 'data-scrolled': true })}
-        className="lg:data-scrolled:pb-[0.5px] bg-grid-line sticky inset-x-0 top-0 z-50 max-lg:pb-px"
+        className="surface-signal lg:data-scrolled:pb-[0.5px] bg-grid-line sticky inset-x-0 top-0 z-50 max-lg:pb-px"
       >
         <div
           className={cn(

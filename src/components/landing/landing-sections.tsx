@@ -88,7 +88,7 @@ export async function LandingHero() {
   const card = next ? toCard(next, locale, tEvents('online')) : null;
 
   return (
-    <section className="overflow-hidden">
+    <section className="surface-signal overflow-hidden">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
           <Rail rows={6} />
@@ -221,7 +221,7 @@ export function LandingFeatures() {
                 name="brain"
                 width={1400}
                 height={878}
-                className="@2xl:block absolute -right-6 -bottom-28 hidden w-[22rem] opacity-50"
+                className="text-primary @2xl:block absolute -right-6 -bottom-28 hidden w-[22rem] opacity-40"
               />
               <div className="relative">
                 <Eyebrow>
@@ -282,7 +282,7 @@ export async function LandingStats() {
           <div className="col-span-full sm:col-span-8">
             <div
               data-grid-content
-              className="surface-void @4xl:p-12 relative overflow-hidden p-6"
+              className="@4xl:p-12 relative overflow-hidden p-6"
             >
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <Eyebrow>{t('heading')}</Eyebrow>
@@ -333,10 +333,10 @@ export function LandingManifesto() {
                 <Eyebrow>{t('manifestoTitle')}</Eyebrow>
                 <p className="@4xl:text-3xl mt-6 text-2xl leading-snug font-medium text-balance">
                   {t.rich('manifestoRich', {
-                    // Kit `.hl`: sayfada tek vurgu bandı. Signal yüzeyde
-                    // beyaz bant + mavi yazı (`.stage--signal .hl`).
+                    // Kit `.hl`: sayfada tek vurgu bandı, metnin arkasında
+                    // dolu signal blok.
                     hl: (chunks) => (
-                      <mark className="bg-foreground text-background px-1.5 [box-decoration-break:clone]">
+                      <mark className="bg-action text-action-foreground px-1.5 [box-decoration-break:clone]">
                         {chunks}
                       </mark>
                     ),
@@ -348,7 +348,7 @@ export function LandingManifesto() {
                 name="satoshi"
                 width={1000}
                 height={877}
-                className="@2xl:-mb-12 mx-auto block h-auto w-full max-w-xs"
+                className="text-primary @2xl:-mb-12 mx-auto block w-full max-w-xs"
               />
             </div>
           </div>
@@ -389,10 +389,7 @@ export function LandingTicker() {
   return (
     <section aria-hidden>
       <Container asGrid>
-        <div
-          data-grid-content
-          className="surface-paper text-primary overflow-hidden py-4"
-        >
+        <div data-grid-content className="text-primary overflow-hidden py-4">
           <div className="motion-safe:animate-marquee flex w-max">
             {row}
             {row}
@@ -461,10 +458,10 @@ export function LandingCta() {
           </div>
 
           <div className="col-span-full sm:col-span-8">
-            <div data-grid-content className="surface-void">
+            <div data-grid-content>
               <div className="@4xl:p-12 @2xl:grid-cols-[3fr_2fr] relative grid items-end gap-10 overflow-hidden p-6">
                 <div>
-                  <h2 className="@4xl:text-6xl text-4xl leading-[1.12] text-balance sm:text-5xl">
+                  <h2 className="text-primary @4xl:text-6xl text-4xl leading-[1.12] text-balance sm:text-5xl">
                     {t('ctaTitle')}
                   </h2>
                   <Terminal path="~/ytu-blockchain" className="mt-8 max-w-md">
@@ -479,11 +476,11 @@ export function LandingCta() {
                   name="whale"
                   width={1400}
                   height={916}
-                  className="@2xl:-mb-12 block h-auto w-full"
+                  className="text-primary @2xl:-mb-12 block w-full"
                 />
               </div>
 
-              <div className="surface-paper @4xl:px-12 flex flex-col gap-6 px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
+              <div className="border-border @4xl:px-12 flex flex-col gap-6 border-t px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-primary font-display text-2xl sm:text-3xl">
                     YTUBLOCKCHAIN.COM/LINKS
