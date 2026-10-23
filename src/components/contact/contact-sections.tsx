@@ -3,8 +3,8 @@ import { useTranslations } from 'next-intl';
 
 import { Container, Rail } from '@/components/container';
 import { SiteForm } from '@/components/site-form';
+import { JOIN_HREF, SiteLink } from '@/components/site-link';
 import { buttonClasses } from '@/components/ui/button';
-import { Link } from '@/i18n/navigation';
 import { siteConfig } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
@@ -130,12 +130,12 @@ export function ContactSection() {
 
                 <p className="text-muted-foreground mt-8 text-sm">
                   {t('communityNote')}{' '}
-                  <Link
-                    href="/community"
+                  <SiteLink
+                    href={JOIN_HREF}
                     className="text-primary font-medium hover:underline"
                   >
                     {t('communityCta')}
-                  </Link>
+                  </SiteLink>
                 </p>
               </div>
             </div>

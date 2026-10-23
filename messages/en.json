@@ -28,14 +28,28 @@
         "teamDesc": "The committees that run the club together"
       },
       "community": {
-        "join": "Join",
-        "joinDesc": "Become a member and take part",
+        "whatsapp": "WhatsApp Community",
+        "whatsappDesc": "Announcements and chat in one group",
+        "luma": "Event Calendar",
+        "lumaDesc": "Follow us on Luma, never miss an event",
+        "roadmap": "Web3 Roadmap",
+        "roadmapDesc": "A learning guide for complete beginners",
         "projects": "Projects",
         "projectsDesc": "The open-source projects we build together",
-        "sponsors": "Sponsors",
-        "sponsorsDesc": "The organizations that make our community possible",
+        "github": "GitHub",
+        "githubDesc": "The club's open-source code",
         "stickers": "Stickers",
-        "stickersDesc": "The club's sticker set"
+        "stickersDesc": "The club's sticker set",
+        "instagram": "Instagram",
+        "instagramDesc": "Event announcements and photos",
+        "x": "X",
+        "xDesc": "Latest news and hackathon updates",
+        "medium": "Medium",
+        "mediumDesc": "What we write about blockchain",
+        "podcast": "Podcast",
+        "podcastDesc": "Listen on Spotify",
+        "sponsors": "Sponsors",
+        "sponsorsDesc": "The organizations that make our community possible"
       }
     },
     "menu": {
@@ -70,10 +84,6 @@
     "projects": {
       "title": "Projects",
       "description": "Blockchain and open-source projects built by our club members."
-    },
-    "community": {
-      "title": "Community",
-      "description": "Join the YTÜ Blockchain community on GitHub, X and Instagram."
     },
     "events": {
       "title": "Events",
@@ -446,16 +456,6 @@
       "heading": "Sponsorships",
       "body": "To sponsor our events or explore a partnership, pick a time that works for you from our calendar.",
       "button": "Book a sponsorship call"
-    }
-  },
-  "Community": {
-    "eyebrow": "Community",
-    "title": "Join the community",
-    "subtitle": "We come together on our online channels and at our events. Follow along, ask questions and start building.",
-    "cta": {
-      "heading": "Want to join us?",
-      "body": "Becoming a member takes a few minutes; we welcome all levels.",
-      "button": "Join us"
     }
   },
   "Blog": {

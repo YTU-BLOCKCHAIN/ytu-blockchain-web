@@ -19,7 +19,6 @@ import { siteConfig } from '@/lib/site';
 const EXPLORE = [
   { key: 'about', href: '/about' },
   { key: 'projects', href: '/projects' },
-  { key: 'community', href: '/community' },
   { key: 'events', href: '/events' },
   { key: 'blog', href: '/blog' },
   { key: 'stickers', href: '/stickers' },

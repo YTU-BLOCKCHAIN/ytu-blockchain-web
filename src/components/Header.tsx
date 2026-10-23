@@ -24,6 +24,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { JOIN_HREF, SiteLink } from '@/components/site-link';
+import { siteConfig } from '@/lib/site';
 import { usePathname } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
@@ -64,8 +65,10 @@ const NAV = [
     ],
   },
   {
+    // Ayrı bir topluluk sayfası yok (eski `/community` → `/links`): başlık
+    // yalnızca menüyü açıyor, kanallar doğrudan burada. Dış adresler
+    // `SiteLink` içinde yeni sekmede açılıyor.
     key: 'community',
-    href: '/community',
     heading: 'menu.community.heading',
     promo: {
       href: JOIN_HREF,
@@ -73,11 +76,20 @@ const NAV = [
       desc: 'menu.community.promo.desc',
     },
     sections: [
-      // Kanallar bölümü kaldırıldı: hepsi `/links` sayfasında bir arada.
       {
-        href: '/community#join',
-        label: 'sections.community.join',
-        desc: 'sections.community.joinDesc',
+        href: siteConfig.social.whatsapp,
+        label: 'sections.community.whatsapp',
+        desc: 'sections.community.whatsappDesc',
+      },
+      {
+        href: siteConfig.social.luma,
+        label: 'sections.community.luma',
+        desc: 'sections.community.lumaDesc',
+      },
+      {
+        href: siteConfig.roadmapPath,
+        label: 'sections.community.roadmap',
+        desc: 'sections.community.roadmapDesc',
       },
       {
         href: '/projects',
@@ -85,9 +97,34 @@ const NAV = [
         desc: 'sections.community.projectsDesc',
       },
       {
+        href: siteConfig.social.github,
+        label: 'sections.community.github',
+        desc: 'sections.community.githubDesc',
+      },
+      {
         href: '/stickers',
         label: 'sections.community.stickers',
         desc: 'sections.community.stickersDesc',
+      },
+      {
+        href: siteConfig.social.instagram,
+        label: 'sections.community.instagram',
+        desc: 'sections.community.instagramDesc',
+      },
+      {
+        href: siteConfig.social.x,
+        label: 'sections.community.x',
+        desc: 'sections.community.xDesc',
+      },
+      {
+        href: siteConfig.social.medium,
+        label: 'sections.community.medium',
+        desc: 'sections.community.mediumDesc',
+      },
+      {
+        href: siteConfig.social.spotify,
+        label: 'sections.community.podcast',
+        desc: 'sections.community.podcastDesc',
       },
       // Destekçilerimiz bölümü about sayfasında gizli olduğu için menüden de
       // kaldırıldı; `<AboutSponsors />` geri açıldığında bu öğeyi de geri alın.
@@ -112,7 +149,6 @@ const SIGNAL_ENTRANCE = new Set([
   '/',
   '/about',
   '/events',
-  '/community',
   '/contact',
   '/projects',
   '/blog',
@@ -291,9 +327,13 @@ function NavMenu() {
                   dropdown'ı açıyor, tıklayınca sayfaya gidiyor. Radix'in click
                   handler'ı açık menüyü kapatıyor (onItemSelect toggle), Next
                   Link de ardından yönlendiriyor — ikisi çakışmıyor. */}
-              <NavigationMenuTrigger asChild>
-                <SiteLink href={item.href}>{t(item.key)}</SiteLink>
-              </NavigationMenuTrigger>
+              {'href' in item ? (
+                <NavigationMenuTrigger asChild>
+                  <SiteLink href={item.href}>{t(item.key)}</SiteLink>
+                </NavigationMenuTrigger>
+              ) : (
+                <NavigationMenuTrigger>{t(item.key)}</NavigationMenuTrigger>
+              )}
               <NavigationMenuContent>
                 <div className="w-[38rem] max-w-[calc(100vw-4rem)]">
                   {/* Kategori başlığı (template: "Features" / "More Features"). */}

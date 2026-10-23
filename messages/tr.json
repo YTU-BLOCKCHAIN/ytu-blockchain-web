@@ -28,14 +28,28 @@
         "teamDesc": "Kulübü birlikte yürüten komiteler"
       },
       "community": {
-        "join": "Katıl",
-        "joinDesc": "Üye ol, topluluğun parçası ol",
+        "whatsapp": "WhatsApp Topluluğu",
+        "whatsappDesc": "Duyurular ve sohbet tek grupta",
+        "luma": "Etkinlik Takvimi",
+        "lumaDesc": "Luma'da takip et, yeni etkinliği kaçırma",
+        "roadmap": "Web3 Yol Haritası",
+        "roadmapDesc": "Sıfırdan başlayanlar için öğrenme rehberi",
         "projects": "Projeler",
         "projectsDesc": "Birlikte ürettiğimiz açık kaynak projeler",
-        "sponsors": "Sponsorlar",
-        "sponsorsDesc": "Topluluğumuzu mümkün kılan kurumlar",
+        "github": "GitHub",
+        "githubDesc": "Kulübün açık kaynak kodu",
         "stickers": "Stickerlar",
-        "stickersDesc": "Kulübün sticker seti"
+        "stickersDesc": "Kulübün sticker seti",
+        "instagram": "Instagram",
+        "instagramDesc": "Etkinlik duyuruları ve fotoğraflar",
+        "x": "X",
+        "xDesc": "Güncel duyurular ve hackathon haberleri",
+        "medium": "Medium",
+        "mediumDesc": "Blockchain üzerine yazılarımız",
+        "podcast": "Podcast",
+        "podcastDesc": "Spotify'da dinle",
+        "sponsors": "Sponsorlar",
+        "sponsorsDesc": "Topluluğumuzu mümkün kılan kurumlar"
       }
     },
     "menu": {
@@ -70,10 +84,6 @@
     "projects": {
       "title": "Projeler",
       "description": "Kulüp üyelerinin geliştirdiği blockchain ve açık kaynak projeleri."
-    },
-    "community": {
-      "title": "Topluluk",
-      "description": "GitHub, X ve Instagram üzerinden YTÜ Blockchain topluluğuna katılın."
     },
     "events": {
       "title": "Etkinlikler",
@@ -446,16 +456,6 @@
       "heading": "Sponsorluklar",
       "body": "Etkinliklerimize sponsor olmak ve iş birliği olanaklarını konuşmak için takvimimizden size uygun bir zamanı seçin.",
       "button": "Sponsorluk görüşmesi ayarla"
-    }
-  },
-  "Community": {
-    "eyebrow": "Topluluk",
-    "title": "Topluluğa katıl",
-    "subtitle": "Online kanallarımızda ve etkinliklerimizde bir aradayız. Takip et, sorular sor, üretime katıl.",
-    "cta": {
-      "heading": "Aramıza katılmak ister misin?",
-      "body": "Üyelik birkaç dakika sürer; her seviye için açığız.",
-      "button": "Bize Katıl"
     }
   },
   "Blog": {
