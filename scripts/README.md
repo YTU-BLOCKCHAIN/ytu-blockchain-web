@@ -82,3 +82,19 @@ günlerde takılı kalır**; sonraki her sürümde `dev → main` **içerik fark
 temiz akar.
 
 Bedeli: `main` artık "her sürüm tek kayıt" değil, `dev`'in tüm geçmişini taşır.
+
+## `dither.py`
+
+Sitedeki dither'lı görselleri (`public/images/dither/`) üretir. Algoritma kulübün
+sosyal medya postlarındaki canvas dither'ının aynısı (4x4 Bayer, kare nokta, 1px
+boşluk); site ve postlar aynı dokuyu taşır. Kaynak görseller depoda değil, Drive'da
+(`design/gorseller/`, `design/sosyal-medya/<set>/kaynak/img/`).
+
+```bash
+python3 scripts/dither.py kaynak.png public/images/dither/ad.png --width 1400 --cell 10 --gap 2 --fade b --fw .15
+```
+
+Mevcut dosyaların ayarları: `brain` (1400, cell 10, fade tb .2), `whale` (1400, cell 10,
+fade b .15), `satoshi` (1000, cell 8, fade b .2), `bulut` (2200, cell 10, lo 120 hi 250,
+fade t .3), `octopus` (1800, cell 8, lo 30 hi 230, fade l .25), `evolution` (1600, cell 6,
+gap 1; web1/web2/web3 etiketleri kaynaktan silinip HTML'de çiziliyor, bkz. `Evolution`).
