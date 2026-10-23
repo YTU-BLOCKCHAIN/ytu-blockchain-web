@@ -23,6 +23,7 @@ import {
   WhatsappIcon,
   XIcon,
 } from '@/components/community/brand-icons';
+import { Evolution } from '@/components/brand';
 import { Logo } from '@/components/logo';
 import { routing } from '@/i18n/routing';
 import { type LinkItem, linksContentFor } from '@/lib/links';
@@ -89,6 +90,10 @@ type RowIconSpec = { Icon: RowIcon; tone: string };
  * Eşleşme `url` (içerik dosyasındaki dil öneksiz hâli) ile yapılıyor, `href`
  * ile değil: önek eklendikten sonra da çalışırdı ama ikon seçimi dilin
  * bilinmesini gerektirmeyen bir karar, o yüzden ham adresle kalıyor.
+ *
+ * Renk yalnız iki tonda: başvuru satırları marka mavisi, geri kalanı beyaz
+ * mürekkep. Marka kılavuzu yeni renk eklemeyi yasaklıyor (Brand > 08); platform
+ * renkleri (Instagram pembesi, WhatsApp yeşili) sayfayı yamalı gösteriyordu.
  */
 function iconForLink(link: LinkItem): RowIconSpec {
   const url = link.url.toLowerCase();
@@ -105,46 +110,46 @@ function iconForLink(link: LinkItem): RowIconSpec {
 
   if (link.external) {
     if (url.includes('cal.com'))
-      return { Icon: CalendarClock, tone: 'text-violet-400' };
+      return { Icon: CalendarClock, tone: 'text-foreground' };
     /* Etkinlik takvimimiz Luma'da. `lu.ma` eski kısa adres, ikisi de aynı
        yere gider, o yüzden ikisi de eşleşiyor. Bilet ikonu bilerek `cal.com`'un
        takviminden ayrı: biri etkinliklerimiz, diğeri sponsorluk randevusu. */
     if (url.includes('luma.com') || url.includes('lu.ma'))
-      return { Icon: Ticket, tone: 'text-red-400' };
+      return { Icon: Ticket, tone: 'text-foreground' };
     // Başvuru formu dışarıda (Google Forms) barınıyor ama satır hâlâ bir
     // başvuru satırı: ikon `/join` sayfasınınkiyle aynı kalsın.
     if (url.includes('forms.gle') || url.includes('docs.google.com/forms'))
       return { Icon: UserPlus, tone: 'text-primary' };
     if (url.includes('notion.site'))
-      return { Icon: MapFilledIcon, tone: 'text-amber-400' };
+      return { Icon: MapFilledIcon, tone: 'text-foreground' };
     if (url.includes('medium.com'))
-      return { Icon: BookText, tone: 'text-emerald-400' };
+      return { Icon: BookText, tone: 'text-foreground' };
     if (url.includes('spotify.com'))
-      return { Icon: Podcast, tone: 'text-[#1DB954]' };
+      return { Icon: Podcast, tone: 'text-foreground' };
     if (url.includes('instagram.com'))
-      return { Icon: InstagramIcon, tone: 'text-[#E4405F]' };
+      return { Icon: InstagramIcon, tone: 'text-foreground' };
     if (url.includes('whatsapp.com'))
-      return { Icon: WhatsappIcon, tone: 'text-[#25D366]' };
+      return { Icon: WhatsappIcon, tone: 'text-foreground' };
     // `//x.com` (yalnız "x.com" değil): adres hep `https://` ile başladığı için
     // bu kalıp host'u yakalar, içinde "x.com" geçen başka adreslere uymaz.
     if (url.includes('//x.com') || url.includes('twitter.com'))
       return { Icon: XIcon, tone: 'text-foreground' };
     if (url.includes('github.com'))
       return { Icon: GithubIcon, tone: 'text-foreground' };
-    return { Icon: Globe, tone: 'text-sky-400' };
+    return { Icon: Globe, tone: 'text-foreground' };
   }
 
   if (url.includes('/join')) return { Icon: UserPlus, tone: 'text-primary' };
   if (url.includes('/projects'))
-    return { Icon: FolderGit2, tone: 'text-orange-400' };
-  if (url.includes('/contact')) return { Icon: Mail, tone: 'text-rose-400' };
+    return { Icon: FolderGit2, tone: 'text-foreground' };
+  if (url.includes('/contact')) return { Icon: Mail, tone: 'text-foreground' };
   // `/brand` ve `/roadmap` Notion'a yönlenir (bkz. next.config.ts): satır içeride
   // görünür ama hedef dışarıda, o yüzden ikonları burada eşleşiyor.
-  if (url.includes('/brand')) return { Icon: Palette, tone: 'text-pink-400' };
+  if (url.includes('/brand')) return { Icon: Palette, tone: 'text-foreground' };
   if (url.includes('/roadmap'))
-    return { Icon: MapFilledIcon, tone: 'text-amber-400' };
+    return { Icon: MapFilledIcon, tone: 'text-foreground' };
   // "Web Sitemiz" (`/`) ve tanımsız iç sayfalar
-  return { Icon: Globe, tone: 'text-sky-400' };
+  return { Icon: Globe, tone: 'text-foreground' };
 }
 
 /** "https://x.com/BlockchainYtu" → "@BlockchainYtu". */
@@ -260,10 +265,10 @@ function LinkRow({
       className={cn(
         // Köşeler yalnızca sm'den itibaren: telefonda kartlar ekranın iki
         // kenarına dayanıyor, orada yuvarlatma kırpılmış gibi duruyordu.
-        'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none sm:rounded md:min-h-20',
-        wide && 'lg:col-span-2',
+        'group focus-visible:ring-ring flex min-h-14 items-center justify-between gap-4 px-5 py-4 transition-colors focus-visible:ring-2 focus-visible:outline-none md:min-h-0 md:py-2 lg:px-8',
+        wide && 'md:col-span-2',
         link.featured
-          ? 'bg-foreground text-background hover:bg-foreground/90'
+          ? 'bg-action text-action-foreground hover:bg-action/90'
           : 'bg-card hover:bg-accent',
       )}
     >
@@ -273,7 +278,7 @@ function LinkRow({
         <LeadingIcon
           className={cn(
             'size-5 shrink-0',
-            link.featured ? 'text-background' : tone,
+            link.featured ? 'text-action-foreground' : tone,
           )}
         />
         <span className="flex min-w-0 flex-col gap-0.5">
@@ -282,15 +287,17 @@ function LinkRow({
             <span
               className={cn(
                 'flex items-center gap-1.5 text-xs',
-                link.featured ? 'text-background/70' : 'text-muted-foreground',
+                link.featured
+                  ? 'text-action-foreground/75'
+                  : 'text-muted-foreground',
               )}
             >
               {/* "Canlı" işaret: yalnızca öne çıkan (başvuru) kartında,
                   "başvurular açık" mesajını nabız gibi vurgular. */}
               {link.featured && (
                 <span aria-hidden className="relative flex size-1.5 shrink-0">
-                  <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
-                  <span className="bg-primary relative inline-flex size-1.5 rounded-full" />
+                  <span className="bg-action-foreground absolute inline-flex h-full w-full animate-ping opacity-75" />
+                  <span className="bg-action-foreground relative inline-flex size-1.5" />
                 </span>
               )}
               {link.note}
@@ -331,7 +338,7 @@ async function LinksLanguageSwitcher({ locale }: { locale: Locale }) {
 
   return (
     <div
-      className="border-foreground/15 mt-6 flex items-center rounded-full border p-0.5 text-xs"
+      className="border-foreground/15 mt-6 flex items-center border p-0.5 text-xs"
       role="group"
       aria-label={t('languageLabel')}
     >
@@ -349,7 +356,7 @@ async function LinksLanguageSwitcher({ locale }: { locale: Locale }) {
             aria-current={selected ? 'page' : undefined}
             aria-label={t('switchTo', { language: t(`language.${candidate}`) })}
             className={cn(
-              'rounded-full px-2.5 py-1 font-medium uppercase transition-colors',
+              'px-2.5 py-1 font-medium uppercase transition-colors',
               selected
                 ? 'bg-foreground/10 text-foreground'
                 : 'text-muted-foreground hover:text-foreground',
@@ -389,13 +396,16 @@ export default async function LinksPage({
     ...links.slice(socialsAt),
   ].map((link) => {
     const { Icon, tone } = iconForLink(link);
-    return { link, LeadingIcon: Icon, tone, wide: Boolean(link.featured) };
+    return { link, LeadingIcon: Icon, tone, wide: false };
   });
-  // Geniş ekranda iki sütun: öne çıkan (başvuru) satırları tam satır; geri
-  // kalanların sayısı tekse sonuncusu da, yoksa sağ altta boş bir hücre kalır.
-  const regular = rows.filter((row) => !row.wide);
-  const last = regular.at(-1);
-  if (regular.length % 2 === 1 && last) last.wide = true;
+  // Geniş ekranda iki sütunlu ızgara: öne çıkan (başvuru) satırları da
+  // normal satırlar da ikişer yan yana. Bir grubun sayısı tekse sonuncusu tam
+  // satır olur; yoksa grubun sonunda boş bir hücre kalırdı.
+  for (const featured of [true, false]) {
+    const group = rows.filter((row) => Boolean(row.link.featured) === featured);
+    const last = group.at(-1);
+    if (group.length % 2 === 1 && last) last.wide = true;
+  }
 
   return (
     /* Telefonda tam ekran: yatay padding yok, kartlar kenardan kenara. Yatay
@@ -406,11 +416,12 @@ export default async function LinksPage({
        kuyu gibi kalıyordu. (İçerik taşarsa main zaten içerikle uzar,
        justify-center etkisiz kalır — kırpma riski yok.)
 
-       md'den itibaren tam ekran: ortada 4xl'lik bir kutu siyah boşlukta
-       küçük kalıyordu. Solda ekrana sabitlenmiş profil paneli, sağda iki
-       sütunlu bağlantı listesi; telefondaki görünüm değişmedi. */
-    <main className="flex flex-1 flex-col items-center pb-24 sm:px-4 sm:pt-14 md:items-stretch md:p-0">
-      <div className="w-full max-w-md md:min-h-dvh md:max-w-none">
+       md'den itibaren sayfa tam olarak bir ekran (`h-dvh`, kaydırma yok):
+       solda profil paneli, sağda paneli kenarsız dolduran bağlantı ızgarası.
+       Satırlar ekran yüksekliğini eşit bölüşüyor. Kaydırma yalnızca
+       telefonda; telefondaki görünüm değişmedi. */
+    <main className="flex flex-1 flex-col items-center pb-24 sm:px-4 sm:pt-14 md:h-dvh md:flex-none md:items-stretch md:overflow-hidden md:p-0">
+      <div className="w-full max-w-md md:h-full md:max-w-none">
         {/* `gap-px`: kartlar arasındaki 1px boşluklardan zemin (tam siyah)
             sızar, ayraç çizgisi bu. Kartlar siyahın üstünde hafif yükselti.
 
@@ -418,29 +429,17 @@ export default async function LinksPage({
             listesi. Telefondaki dar sütun geniş ekranda siyah boşlukta ince
             bir şerit gibi kaybolmasın diye. Aradaki 1px boşluk da satır
             araları ile aynı ayraç dili. */}
-        <div className="grid gap-px md:min-h-dvh md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+        <div className="grid gap-px md:h-full md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
           {/* md'de header sol kolonun tamamını kaplar (grid stretch) ve içerik
               dikeyde ortalanır; mask zaten absolute, flex'ten etkilenmez. */}
-          <header className="bg-card relative overflow-hidden px-6 py-10 text-center sm:rounded md:sticky md:top-0 md:flex md:h-dvh md:flex-col md:justify-center md:rounded-none md:px-10 md:py-16">
-            {/* Sitedeki hero'larla aynı teknik: CSS mask + bg-foreground →
-                görsel metin rengini alır. Sayfa her zaman koyu olduğu için
-                opaklık tek değer (`dark:` varyantı OS temasına bakardı, bu
-                sayfa ise ona bakmıyor). */}
-            <div
-              aria-hidden
-              className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
-              style={{
-                maskImage: 'url(/images/landing-bg.png)',
-                WebkitMaskImage: 'url(/images/landing-bg.png)',
-                maskSize: 'cover',
-                WebkitMaskSize: 'cover',
-                maskPosition: 'center 20%',
-                WebkitMaskPosition: 'center 20%',
-                maskRepeat: 'no-repeat',
-                WebkitMaskRepeat: 'no-repeat',
-              }}
-            />
-            <div className="relative flex flex-col items-center">
+          {/* Sol panel postların mavi yüzeyi, altta Tanışma afişindeki evrim
+              dizisi (dither); sağdaki bağlantılar beyaz — postlardaki mavi
+              üst + beyaz bant kompozisyonu. */}
+          {/* md'de iki satır: üstte profil (kalan alanda ortalı), altta evrim
+              dizisi. Dizinin genişliği ekran yüksekliğine bağlı; kısa ekranda
+              küçülüyor, profilin üstüne binmiyor. */}
+          <header className="surface-signal relative overflow-hidden px-6 py-10 text-center md:grid md:h-full md:grid-rows-[minmax(0,1fr)_auto] md:px-10 md:pt-16 md:pb-0">
+            <div className="relative flex flex-col items-center md:justify-center">
               <h1 className="flex items-center justify-center">
                 <Logo className="scale-110 md:scale-125" />
                 <span className="sr-only">{profile.title}</span>
@@ -457,12 +456,16 @@ export default async function LinksPage({
                   Listenin altında kalsa kaydırmadan görünmezdi. */}
               <LinksLanguageSwitcher locale={locale} />
             </div>
+            <div className="mx-auto hidden w-full max-w-[calc((100dvh-20rem)*2)] pt-8 md:block">
+              <Evolution you={t('you')} />
+            </div>
           </header>
 
-          {/* İç grid de `gap-px`: telefonda dıştaki ile aynı ayraçlar, yani
-              görünüm eskisiyle birebir. md'de sağ kolon soldan kısaysa
-              satırlar stretch ile eşit büyüyüp paneli doldurur. */}
-          <div className="grid content-center gap-px md:p-8 lg:grid-cols-2 lg:p-16">
+          {/* `gap-px` + `bg-grid-line`: hücre aralarındaki 1px boşluk ızgara
+              çizgisini gösteriyor (sitedeki `asGrid` dili). md'den itibaren
+              ızgara sağ paneli kenarsız dolduruyor; `auto-rows` satırlara
+              ekranı eşit bölüştürüyor. */}
+          <div className="bg-grid-line grid gap-px md:h-full md:auto-rows-[minmax(0,1fr)] md:grid-cols-2">
             {rows.map((row) => (
               <LinkRow key={`${row.link.label}-${row.link.href}`} {...row} />
             ))}
@@ -478,7 +481,7 @@ export default async function LinksPage({
         aria-hidden
         // Maske yalnızca en alttaki ~%15'i tam opak bırakır, kalanı uzun bir
         // rampayla söner: kısa/sert bir bant yerine yumuşak bir eriyiş.
-        className="from-background pointer-events-none fixed inset-x-0 bottom-0 h-32 bg-linear-to-t to-transparent backdrop-blur-[2px] [mask-image:linear-gradient(to_top,#000_15%,transparent)]"
+        className="from-background pointer-events-none fixed inset-x-0 bottom-0 h-32 md:hidden bg-linear-to-t to-transparent backdrop-blur-[2px] [mask-image:linear-gradient(to_top,#000_15%,transparent)]"
       />
     </main>
   );

@@ -5,4 +5,4 @@ import { pageCard } from '@/lib/og-page';
 export const alt = 'YTÜ Blockchain';
 export { size, contentType };
 
-export default pageCard('community');
+export default pageCard('stickers');

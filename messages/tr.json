@@ -20,7 +20,7 @@
     },
     "sections": {
       "about": {
-        "mission": "Misyonumuz",
+        "mission": "Vizyon ve Misyon",
         "missionDesc": "Kampüste blockchain'i erişilebilir kılma amacımız",
         "values": "Değerlerimiz",
         "valuesDesc": "Her kararımıza yön veren ilkeler",
@@ -28,10 +28,16 @@
         "teamDesc": "Kulübü birlikte yürüten komiteler"
       },
       "community": {
-        "join": "Katıl",
-        "joinDesc": "Üye ol, topluluğun parçası ol",
+        "links": "Tüm Kanallarımız",
+        "linksDesc": "WhatsApp, Instagram, X, GitHub ve fazlası tek sayfada",
+        "roadmap": "Web3 Yol Haritası",
+        "roadmapDesc": "Sıfırdan başlayanlar için öğrenme rehberi",
         "projects": "Projeler",
         "projectsDesc": "Birlikte ürettiğimiz açık kaynak projeler",
+        "stickers": "Stickerlar",
+        "stickersDesc": "Kulübün sticker seti",
+        "brand": "Marka Kılavuzu",
+        "brandDesc": "Logo, renk ve font",
         "sponsors": "Sponsorlar",
         "sponsorsDesc": "Topluluğumuzu mümkün kılan kurumlar"
       }
@@ -51,7 +57,8 @@
           "desc": "Topluluğun bir parçası ol"
         }
       }
-    }
+    },
+    "stickers": "Stickerlar"
   },
   "Meta": {
     "defaultTitle": "YTÜ Blockchain Kulübü",
@@ -68,10 +75,6 @@
       "title": "Projeler",
       "description": "Kulüp üyelerinin geliştirdiği blockchain ve açık kaynak projeleri."
     },
-    "community": {
-      "title": "Topluluk",
-      "description": "GitHub, X ve Instagram üzerinden YTÜ Blockchain topluluğuna katılın."
-    },
     "events": {
       "title": "Etkinlikler",
       "description": "YTÜ Blockchain Kulübü'nün eğitimleri, meetup'ları, hackathon ve konferans katılımları — yaklaşan etkinlikler ve 2022'den bugüne arşiv."
@@ -87,6 +90,10 @@
     "privacy": {
       "title": "Aydınlatma Metni",
       "description": "YTÜ Blockchain Kulübü form kayıtlarında kişisel verilerin nasıl işlendiğine dair aydınlatma metni."
+    },
+    "stickers": {
+      "title": "Stickerlar",
+      "description": "YTÜ Blockchain Kulübü'nün sticker seti: dither, VHS ve biraz meme."
     }
   },
   "Landing": {
@@ -149,13 +156,115 @@
       "heading": "Merakın mı var? Aramıza katıl.",
       "button": "Bize Katıl"
     },
-    "sticker": {
-      "hint": "Kenarından tutup soy, ortasından çevir.",
-      "label": "YTU Blockchain stickerları",
-      "previous": "Önceki sticker",
-      "next": "Sonraki sticker",
-      "slideLabel": "{index}. sticker"
-    }
+    "hero": {
+      "season": {
+        "fall": "GÜZ {year}",
+        "spring": "BAHAR {year}",
+        "summer": "YAZ {year}"
+      },
+      "title": "MERKEZİYETSİZ GELECEĞİ YTÜ'DE BİRLİKTE İNŞA EDİYORUZ",
+      "next": "SIRADAKİ ETKİNLİK",
+      "register": "Kayıt ol",
+      "details": "Ayrıntılar",
+      "you": "SEN",
+      "fallbackTitle": "SIRADAKİ BLOK SENSİN.",
+      "fallbackText": "Eğitimler, hackathonlar ve ekipler. Ön bilgi gerekmez, merak yeter."
+    },
+    "stats": {
+      "heading": "RAKAMLARLA",
+      "events": "ETKİNLİK",
+      "countries": "ÜLKE",
+      "awards": "HACKATHON DERECESİ",
+      "firsts": "BİRİNCİLİK",
+      "awardsNote": "Hackathon dereceleri ve birincilikler: son iki yıl."
+    },
+    "vision": {
+      "heading": "BİZ KİMİZ",
+      "title": "VİZYON VE MİSYON.",
+      "visionLabel": "VİZYON",
+      "vision": "Blockchain teknolojisini kampüste erişilebilir kılmak; öğrencilerin teoriyi pratiğe döktüğü, birlikte öğrenip ürettiği bir alan açmak istiyoruz.",
+      "missionLabel": "MİSYON",
+      "mission": "Amacımız fikir ile uygulama arasındaki mesafeyi kısaltmak. Atölyeler, açık kaynak projeler ve teknik içeriklerle üyelerimizin haftalar değil günler içinde gerçek işler ortaya koymasını sağlıyoruz."
+    },
+    "values": {
+      "heading": "DEĞERLERİMİZ",
+      "title": "HER KARARIN ARKASINDAKİ İLKELER.",
+      "intro": "Üye almaktan proje geliştirmeye, her kararımıza yön veren ilkeler.",
+      "items": {
+        "curiosity": {
+          "title": "Merak ve Öğrenme",
+          "description": "Sorular sorar, varsayımları test eder ve öğrenmeyi bir alışkanlığa dönüştürürüz. Her seviyeden merak burada yer bulur."
+        },
+        "community": {
+          "title": "Topluluk",
+          "description": "İyi işler farklı bakış açılarından doğar. Herkesin söz sahibi olduğu, iş birliğinin esas olduğu bir ortam kuruyoruz."
+        },
+        "building": {
+          "title": "Üretmek",
+          "description": "Slaytta kalmaz, kod yazarız. Öğrendiğimizi açık kaynak projelere ve çalışan uygulamalara dönüştürürüz."
+        },
+        "openness": {
+          "title": "Açıklık",
+          "description": "Bilgi, kaynak ve süreç açık olsun isteriz. Şeffaflık ve açık kaynak, çalışma biçimimizin merkezinde."
+        }
+      }
+    },
+    "roadmap": {
+      "heading": "WEB3 YOL HARİTASI",
+      "title": "SIFIRDAN WEB3'E 7 ADIM.",
+      "intro": "Web3'e sıfırdan başlıyorsan doğru yerdesin. 6 adımda temelleri öğren, 7. adımda kendi yolunu seç. Her adımda kolaydan zora sıralanmış Türkçe ve İngilizce kaynaklar var.",
+      "open": "Yol haritasını aç",
+      "steps": {
+        "basics": {
+          "title": "Blockchain Nedir?",
+          "description": "Fikrin kendisi: aracısız ortak kayıt defteri.",
+          "time": "~1 SAAT"
+        },
+        "bitcoin": {
+          "title": "Bitcoin",
+          "description": "İlk blockchain. Hash, imza ve iş ispatı.",
+          "time": "~3 SAAT"
+        },
+        "ethereum": {
+          "title": "Ethereum",
+          "description": "Programlanabilir blockchain, akıllı sözleşmeler.",
+          "time": "~4 SAAT"
+        },
+        "ecosystem": {
+          "title": "Ekosisteme Giriş",
+          "description": "Cüzdan kur, ilk işlemini yap.",
+          "time": "~2 SAAT"
+        },
+        "useCases": {
+          "title": "Uygulama Alanları",
+          "description": "DeFi, NFT, stablecoin, RWA, yapay zeka.",
+          "time": "~5 SAAT"
+        },
+        "advanced": {
+          "title": "İleri Konular",
+          "description": "Ölçeklenme, L2, köprüler, güvenlik.",
+          "time": "~4 SAAT"
+        },
+        "path": {
+          "title": "Kendi Yolunu Seç",
+          "description": "Geliştirici, araştırma, tasarım, topluluk ya da hackathon.",
+          "time": "SENİN SEÇİMİN"
+        }
+      },
+      "shortcutTitle": "Sadece kullanmak mı istiyorsun?",
+      "shortcut": "Doğrudan 4. adıma geç.",
+      "total": "~19",
+      "totalLabel": "SAATTE TEMELLER",
+      "shortcutChip": "KISAYOL"
+    },
+    "featuresTitle": "ÖĞRENMEKTEN ÜRETMEYE.",
+    "manifestoTitle": "NEDEN BURADAYIZ",
+    "manifestoRich": "Blockchain'i YTÜ'de öğrenilebilir, üretilebilir ve paylaşılabilir kılıyoruz. <hl>Deneyim şart değil, merak şart.</hl> Birlikte öğreniyor, birlikte üretiyoruz.",
+    "eventsTitle": "ETKİNLİKLER",
+    "ctaTitle": "MERAKIN MI VAR? ARAMIZA KATIL.",
+    "ctaText": "WhatsApp topluluğu, başvuru formu ve tüm bağlantılarımız tek adreste.",
+    "ctaCommand": "$ ytu katil",
+    "ctaOutput": "Bağlantılar açılıyor..."
   },
   "About": {
     "hero": {
@@ -178,33 +287,6 @@
         "founded": {
           "value": "2021",
           "label": "kuruluş"
-        }
-      }
-    },
-    "mission": {
-      "heading": "Misyonumuz",
-      "body1": "Blockchain teknolojisini kampüste erişilebilir kılmak; öğrencilerin teoriyi pratiğe döktüğü, birlikte öğrenip ürettiği bir alan açmak istiyoruz.",
-      "body2": "Amacımız fikir ile uygulama arasındaki mesafeyi kısaltmak. Atölyeler, açık kaynak projeler ve teknik içeriklerle üyelerimizin haftalar değil günler içinde gerçek işler ortaya koymasını sağlıyoruz."
-    },
-    "values": {
-      "heading": "Değerlerimiz",
-      "intro": "Üye almaktan proje geliştirmeye, her kararımıza yön veren ilkeler.",
-      "items": {
-        "curiosity": {
-          "title": "Merak ve Öğrenme",
-          "description": "Sorular sorar, varsayımları test eder ve öğrenmeyi bir alışkanlığa dönüştürürüz. Her seviyeden merak burada yer bulur."
-        },
-        "community": {
-          "title": "Topluluk",
-          "description": "İyi işler farklı bakış açılarından doğar. Herkesin söz sahibi olduğu, iş birliğinin esas olduğu bir ortam kuruyoruz."
-        },
-        "building": {
-          "title": "Üretmek",
-          "description": "Slaytta kalmaz, kod yazarız. Öğrendiğimizi açık kaynak projelere ve çalışan uygulamalara dönüştürürüz."
-        },
-        "openness": {
-          "title": "Açıklık",
-          "description": "Bilgi, kaynak ve süreç açık olsun isteriz. Şeffaflık ve açık kaynak, çalışma biçimimizin merkezinde."
         }
       }
     },
@@ -278,7 +360,8 @@
       "title": "Projeler çok yakında",
       "body": "Hackathonlarda ve kulüp içinde geliştirdiğimiz projeleri burada topluyoruz. O zamana kadar kodlarımız GitHub'da.",
       "github": "GitHub'da incele",
-      "join": "Bize Katıl"
+      "join": "Bize Katıl",
+      "folder": "projeler/"
     }
   },
   "Events": {
@@ -365,16 +448,6 @@
       "button": "Sponsorluk görüşmesi ayarla"
     }
   },
-  "Community": {
-    "eyebrow": "Topluluk",
-    "title": "Topluluğa katıl",
-    "subtitle": "Online kanallarımızda ve etkinliklerimizde bir aradayız. Takip et, sorular sor, üretime katıl.",
-    "cta": {
-      "heading": "Aramıza katılmak ister misin?",
-      "body": "Üyelik birkaç dakika sürer; her seviye için açığız.",
-      "button": "Bize Katıl"
-    }
-  },
   "Blog": {
     "title": "Kulüpten haberler ve yazılar",
     "subtitle": "Etkinlik duyuruları, kulüpten gelişmeler ve blockchain üzerine yazdıklarımız.",
@@ -397,7 +470,8 @@
       "title": "İlk yazılar yolda",
       "body": "Blockchain üzerine yazdıklarımızı ve kulüpten haberleri burada paylaşacağız. Şimdilik eski yazılarımız Medium'da.",
       "medium": "Medium'da oku",
-      "events": "Etkinliklere göz at"
+      "events": "Etkinliklere göz at",
+      "folder": "blog/"
     }
   },
   "Forms": {
@@ -438,7 +512,8 @@
   },
   "Links": {
     "kicker": "bağlantılar",
-    "titleSuffix": "Bağlantılar"
+    "titleSuffix": "Bağlantılar",
+    "you": "SEN"
   },
   "Consent": {
     "title": "Çerezler",
@@ -502,5 +577,33 @@
     "description": "Bu sayfa yüklenemedi. Genellikle geçici bir durumdur — tekrar denemeyi deneyin.",
     "retry": "Tekrar dene",
     "back": "Anasayfaya dön"
+  },
+  "Stickers": {
+    "hero": {
+      "eyebrow": "STICKERLAR",
+      "title": "Kulübün sticker seti",
+      "subtitle": "Hepsi kulübün tasarım dilinden: dither, VHS ve biraz meme. Aşağıda kenarından tutup soyabilir, ortasından çevirebilirsin."
+    },
+    "viewerTitle": "SOY, ÇEVİR, İNCELE.",
+    "galleryTitle": "TÜM SET",
+    "galleryIntro": "{count} sticker.",
+    "names": {
+      "sell": "sell.exe",
+      "satoshi": "Satoshi",
+      "own-keys": "Kendi anahtarı",
+      "money-printer": "money_printer.exe",
+      "banknote": "Banknot",
+      "big-type": "YTU BLOCKCHAIN",
+      "cat": "Kedi",
+      "mouse": "Fare",
+      "laptop": "Laptop"
+    },
+    "viewer": {
+      "hint": "Kenarından tutup soy, ortasından çevir.",
+      "label": "YTU Blockchain stickerları",
+      "previous": "Önceki sticker",
+      "next": "Sonraki sticker",
+      "slideLabel": "{index}. sticker"
+    }
   }
 }

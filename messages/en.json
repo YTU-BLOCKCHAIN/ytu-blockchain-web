@@ -20,7 +20,7 @@
     },
     "sections": {
       "about": {
-        "mission": "Mission",
+        "mission": "Vision & Mission",
         "missionDesc": "Our goal to make blockchain accessible on campus",
         "values": "Values",
         "valuesDesc": "The principles behind every decision",
@@ -28,10 +28,16 @@
         "teamDesc": "The committees that run the club together"
       },
       "community": {
-        "join": "Join",
-        "joinDesc": "Become a member and take part",
+        "links": "All Our Channels",
+        "linksDesc": "WhatsApp, Instagram, X, GitHub and more on one page",
+        "roadmap": "Web3 Roadmap",
+        "roadmapDesc": "A learning guide for complete beginners",
         "projects": "Projects",
         "projectsDesc": "The open-source projects we build together",
+        "stickers": "Stickers",
+        "stickersDesc": "The club's sticker set",
+        "brand": "Brand Guide",
+        "brandDesc": "Logo, colors and type",
         "sponsors": "Sponsors",
         "sponsorsDesc": "The organizations that make our community possible"
       }
@@ -51,7 +57,8 @@
           "desc": "Be part of the community"
         }
       }
-    }
+    },
+    "stickers": "Stickers"
   },
   "Meta": {
     "defaultTitle": "YTÜ Blockchain Club",
@@ -68,10 +75,6 @@
       "title": "Projects",
       "description": "Blockchain and open-source projects built by our club members."
     },
-    "community": {
-      "title": "Community",
-      "description": "Join the YTÜ Blockchain community on GitHub, X and Instagram."
-    },
     "events": {
       "title": "Events",
       "description": "Trainings, meetups, hackathons and conferences of the YTÜ Blockchain Club — upcoming events and an archive going back to 2022."
@@ -87,6 +90,10 @@
     "privacy": {
       "title": "Privacy Notice",
       "description": "How the YTÜ Blockchain Club processes personal data submitted through the site forms."
+    },
+    "stickers": {
+      "title": "Stickers",
+      "description": "YTÜ Blockchain Club's sticker set: dither, VHS and a bit of meme."
     }
   },
   "Landing": {
@@ -149,13 +156,115 @@
       "heading": "Curious? Come join us.",
       "button": "Join us"
     },
-    "sticker": {
-      "hint": "Peel it from the edge, spin it from the middle.",
-      "label": "YTÜ Blockchain stickers",
-      "previous": "Previous sticker",
-      "next": "Next sticker",
-      "slideLabel": "Sticker {index}"
-    }
+    "hero": {
+      "season": {
+        "fall": "FALL {year}",
+        "spring": "SPRING {year}",
+        "summer": "SUMMER {year}"
+      },
+      "title": "BUILDING THE DECENTRALIZED FUTURE TOGETHER AT YTÜ",
+      "next": "NEXT EVENT",
+      "register": "Register",
+      "details": "Details",
+      "you": "YOU",
+      "fallbackTitle": "YOU'RE THE NEXT BLOCK.",
+      "fallbackText": "Trainings, hackathons and teams. No experience needed, curiosity is enough."
+    },
+    "stats": {
+      "heading": "BY THE NUMBERS",
+      "events": "EVENTS",
+      "countries": "COUNTRIES",
+      "awards": "HACKATHON PLACINGS",
+      "firsts": "FIRST PLACES",
+      "awardsNote": "Hackathon placings and first places: the last two years."
+    },
+    "vision": {
+      "heading": "WHO WE ARE",
+      "title": "VISION AND MISSION.",
+      "visionLabel": "VISION",
+      "vision": "We want to make blockchain accessible on campus — opening up a space where students turn theory into practice and learn and build together.",
+      "missionLabel": "MISSION",
+      "mission": "Our goal is to shrink the distance between idea and execution. Through workshops, open-source projects and technical content, we help our members ship real work in days, not months."
+    },
+    "values": {
+      "heading": "OUR VALUES",
+      "title": "THE PRINCIPLES BEHIND EVERY DECISION.",
+      "intro": "The principles that guide every decision we make, from welcoming members to shipping projects.",
+      "items": {
+        "curiosity": {
+          "title": "Curiosity & Learning",
+          "description": "We ask questions, test assumptions and turn learning into a habit. Curiosity at every level is welcome here."
+        },
+        "community": {
+          "title": "Community",
+          "description": "Great work comes from diverse perspectives. We build an environment where everyone has a voice and collaboration is the default."
+        },
+        "building": {
+          "title": "Building",
+          "description": "We don't stop at slides — we write code. We turn what we learn into open-source projects and working applications."
+        },
+        "openness": {
+          "title": "Openness",
+          "description": "We want knowledge, resources and process to stay open. Transparency and open source are at the heart of how we work."
+        }
+      }
+    },
+    "roadmap": {
+      "heading": "WEB3 ROADMAP",
+      "title": "WEB3 FROM ZERO IN 7 STEPS.",
+      "intro": "Starting Web3 from scratch? You're in the right place. Learn the basics in 6 steps, then pick your own path in step 7. Every step lists Turkish and English resources from easy to hard.",
+      "open": "Open the roadmap",
+      "steps": {
+        "basics": {
+          "title": "What Is a Blockchain?",
+          "description": "The idea itself: a shared ledger with no middleman.",
+          "time": "~1 HOUR"
+        },
+        "bitcoin": {
+          "title": "Bitcoin",
+          "description": "The first blockchain. Hashes, signatures and proof of work.",
+          "time": "~3 HOURS"
+        },
+        "ethereum": {
+          "title": "Ethereum",
+          "description": "The programmable blockchain and smart contracts.",
+          "time": "~4 HOURS"
+        },
+        "ecosystem": {
+          "title": "Into the Ecosystem",
+          "description": "Set up a wallet and make your first transaction.",
+          "time": "~2 HOURS"
+        },
+        "useCases": {
+          "title": "Use Cases",
+          "description": "DeFi, NFTs, stablecoins, RWA, AI.",
+          "time": "~5 HOURS"
+        },
+        "advanced": {
+          "title": "Advanced Topics",
+          "description": "Scaling, L2s, bridges, security.",
+          "time": "~4 HOURS"
+        },
+        "path": {
+          "title": "Choose Your Path",
+          "description": "Developer, research, design, community or hackathons.",
+          "time": "YOUR CALL"
+        }
+      },
+      "shortcutTitle": "Just want to use it?",
+      "shortcut": "Skip straight to step 4.",
+      "total": "~19",
+      "totalLabel": "HOURS OF BASICS",
+      "shortcutChip": "SHORTCUT"
+    },
+    "featuresTitle": "FROM LEARNING TO BUILDING.",
+    "manifestoTitle": "WHY WE'RE HERE",
+    "manifestoRich": "We make blockchain something students at YTÜ can learn, build and share. <hl>No experience required, just curiosity.</hl> We learn and build together.",
+    "eventsTitle": "EVENTS",
+    "ctaTitle": "CURIOUS? COME JOIN US.",
+    "ctaText": "Our WhatsApp community, application form and every link in one place.",
+    "ctaCommand": "$ ytu join",
+    "ctaOutput": "Opening links..."
   },
   "About": {
     "hero": {
@@ -178,33 +287,6 @@
         "founded": {
           "value": "2021",
           "label": "founded"
-        }
-      }
-    },
-    "mission": {
-      "heading": "Our Mission",
-      "body1": "We want to make blockchain accessible on campus — opening up a space where students turn theory into practice and learn and build together.",
-      "body2": "Our goal is to shrink the distance between idea and execution. Through workshops, open-source projects and technical content, we help our members ship real work in days, not months."
-    },
-    "values": {
-      "heading": "Our Values",
-      "intro": "The principles that guide every decision we make, from welcoming members to shipping projects.",
-      "items": {
-        "curiosity": {
-          "title": "Curiosity & Learning",
-          "description": "We ask questions, test assumptions and turn learning into a habit. Curiosity at every level is welcome here."
-        },
-        "community": {
-          "title": "Community",
-          "description": "Great work comes from diverse perspectives. We build an environment where everyone has a voice and collaboration is the default."
-        },
-        "building": {
-          "title": "Building",
-          "description": "We don't stop at slides — we write code. We turn what we learn into open-source projects and working applications."
-        },
-        "openness": {
-          "title": "Openness",
-          "description": "We want knowledge, resources and process to stay open. Transparency and open source are at the heart of how we work."
         }
       }
     },
@@ -278,7 +360,8 @@
       "title": "Projects coming soon",
       "body": "We are gathering the projects we build at hackathons and inside the club. Until then, our code is on GitHub.",
       "github": "Browse on GitHub",
-      "join": "Join Us"
+      "join": "Join Us",
+      "folder": "projects/"
     }
   },
   "Events": {
@@ -365,16 +448,6 @@
       "button": "Book a sponsorship call"
     }
   },
-  "Community": {
-    "eyebrow": "Community",
-    "title": "Join the community",
-    "subtitle": "We come together on our online channels and at our events. Follow along, ask questions and start building.",
-    "cta": {
-      "heading": "Want to join us?",
-      "body": "Becoming a member takes a few minutes; we welcome all levels.",
-      "button": "Join us"
-    }
-  },
   "Blog": {
     "title": "News and writing from the club",
     "subtitle": "Event announcements, club updates and what we write about blockchain.",
@@ -397,7 +470,8 @@
       "title": "First posts on the way",
       "body": "This is where our writing on blockchain and club news will live. For now, our earlier posts are on Medium.",
       "medium": "Read on Medium",
-      "events": "See our events"
+      "events": "See our events",
+      "folder": "blog/"
     }
   },
   "Forms": {
@@ -438,7 +512,8 @@
   },
   "Links": {
     "kicker": "links",
-    "titleSuffix": "Links"
+    "titleSuffix": "Links",
+    "you": "YOU"
   },
   "Consent": {
     "title": "Cookies",
@@ -502,5 +577,33 @@
     "description": "This page could not be loaded. It is usually temporary — please try again.",
     "retry": "Try again",
     "back": "Back to home"
+  },
+  "Stickers": {
+    "hero": {
+      "eyebrow": "STICKERS",
+      "title": "The club's sticker set",
+      "subtitle": "All drawn from the club's design language: dither, VHS and a bit of meme. Peel one from the edge below, spin it from the middle."
+    },
+    "viewerTitle": "PEEL, SPIN, LOOK CLOSER.",
+    "galleryTitle": "THE FULL SET",
+    "galleryIntro": "{count, plural, one {# sticker} other {# stickers}}.",
+    "names": {
+      "sell": "sell.exe",
+      "satoshi": "Satoshi",
+      "own-keys": "Own keys",
+      "money-printer": "money_printer.exe",
+      "banknote": "Banknote",
+      "big-type": "YTU BLOCKCHAIN",
+      "cat": "Cat",
+      "mouse": "Mouse",
+      "laptop": "Laptop"
+    },
+    "viewer": {
+      "hint": "Peel it from the edge, spin it from the middle.",
+      "label": "YTÜ Blockchain stickers",
+      "previous": "Previous sticker",
+      "next": "Next sticker",
+      "slideLabel": "Sticker {index}"
+    }
   }
 }

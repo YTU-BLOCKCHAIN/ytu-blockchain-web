@@ -17,9 +17,9 @@ export function pageCard(
     | 'about'
     | 'projects'
     | 'events'
-    | 'community'
     | 'blog'
     | 'contact'
+    | 'stickers'
     | 'privacy',
 ) {
   return async function Image({

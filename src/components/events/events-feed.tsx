@@ -95,7 +95,7 @@ export function EventsFeed({
                 >
                   <span
                     className={cn(
-                      'flex w-fit items-center gap-2 whitespace-nowrap rounded-full px-3 py-1 text-sm transition-colors',
+                      'flex w-fit items-center gap-2 whitespace-nowrap px-3 py-1 text-sm transition-colors',
                       selected
                         ? 'bg-muted text-primary ring-foreground/10 font-medium ring-1'
                         : 'group-hover:text-foreground group-hover:bg-foreground/5',

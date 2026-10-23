@@ -1,6 +1,19 @@
 'use client';
 
-import { ArrowRight, Menu, X } from 'lucide-react';
+import {
+  ArrowRight,
+  Eye,
+  FolderGit2,
+  Gem,
+  Link2,
+  Map as MapIcon,
+  Menu,
+  Palette,
+  Sticker,
+  UserPlus,
+  X,
+  type LucideIcon,
+} from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
@@ -24,6 +37,8 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { JOIN_HREF, SiteLink } from '@/components/site-link';
+import { siteConfig } from '@/lib/site';
+import { usePathname } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
 /**
@@ -44,12 +59,14 @@ const NAV = [
     },
     sections: [
       {
-        href: '/about#mission',
+        href: '/#vision',
+        icon: Eye,
         label: 'sections.about.mission',
         desc: 'sections.about.missionDesc',
       },
       {
-        href: '/about#values',
+        href: '/#values',
+        icon: Gem,
         label: 'sections.about.values',
         desc: 'sections.about.valuesDesc',
       },
@@ -63,8 +80,10 @@ const NAV = [
     ],
   },
   {
+    // Ayrı bir topluluk sayfası yok (eski `/community` → `/links`): başlık
+    // yalnızca menüyü açıyor. Sosyal kanallar tek tek listelenmiyor, hepsi
+    // zaten `/links`te; menü oraya ve sitenin topluluk içeriklerine gidiyor.
     key: 'community',
-    href: '/community',
     heading: 'menu.community.heading',
     promo: {
       href: JOIN_HREF,
@@ -72,16 +91,36 @@ const NAV = [
       desc: 'menu.community.promo.desc',
     },
     sections: [
-      // Kanallar bölümü kaldırıldı: hepsi `/links` sayfasında bir arada.
       {
-        href: '/community#join',
-        label: 'sections.community.join',
-        desc: 'sections.community.joinDesc',
+        href: JOIN_HREF,
+        icon: Link2,
+        label: 'sections.community.links',
+        desc: 'sections.community.linksDesc',
+        wide: true,
+      },
+      {
+        href: siteConfig.roadmapPath,
+        icon: MapIcon,
+        label: 'sections.community.roadmap',
+        desc: 'sections.community.roadmapDesc',
       },
       {
         href: '/projects',
+        icon: FolderGit2,
         label: 'sections.community.projects',
         desc: 'sections.community.projectsDesc',
+      },
+      {
+        href: '/stickers',
+        icon: Sticker,
+        label: 'sections.community.stickers',
+        desc: 'sections.community.stickersDesc',
+      },
+      {
+        href: '/brand',
+        icon: Palette,
+        label: 'sections.community.brand',
+        desc: 'sections.community.brandDesc',
       },
       // Destekçilerimiz bölümü about sayfasında gizli olduğu için menüden de
       // kaldırıldı; `<AboutSponsors />` geri açıldığında bu öğeyi de geri alın.
@@ -97,10 +136,79 @@ const NAV = [
   { key: 'contact', href: '/contact' },
 ] as const;
 
+/**
+ * Mavi girişi (`.surface-signal` hero) olan sayfalar. Header ilk çizimde bu
+ * listeye göre boyanıyor; yoksa hero'suz sayfada (etkinlik detayı, blog
+ * yazısı) hidrasyona kadar mavi görünüp beyaza atlardı.
+ */
+const SIGNAL_ENTRANCE = new Set([
+  '/',
+  '/about',
+  '/events',
+  '/contact',
+  '/projects',
+  '/blog',
+  '/stickers',
+]);
+
+/**
+ * Header'ın hemen altındaki bölüm mavi mi? Header'ın alt kenarının bir
+ * piksel altındaki elemanlara bakılıyor (header'ın kendisi ve
+ * `pointer-events: none` katmanlar — film grain — atlanıyor) ve en yakın
+ * yüzey sınıfı okunuyor. Hero'nun içindeki beyaz bant `.surface-paper`
+ * olduğu için orada da doğru sonuç çıkıyor.
+ */
+function useOverSignal(
+  header: React.RefObject<HTMLElement | null>,
+  pathname: string,
+) {
+  const [overSignal, setOverSignal] = React.useState(() =>
+    SIGNAL_ENTRANCE.has(pathname),
+  );
+
+  React.useEffect(() => {
+    let frame = 0;
+    const check = () => {
+      frame = 0;
+      const el = header.current;
+      if (!el) return;
+      const y = el.getBoundingClientRect().bottom + 1;
+      const below = document
+        .elementsFromPoint(window.innerWidth / 2, y)
+        .find((node) => !el.contains(node));
+      const surface = below?.closest('.surface-signal, .surface-paper');
+      setOverSignal(surface?.classList.contains('surface-signal') ?? false);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(check);
+    };
+
+    check();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+    };
+  }, [header, pathname]);
+
+  return overSignal;
+}
+
 export default function Header() {
   const t = useTranslations('Nav');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const headerRef = React.useRef<HTMLElement>(null);
+  const pathname = usePathname();
+  const overSignal = useOverSignal(headerRef, pathname);
+  // Header altındaki yüzeyin rengini alıyor: mavi girişte mavi, beyaz
+  // bölümlerde beyaz. Renk değişkenleri anında, zemin yumuşak geçiyor.
+  const surface = cn(
+    overSignal ? 'surface-signal' : 'surface-paper',
+    'transition-[background-color] duration-300',
+  );
 
   React.useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -121,15 +229,20 @@ export default function Header() {
 
   return (
     <>
-      {/* Üstte boşluk bandı — template gibi hafif zemin tonu (grid çizgileri). */}
-      <div aria-hidden className="bg-grid-line">
+      {/* Üstte boşluk bandı — template gibi hafif zemin tonu (grid çizgileri).
+          Header ile aynı yüzeyi alıyor (bkz. `useOverSignal`). */}
+      <div aria-hidden className={cn(surface, 'bg-grid-line')}>
         <Separator className="h-6" />
       </div>
       <header
+        ref={headerRef}
         role="banner"
         data-state={isMobileMenuOpen ? 'active' : 'inactive'}
         {...(isScrolled && { 'data-scrolled': true })}
-        className="lg:data-scrolled:pb-[0.5px] bg-grid-line sticky inset-x-0 top-0 z-50 max-lg:pb-px"
+        className={cn(
+          surface,
+          'lg:data-scrolled:pb-[0.5px] bg-grid-line sticky inset-x-0 top-0 z-50 max-lg:pb-px',
+        )}
       >
         <div
           className={cn(
@@ -210,13 +323,18 @@ function NavMenu() {
                   dropdown'ı açıyor, tıklayınca sayfaya gidiyor. Radix'in click
                   handler'ı açık menüyü kapatıyor (onItemSelect toggle), Next
                   Link de ardından yönlendiriyor — ikisi çakışmıyor. */}
-              <NavigationMenuTrigger asChild>
-                <SiteLink href={item.href}>{t(item.key)}</SiteLink>
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="w-[38rem] max-w-[calc(100vw-4rem)]">
+              {'href' in item ? (
+                <NavigationMenuTrigger asChild>
+                  <SiteLink href={item.href}>{t(item.key)}</SiteLink>
+                </NavigationMenuTrigger>
+              ) : (
+                <NavigationMenuTrigger>{t(item.key)}</NavigationMenuTrigger>
+              )}
+              <NavigationMenuContent className="md:right-0 md:w-full">
+                {/* Panel header genişliğinde; içerik de onu dolduruyor. */}
+                <div className="w-full">
                   {/* Kategori başlığı (template: "Features" / "More Features"). */}
-                  <span className="text-muted-foreground ml-3 block border-b pb-3 text-sm">
+                  <span className="text-muted-foreground mx-3 block border-b pb-3 text-sm">
                     {t(item.heading)}
                   </span>
 
@@ -227,16 +345,21 @@ function NavMenu() {
                         href={section.href}
                         title={t(section.label)}
                         description={t(section.desc)}
+                        icon={section.icon}
+                        wide={'wide' in section && section.wide}
                       />
                     ))}
                   </ul>
 
-                  {/* Tanıtım kartı (template: gradient ikon + başlık + açıklama). */}
+                  {/* Tanıtım kartı: düz beyaz kare + başlık + açıklama. Kit gradient'i
+                      yasaklıyor; kare logonun 24px modülünü hatırlatıyor. */}
                   <div className="relative m-3 grid grid-cols-[auto_1fr] items-center gap-3 border-t pt-6">
-                    <div
+                    <span
                       aria-hidden
-                      className="bg-linear-to-br inset-ring-foreground/10 inset-ring-1 size-11 shrink-0 rounded-xl from-[var(--brand-signal)] to-[var(--brand-deep)]"
-                    />
+                      className="bg-action text-action-foreground flex size-11 shrink-0 items-center justify-center"
+                    >
+                      <UserPlus className="text-action-foreground size-5" />
+                    </span>
                     <div className="space-y-0.5">
                       <SiteLink
                         href={item.promo.href}
@@ -268,30 +391,51 @@ function NavMenu() {
   );
 }
 
+/**
+ * Menü satırı: solda ikon karesi (yüzeyin tersi — mavi header'da beyaz kare,
+ * beyaz header'da mavi; postlardaki numara chip'leriyle aynı dil), sağda
+ * başlık + tek satır açıklama.
+ */
 function ListItem({
   title,
   description,
   href,
+  icon: Icon,
+  wide = false,
 }: {
   title: string;
   description: string;
   href: string;
+  icon: LucideIcon;
+  /** İki sütunu da kaplar: menünün öne çıkan satırı. */
+  wide?: boolean;
 }) {
   return (
-    <li>
-      <NavigationMenuLink asChild className="group rounded-xl p-3">
-        <SiteLink href={href} className="grid gap-1">
-          <span className="text-foreground flex items-center gap-2 text-sm font-medium">
-            {title}
-            <ArrowRight
-              aria-hidden
-              strokeWidth={2.5}
-              className="not-group-hover:opacity-0 not-group-hover:-translate-x-1 size-3 duration-200"
-            />
+    <li className={wide ? 'col-span-2' : undefined}>
+      <NavigationMenuLink asChild className="group p-3">
+        <SiteLink
+          href={href}
+          className="grid grid-cols-[auto_1fr] items-center gap-4"
+        >
+          <span
+            aria-hidden
+            className="bg-action text-action-foreground flex size-11 shrink-0 items-center justify-center"
+          >
+            <Icon className="text-action-foreground size-5" />
           </span>
-          <p className="text-muted-foreground line-clamp-1 text-sm">
-            {description}
-          </p>
+          <span className="grid min-w-0 gap-1">
+            <span className="text-foreground flex items-center gap-2 text-sm font-medium">
+              {title}
+              <ArrowRight
+                aria-hidden
+                strokeWidth={2.5}
+                className="not-group-hover:opacity-0 not-group-hover:-translate-x-1 size-3 duration-200"
+              />
+            </span>
+            <span className="text-muted-foreground line-clamp-1 text-sm">
+              {description}
+            </span>
+          </span>
         </SiteLink>
       </NavigationMenuLink>
     </li>
@@ -329,8 +473,14 @@ function MobileMenu({ closeMenu }: { closeMenu: () => void }) {
                       <SiteLink
                         href={section.href}
                         onClick={closeMenu}
-                        className="text-muted-foreground block gap-2.5 px-4 py-3 text-lg"
+                        className="text-muted-foreground flex items-center gap-3 px-4 py-2.5 text-lg"
                       >
+                        <span
+                          aria-hidden
+                          className="bg-action text-action-foreground flex size-9 shrink-0 items-center justify-center"
+                        >
+                          <section.icon className="text-action-foreground size-4" />
+                        </span>
                         {t(section.label)}
                       </SiteLink>
                     </li>

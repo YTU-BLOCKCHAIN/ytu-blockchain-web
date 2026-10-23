@@ -63,7 +63,7 @@ export function PostMeta({
         {post.authorName ? (
           <div className="grid grid-cols-[auto_1fr] items-center gap-2">
             {post.authorAvatarUrl ? (
-              <div className="ring-border-illustration bg-card aspect-square size-6 overflow-hidden rounded-md border border-transparent shadow-md shadow-black/15 ring-1">
+              <div className="ring-border-illustration bg-card aspect-square size-6 overflow-hidden border border-transparent ring-1">
                 {/* Adı hemen yanında yazdığı için fotoğraf dekoratif —
                     ekran okuyucuya aynı bilgiyi iki kez okutmuyoruz. */}
                 <Image
@@ -108,7 +108,7 @@ export function PostCard({ post }: { post: BlogCardPost }) {
     <article className="group relative">
       <div
         data-grid-content
-        className="@4xl:p-12 hover:bg-muted! flex flex-col p-6 shadow-xl shadow-transparent transition duration-200 hover:shadow-[var(--brand-deep)]/5"
+        className="@4xl:p-12 hover:bg-muted! flex flex-col p-6 transition duration-200"
       >
         <div className="space-y-4">
           <PostDate post={post} />

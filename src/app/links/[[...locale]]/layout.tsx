@@ -39,8 +39,8 @@ export default async function LinksLayout({
   if (!locale) notFound();
 
   return (
-    /* `links-theme`: sayfayı OS temasından bağımsız olarak koyu ve tam siyah
-       zeminli sabitler (globals.css). */
+    /* `links-theme`: yalnız bu sayfaya özgü stiller için kanca; renkler
+       sitenin signal temasından geliyor (globals.css). */
     <html
       lang={locale}
       className={`${displayFont.variable} ${bodyFont.variable} links-theme h-full antialiased`}

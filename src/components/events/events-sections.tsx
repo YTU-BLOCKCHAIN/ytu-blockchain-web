@@ -1,7 +1,7 @@
 import { ArrowUpRight, CalendarDays } from 'lucide-react';
 import { type Locale, useTranslations } from 'next-intl';
 
-import { Container } from '@/components/container';
+import { Container, Rail } from '@/components/container';
 import {
   academicYear,
   countryName,
@@ -49,7 +49,6 @@ export function toCard(
     // Kırpılmadan sığdırılıyor (bkz. `EventCover`): yalnız genişlik veriliyor,
     // 2× ölçü retina ekran için.
     coverUrl: event.cover?.asset ? imageUrlByWidth(event.cover, 800) : null,
-    coverBlurUrl: event.cover?.asset ? imageUrlByWidth(event.cover, 48) : null,
     coverAlt: event.cover?.alt ?? '',
     academicYear: academicYear(event.date),
     lumaUrl: event.lumaUrl,
@@ -81,51 +80,60 @@ export function EventsHero({ events }: { events: EventsQueryResult }) {
   ].filter(Boolean);
 
   return (
-    <section>
-      <Container className="@4xl:py-12 @4xl:px-12 flex flex-col gap-8 px-6 pb-6 pt-12 md:flex-row md:items-end md:justify-between">
-        <div className="max-w-2xl">
-          <span className="text-primary font-display text-xs tracking-widest uppercase">
-            {'//'} {t('eyebrow')}
-          </span>
-          {/* Geniş ekranda ölçüler blog hero'suyla aynı. Mobilde bir kademe
+    <section className="surface-signal overflow-hidden">
+      <Container asGrid>
+        <div className="grid grid-cols-10 gap-px">
+          <Rail rows={5} />
+          <div
+            data-grid-content
+            className="@4xl:p-12 col-span-full flex flex-col gap-8 p-6 sm:col-span-8 md:flex-row md:items-end md:justify-between"
+          >
+            <div className="max-w-2xl">
+              <span className="text-primary font-display text-xs tracking-widest uppercase">
+                {'//'} {t('eyebrow')}
+              </span>
+              {/* Geniş ekranda ölçüler blog hero'suyla aynı. Mobilde bir kademe
               küçük: "öğrendiğimiz," piksel fontta 36px'te 390px'lik ekrana
               sığmıyor, bölünemeyen kelime bütün sayfayı yatay kaydırıyordu. */}
-          <h1 className="text-foreground mt-6 text-balance text-3xl font-semibold sm:text-5xl lg:text-6xl">
-            {t('title')}
-          </h1>
-          <p className="text-muted-foreground mt-6 text-balance text-lg">
-            {t('intro')}
-          </p>
-          {events.length > 0 ? (
-            <p className="text-foreground mt-6 text-sm font-medium">
-              {stats.join(' · ')}
-            </p>
-          ) : null}
-        </div>
+              <h1 className="text-foreground mt-6 text-balance text-3xl font-semibold sm:text-5xl lg:text-6xl">
+                {t('title')}
+              </h1>
+              <p className="text-muted-foreground mt-6 text-balance text-lg">
+                {t('intro')}
+              </p>
+              {events.length > 0 ? (
+                <p className="text-foreground mt-6 text-sm font-medium">
+                  {stats.join(' · ')}
+                </p>
+              ) : null}
+            </div>
 
-        {/* Yeni etkinlikler önce Luma'da açılıyor; buradan takip edilebilsin. */}
-        <a
-          href={siteConfig.social.luma}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="group border-foreground/10 hover:border-primary/40 hover:bg-muted flex shrink-0 items-center gap-4 rounded-xl border p-4 duration-150 md:max-w-xs"
-        >
-          <span className="bg-primary/10 text-primary flex size-10 shrink-0 items-center justify-center rounded-lg">
-            <CalendarDays aria-hidden className="size-5" />
-          </span>
-          <span className="flex flex-col">
-            <span className="text-foreground inline-flex items-center gap-1 font-medium">
-              {t('luma.label')}
-              <ArrowUpRight
-                aria-hidden
-                className="size-4 duration-150 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </span>
-            <span className="text-muted-foreground text-sm">
-              {t('luma.hint')}
-            </span>
-          </span>
-        </a>
+            {/* Yeni etkinlikler önce Luma'da açılıyor; buradan takip edilebilsin. */}
+            <a
+              href={siteConfig.social.luma}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="group border-foreground/10 hover:border-primary/40 hover:bg-muted flex shrink-0 items-center gap-4 border p-4 duration-150 md:max-w-xs"
+            >
+              <span className="bg-primary/10 text-primary flex size-10 shrink-0 items-center justify-center">
+                <CalendarDays aria-hidden className="size-5" />
+              </span>
+              <span className="flex flex-col">
+                <span className="text-foreground inline-flex items-center gap-1 font-medium">
+                  {t('luma.label')}
+                  <ArrowUpRight
+                    aria-hidden
+                    className="size-4 duration-150 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </span>
+                <span className="text-muted-foreground text-sm">
+                  {t('luma.hint')}
+                </span>
+              </span>
+            </a>
+          </div>
+          <Rail rows={5} />
+        </div>
       </Container>
     </section>
   );
