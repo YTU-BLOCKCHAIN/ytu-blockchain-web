@@ -241,8 +241,9 @@ export function LandingFeatures() {
 
 /**
  * Rakam bandı (kit `.stat`, signal yüzeyde en güçlü). Etkinlik ve ülke
- * sayısı kayıtlardan hesaplanıyor (bkz. `EventsHero`); hackathon dereceleri
- * Bahar 2026'nın sonucu, metin dosyasında.
+ * sayısı kayıtlardan hesaplanıyor (bkz. `EventsHero`). Hackathon dereceleri
+ * ve birincilikler son iki yılın toplamı, Sanity'de kaydı olmadığı için elle
+ * yazılı ("15+", "10+"); yeni derece gelince buradan güncellenir.
  */
 export async function LandingStats() {
   const events = await getEvents();
@@ -253,11 +254,13 @@ export async function LandingStats() {
   ).size;
 
   const stats = [
-    { value: events.length, label: t('events') },
-    { value: countries, label: t('countries') },
-    { value: 5, label: t('awards') },
-    { value: 3, label: t('firsts') },
-  ].filter((stat) => stat.value > 0);
+    ...[
+      { value: events.length, label: t('events') },
+      { value: countries, label: t('countries') },
+    ].filter((stat) => stat.value > 0),
+    { value: '15+', label: t('awards') },
+    { value: '10+', label: t('firsts') },
+  ];
 
   return (
     <section>
