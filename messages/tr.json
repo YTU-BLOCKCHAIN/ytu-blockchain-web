@@ -209,6 +209,51 @@
         }
       }
     },
+    "roadmap": {
+      "heading": "WEB3 YOL HARİTASI",
+      "title": "SIFIRDAN WEB3'E 7 ADIM.",
+      "intro": "Web3'e sıfırdan başlıyorsan doğru yerdesin. 6 adımda temelleri öğren, 7. adımda kendi yolunu seç. Her adımda kolaydan zora sıralanmış Türkçe ve İngilizce kaynaklar var.",
+      "open": "Yol haritasını aç",
+      "steps": {
+        "basics": {
+          "title": "Blockchain Nedir?",
+          "description": "Fikrin kendisi: aracısız ortak kayıt defteri.",
+          "time": "~1 SAAT"
+        },
+        "bitcoin": {
+          "title": "Bitcoin",
+          "description": "İlk blockchain. Hash, imza ve iş ispatı.",
+          "time": "~3 SAAT"
+        },
+        "ethereum": {
+          "title": "Ethereum",
+          "description": "Programlanabilir blockchain, akıllı sözleşmeler.",
+          "time": "~4 SAAT"
+        },
+        "ecosystem": {
+          "title": "Ekosisteme Giriş",
+          "description": "Cüzdan kur, ilk işlemini yap.",
+          "time": "~2 SAAT"
+        },
+        "useCases": {
+          "title": "Uygulama Alanları",
+          "description": "DeFi, NFT, stablecoin, RWA, yapay zeka.",
+          "time": "~5 SAAT"
+        },
+        "advanced": {
+          "title": "İleri Konular",
+          "description": "Ölçeklenme, L2, köprüler, güvenlik.",
+          "time": "~4 SAAT"
+        },
+        "path": {
+          "title": "Kendi Yolunu Seç",
+          "description": "Geliştirici, araştırma, tasarım, topluluk ya da hackathon.",
+          "time": "SENİN SEÇİMİN"
+        }
+      },
+      "shortcutTitle": "Sadece kullanmak mı istiyorsun?",
+      "shortcut": "Doğrudan 4. adıma geç."
+    },
     "featuresTitle": "ÖĞRENMEKTEN ÜRETMEYE.",
     "manifestoTitle": "NEDEN BURADAYIZ",
     "manifestoRich": "Blockchain'i YTÜ'de öğrenilebilir, üretilebilir ve paylaşılabilir kılıyoruz. <hl>Deneyim şart değil, merak şart.</hl> Birlikte öğreniyor, birlikte üretiyoruz.",

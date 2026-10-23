@@ -209,6 +209,51 @@
         }
       }
     },
+    "roadmap": {
+      "heading": "WEB3 ROADMAP",
+      "title": "WEB3 FROM ZERO IN 7 STEPS.",
+      "intro": "Starting Web3 from scratch? You're in the right place. Learn the basics in 6 steps, then pick your own path in step 7. Every step lists Turkish and English resources from easy to hard.",
+      "open": "Open the roadmap",
+      "steps": {
+        "basics": {
+          "title": "What Is a Blockchain?",
+          "description": "The idea itself: a shared ledger with no middleman.",
+          "time": "~1 HOUR"
+        },
+        "bitcoin": {
+          "title": "Bitcoin",
+          "description": "The first blockchain. Hashes, signatures and proof of work.",
+          "time": "~3 HOURS"
+        },
+        "ethereum": {
+          "title": "Ethereum",
+          "description": "The programmable blockchain and smart contracts.",
+          "time": "~4 HOURS"
+        },
+        "ecosystem": {
+          "title": "Into the Ecosystem",
+          "description": "Set up a wallet and make your first transaction.",
+          "time": "~2 HOURS"
+        },
+        "useCases": {
+          "title": "Use Cases",
+          "description": "DeFi, NFTs, stablecoins, RWA, AI.",
+          "time": "~5 HOURS"
+        },
+        "advanced": {
+          "title": "Advanced Topics",
+          "description": "Scaling, L2s, bridges, security.",
+          "time": "~4 HOURS"
+        },
+        "path": {
+          "title": "Choose Your Path",
+          "description": "Developer, research, design, community or hackathons.",
+          "time": "YOUR CALL"
+        }
+      },
+      "shortcutTitle": "Just want to use it?",
+      "shortcut": "Skip straight to step 4."
+    },
     "featuresTitle": "FROM LEARNING TO BUILDING.",
     "manifestoTitle": "WHY WE'RE HERE",
     "manifestoRich": "We make blockchain something students at YTÜ can learn, build and share. <hl>No experience required, just curiosity.</hl> We learn and build together.",

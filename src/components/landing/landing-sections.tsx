@@ -20,6 +20,7 @@ import { toCard } from '@/components/events/events-sections';
 import { JOIN_HREF } from '@/components/site-link';
 import { ButtonLink, buttonClasses } from '@/components/ui/button';
 import { getEvents, isUpcoming, todayInClubTimeZone } from '@/lib/events';
+import { siteConfig } from '@/lib/site';
 
 /*
   Ana sayfa, kulübün sosyal medya postlarının diliyle kuruldu: signal mavisi
@@ -330,6 +331,119 @@ export function LandingValues() {
                 </p>
               </div>
             ))}
+          </div>
+
+          <GridRail />
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/**
+ * Web3 yol haritası — Notion'daki rehberin (`/roadmap`) rotası: 6 temel adım
+ * ve "kendi yolunu seç". Kaynaklar Notion'da kalıyor; burada yalnızca rota
+ * görünüyor ki ziyaretçi rehberin varlığını aramadan fark etsin. Adımlar ve
+ * süreler Notion sayfasındaki rota kutularıyla aynı; orası değişirse burası da.
+ */
+export function LandingRoadmap() {
+  const t = useTranslations('Landing.roadmap');
+
+  const steps = [
+    'basics',
+    'bitcoin',
+    'ethereum',
+    'ecosystem',
+    'useCases',
+    'advanced',
+  ] as const;
+
+  /* `/roadmap` bir yönlendirme (next.config.ts → Notion), sayfa değil: dil
+     öneki almamalı, bu yüzden i18n `Link` değil düz `<a>`. */
+  const open = (
+    <a
+      href={siteConfig.roadmapPath}
+      target="_blank"
+      rel="noreferrer noopener"
+      className={buttonClasses({ className: 'shrink-0' })}
+    >
+      {t('open')}
+      <ArrowUpRight aria-hidden className="size-4" />
+    </a>
+  );
+
+  return (
+    <section id="roadmap" className="scroll-mt-24">
+      <Container asGrid>
+        <div className="grid grid-cols-10 gap-px">
+          <GridRail />
+
+          <div className="@2xl:grid-cols-2 @4xl:grid-cols-3 col-span-full grid gap-px sm:col-span-8">
+            <div
+              data-grid-content
+              className="@4xl:p-12 @4xl:flex-row @4xl:items-end @4xl:justify-between col-span-full flex flex-col gap-8 p-6"
+            >
+              <div>
+                <Eyebrow>{t('heading')}</Eyebrow>
+                <h2 className="@4xl:text-5xl mt-5 text-3xl leading-[1.12] sm:text-4xl">
+                  {t('title')}
+                </h2>
+                <p className="text-muted-foreground mt-6 max-w-2xl text-lg text-balance">
+                  {t('intro')}
+                </p>
+              </div>
+              {open}
+            </div>
+
+            {steps.map((key, i) => (
+              <div
+                key={key}
+                data-grid-content
+                className="@4xl:p-10 flex flex-col gap-4 p-6"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <Chip>{String(i + 1).padStart(2, '0')}</Chip>
+                  <span className="text-muted-foreground font-display text-xs tracking-widest">
+                    {t(`steps.${key}.time`)}
+                  </span>
+                </div>
+                <h3 className="text-foreground mt-2 text-lg leading-tight font-semibold">
+                  {t(`steps.${key}.title`)}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {t(`steps.${key}.description`)}
+                </p>
+              </div>
+            ))}
+
+            {/* 7. adım rotanın sonu: signal yüzeyde, iki hücre genişliğinde. */}
+            <div
+              data-grid-content
+              className="surface-signal @4xl:col-span-2 @4xl:p-10 flex flex-col gap-4 p-6"
+            >
+              <div className="flex items-center justify-between gap-4">
+                <Chip>07</Chip>
+                <span className="text-muted-foreground font-display text-xs tracking-widest">
+                  {t('steps.path.time')}
+                </span>
+              </div>
+              <h3 className="text-foreground mt-2 text-lg leading-tight font-semibold">
+                {t('steps.path.title')}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {t('steps.path.description')}
+              </p>
+            </div>
+
+            <div
+              data-grid-content
+              className="@4xl:p-10 flex flex-col justify-center gap-2 p-6"
+            >
+              <p className="text-foreground font-semibold">
+                {t('shortcutTitle')}
+              </p>
+              <p className="text-muted-foreground">{t('shortcut')}</p>
+            </div>
           </div>
 
           <GridRail />

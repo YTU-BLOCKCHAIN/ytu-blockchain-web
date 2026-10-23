@@ -10,6 +10,7 @@ import {
   LandingFeatures,
   LandingHero,
   LandingManifesto,
+  LandingRoadmap,
   LandingStats,
   LandingTicker,
   LandingValues,
@@ -50,6 +51,7 @@ export default async function LandingPage({
       <LandingFeatures />
       <LandingVision />
       <LandingValues />
+      <LandingRoadmap />
       <LandingStats />
       <LandingTicker />
       <LandingEvents />
