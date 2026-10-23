@@ -6,14 +6,16 @@ import {
   Unlock,
   Users,
 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
+import { Stat } from '@/components/brand';
 import { Container } from '@/components/container';
 import { ButtonLink } from '@/components/ui/button';
 import { JOIN_HREF, SiteLink } from '@/components/site-link';
 
 export function AboutHero() {
   const t = useTranslations('About.hero');
+  const locale = useLocale();
 
   const stats = [
     { value: t('stats.members.value'), label: t('stats.members.label') },
@@ -72,10 +74,7 @@ export function AboutHero() {
             data-grid-content
             className="@4xl:p-12 @4xl:col-span-2 @max-4xl:p-6"
           >
-            <p className="text-muted-foreground">
-              <strong className="text-foreground font-medium">{s.value}</strong>{' '}
-              {s.label}
-            </p>
+            <Stat value={s.value} label={s.label.toLocaleUpperCase(locale)} />
           </div>
         ))}
         <div aria-hidden data-grid-content className="@max-4xl:hidden" />

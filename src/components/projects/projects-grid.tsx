@@ -81,7 +81,7 @@ export function ProjectsGrid() {
   if (projects.length === 0) {
     return (
       <EmptyState
-        Icon={Code2}
+        folder={t('empty.folder')}
         eyebrow={t('empty.eyebrow')}
         title={t('empty.title')}
         body={t('empty.body')}

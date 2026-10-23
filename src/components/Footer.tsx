@@ -152,6 +152,20 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        {/* Kapanış: marka banner'ındaki dev wordmark. Genişlik konteynere
+            göre (`cqw`), tek satırda hücreyi kenardan kenara dolduruyor.
+            Logo zaten yukarıda; bu satır dekoratif. */}
+        <div aria-hidden>
+          <div
+            data-grid-content
+            className="surface-signal flex items-end justify-between gap-6 overflow-hidden px-6 pt-8 pb-4 lg:px-12"
+          >
+            <span className="font-display text-[10.5cqw] leading-[0.85] whitespace-nowrap">
+              YTU BLOCKCHAIN
+            </span>
+          </div>
+        </div>
       </Container>
 
       <Separator className="h-6" />

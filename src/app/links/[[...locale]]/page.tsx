@@ -23,6 +23,7 @@ import {
   WhatsappIcon,
   XIcon,
 } from '@/components/community/brand-icons';
+import { Evolution } from '@/components/brand';
 import { Logo } from '@/components/logo';
 import { routing } from '@/i18n/routing';
 import { type LinkItem, linksContentFor } from '@/lib/links';
@@ -425,23 +426,13 @@ export default async function LinksPage({
         <div className="grid gap-px md:min-h-dvh md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
           {/* md'de header sol kolonun tamamını kaplar (grid stretch) ve içerik
               dikeyde ortalanır; mask zaten absolute, flex'ten etkilenmez. */}
-          <header className="bg-card relative overflow-hidden px-6 py-10 text-center md:sticky md:top-0 md:flex md:h-dvh md:flex-col md:justify-center md:rounded-none md:px-10 md:py-16">
-            {/* Sitedeki hero'larla aynı teknik: CSS mask + bg-foreground →
-                görsel metin rengini alır. */}
-            <div
-              aria-hidden
-              className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
-              style={{
-                maskImage: 'url(/images/landing-bg.png)',
-                WebkitMaskImage: 'url(/images/landing-bg.png)',
-                maskSize: 'cover',
-                WebkitMaskSize: 'cover',
-                maskPosition: 'center 20%',
-                WebkitMaskPosition: 'center 20%',
-                maskRepeat: 'no-repeat',
-                WebkitMaskRepeat: 'no-repeat',
-              }}
-            />
+          {/* Sol panel kulübün post yüzeyi: signal zemin, beyaz mürekkep,
+              altta Tanışma afişindeki evrim dizisi (dither). Instagram
+              biyografisinden gelen ziyaretçi postlarda gördüğü yüzeye iniyor. */}
+          <header className="surface-signal relative overflow-hidden px-6 py-10 text-center md:sticky md:top-0 md:flex md:h-dvh md:flex-col md:justify-center md:px-10 md:py-16">
+            <div className="absolute inset-x-10 bottom-0 hidden md:block">
+              <Evolution you={t('you')} />
+            </div>
             <div className="relative flex flex-col items-center">
               <h1 className="flex items-center justify-center">
                 <Logo className="scale-110 md:scale-125" />
@@ -480,7 +471,7 @@ export default async function LinksPage({
         aria-hidden
         // Maske yalnızca en alttaki ~%15'i tam opak bırakır, kalanı uzun bir
         // rampayla söner: kısa/sert bir bant yerine yumuşak bir eriyiş.
-        className="from-background pointer-events-none fixed inset-x-0 bottom-0 h-32 bg-linear-to-t to-transparent backdrop-blur-[2px] [mask-image:linear-gradient(to_top,#000_15%,transparent)]"
+        className="from-background pointer-events-none fixed inset-x-0 bottom-0 h-32 md:left-[41.667%] bg-linear-to-t to-transparent backdrop-blur-[2px] [mask-image:linear-gradient(to_top,#000_15%,transparent)]"
       />
     </main>
   );

@@ -1,4 +1,3 @@
-import { PenLine } from 'lucide-react';
 import { type Locale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 
@@ -176,7 +175,7 @@ export function BlogList({
   if (!featured) {
     return (
       <EmptyState
-        Icon={PenLine}
+        folder={t('emptyState.folder')}
         eyebrow={t('emptyState.eyebrow')}
         title={t('emptyState.title')}
         body={t('emptyState.body')}
