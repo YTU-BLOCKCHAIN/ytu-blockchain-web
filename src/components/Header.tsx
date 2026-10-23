@@ -1,6 +1,19 @@
 'use client';
 
-import { ArrowRight, Menu, X } from 'lucide-react';
+import {
+  ArrowRight,
+  Eye,
+  FolderGit2,
+  Gem,
+  Link2,
+  Map as MapIcon,
+  Menu,
+  Palette,
+  Sticker,
+  UserPlus,
+  X,
+  type LucideIcon,
+} from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
@@ -47,11 +60,13 @@ const NAV = [
     sections: [
       {
         href: '/#vision',
+        icon: Eye,
         label: 'sections.about.mission',
         desc: 'sections.about.missionDesc',
       },
       {
         href: '/#values',
+        icon: Gem,
         label: 'sections.about.values',
         desc: 'sections.about.valuesDesc',
       },
@@ -78,27 +93,32 @@ const NAV = [
     sections: [
       {
         href: JOIN_HREF,
+        icon: Link2,
         label: 'sections.community.links',
         desc: 'sections.community.linksDesc',
         wide: true,
       },
       {
         href: siteConfig.roadmapPath,
+        icon: MapIcon,
         label: 'sections.community.roadmap',
         desc: 'sections.community.roadmapDesc',
       },
       {
         href: '/projects',
+        icon: FolderGit2,
         label: 'sections.community.projects',
         desc: 'sections.community.projectsDesc',
       },
       {
         href: '/stickers',
+        icon: Sticker,
         label: 'sections.community.stickers',
         desc: 'sections.community.stickersDesc',
       },
       {
         href: '/brand',
+        icon: Palette,
         label: 'sections.community.brand',
         desc: 'sections.community.brandDesc',
       },
@@ -310,10 +330,11 @@ function NavMenu() {
               ) : (
                 <NavigationMenuTrigger>{t(item.key)}</NavigationMenuTrigger>
               )}
-              <NavigationMenuContent>
-                <div className="w-[38rem] max-w-[calc(100vw-4rem)]">
+              <NavigationMenuContent className="md:right-0 md:w-full">
+                {/* Panel header genişliğinde; içerik de onu dolduruyor. */}
+                <div className="w-full">
                   {/* Kategori başlığı (template: "Features" / "More Features"). */}
-                  <span className="text-muted-foreground ml-3 block border-b pb-3 text-sm">
+                  <span className="text-muted-foreground mx-3 block border-b pb-3 text-sm">
                     {t(item.heading)}
                   </span>
 
@@ -324,6 +345,7 @@ function NavMenu() {
                         href={section.href}
                         title={t(section.label)}
                         description={t(section.desc)}
+                        icon={section.icon}
                         wide={'wide' in section && section.wide}
                       />
                     ))}
@@ -332,10 +354,12 @@ function NavMenu() {
                   {/* Tanıtım kartı: düz beyaz kare + başlık + açıklama. Kit gradient'i
                       yasaklıyor; kare logonun 24px modülünü hatırlatıyor. */}
                   <div className="relative m-3 grid grid-cols-[auto_1fr] items-center gap-3 border-t pt-6">
-                    <div
+                    <span
                       aria-hidden
-                      className="bg-foreground size-11 shrink-0"
-                    />
+                      className="bg-action text-action-foreground flex size-11 shrink-0 items-center justify-center"
+                    >
+                      <UserPlus className="text-action-foreground size-5" />
+                    </span>
                     <div className="space-y-0.5">
                       <SiteLink
                         href={item.promo.href}
@@ -367,33 +391,51 @@ function NavMenu() {
   );
 }
 
+/**
+ * Menü satırı: solda ikon karesi (yüzeyin tersi — mavi header'da beyaz kare,
+ * beyaz header'da mavi; postlardaki numara chip'leriyle aynı dil), sağda
+ * başlık + tek satır açıklama.
+ */
 function ListItem({
   title,
   description,
   href,
+  icon: Icon,
   wide = false,
 }: {
   title: string;
   description: string;
   href: string;
+  icon: LucideIcon;
   /** İki sütunu da kaplar: menünün öne çıkan satırı. */
   wide?: boolean;
 }) {
   return (
     <li className={wide ? 'col-span-2' : undefined}>
       <NavigationMenuLink asChild className="group p-3">
-        <SiteLink href={href} className="grid gap-1">
-          <span className="text-foreground flex items-center gap-2 text-sm font-medium">
-            {title}
-            <ArrowRight
-              aria-hidden
-              strokeWidth={2.5}
-              className="not-group-hover:opacity-0 not-group-hover:-translate-x-1 size-3 duration-200"
-            />
+        <SiteLink
+          href={href}
+          className="grid grid-cols-[auto_1fr] items-center gap-4"
+        >
+          <span
+            aria-hidden
+            className="bg-action text-action-foreground flex size-11 shrink-0 items-center justify-center"
+          >
+            <Icon className="text-action-foreground size-5" />
           </span>
-          <p className="text-muted-foreground line-clamp-1 text-sm">
-            {description}
-          </p>
+          <span className="grid min-w-0 gap-1">
+            <span className="text-foreground flex items-center gap-2 text-sm font-medium">
+              {title}
+              <ArrowRight
+                aria-hidden
+                strokeWidth={2.5}
+                className="not-group-hover:opacity-0 not-group-hover:-translate-x-1 size-3 duration-200"
+              />
+            </span>
+            <span className="text-muted-foreground line-clamp-1 text-sm">
+              {description}
+            </span>
+          </span>
         </SiteLink>
       </NavigationMenuLink>
     </li>
@@ -431,8 +473,14 @@ function MobileMenu({ closeMenu }: { closeMenu: () => void }) {
                       <SiteLink
                         href={section.href}
                         onClick={closeMenu}
-                        className="text-muted-foreground block gap-2.5 px-4 py-3 text-lg"
+                        className="text-muted-foreground flex items-center gap-3 px-4 py-2.5 text-lg"
                       >
+                        <span
+                          aria-hidden
+                          className="bg-action text-action-foreground flex size-9 shrink-0 items-center justify-center"
+                        >
+                          <section.icon className="text-action-foreground size-4" />
+                        </span>
                         {t(section.label)}
                       </SiteLink>
                     </li>
