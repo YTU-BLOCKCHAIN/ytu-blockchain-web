@@ -66,8 +66,8 @@ const NAV = [
   },
   {
     // Ayrı bir topluluk sayfası yok (eski `/community` → `/links`): başlık
-    // yalnızca menüyü açıyor, kanallar doğrudan burada. Dış adresler
-    // `SiteLink` içinde yeni sekmede açılıyor.
+    // yalnızca menüyü açıyor. Sosyal kanallar tek tek listelenmiyor, hepsi
+    // zaten `/links`te; menü oraya ve sitenin topluluk içeriklerine gidiyor.
     key: 'community',
     heading: 'menu.community.heading',
     promo: {
@@ -77,14 +77,10 @@ const NAV = [
     },
     sections: [
       {
-        href: siteConfig.social.whatsapp,
-        label: 'sections.community.whatsapp',
-        desc: 'sections.community.whatsappDesc',
-      },
-      {
-        href: siteConfig.social.luma,
-        label: 'sections.community.luma',
-        desc: 'sections.community.lumaDesc',
+        href: JOIN_HREF,
+        label: 'sections.community.links',
+        desc: 'sections.community.linksDesc',
+        wide: true,
       },
       {
         href: siteConfig.roadmapPath,
@@ -97,34 +93,14 @@ const NAV = [
         desc: 'sections.community.projectsDesc',
       },
       {
-        href: siteConfig.social.github,
-        label: 'sections.community.github',
-        desc: 'sections.community.githubDesc',
-      },
-      {
         href: '/stickers',
         label: 'sections.community.stickers',
         desc: 'sections.community.stickersDesc',
       },
       {
-        href: siteConfig.social.instagram,
-        label: 'sections.community.instagram',
-        desc: 'sections.community.instagramDesc',
-      },
-      {
-        href: siteConfig.social.x,
-        label: 'sections.community.x',
-        desc: 'sections.community.xDesc',
-      },
-      {
-        href: siteConfig.social.medium,
-        label: 'sections.community.medium',
-        desc: 'sections.community.mediumDesc',
-      },
-      {
-        href: siteConfig.social.spotify,
-        label: 'sections.community.podcast',
-        desc: 'sections.community.podcastDesc',
+        href: '/brand',
+        label: 'sections.community.brand',
+        desc: 'sections.community.brandDesc',
       },
       // Destekçilerimiz bölümü about sayfasında gizli olduğu için menüden de
       // kaldırıldı; `<AboutSponsors />` geri açıldığında bu öğeyi de geri alın.
@@ -348,6 +324,7 @@ function NavMenu() {
                         href={section.href}
                         title={t(section.label)}
                         description={t(section.desc)}
+                        wide={'wide' in section && section.wide}
                       />
                     ))}
                   </ul>
@@ -394,13 +371,16 @@ function ListItem({
   title,
   description,
   href,
+  wide = false,
 }: {
   title: string;
   description: string;
   href: string;
+  /** İki sütunu da kaplar: menünün öne çıkan satırı. */
+  wide?: boolean;
 }) {
   return (
-    <li>
+    <li className={wide ? 'col-span-2' : undefined}>
       <NavigationMenuLink asChild className="group p-3">
         <SiteLink href={href} className="grid gap-1">
           <span className="text-foreground flex items-center gap-2 text-sm font-medium">
