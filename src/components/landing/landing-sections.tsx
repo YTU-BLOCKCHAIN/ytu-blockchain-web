@@ -15,7 +15,7 @@ import {
   Stat,
   Terminal,
 } from '@/components/brand';
-import { Container } from '@/components/container';
+import { Container, Rail as GridRail } from '@/components/container';
 import { toCard } from '@/components/events/events-sections';
 import { JOIN_HREF } from '@/components/site-link';
 import { ButtonLink, buttonClasses } from '@/components/ui/button';
@@ -30,19 +30,7 @@ import { getEvents, isUpcoming, todayInClubTimeZone } from '@/lib/events';
 
 /** Izgaranın yan rayları: masaüstünde boş hücreler, telefonda yok. */
 function Rail({ rows = 1 }: { rows?: number }) {
-  return (
-    <div
-      aria-hidden
-      className="@4xl:grid hidden gap-px"
-      style={{ gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))` }}
-    >
-      {Array.from({ length: rows }).map((_, i) => (
-        <div key={i}>
-          <div data-grid-content />
-        </div>
-      ))}
-    </div>
-  );
+  return <GridRail rows={rows} className="@4xl:grid hidden" />;
 }
 
 /**

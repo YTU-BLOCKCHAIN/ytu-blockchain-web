@@ -9,7 +9,7 @@ import {
 import { useLocale, useTranslations } from 'next-intl';
 
 import { Stat } from '@/components/brand';
-import { Container } from '@/components/container';
+import { Container, Rail } from '@/components/container';
 import { ButtonLink } from '@/components/ui/button';
 import { JOIN_HREF, SiteLink } from '@/components/site-link';
 
@@ -29,9 +29,7 @@ export function AboutHero() {
       {/* Hero metin bloğu — gerçek grid-2-about-one #home markup'ı birebir. */}
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <Rail rows={4} />
 
           <div
             data-grid-content
@@ -51,9 +49,7 @@ export function AboutHero() {
             </p>
           </div>
 
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <Rail rows={4} />
         </div>
       </Container>
 

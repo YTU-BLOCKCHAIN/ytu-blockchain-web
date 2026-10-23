@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 import { Dither, Eyebrow } from '@/components/brand';
-import { Container } from '@/components/container';
+import { Container, Rail } from '@/components/container';
 
 import { STICKERS } from './sticker/list';
 
@@ -17,9 +17,7 @@ export function StickersHero() {
     <section className="surface-signal overflow-hidden">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <Rail rows={3} />
 
           <div
             data-grid-content
@@ -42,21 +40,10 @@ export function StickersHero() {
             />
           </div>
 
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <Rail rows={3} />
         </div>
       </Container>
     </section>
-  );
-}
-
-/** Izgaranın yan rayı: telefonda yok (diğer bölümlerle aynı düzen). */
-function Rail() {
-  return (
-    <div aria-hidden className="max-sm:hidden">
-      <div data-grid-content />
-    </div>
   );
 }
 

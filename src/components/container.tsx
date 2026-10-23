@@ -104,3 +104,31 @@ const Decorator = ({ className }: { className?: string }) => {
     </div>
   );
 };
+
+/**
+ * Izgaranın yan rayı (10 sütunluk düzenin 1. ve 10. sütunu). Sayfa
+ * girişlerinde `rows` ile kare hücrelere bölünüyor — ana sayfa hero'su ve
+ * postlardaki ızgara gibi; düz bir şerit gibi durmasın. Satır sayısı elle:
+ * hücreler ~kare kalsın diye hero yüksekliği / ray genişliği (1440px'te).
+ */
+export const Rail = ({
+  rows = 1,
+  className = 'max-sm:hidden',
+}: {
+  rows?: number;
+  className?: string;
+}) => {
+  return (
+    <div
+      aria-hidden
+      className={cn('grid gap-px', className)}
+      style={{ gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))` }}
+    >
+      {Array.from({ length: rows }).map((_, i) => (
+        <div key={i}>
+          <div data-grid-content />
+        </div>
+      ))}
+    </div>
+  );
+};

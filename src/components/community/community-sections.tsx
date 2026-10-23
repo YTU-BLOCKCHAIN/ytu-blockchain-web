@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 
-import { Container } from '@/components/container';
+import { Container, Rail } from '@/components/container';
 import { JOIN_HREF } from '@/components/site-link';
 import { ButtonLink } from '@/components/ui/button';
 
@@ -11,9 +11,7 @@ export function CommunityHero() {
     <section className="surface-signal overflow-hidden">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <Rail rows={2} />
 
           <div
             data-grid-content
@@ -50,9 +48,7 @@ export function CommunityHero() {
             </div>
           </div>
 
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <Rail rows={2} />
         </div>
       </Container>
     </section>

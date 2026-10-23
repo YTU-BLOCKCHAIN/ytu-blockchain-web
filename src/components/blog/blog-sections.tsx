@@ -1,7 +1,7 @@
 import { type Locale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 
-import { Container } from '@/components/container';
+import { Container, Rail } from '@/components/container';
 import { EmptyState } from '@/components/empty-state';
 import { Link } from '@/i18n/navigation';
 import { formatPostDate } from '@/lib/blog';
@@ -45,11 +45,17 @@ export function BlogHero() {
   const t = useTranslations('Blog');
 
   return (
-    <section className="surface-signal">
-      {/* `relative overflow-hidden` kartın kendisinde: leke kartın yuvarlatılmış
-          sınırında kırpılsın, yan raylara taşmasın. */}
-      <Container className="@4xl:py-12 relative overflow-hidden pb-6 pt-12">
-        {/* Dekoratif halftone balina kuyruğu. Diğer hero'lar ile aynı teknik:
+    <section className="surface-signal overflow-hidden">
+      <Container asGrid>
+        <div className="grid grid-cols-10 gap-px">
+          <Rail rows={3} />
+          {/* `relative overflow-hidden` hücrenin kendisinde: görsel hücrede
+              kırpılsın, yan raylara taşmasın. */}
+          <div
+            data-grid-content
+            className="@4xl:py-12 relative col-span-full overflow-hidden pt-12 pb-6 sm:col-span-8"
+          >
+            {/* Dekoratif halftone balina kuyruğu. Diğer hero'lar ile aynı teknik:
             CSS mask + bg-foreground → görsel metin rengini alır (dark açık /
             light koyu), her iki temada aynı silik görsel, tek dosya, geçiş yok.
 
@@ -61,30 +67,33 @@ export function BlogHero() {
             büyütmeye girer ve halftone taneleri bulanır. `auto 115%` ile çizim
             ≈626×409 oluyor: 1252 fiziksel piksel < 1492, yani hâlâ küçültme.
             Netliği korumak için bu yüzde ~135'i geçmemeli. */}
-        <div
-          aria-hidden
-          className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
-          style={{
-            maskImage: 'url(/images/blog-bg.png)',
-            WebkitMaskImage: 'url(/images/blog-bg.png)',
-            maskSize: 'auto 115%',
-            WebkitMaskSize: 'auto 115%',
-            maskPosition: 'right center',
-            WebkitMaskPosition: 'right center',
-            maskRepeat: 'no-repeat',
-            WebkitMaskRepeat: 'no-repeat',
-          }}
-        />
-        <div className="@4xl:px-12 relative max-w-xl px-6">
-          {/* Mobilde 36px — diğer sayfa hero'larıyla aynı ölçü; 48px telefonda
+            <div
+              aria-hidden
+              className="bg-foreground pointer-events-none absolute inset-0 opacity-15"
+              style={{
+                maskImage: 'url(/images/blog-bg.png)',
+                WebkitMaskImage: 'url(/images/blog-bg.png)',
+                maskSize: 'auto 115%',
+                WebkitMaskSize: 'auto 115%',
+                maskPosition: 'right center',
+                WebkitMaskPosition: 'right center',
+                maskRepeat: 'no-repeat',
+                WebkitMaskRepeat: 'no-repeat',
+              }}
+            />
+            <div className="@4xl:px-12 relative max-w-xl px-6">
+              {/* Mobilde 36px — diğer sayfa hero'larıyla aynı ölçü; 48px telefonda
               başlığı fazladan satıra bölüp hero'yu ekranın tamamına şişiriyor.
               Geniş ekranda tasarımın 60px'ine çıkıyor. */}
-          <h1 className="text-foreground text-balance text-4xl font-semibold sm:text-5xl lg:text-6xl">
-            {t('title')}
-          </h1>
-          <p className="text-muted-foreground mt-6 text-balance text-lg">
-            {t('subtitle')}
-          </p>
+              <h1 className="text-foreground text-balance text-4xl font-semibold sm:text-5xl lg:text-6xl">
+                {t('title')}
+              </h1>
+              <p className="text-muted-foreground mt-6 text-balance text-lg">
+                {t('subtitle')}
+              </p>
+            </div>
+          </div>
+          <Rail rows={3} />
         </div>
       </Container>
     </section>

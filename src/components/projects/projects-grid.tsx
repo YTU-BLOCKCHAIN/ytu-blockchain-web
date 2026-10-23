@@ -3,7 +3,7 @@ import { useLocale, useTranslations } from 'next-intl';
 
 import type { ProjectStatus } from '@/data/projects';
 import { cn } from '@/lib/utils';
-import { Container } from '@/components/container';
+import { Container, Rail } from '@/components/container';
 import { EmptyState } from '@/components/empty-state';
 import { JOIN_HREF } from '@/components/site-link';
 import { siteConfig } from '@/lib/site';
@@ -17,9 +17,7 @@ export function ProjectsHeader() {
     <section className="surface-signal overflow-hidden">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <Rail rows={3} />
 
           <div
             data-grid-content
@@ -58,9 +56,7 @@ export function ProjectsHeader() {
             </div>
           </div>
 
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <Rail rows={3} />
         </div>
       </Container>
     </section>
