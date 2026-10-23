@@ -241,7 +241,7 @@ export function LandingFeatures() {
 
 /**
  * Vizyon ve misyon — eskiden Hakkımızda sayfasındaydı, kulübü ilk kez gören
- * biri aramadan okusun diye ana sayfaya taşındı. Header'daki "Vizyon ve
+ * biri aramadan okusun diye ana sayfaya taşındı. Hero gibi signal yüzeyde. Header'daki "Vizyon ve
  * Misyon" bağlantısı `/#vision`a iniyor.
  */
 export function LandingVision() {
@@ -253,10 +253,10 @@ export function LandingVision() {
   ];
 
   return (
-    <section id="vision" className="scroll-mt-24">
+    <section id="vision" className="surface-signal scroll-mt-24">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
-          <GridRail />
+          <GridRail rows={5} />
 
           <div className="@2xl:grid-cols-2 col-span-full grid gap-px sm:col-span-8">
             <div data-grid-content className="@4xl:p-12 col-span-full p-6">
@@ -280,7 +280,7 @@ export function LandingVision() {
             ))}
           </div>
 
-          <GridRail />
+          <GridRail rows={5} />
         </div>
       </Container>
     </section>
@@ -541,12 +541,10 @@ export function LandingCta() {
   const t = useTranslations('Landing');
 
   return (
-    <section>
+    <section className="surface-signal overflow-hidden">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <GridRail rows={5} />
 
           <div className="col-span-full sm:col-span-8">
             <div data-grid-content>
@@ -571,7 +569,7 @@ export function LandingCta() {
                 />
               </div>
 
-              <div className="border-border @4xl:px-12 flex flex-col gap-6 border-t px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
+              <div className="surface-paper @4xl:px-12 flex flex-col gap-6 px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-primary font-display text-2xl sm:text-3xl">
                     YTUBLOCKCHAIN.COM/LINKS
@@ -587,9 +585,7 @@ export function LandingCta() {
             </div>
           </div>
 
-          <div aria-hidden className="max-sm:hidden">
-            <div data-grid-content />
-          </div>
+          <GridRail rows={5} />
         </div>
       </Container>
     </section>
