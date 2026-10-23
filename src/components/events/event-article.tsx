@@ -176,7 +176,6 @@ export function EventArticle({
             {event.cover?.asset ? (
               <EventCover
                 src={imageUrlByWidth(event.cover, 1600)}
-                blurSrc={imageUrlByWidth(event.cover, 48)}
                 alt={event.cover.alt ?? ''}
                 priority
                 sizes="(min-width: 1024px) 42rem, 100vw"

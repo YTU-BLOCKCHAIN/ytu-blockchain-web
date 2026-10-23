@@ -29,8 +29,6 @@ export type EventCardData = {
   type: EventType | null;
   place: string | null;
   coverUrl: string | null;
-  /** Kapağın arkasındaki bulanık zemin için küçük kopya (bkz. `EventCover`). */
-  coverBlurUrl: string | null;
   coverAlt: string;
   /** "2025–2026" — geçmiş etkinlikler bu başlıklar altında gruplanıyor. */
   academicYear: string;
@@ -44,7 +42,7 @@ export function EventTypeBadge({ type }: { type: EventType | null }) {
   if (!type) return null;
 
   return (
-    <span className="bg-foreground/8 text-foreground/75 inline-flex px-2 py-0.5 text-xs font-medium">
+    <span className="border-foreground/30 text-foreground/80 inline-flex border px-2 py-0.5 text-xs font-medium">
       {t(EVENT_TYPE_LABEL_KEY[type])}
     </span>
   );
@@ -73,10 +71,9 @@ export function EventCard({
         data-grid-content
         className="@4xl:p-8 hover:bg-muted! flex flex-col gap-4 p-6 transition duration-200"
       >
-        {event.coverUrl && event.coverBlurUrl ? (
+        {event.coverUrl ? (
           <EventCover
             src={event.coverUrl}
-            blurSrc={event.coverBlurUrl}
             alt={event.coverAlt}
             sizes="(min-width: 1024px) 22rem, (min-width: 640px) 50vw, 100vw"
             className="aspect-[16/10]"
@@ -96,7 +93,7 @@ export function EventCard({
           {event.date ? (
             <time
               dateTime={event.dateTime ?? undefined}
-              className="text-muted-foreground text-sm"
+              className="text-primary font-display text-sm"
             >
               {event.date}
               {upcoming && event.time ? ` · ${event.time}` : null}

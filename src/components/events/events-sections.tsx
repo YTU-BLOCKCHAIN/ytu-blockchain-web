@@ -49,7 +49,6 @@ export function toCard(
     // Kırpılmadan sığdırılıyor (bkz. `EventCover`): yalnız genişlik veriliyor,
     // 2× ölçü retina ekran için.
     coverUrl: event.cover?.asset ? imageUrlByWidth(event.cover, 800) : null,
-    coverBlurUrl: event.cover?.asset ? imageUrlByWidth(event.cover, 48) : null,
     coverAlt: event.cover?.alt ?? '',
     academicYear: academicYear(event.date),
     lumaUrl: event.lumaUrl,
