@@ -231,12 +231,12 @@ function NavMenu() {
                     ))}
                   </ul>
 
-                  {/* Tanıtım kartı: düz signal karesi + başlık + açıklama. Kit gradient'i
+                  {/* Tanıtım kartı: düz beyaz kare + başlık + açıklama. Kit gradient'i
                       yasaklıyor; kare logonun 24px modülünü hatırlatıyor. */}
                   <div className="relative m-3 grid grid-cols-[auto_1fr] items-center gap-3 border-t pt-6">
                     <div
                       aria-hidden
-                      className="size-11 shrink-0 bg-[var(--brand-signal)]"
+                      className="bg-foreground size-11 shrink-0"
                     />
                     <div className="space-y-0.5">
                       <SiteLink

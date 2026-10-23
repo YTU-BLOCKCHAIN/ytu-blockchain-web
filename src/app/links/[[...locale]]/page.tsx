@@ -294,8 +294,8 @@ function LinkRow({
                   "başvurular açık" mesajını nabız gibi vurgular. */}
               {link.featured && (
                 <span aria-hidden className="relative flex size-1.5 shrink-0">
-                  <span className="bg-primary absolute inline-flex h-full w-full animate-ping opacity-75" />
-                  <span className="bg-primary relative inline-flex size-1.5" />
+                  <span className="bg-background absolute inline-flex h-full w-full animate-ping opacity-75" />
+                  <span className="bg-background relative inline-flex size-1.5" />
                 </span>
               )}
               {link.note}
@@ -426,10 +426,11 @@ export default async function LinksPage({
         <div className="grid gap-px md:min-h-dvh md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
           {/* md'de header sol kolonun tamamını kaplar (grid stretch) ve içerik
               dikeyde ortalanır; mask zaten absolute, flex'ten etkilenmez. */}
-          {/* Sol panel kulübün post yüzeyi: signal zemin, beyaz mürekkep,
-              altta Tanışma afişindeki evrim dizisi (dither). Instagram
-              biyografisinden gelen ziyaretçi postlarda gördüğü yüzeye iniyor. */}
-          <header className="surface-signal relative overflow-hidden px-6 py-10 text-center md:sticky md:top-0 md:flex md:h-dvh md:flex-col md:justify-center md:px-10 md:py-16">
+          {/* Sol panel koyu vurgu bloğu, altta Tanışma afişindeki evrim
+              dizisi (dither); sağdaki bağlantılar sayfanın signal mavisinde.
+              Instagram biyografisinden gelen ziyaretçi postlardaki yüzeye
+              iniyor. */}
+          <header className="surface-void relative overflow-hidden px-6 py-10 text-center md:sticky md:top-0 md:flex md:h-dvh md:flex-col md:justify-center md:px-10 md:py-16">
             <div className="absolute inset-x-10 bottom-0 hidden md:block">
               <Evolution you={t('you')} />
             </div>
@@ -452,13 +453,17 @@ export default async function LinksPage({
             </div>
           </header>
 
-          {/* İç grid de `gap-px`: telefonda dıştaki ile aynı ayraçlar, yani
-              görünüm eskisiyle birebir. md'de sağ kolon soldan kısaysa
-              satırlar stretch ile eşit büyüyüp paneli doldurur. */}
-          <div className="grid content-center gap-px md:p-8 lg:grid-cols-2 lg:p-16">
-            {rows.map((row) => (
-              <LinkRow key={`${row.link.label}-${row.link.href}`} {...row} />
-            ))}
+          {/* İç grid `gap-px` + `bg-grid-line`: satır aralarındaki 1px
+              boşluk ızgara çizgisini gösteriyor (sitedeki `asGrid` dili).
+              Zemin ve kartlar aynı signal mavisi olduğu için çizgi zeminden
+              değil bu katmandan gelmeli. Dolgu dış sarmalayıcıda; içte olsa
+              dolgu alanı da çizgi renginde boyanırdı. */}
+          <div className="grid content-center md:p-8 lg:p-16">
+            <div className="bg-grid-line grid gap-px lg:grid-cols-2">
+              {rows.map((row) => (
+                <LinkRow key={`${row.link.label}-${row.link.href}`} {...row} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

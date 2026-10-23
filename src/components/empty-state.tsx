@@ -17,7 +17,7 @@ type Action =
  * geleceğini söyleyen bir başlık ve ziyaretçiyi boşlukta bırakmayan iki çıkış:
  * içeriğin şu an bulunduğu yer (Medium, GitHub) ve kulübe katılma.
  *
- * Görünüm postlardaki terminal kutusu (Pi Günü, Genesis): signal yüzeyde
+ * Görünüm postlardaki terminal kutusu (Pi Günü, Genesis): koyu blokta
  * `$ ls <klasör>` ve yanıp sönen imleçle "yakında". `folder` terminalde
  * listelenen klasör adı, ör. "projeler/".
  */
@@ -44,7 +44,7 @@ export function EmptyState({
         <div>
           <div
             data-grid-content
-            className="surface-signal @4xl:p-16 @2xl:grid-cols-[3fr_2fr] grid items-center gap-10 px-6 py-14"
+            className="surface-void @4xl:p-16 @2xl:grid-cols-[3fr_2fr] grid items-center gap-10 px-6 py-14"
           >
             <div>
               <span className="text-primary font-display text-xs tracking-widest">

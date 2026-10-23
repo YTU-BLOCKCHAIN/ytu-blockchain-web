@@ -94,7 +94,7 @@ export async function LandingHero() {
           <Rail rows={6} />
 
           <div className="@4xl:col-span-8 col-span-full">
-            <div data-grid-content className="surface-signal flex flex-col">
+            <div data-grid-content className="flex flex-col">
               <div className="@4xl:px-12 @4xl:pt-12 px-6 pt-6 sm:px-10 sm:pt-10">
                 <div className="flex items-start justify-between gap-4">
                   <Eyebrow className="pt-2">
@@ -282,7 +282,7 @@ export async function LandingStats() {
           <div className="col-span-full sm:col-span-8">
             <div
               data-grid-content
-              className="surface-signal @4xl:p-12 relative overflow-hidden p-6"
+              className="surface-void @4xl:p-12 relative overflow-hidden p-6"
             >
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <Eyebrow>{t('heading')}</Eyebrow>
@@ -333,9 +333,10 @@ export function LandingManifesto() {
                 <Eyebrow>{t('manifestoTitle')}</Eyebrow>
                 <p className="@4xl:text-3xl mt-6 text-2xl leading-snug font-medium text-balance">
                   {t.rich('manifestoRich', {
-                    // Kit `.hl`: sayfada tek vurgu bandı.
+                    // Kit `.hl`: sayfada tek vurgu bandı. Signal yüzeyde
+                    // beyaz bant + mavi yazı (`.stage--signal .hl`).
                     hl: (chunks) => (
-                      <mark className="bg-signal px-1.5 text-white [box-decoration-break:clone]">
+                      <mark className="bg-foreground text-background px-1.5 [box-decoration-break:clone]">
                         {chunks}
                       </mark>
                     ),
@@ -388,7 +389,10 @@ export function LandingTicker() {
   return (
     <section aria-hidden>
       <Container asGrid>
-        <div data-grid-content className="surface-signal overflow-hidden py-4">
+        <div
+          data-grid-content
+          className="surface-paper text-primary overflow-hidden py-4"
+        >
           <div className="motion-safe:animate-marquee flex w-max">
             {row}
             {row}
@@ -457,7 +461,7 @@ export function LandingCta() {
           </div>
 
           <div className="col-span-full sm:col-span-8">
-            <div data-grid-content className="surface-signal">
+            <div data-grid-content className="surface-void">
               <div className="@4xl:p-12 @2xl:grid-cols-[3fr_2fr] relative grid items-end gap-10 overflow-hidden p-6">
                 <div>
                   <h2 className="@4xl:text-6xl text-4xl leading-[1.12] text-balance sm:text-5xl">
