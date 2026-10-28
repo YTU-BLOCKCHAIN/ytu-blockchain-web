@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 
+import { Scramble } from '@/components/scramble';
 import { cn } from '@/lib/utils';
 
 /*
@@ -47,7 +48,8 @@ export function Chip({
 
 /**
  * Bölüm başı: `//` önekli küçük etiket. Postlardaki "01 / BLOCKCHAIN 101"
- * satırının sitedeki karşılığı.
+ * satırının sitedeki karşılığı. Düz metinse ekrana girince terminal gibi
+ * çözülüyor (`Scramble`); `//` sabit kalıyor.
  */
 export function Eyebrow({
   children,
@@ -63,7 +65,13 @@ export function Eyebrow({
         className,
       )}
     >
-      {'//'} {children}
+      {typeof children === 'string' ? (
+        <Scramble text={`// ${children}`} keep={3} />
+      ) : (
+        <>
+          {'//'} {children}
+        </>
+      )}
     </span>
   );
 }
@@ -249,22 +257,33 @@ const EVOLUTION_TAGS = [
  */
 export function Evolution({ you }: { you: string }) {
   return (
-    <div aria-hidden className="flex items-end gap-[3%]">
+    <div
+      aria-hidden
+      className="intro-rise flex items-end gap-[3%] [--intro-delay:300ms]"
+    >
       <div className="relative flex-1">
         <Dither name="evolution" width={1600} height={865} className="w-full" />
-        {EVOLUTION_TAGS.map((tag) => (
+        {EVOLUTION_TAGS.map((tag, i) => (
           <Chip
             key={tag.label}
-            className="absolute h-5 -translate-x-1/2 -translate-y-1/2 px-1.5 text-[10px] sm:h-6 sm:text-xs"
-            style={{ left: `${tag.x}%`, top: `${tag.y}%` }}
+            className="intro-pop absolute h-5 -translate-x-1/2 -translate-y-1/2 px-1.5 text-[10px] sm:h-6 sm:text-xs"
+            style={
+              {
+                left: `${tag.x}%`,
+                top: `${tag.y}%`,
+                '--intro-delay': `${700 + i * 140}ms`,
+              } as React.CSSProperties
+            }
           >
             {tag.label}
           </Chip>
         ))}
       </div>
       <div className="border-foreground/80 relative mb-[0.5%] flex aspect-[0.46] w-[18%] items-center justify-center border-2 border-dashed">
-        <span className="font-display text-4xl sm:text-6xl">?</span>
-        <Chip className="absolute top-0 left-1/2 h-5 -translate-x-1/2 -translate-y-1/2 px-1.5 text-[10px] sm:h-6 sm:text-xs">
+        <span className="font-display intro-blink text-4xl [--intro-delay:1.3s] sm:text-6xl">
+          ?
+        </span>
+        <Chip className="intro-pop absolute top-0 left-1/2 h-5 -translate-x-1/2 -translate-y-1/2 px-1.5 text-[10px] [--intro-delay:1.1s] sm:h-6 sm:text-xs">
           {you}
         </Chip>
       </div>

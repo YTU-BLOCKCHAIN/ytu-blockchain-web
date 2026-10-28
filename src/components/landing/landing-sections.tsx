@@ -87,26 +87,26 @@ export async function LandingHero() {
           <div className="@4xl:col-span-8 col-span-full">
             <div data-grid-content className="flex flex-col">
               <div className="@4xl:px-12 @4xl:pt-12 px-6 pt-6 sm:px-10 sm:pt-10">
-                <div className="flex items-start justify-between gap-4">
+                <div className="intro-rise flex items-start justify-between gap-4">
                   <Eyebrow className="pt-2">
                     BLOCKCHAIN · DEFI · ZK · OPEN-SOURCE
                   </Eyebrow>
-                  <Chip>
+                  <Chip className="intro-pop [--intro-delay:150ms]">
                     {t(`hero.season.${season.key}`, { year: season.year })}
                   </Chip>
                 </div>
 
-                <h1 className="@4xl:text-7xl mt-10 text-[2.5rem] leading-[1.12] text-balance sm:text-6xl">
+                <h1 className="intro-wipe @4xl:text-7xl mt-10 text-[2.5rem] leading-[1.12] text-balance [--intro-delay:100ms] sm:text-6xl">
                   {t('hero.title')}
                 </h1>
               </div>
 
               <div className="@4xl:grid-cols-[5fr_7fr] @4xl:items-end @4xl:gap-10 @4xl:pl-12 mt-8 grid gap-10 px-6 sm:px-10 @4xl:pr-0">
                 <div className="@4xl:pb-12">
-                  <p className="text-muted-foreground text-lg text-balance">
+                  <p className="intro-rise text-muted-foreground text-lg text-balance [--intro-delay:350ms]">
                     {t('subtitle')}
                   </p>
-                  <div className="mt-8 flex flex-wrap gap-3">
+                  <div className="intro-rise mt-8 flex flex-wrap gap-3 [--intro-delay:450ms]">
                     <ButtonLink href={JOIN_HREF} withArrow>
                       {t('cta')}
                     </ButtonLink>
@@ -125,7 +125,7 @@ export async function LandingHero() {
               <div className="surface-paper @4xl:flex-row @4xl:items-end @4xl:justify-between @4xl:px-12 @4xl:py-10 flex flex-col gap-6 px-6 py-8 sm:px-10">
                 {card ? (
                   <>
-                    <div className="min-w-0">
+                    <div className="intro-rise min-w-0 [--intro-delay:550ms]">
                       <Chip tone="signal">{t('hero.next')}</Chip>
                       <p className="text-primary font-display mt-4 text-3xl leading-tight sm:text-4xl">
                         {card.title}
@@ -138,7 +138,7 @@ export async function LandingHero() {
                         ].filter(Boolean)}
                       />
                     </div>
-                    <div className="flex flex-wrap gap-3">
+                    <div className="intro-rise flex flex-wrap gap-3 [--intro-delay:650ms]">
                       {card.lumaUrl ? (
                         <a
                           href={card.lumaUrl}
@@ -160,7 +160,7 @@ export async function LandingHero() {
                   </>
                 ) : (
                   <>
-                    <div className="max-w-xl">
+                    <div className="intro-rise max-w-xl [--intro-delay:550ms]">
                       <p className="text-primary font-display text-3xl leading-tight sm:text-4xl">
                         {t('hero.fallbackTitle')}
                       </p>
@@ -168,7 +168,11 @@ export async function LandingHero() {
                         {t('hero.fallbackText')}
                       </p>
                     </div>
-                    <ButtonLink href="/events" withArrow className="shrink-0">
+                    <ButtonLink
+                      href="/events"
+                      withArrow
+                      className="intro-rise shrink-0 [--intro-delay:650ms]"
+                    >
                       {t('events.all')}
                     </ButtonLink>
                   </>
@@ -212,7 +216,7 @@ export function LandingFeatures() {
                 name="brain"
                 width={1400}
                 height={878}
-                className="text-primary @2xl:block absolute -right-6 -bottom-28 hidden w-[22rem] opacity-40"
+                className="parallax text-primary @2xl:block absolute -right-6 -bottom-28 hidden w-[22rem] opacity-40"
               />
               <div className="relative">
                 <Eyebrow>
@@ -420,7 +424,7 @@ export function LandingRoadmap() {
                 name="bulut"
                 width={2200}
                 height={1725}
-                className="@4xl:block absolute bottom-0 left-0 hidden w-[42%] opacity-25"
+                className="parallax @4xl:block absolute bottom-0 left-0 hidden w-[42%] opacity-25"
               />
               <ol className="relative flex flex-col gap-2">
                 {steps.map((key, i) => {
@@ -588,7 +592,7 @@ export function LandingManifesto() {
                 name="satoshi"
                 width={1000}
                 height={877}
-                className="text-primary @2xl:-mb-12 mx-auto block w-full max-w-xs"
+                className="parallax text-primary @2xl:-mb-12 mx-auto block w-full max-w-xs"
               />
             </div>
           </div>
@@ -690,14 +694,14 @@ export function LandingCta() {
   const t = useTranslations('Landing');
 
   return (
-    <section className="surface-signal overflow-hidden">
+    <section className="surface-signal overflow-clip">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
           <GridRail rows={5} />
 
           <div className="col-span-full sm:col-span-8">
             <div data-grid-content>
-              <div className="@4xl:p-12 @2xl:grid-cols-[3fr_2fr] relative grid items-end gap-10 overflow-hidden p-6">
+              <div className="@4xl:p-12 @2xl:grid-cols-[3fr_2fr] relative grid items-end gap-10 overflow-clip p-6">
                 <div>
                   <h2 className="text-primary @4xl:text-6xl text-4xl leading-[1.12] text-balance sm:text-5xl">
                     {t('ctaTitle')}
@@ -714,7 +718,7 @@ export function LandingCta() {
                   name="whale"
                   width={1400}
                   height={916}
-                  className="text-primary @2xl:-mb-12 block w-full"
+                  className="parallax text-primary @2xl:-mb-12 block w-full"
                 />
               </div>
 
