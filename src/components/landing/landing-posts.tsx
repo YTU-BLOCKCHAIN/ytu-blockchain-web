@@ -37,7 +37,7 @@ export async function LandingPosts() {
             <div data-grid-content />
           </div>
 
-          <div className="@2xl:grid-cols-3 col-span-full grid gap-px sm:col-span-8">
+          <div className="reveal-cells @2xl:grid-cols-3 col-span-full grid gap-px sm:col-span-8">
             <div data-grid-content className="@4xl:p-12 col-span-full p-6">
               <h2 className="@4xl:text-5xl text-3xl leading-[1.12] sm:text-4xl">
                 {t('heading').toLocaleUpperCase(locale)}

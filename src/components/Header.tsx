@@ -157,19 +157,25 @@ const SIGNAL_ENTRANCE = new Set([
  * `pointer-events: none` katmanlar — film grain — atlanıyor) ve en yakın
  * yüzey sınıfı okunuyor. Hero'nun içindeki beyaz bant `.surface-paper`
  * olduğu için orada da doğru sonuç çıkıyor.
+ *
+ * Aynı dinleyici `scrolled`ı da (sayfa 50px'ten fazla kaydı mı) hesaplıyor;
+ * eskiden ikisi için ayrı scroll dinleyicisi vardı ve biri her olayda,
+ * kare beklemeden state yazıyordu.
  */
-function useOverSignal(
+function useHeaderScroll(
   header: React.RefObject<HTMLElement | null>,
   pathname: string,
 ) {
   const [overSignal, setOverSignal] = React.useState(() =>
     SIGNAL_ENTRANCE.has(pathname),
   );
+  const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => {
     let frame = 0;
     const check = () => {
       frame = 0;
+      setScrolled(window.scrollY > 50);
       const el = header.current;
       if (!el) return;
       const y = el.getBoundingClientRect().bottom + 1;
@@ -193,31 +199,25 @@ function useOverSignal(
     };
   }, [header, pathname]);
 
-  return overSignal;
+  return { overSignal, scrolled };
 }
 
 export default function Header() {
   const t = useTranslations('Nav');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const [isScrolled, setIsScrolled] = React.useState(false);
   const headerRef = React.useRef<HTMLElement>(null);
   const pathname = usePathname();
-  const overSignal = useOverSignal(headerRef, pathname);
-  // Header altındaki yüzeyin rengini alıyor: mavi girişte mavi, beyaz
-  // bölümlerde beyaz. Renk değişkenleri anında, zemin yumuşak geçiyor.
-  const surface = cn(
-    overSignal ? 'surface-signal' : 'surface-paper',
-    'transition-[background-color] duration-300',
+  const { overSignal, scrolled: isScrolled } = useHeaderScroll(
+    headerRef,
+    pathname,
   );
-
-  React.useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    // `passive`: dinleyici yalnızca `scrollY` okuyor, `preventDefault`
-    // çağırmıyor. İşaretlenmezse tarayıcı her kaydırma karesinde handler'ın
-    // dönmesini beklemek zorunda kalıyor ve mobilde kaydırma takılabiliyor.
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Header altındaki yüzeyin rengini alıyor: mavi girişte mavi, beyaz
+  // bölümlerde beyaz. Geçiş BİLEREK anlık: eskiden yalnız zemin 300ms'de
+  // soluyordu, yazı ve buton renkleri (değişken) ise anında dönüyordu; arada
+  // "Bize Katıl" beyaz-üstüne-beyaz kalıp kayboluyordu. Değişim, bölüm sınırı
+  // header'ın altından geçtiği karede oluyor, yani anlık dönüş sınırla
+  // birlikte akıyor.
+  const surface = overSignal ? 'surface-signal' : 'surface-paper';
 
   React.useEffect(() => {
     const original = document.body.style.overflow;
@@ -251,7 +251,10 @@ export default function Header() {
               'bg-background/75 max-lg:h-screen! max-lg:overflow-visible! backdrop-blur',
           )}
         >
-          <Container className="backdrop-blur">
+          {/* Burada `backdrop-blur` vardı; header zemini opak olduğu için
+              bulanıklık hiç görünmüyor ama her kaydırma karesinde yeniden
+              hesaplanıyordu. */}
+          <Container>
             <div className="relative flex flex-wrap items-center justify-between px-6 lg:px-12 lg:py-5">
               <div className="z-51 relative flex justify-between gap-8 max-lg:h-14 max-lg:w-full">
                 <SiteLink
