@@ -16,6 +16,7 @@ import {
   Terminal,
 } from '@/components/brand';
 import { Container, Rail as GridRail } from '@/components/container';
+import { CountUp } from '@/components/count-up';
 import { toCard } from '@/components/events/events-sections';
 import { JOIN_HREF } from '@/components/site-link';
 import { ButtonLink, buttonClasses } from '@/components/ui/button';
@@ -202,10 +203,10 @@ export function LandingFeatures() {
             <div data-grid-content />
           </div>
 
-          <div className="@2xl:grid-cols-2 col-span-full grid gap-px sm:col-span-8">
+          <div className="reveal-cells @2xl:grid-cols-2 col-span-full grid gap-px sm:col-span-8">
             <div
               data-grid-content
-              className="@4xl:p-12 relative col-span-full overflow-hidden p-6"
+              className="@4xl:p-12 relative col-span-full overflow-clip p-6"
             >
               <Dither
                 name="brain"
@@ -260,7 +261,7 @@ export function LandingVision() {
         <div className="grid grid-cols-10 gap-px">
           <GridRail rows={5} />
 
-          <div className="@2xl:grid-cols-2 col-span-full grid gap-px sm:col-span-8">
+          <div className="reveal-cells @2xl:grid-cols-2 col-span-full grid gap-px sm:col-span-8">
             <div data-grid-content className="@4xl:p-12 col-span-full p-6">
               <Eyebrow>{t('heading')}</Eyebrow>
               <h2 className="@4xl:text-5xl mt-5 text-3xl leading-[1.12] sm:text-4xl">
@@ -306,7 +307,7 @@ export function LandingValues() {
         <div className="grid grid-cols-10 gap-px">
           <GridRail />
 
-          <div className="@2xl:grid-cols-2 @4xl:grid-cols-4 col-span-full grid gap-px sm:col-span-8">
+          <div className="reveal-cells @2xl:grid-cols-2 @4xl:grid-cols-4 col-span-full grid gap-px sm:col-span-8">
             <div data-grid-content className="@4xl:p-12 col-span-full p-6">
               <Eyebrow>{t('heading')}</Eyebrow>
               <h2 className="@4xl:text-5xl mt-5 text-3xl leading-[1.12] sm:text-4xl">
@@ -367,10 +368,7 @@ export function LandingRoadmap() {
   const last = steps.length - 1;
 
   return (
-    <section
-      id="roadmap"
-      className="surface-signal scroll-mt-24 overflow-hidden"
-    >
+    <section id="roadmap" className="surface-signal scroll-mt-24 overflow-clip">
       <Container asGrid>
         <div className="grid grid-cols-10 gap-px">
           <GridRail rows={8} />
@@ -380,7 +378,7 @@ export function LandingRoadmap() {
               data-grid-content
               className="@4xl:p-12 @4xl:flex-row @4xl:items-end @4xl:justify-between flex flex-col gap-8 p-6"
             >
-              <div>
+              <div className="reveal">
                 <Eyebrow>{t('heading')}</Eyebrow>
                 <h2 className="@4xl:text-5xl mt-5 text-3xl leading-[1.12] sm:text-4xl">
                   {t('title')}
@@ -395,7 +393,7 @@ export function LandingRoadmap() {
                   {t('shortcut')}
                 </p>
               </div>
-              <div className="flex shrink-0 flex-col items-start gap-6">
+              <div className="reveal flex shrink-0 flex-col items-start gap-6">
                 <Stat value={t('total')} label={t('totalLabel')} />
                 {/* `/roadmap` bir yönlendirme (next.config.ts → Notion), sayfa
                     değil: dil öneki almamalı, bu yüzden i18n `Link` değil düz
@@ -414,7 +412,7 @@ export function LandingRoadmap() {
 
             <div
               data-grid-content
-              className="@4xl:p-12 @4xl:[--stair:3rem] relative overflow-hidden p-6 [--stair:0.75rem] sm:[--stair:2rem]"
+              className="@4xl:p-12 @4xl:[--stair:3rem] relative overflow-clip p-6 [--stair:0.75rem] sm:[--stair:2rem]"
             >
               {/* Merdivenin altında kalan boş üçgende dither dağlar: tırmanılacak
                   yol. Dekoratif, yalnızca geniş ekranda. */}
@@ -435,7 +433,7 @@ export function LandingRoadmap() {
                         width: `calc(100% - ${last} * var(--stair))`,
                       }}
                       className={cn(
-                        'flex items-stretch',
+                        'reveal-left flex items-stretch',
                         final
                           ? 'bg-action text-action-foreground'
                           : 'bg-muted text-foreground',
@@ -524,7 +522,7 @@ export async function LandingStats() {
           <div className="col-span-full sm:col-span-8">
             <div
               data-grid-content
-              className="@4xl:p-12 relative overflow-hidden p-6"
+              className="@4xl:p-12 relative overflow-clip p-6"
             >
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <Eyebrow>{t('heading')}</Eyebrow>
@@ -534,9 +532,9 @@ export async function LandingStats() {
                 {stats.map((stat) => (
                   <Stat
                     key={stat.label}
-                    value={stat.value}
+                    value={<CountUp value={stat.value} />}
                     label={stat.label}
-                    className="border-border border-l pl-4"
+                    className="reveal border-border border-l pl-4"
                   />
                 ))}
               </div>
@@ -566,10 +564,10 @@ export function LandingManifesto() {
             <div data-grid-content />
           </div>
 
-          <div className="col-span-full sm:col-span-8">
+          <div className="reveal-cells col-span-full sm:col-span-8">
             <div
               data-grid-content
-              className="@4xl:p-12 @2xl:grid-cols-[3fr_2fr] relative grid items-end gap-10 overflow-hidden p-6"
+              className="@4xl:p-12 @2xl:grid-cols-[3fr_2fr] relative grid items-end gap-10 overflow-clip p-6"
             >
               <div>
                 <Eyebrow>{t('manifestoTitle')}</Eyebrow>

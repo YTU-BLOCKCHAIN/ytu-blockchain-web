@@ -482,3 +482,65 @@
     }
   }
 }
+
+/*
+  === KAYDIRMAYLA GİRİŞ ======================================================
+  Öğeler görünür alana girerken hafifçe yukarı kayıp beliriyor. Zamanlayıcı
+  yok: ilerleme doğrudan kaydırma konumuna bağlı (CSS scroll-driven
+  animation), yani JS çalışmıyor, animasyon kompozitörde dönüyor ve geri
+  kaydırınca geri sarıyor.
+
+  Üç güvence:
+  - `@supports` dışında kalan tarayıcıda (ör. Firefox) içerik düz görünüyor;
+    "JS yüklenene kadar gizli" durumu yok.
+  - Hareket azaltma tercihinde hiç çalışmıyor.
+  - Bitiş noktası (`cover 20%`) öğenin üst kenarı ekranın altından ~%20
+    yukarı çıktığı an. Sayfanın en dibindeki öğe bu noktaya hiç
+    ulaşamayabilir ve yarı saydam kalır; bu yüzden son bölüme (CTA) ve
+    footer'a verilmiyor.
+
+  DİKKAT: `view()` en yakın kaydırma kabını izliyor ve `overflow: hidden` da
+  bir kaydırma kabı. Atalarından biri `overflow-hidden` olan öğede zaman
+  çizelgesi pasif kalıyor (animasyon hiç oynamıyor). Kırpma gerekiyorsa
+  `overflow-clip` kullanın; o kaydırma kabı oluşturmuyor.
+
+  - `.reveal`: tek öğe.
+  - `.reveal-left`: soldan giriş (yol haritası merdiveni).
+  - `.reveal-cells`: ızgara kabına verilir; içindeki her hücrenin
+    çocuklarını ayrı ayrı oynatır. Hücrenin kendisi değil içeriği hareket
+    ediyor; hücre opak `bg-card`, saydamlaşsa alttaki ızgara çizgisinin grisi
+    görünürdü.
+*/
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+@keyframes reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(-1.5rem);
+  }
+}
+
+@layer components {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .reveal,
+      .reveal-left,
+      .reveal-cells [data-grid-content] > * {
+        /* Kısaltılmış `animation` timeline'ı `auto`ya sıfırlıyor; timeline
+           ve aralık ondan SONRA gelmeli. */
+        animation: reveal-up cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 20%;
+      }
+
+      .reveal-left {
+        animation-name: reveal-left;
+      }
+    }
+  }
+}

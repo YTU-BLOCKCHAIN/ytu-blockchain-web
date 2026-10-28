@@ -129,7 +129,7 @@ export function HackathonsCarousel({
             <div data-grid-content />
           </div>
 
-          <div className="col-span-full grid gap-px sm:col-span-8">
+          <div className="reveal-cells col-span-full grid gap-px sm:col-span-8">
             <div
               data-grid-content
               className="@4xl:p-12 flex flex-wrap items-end justify-between gap-6 p-6"
