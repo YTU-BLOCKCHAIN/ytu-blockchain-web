@@ -1,6 +1,6 @@
 {
   "Nav": {
-    "home": "Anasayfa",
+    "home": "Ana sayfa",
     "about": "Hakkımızda",
     "projects": "Projeler",
     "community": "Topluluk",
@@ -8,12 +8,12 @@
     "blog": "Blog",
     "contact": "İletişim",
     "join": "Bize Katıl",
-    "homeLabel": "YTÜ Blockchain — anasayfa",
+    "homeLabel": "YTÜ Blockchain — ana sayfa",
     "openMenu": "Menüyü aç",
     "closeMenu": "Menüyü kapat",
     "skipToContent": "İçeriğe geç",
     "languageLabel": "Dil",
-    "switchTo": "{language} diline geç",
+    "switchTo": "{language} sürüme geç",
     "language": {
       "tr": "Türkçe",
       "en": "İngilizce"
@@ -132,7 +132,7 @@
     },
     "hackathons": {
       "heading": "Hackathonlar",
-      "intro": "Takımlarımızın yer aldığı hackathon'lardan kareler.",
+      "intro": "Takımlarımızın yer aldığı hackathonlardan kareler.",
       "roleDescription": "karusel",
       "previous": "Önceki kare",
       "next": "Sonraki kare",
@@ -237,7 +237,7 @@
         },
         "useCases": {
           "title": "Uygulama Alanları",
-          "description": "DeFi, NFT, stablecoin, RWA, yapay zeka.",
+          "description": "DeFi, NFT, stablecoin, RWA, yapay zekâ.",
           "time": "~5 SAAT"
         },
         "advanced": {
@@ -263,7 +263,7 @@
     "eventsTitle": "ETKİNLİKLER",
     "ctaTitle": "MERAKIN MI VAR? ARAMIZA KATIL.",
     "ctaText": "WhatsApp topluluğu, başvuru formu ve tüm bağlantılarımız tek adreste.",
-    "ctaCommand": "$ ytu katil",
+    "ctaCommand": "$ ytu katıl",
     "ctaOutput": "Bağlantılar açılıyor..."
   },
   "About": {
@@ -421,7 +421,7 @@
   },
   "Contact": {
     "eyebrow": "İletişim",
-    "title": "Bize ulaşın",
+    "title": "Bize ulaş",
     "subtitle": "Soru, iş birliği ya da sadece merhaba demek için — yazmaktan çekinme.",
     "reasonsHeading": "Ne için yazabilirsin?",
     "reasons": {
@@ -434,11 +434,11 @@
     "communityNote": "Topluluğa katılmak mı istiyorsun?",
     "communityCta": "Topluluk kanalları",
     "form": {
-      "heading": "Bize yazın",
+      "heading": "Bize yaz",
       "intro": "Formu doldur, mesajın doğrudan bize ulaşsın. E-posta adresine bir onay mesajı göndereceğiz.",
       "name": "Ad Soyad",
       "email": "E-posta",
-      "message": "Mesajınız",
+      "message": "Mesajın",
       "submit": "Gönder"
     },
     "bookCall": "Görüşme ayarla",
@@ -569,14 +569,14 @@
   },
   "NotFound": {
     "title": "Sayfa bulunamadı",
-    "description": "Aradığınız sayfa taşınmış ya da hiç var olmamış olabilir.",
-    "back": "Anasayfaya dön"
+    "description": "Aradığın sayfa taşınmış ya da hiç var olmamış olabilir.",
+    "back": "Ana sayfaya dön"
   },
   "Error": {
     "title": "Bir şeyler ters gitti",
-    "description": "Bu sayfa yüklenemedi. Genellikle geçici bir durumdur — tekrar denemeyi deneyin.",
+    "description": "Bu sayfa yüklenemedi. Bu genellikle geçici bir durumdur, birazdan tekrar dene.",
     "retry": "Tekrar dene",
-    "back": "Anasayfaya dön"
+    "back": "Ana sayfaya dön"
   },
   "Stickers": {
     "hero": {
