@@ -76,6 +76,7 @@ export function EventCard({
             src={event.coverUrl}
             alt={event.coverAlt}
             sizes="(min-width: 1024px) 22rem, (min-width: 640px) 50vw, 100vw"
+            zoomOnHover
             className="aspect-[16/10]"
           />
         ) : (

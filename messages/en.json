@@ -184,7 +184,7 @@
       "visionLabel": "VISION",
       "vision": "We want to make blockchain accessible on campus — opening up a space where students turn theory into practice and learn and build together.",
       "missionLabel": "MISSION",
-      "mission": "Our goal is to shrink the distance between idea and execution. Through workshops, open-source projects and technical content, we help our members ship real work in days, not months."
+      "mission": "Our goal is to shrink the distance between idea and execution. Through workshops, open-source projects and technical content, we help our members ship real work in days, not weeks."
     },
     "values": {
       "heading": "OUR VALUES",
@@ -360,7 +360,7 @@
       "title": "Projects coming soon",
       "body": "We are gathering the projects we build at hackathons and inside the club. Until then, our code is on GitHub.",
       "github": "Browse on GitHub",
-      "join": "Join Us",
+      "join": "Join us",
       "folder": "projects/"
     }
   },
