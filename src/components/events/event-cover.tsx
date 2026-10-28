@@ -23,6 +23,7 @@ export function EventCover({
   alt,
   sizes,
   priority = false,
+  zoomOnHover = false,
   className,
 }: {
   /** Kırpılmamış, yalnızca genişliği sınırlanmış görsel adresi. */
@@ -30,6 +31,8 @@ export function EventCover({
   alt: string;
   sizes: string;
   priority?: boolean;
+  /** Kartta: üst öğedeki `group`'un hover'ında görsel hafifçe yaklaşıyor. */
+  zoomOnHover?: boolean;
   /** Kutunun oranı, ör. `aspect-[16/10]`. */
   className?: string;
 }) {
@@ -41,7 +44,11 @@ export function EventCover({
         fill
         sizes={sizes}
         priority={priority}
-        className="relative object-contain"
+        className={cn(
+          'relative object-contain',
+          zoomOnHover &&
+            'transition-transform duration-500 ease-out motion-safe:group-hover:scale-105',
+        )}
       />
     </div>
   );
