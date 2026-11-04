@@ -29,7 +29,7 @@
       },
       "community": {
         "links": "All Our Channels",
-        "linksDesc": "WhatsApp, Instagram, X, GitHub and more on one page",
+        "linksDesc": "Instagram, X, GitHub and more on one page",
         "roadmap": "Web3 Roadmap",
         "roadmapDesc": "A learning guide for complete beginners",
         "projects": "Projects",
@@ -262,7 +262,7 @@
     "manifestoRich": "We make blockchain something students at YTÜ can learn, build and share. <hl>No experience required, just curiosity.</hl> We learn and build together.",
     "eventsTitle": "EVENTS",
     "ctaTitle": "CURIOUS? COME JOIN US.",
-    "ctaText": "Our WhatsApp community, application form and every link in one place.",
+    "ctaText": "Our application form, events and every link in one place.",
     "ctaCommand": "$ ytu join",
     "ctaOutput": "Opening links..."
   },
