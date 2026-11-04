@@ -133,6 +133,7 @@ const NAV = [
   },
   { key: 'events', href: '/events' },
   { key: 'blog', href: '/blog' },
+  { key: 'news', href: '/news' },
   { key: 'contact', href: '/contact' },
 ] as const;
 
@@ -148,6 +149,7 @@ const SIGNAL_ENTRANCE = new Set([
   '/contact',
   '/projects',
   '/blog',
+  '/news',
   '/stickers',
 ]);
 
@@ -318,7 +320,9 @@ function NavMenu() {
        sütununun tamamını kaplıyor ama sütun daraldığında onunla birlikte
        küçülüyor — sabit ölçü dar pencerede kutudan taşıp kırpılıyordu. */
     <NavigationMenu className="**:data-[slot=navigation-menu-link]:relative **:data-[slot=navigation-menu-link]:z-51 **:data-[slot=navigation-menu-trigger]:relative **:data-[slot=navigation-menu-trigger]:z-51 **:data-[slot=navigation-menu-viewport]:min-w-full max-lg:hidden">
-      <NavigationMenuList className="gap-3">
+      {/* 1024px'te altı öğe, logo ile dil düğmesinin arasına ancak aralıksız
+          sığıyor; `gap-3` logoyu "Hakkımızda"nın üstüne bindiriyordu. */}
+      <NavigationMenuList className="gap-0 xl:gap-3">
         {NAV.map((item) =>
           'sections' in item ? (
             <NavigationMenuItem key={item.key} value={item.key}>

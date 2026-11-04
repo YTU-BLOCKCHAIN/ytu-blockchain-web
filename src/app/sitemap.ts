@@ -4,6 +4,7 @@ import { hasLocale } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { getPostRoutes, postLanguageAlternates } from '@/lib/blog';
 import { getEventRoutes } from '@/lib/events';
+import { getDigests } from '@/lib/news';
 import { linksPath, LOCALIZED_PATHS } from '@/lib/routes';
 import { siteConfig } from '@/lib/site';
 
@@ -103,5 +104,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ];
   });
 
-  return [...localized, ...links, ...posts, ...events];
+  /*
+    Günlük bültenler. Metin yalnız Türkçe, sayfaların kanonik adresi de `/tr`;
+    bu yüzden hreflang kümesi yok, yalnız Türkçe adres listeleniyor.
+  */
+  const news = getDigests().map((digest): MetadataRoute.Sitemap[number] => ({
+    url: `${base}/tr/news/${digest.date}`,
+    lastModified: new Date(`${digest.date}T06:00:00Z`),
+    changeFrequency: 'yearly',
+  }));
+
+  return [...localized, ...links, ...posts, ...events, ...news];
 }

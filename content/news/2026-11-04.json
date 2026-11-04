@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-04",
+  "summary": "ABD'de Senato çoğunluğunun değişmesi kripto düzenlemelerini yeniden tartışmaya açarken Wall Street tokenizasyonda hızlanıyor. Güvenlik tarafında Binance ve GitBook olayları öne çıkıyor.",
+  "items": [
+    {
+      "title": "ABD Senatosu'nda çoğunluk Demokratlara geçti",
+      "body": "AP'ye göre Demokratlar, birlikte hareket ettikleri bağımsızlarla 51 sandalyeye ulaştı. Ethereum France başkanı Jerome de Tychey, eylülde usul oylamasında 49'a 50 ile takılan CLARITY Yasası'nın ocağa kadar geçmezse yeni Kongre'de sıfırdan başlayacağını söyledi.",
+      "why": "De Tychey'e göre artık iki partinin desteği olmadan hiçbir kripto düzenlemesi geçmeyecek.",
+      "sourceUrl": "https://cointelegraph.com/news/democrats-flip-us-senate-as-crypto-industry-faces-policy-reset"
+    },
+    {
+      "title": "SEC personeli Canton Coin'i \"dijital emtia\" olarak değerlendirdi",
+      "body": "SEC'in Kurumsal Finans Bölümü, Canton Network'ün yerel tokeni için gönderdiği mektupta, tokenin kayıt olmadan programatik olarak basılması hâlinde yaptırım önermeyeceğini bildirdi.",
+      "why": "Canton'a göre bu, SEC'in mart ayındaki yorumundan sonra türünün ilk muafiyeti. Ancak mektup hukuki bir sonuç değil, yalnızca SEC personelinin görüşü.",
+      "sourceUrl": "https://decrypt.co/382554/canton-coin-sec-no-action-wall-street-tokenization"
+    },
+    {
+      "title": "Morgan Stanley, ABD hisse ve Hazine tahvillerini tokenize etmeye başladı",
+      "body": "Banka, 28 Ekim'de açılan DTCC Tokenizasyon Hizmeti'ni ilk kullananlar arasında. Hizmet, DTC'de tutulan menkul kıymetleri aynı haklara sahip dijital ikizlere çeviriyor.",
+      "why": "Tokenizasyon artık ABD piyasalarının ana altyapısına giriyor: DTC'nin saklamasında 114 trilyon dolardan fazla varlık var ve hizmete şimdiye kadar 20 kurum katıldı.",
+      "sourceUrl": "https://decrypt.co/382513/wall-streets-plumbing-onchain-morgan-stanley-tokenizes-securities"
+    },
+    {
+      "title": "Circle, kârlı bir çeyrekte çalışanlarının yaklaşık %5'ini çıkardı",
+      "body": "USDC'nin ihraççısı Circle, üçüncü çeyrekte 865 milyon dolar toplam gelir ve 226 milyon dolar net kâr açıkladı. En büyük gelir kaynağı olan rezerv geliri ise faizlerin düşmesiyle %8 azalarak 658 milyon dolara indi.",
+      "why": "Şirketin ana geliri faizlere bağlı. Şirkete göre USDC'nin dolar bazlı stablecoin piyasasındaki payı da %27'ye geriledi.",
+      "sourceUrl": "https://decrypt.co/382493/usdc-issuer-circle-quietly-cuts-5-of-staff-in-profitable-quarter"
+    },
+    {
+      "title": "Fransa Ulusal Meclisi'nden kişisel cüzdanlara bildirim şartı",
+      "body": "Meclis, kişisel saklamada (self-custody) toplam 100.000 avro ve üzeri kripto varlık tutan mükelleflerin vergi idaresine bildirim yapmasını öngören değişiklik önergesini 150'ye 44 oyla kabul etti.",
+      "why": "Önerge henüz yasalaşmadı. Yürürlüğe girmesi için 2027 bütçe yasasının son metninde kalması gerekiyor.",
+      "sourceUrl": "https://cointelegraph.com/news/france-approves-amendment-self-custodied-crypto-wallets-100k"
+    },
+    {
+      "title": "Binance saldırganları çalınan SOL'un yaklaşık %81'ini taşıdı",
+      "body": "Arkham verilerine göre 6,3 milyar dolarlık saldırıda çalınan 970.522 SOL'un yalnızca %18,8'i hâlâ saldırganlarla ilişkili cüzdanlarda. Fonlar THORChain üzerinden aklanmaya devam ediyor. FBI saldırıyı Kuzey Kore bağlantılı TraderTraitor grubuna bağladı, Kuzey Kore ise suçlamayı reddetti.",
+      "why": "Binance'e göre saldırganlar, çalışan cihazlarına sahte iş görüşmeleri ve zararlı yazılımlarla girdi.",
+      "sourceUrl": "https://cointelegraph.com/news/binance-hackers-move-81-stolen-solana-route-thorchain"
+    },
+    {
+      "title": "Ethereum'un kuantum sonrası geçişi için Aralık 2028 umudu",
+      "body": "Ethereum Vakfı araştırmacısı Justin Drake, Mumbai'deki Devcon 8'de kuantum ve yapay zekâ sonrası geçişi Aralık 2028'de tamamlamayı umduklarını söyledi.",
+      "why": "Bu tarih, vakfın eylül yol haritasındaki Aralık 2029 hedefinden bir yıl önce. Ancak resmi yol haritasının yerini almıyor.",
+      "sourceUrl": "https://cointelegraph.com/news/ethereum-post-quantum-transition-2028-target"
+    },
+    {
+      "title": "GitBook'a yapay zekâ ajanlarıyla saldırı",
+      "body": "Kripto projelerinin yaygın kullandığı dokümantasyon platformu GitBook, \"yapay zekâ ajanlarının kullanıldığı, gelişmiş ve son derece hedefli\" bir saldırıda bazı altyapı kimlik bilgilerine erişildiğini açıkladı ve müşteri erişim tokenlarını iptal etti.",
+      "why": "Şirket ajanların nasıl kullanıldığını açıklamadı. PancakeSwap önlem olarak dokümanlarını geçici kapattı ve dokümanların cüzdan bağlamayı istemediğini hatırlattı.",
+      "sourceUrl": "https://decrypt.co/382465/crypto-docs-gitbook-ai-agent-security-breach"
+    }
+  ]
+}
