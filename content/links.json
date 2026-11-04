@@ -47,6 +47,14 @@
       }
     },
     {
+      "label": { "tr": "Developer Roadmap", "en": "Developer Roadmap" },
+      "url": "/dev-roadmap",
+      "note": {
+        "tr": "Kulüpte developer olmak için adım adım yol",
+        "en": "Step-by-step path to becoming a club developer"
+      }
+    },
+    {
       "label": { "tr": "Projelerimiz", "en": "Our Projects" },
       "url": "/projects"
     },

@@ -6,6 +6,7 @@ import {
   ArrowUpRight,
   BookText,
   CalendarClock,
+  Code,
   FolderGit2,
   Globe,
   Mail,
@@ -143,9 +144,12 @@ function iconForLink(link: LinkItem): RowIconSpec {
   if (url.includes('/projects'))
     return { Icon: FolderGit2, tone: 'text-foreground' };
   if (url.includes('/contact')) return { Icon: Mail, tone: 'text-foreground' };
-  // `/brand` ve `/roadmap` Notion'a yönlenir (bkz. next.config.ts): satır içeride
-  // görünür ama hedef dışarıda, o yüzden ikonları burada eşleşiyor.
+  // `/brand`, `/roadmap` ve `/dev-roadmap` Notion'a yönlenir (bkz.
+  // next.config.ts): satır içeride görünür ama hedef dışarıda, o yüzden
+  // ikonları burada eşleşiyor. `/dev-roadmap` önce: `/roadmap` onu da içeriyor.
   if (url.includes('/brand')) return { Icon: Palette, tone: 'text-foreground' };
+  if (url.includes('/dev-roadmap'))
+    return { Icon: Code, tone: 'text-foreground' };
   if (url.includes('/roadmap'))
     return { Icon: MapFilledIcon, tone: 'text-foreground' };
   // "Web Sitemiz" (`/`) ve tanımsız iç sayfalar
