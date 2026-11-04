@@ -6,6 +6,7 @@
     "community": "Topluluk",
     "events": "Etkinlikler",
     "blog": "Blog",
+    "news": "Haberler",
     "contact": "İletişim",
     "join": "Bize Katıl",
     "homeLabel": "YTÜ Blockchain — ana sayfa",
@@ -82,6 +83,10 @@
     "blog": {
       "title": "Blog",
       "description": "YTÜ Blockchain Kulübü’nden etkinlik duyuruları, kulüpten haberler ve blockchain üzerine yazılar."
+    },
+    "news": {
+      "title": "Günlük Haber Bülteni",
+      "description": "YTÜ Blockchain Kulübü’nden her gün blockchain ve kripto dünyasının öne çıkan haberleri: kısa özet, neden önemli olduğu ve kaynak bağlantısı."
     },
     "contact": {
       "title": "İletişim",
@@ -472,6 +477,23 @@
       "medium": "Medium'da oku",
       "events": "Etkinliklere göz at",
       "folder": "blog/"
+    }
+  },
+  "News": {
+    "title": "Günlük haber bülteni",
+    "subtitle": "Blockchain ve kripto dünyasında bugün ne oldu, neden önemli? Kısa özetler, her haberde kaynak bağlantısı.",
+    "latest": "Son bülten",
+    "readDigest": "Bülteni oku",
+    "archive": "Önceki bültenler",
+    "rss": "RSS ile takip et",
+    "breadcrumb": "Haberler",
+    "source": "Kaynak: {name}",
+    "disclaimer": "Yatırım tavsiyesi değildir. Bilgilendirme amaçlıdır.",
+    "turkishOnly": "Bülten şimdilik yalnızca Türkçe yayımlanıyor.",
+    "cta": {
+      "title": "Blockchain'i birlikte öğrenelim",
+      "body": "YTÜ Blockchain Kulübü'nün etkinliklerine ve topluluğuna katıl.",
+      "join": "Bize Katıl"
     }
   },
   "Forms": {

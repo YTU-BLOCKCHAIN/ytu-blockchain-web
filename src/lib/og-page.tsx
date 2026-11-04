@@ -18,6 +18,7 @@ export function pageCard(
     | 'projects'
     | 'events'
     | 'blog'
+    | 'news'
     | 'contact'
     | 'stickers'
     | 'privacy',

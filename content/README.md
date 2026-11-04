@@ -7,6 +7,7 @@ yok; GitHub üzerinden düzenlenebilirler.
 | ------------ | ---------------------------------------------------- |
 | `links.json` | `/links` (linktree) sayfasındaki butonlar, iki dilde |
 | `posts.json` | Ana sayfadaki "öne çıkan X paylaşımları" bölümü      |
+| `news/`      | `/news` günlük haber bülteni, gün başına bir dosya   |
 
 Her ikisinde de akış aynı: GitHub'da dosyayı düzenle → pull request aç → kontrol
 yeşile dönünce birleştirilir.
@@ -181,3 +182,22 @@ otomatik çekilir — kopyalamana gerek yok, yazım hatası riski yok, kartta ya
 Adres X paylaşım biçiminde değilse pull request kontrolü kırmızı yanar ve hangi
 satırın hatalı olduğunu yazar. Site bozulmaz — düzeltip tekrar commit'lemen
 yeterli.
+
+---
+
+## `news/` nasıl güncellenir?
+
+Her bülten `news/YYYY-MM-DD.json` dosyasıdır ve yayından önce kulüp yöneticisi
+tarafından incelenir. Metin yalnız Türkçedir; `/en/news` sayfaları da aynı metni
+gösterir, kanonik adresleri `/tr/news/...` olur.
+
+| Alan                | Açıklama                                  |
+| ------------------- | ----------------------------------------- |
+| `date`              | Dosya adındaki tarihle aynı               |
+| `summary`           | Günün kısa özeti                          |
+| `items[].title`     | Haber başlığı                             |
+| `items[].body`      | Ne oldu                                   |
+| `items[].why`       | Neden önemli                              |
+| `items[].sourceUrl` | Haberin kaynağı, `https://` ile başlamalı |
+
+Dosya hatalıysa build kırılır ve kontrol kırmızı yanar, yani hata canlıya çıkmaz.

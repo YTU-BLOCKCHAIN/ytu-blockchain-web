@@ -20,6 +20,7 @@ const EXPLORE = [
   { key: 'projects', href: '/projects' },
   { key: 'events', href: '/events' },
   { key: 'blog', href: '/blog' },
+  { key: 'news', href: '/news' },
   { key: 'stickers', href: '/stickers' },
   { key: 'contact', href: '/contact' },
   { key: 'join', href: JOIN_HREF },
