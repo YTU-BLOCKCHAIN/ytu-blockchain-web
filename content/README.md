@@ -92,7 +92,7 @@ gidiyor). Yanlışlıkla `/tr/projects` yazarsan kontrol kırmızı yanar ve ne
 yazman gerektiğini söyler — eskiden öyle yazılıydı ve İngilizce sayfadan gelen
 ziyaretçi Türkçe siteye düşüyordu.
 
-> **İstisna:** `/roadmap`, `/brand` ve `/logos` birer sayfa değil,
+> **İstisna:** `/roadmap`, `/dev-roadmap`, `/brand` ve `/logos` birer sayfa değil,
 > yönlendirme (hedefleri Notion ve Drive). Onlar dil öneki almıyor, olduğu gibi
 > yazılıyor.
 

@@ -20,8 +20,8 @@ import { routing } from '@/i18n/routing';
  *
  * Anasayfa bilerek boş dize: adres `/tr` biçiminde, sonunda eğik çizgi yok.
  *
- * **Bu listede OLMAYAN iç yollar dil öneki almaz.** `/roadmap`, `/brand` ve
- * `/logos` böyle: onlar sayfa değil, `next.config.ts`teki yönlendirmeler
+ * **Bu listede OLMAYAN iç yollar dil öneki almaz.** `/roadmap`,
+ * `/dev-roadmap`, `/brand` ve `/logos` böyle: onlar sayfa değil, `next.config.ts`teki yönlendirmeler
  * (hedefleri Notion ve Drive).
  */
 export const LOCALIZED_PATHS = [
