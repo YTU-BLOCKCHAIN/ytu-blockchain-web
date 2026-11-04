@@ -30,6 +30,7 @@ export const LOCALIZED_PATHS = [
   '/projects',
   '/events',
   '/blog',
+  '/news',
   '/contact',
   '/stickers',
   '/privacy',

@@ -27,6 +27,14 @@
       "url": "/"
     },
     {
+      "label": { "tr": "Günlük Haber Bülteni", "en": "Daily News Digest" },
+      "url": "/news",
+      "note": {
+        "tr": "Blockchain dünyasından bugünün haberleri",
+        "en": "Today's blockchain news, in Turkish"
+      }
+    },
+    {
       "label": { "tr": "Etkinliklerimiz", "en": "Our Events" },
       "url": "https://luma.com/user/ytublockchain",
       "note": {

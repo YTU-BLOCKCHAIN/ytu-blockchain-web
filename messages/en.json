@@ -6,6 +6,7 @@
     "community": "Community",
     "events": "Events",
     "blog": "Blog",
+    "news": "News",
     "contact": "Contact",
     "join": "Join us",
     "homeLabel": "YTÜ Blockchain — home",
@@ -82,6 +83,10 @@
     "blog": {
       "title": "Blog",
       "description": "Event announcements, club news and writing on blockchain from YTÜ Blockchain Club."
+    },
+    "news": {
+      "title": "Daily News Digest",
+      "description": "A daily digest of blockchain and crypto news from YTÜ Blockchain Club: a short summary, why it matters and a link to the source. Published in Turkish."
     },
     "contact": {
       "title": "Contact",
@@ -472,6 +477,23 @@
       "medium": "Read on Medium",
       "events": "See our events",
       "folder": "blog/"
+    }
+  },
+  "News": {
+    "title": "Daily news digest",
+    "subtitle": "What happened in blockchain and crypto today, and why it matters. Short summaries with a source link on every item.",
+    "latest": "Latest digest",
+    "readDigest": "Read the digest",
+    "archive": "Earlier digests",
+    "rss": "Follow via RSS",
+    "breadcrumb": "News",
+    "source": "Source: {name}",
+    "disclaimer": "Not investment advice. For information only.",
+    "turkishOnly": "The digest is published in Turkish only for now.",
+    "cta": {
+      "title": "Let's learn blockchain together",
+      "body": "Join the events and community of YTÜ Blockchain Club.",
+      "join": "Join us"
     }
   },
   "Forms": {
