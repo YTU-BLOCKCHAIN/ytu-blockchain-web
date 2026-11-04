@@ -387,7 +387,7 @@ export default async function LinksPage({
 
   /**
    * Sosyal hesaplar "Projelerimiz" (`/projects`) satırının hemen üstüne girer
-   * (yani "Web Sitemiz" ve WhatsApp topluluğunun altına); o satır içerik
+   * (yani "Web Sitemiz" ve etkinlik satırlarının altına); o satır içerik
    * dosyasından kaldırılırsa listenin sonuna düşer.
    */
   const projectsAt = links.findIndex((link) => link.url === '/projects');
