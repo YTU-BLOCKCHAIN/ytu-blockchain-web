@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
     ],
   },
   // Config yönlendirmeleri proxy'den (next-intl) önce çalışır, bu yüzden
-  // `/logos`, `/roadmap` ve `/brand` dil ön eki almadan doğrudan hedefe gider.
+  // `/logos`, `/roadmap`, `/dev-roadmap` ve `/brand` dil ön eki almadan doğrudan hedefe gider.
   // `permanent: false`: hedef adres değişirse tarayıcı önbelleği eski adreste
   // takılı kalmasın.
   async redirects() {
@@ -65,6 +65,14 @@ const nextConfig: NextConfig = {
       {
         source: '/roadmap',
         destination: 'https://ytu-blockchain.notion.site/',
+        permanent: false,
+      },
+      // Kulübe katılan geliştiricilerin adım adım ilerlediği Developer
+      // Roadmap. YTU MINT workspace'inde duruyor, alan adı bu yüzden farklı.
+      {
+        source: '/dev-roadmap',
+        destination:
+          'https://mire-math-90b.notion.site/Developer-Roadmap-403157721a4c8158a7a8d94eff1aa340',
         permanent: false,
       },
       {

@@ -29,7 +29,7 @@
       },
       "community": {
         "links": "Tüm Kanallarımız",
-        "linksDesc": "WhatsApp, Instagram, X, GitHub ve fazlası tek sayfada",
+        "linksDesc": "Instagram, X, GitHub ve fazlası tek sayfada",
         "roadmap": "Web3 Yol Haritası",
         "roadmapDesc": "Sıfırdan başlayanlar için öğrenme rehberi",
         "projects": "Projeler",
@@ -262,7 +262,7 @@
     "manifestoRich": "Blockchain'i YTÜ'de öğrenilebilir, üretilebilir ve paylaşılabilir kılıyoruz. <hl>Deneyim şart değil, merak şart.</hl> Birlikte öğreniyor, birlikte üretiyoruz.",
     "eventsTitle": "ETKİNLİKLER",
     "ctaTitle": "MERAKIN MI VAR? ARAMIZA KATIL.",
-    "ctaText": "WhatsApp topluluğu, başvuru formu ve tüm bağlantılarımız tek adreste.",
+    "ctaText": "Başvuru formu, etkinliklerimiz ve tüm bağlantılarımız tek adreste.",
     "ctaCommand": "$ ytu katıl",
     "ctaOutput": "Bağlantılar açılıyor..."
   },

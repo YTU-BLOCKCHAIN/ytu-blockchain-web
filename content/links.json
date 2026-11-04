@@ -27,10 +27,6 @@
       "url": "/"
     },
     {
-      "label": { "tr": "Topluluğumuza Katıl", "en": "Join Our Community" },
-      "url": "https://chat.whatsapp.com/JpClE5mXx8sJQ6ERIIrx0n"
-    },
-    {
       "label": { "tr": "Etkinliklerimiz", "en": "Our Events" },
       "url": "https://luma.com/user/ytublockchain",
       "note": {
@@ -44,6 +40,14 @@
       "note": {
         "tr": "Sıfırdan başlayanlar için öğrenme rehberi",
         "en": "A learning guide for complete beginners"
+      }
+    },
+    {
+      "label": { "tr": "Developer Roadmap", "en": "Developer Roadmap" },
+      "url": "/dev-roadmap",
+      "note": {
+        "tr": "Kulüpte developer olmak için adım adım yol",
+        "en": "Step-by-step path to becoming a club developer"
       }
     },
     {

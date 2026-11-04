@@ -142,9 +142,7 @@ export default async function LocaleLayout({
                     '@type': 'CollegeOrUniversity',
                     name: 'Yıldız Teknik Üniversitesi',
                   },
-                  /* `sameAs` = kulübün KİMLİĞİNİ taşıyan profiller. WhatsApp
-                     bilerek dışarıda: o bir grup davet bağlantısı, kulübün
-                     profili değil. */
+                  /* `sameAs` = kulübün KİMLİĞİNİ taşıyan profiller. */
                   sameAs: [
                     siteConfig.social.github,
                     siteConfig.social.x,

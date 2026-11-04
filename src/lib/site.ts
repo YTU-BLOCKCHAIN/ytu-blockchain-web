@@ -24,9 +24,12 @@ export const siteConfig = {
    * Kulübün resmî sosyal/topluluk kanalları.
    *
    * Hepsi burada çünkü adresler dört yerden okunuyor: `/links` sayfası,
-   * footer, topluluk sayfası ve JSON-LD'deki `sameAs`. Daha önce WhatsApp,
-   * Medium ve podcast YALNIZCA `content/links.json` içinde yaşıyordu, yani
-   * ana siteyi gezen ziyaretçi kulübün en aktif kanallarını hiç görmüyordu.
+   * footer, topluluk sayfası ve JSON-LD'deki `sameAs`. Daha önce Medium ve
+   * podcast YALNIZCA `content/links.json` içinde yaşıyordu, yani ana siteyi
+   * gezen ziyaretçi kulübün en aktif kanallarını hiç görmüyordu.
+   *
+   * WhatsApp topluluğunun davet bağlantısı bilerek burada YOK: herkese açık
+   * link gruba dolandırıcı çekiyordu, sitenin hiçbir yerinde yayınlanmıyor.
    */
   social: {
     github: 'https://github.com/YTU-BLOCKCHAIN',
@@ -34,7 +37,6 @@ export const siteConfig = {
     // Etkinliklerin yayımlandığı Luma profili; etkinlikler sayfasından bağlı.
     luma: 'https://luma.com/user/ytublockchain',
     instagram: 'https://www.instagram.com/ytu_blockchain/',
-    whatsapp: 'https://chat.whatsapp.com/JpClE5mXx8sJQ6ERIIrx0n',
     medium: 'https://medium.com/ytublockchain',
     spotify: 'https://open.spotify.com/show/5bA9wkC2zxASZCOKzu5EOX',
   },
