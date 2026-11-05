@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-05",
+  "summary": "Demokratların ABD Kongresi'ni kazanması kripto sektörünün Washington planlarını yeniden tartışmaya açtı. Güvenlik tarafında bir Fransız bankası, bir Brezilya borsası ve Hindistan'dan gelen yapay zekâ destekli saldırı uyarısı öne çıkıyor.",
+  "items": [
+    {
+      "title": "Kongre'nin el değiştirmesi CLARITY Yasası'nı zorlaştırıyor",
+      "body": "Decrypt'e göre Bitcoin, Demokratların iki kanatta da çoğunluğu almasının ardından yeniden 80.000 doların üzerine çıktı. Görüşülen analistler sonucun büyük ölçüde fiyatlara yansıdığını söylüyor. CLARITY Yasası ise eylüldeki usul oylamasında 49'a 50 sonuçlanmış, gereken 60 oya ulaşamamıştı.",
+      "why": "Yeni Kongre Ocak 2027'de göreve başlıyor. Tasarı o zamana kadar canlandırılmazsa sektör yeni bir yasa çalışmasına başlamak zorunda kalacak.",
+      "sourceUrl": "https://decrypt.co/382515/bitcoin-rebounds-democratic-midterm-sweep-crypto-washington"
+    },
+    {
+      "title": "Kripto fonlarının seçim harcaması 176 milyon dolara ulaştı",
+      "body": "Reuters'ın verilerini aktaran Cointelegraph'a göre kripto destekli siyasi fonlar bu seçim döneminde yaklaşık 176 milyon dolar harcadı. Ohio'da Jon Husted için 64 milyon dolardan fazla harcanmasına rağmen seçimi Sherrod Brown kazandı. Sektörü sert biçimde eleştiren Elizabeth Warren da Senato Bankacılık Komitesi başkanlığı için sırada görünüyor.",
+      "why": "Decentralization Research Center yöneticisi Kyle Bligen, sektörün yeni Kongre'de çok daha sıkı bir denetim beklemesi gerektiğini söyledi.",
+      "sourceUrl": "https://cointelegraph.com/news/crypto-superpac-midterms"
+    },
+    {
+      "title": "Fransız bankası Crédit Mutuel Arkéa siber saldırıyı doğruladı",
+      "body": "Banka, saldırının sahte işlemlere yol açtığını, olayın kontrol altına alındığını ve müşteri varlıklarının etkilenmediğini açıkladı. Kripto varlıklardan söz etmedi, tutarın da hâlâ hesaplandığını belirtti. Zincir üstü araştırmacı ZachXBT ise kaybın 133 milyon doları aştığını öne sürüyor.",
+      "why": "ZachXBT, olayın gerektiği gibi duyurulmamasının yaklaşık 30 milyon dolarlık fonun dondurulmasını engellediğini iddia ediyor. Banka müşterilerini oltalama girişimlerine karşı da uyardı.",
+      "sourceUrl": "https://decrypt.co/382486/zachxbt-names-french-bank-credit-mutuel-arkea-as-alleged-victim-of-133m-crypto-theft"
+    },
+    {
+      "title": "Mercado Bitcoin hesapları aşamalı olarak açıyor",
+      "body": "Analistlerin 46 milyon dolardan fazla kayıp tahmin ettiği saldırının ardından Brezilya borsası, pazartesi günü erişimi yeniden açacağını duyurdu. Müşteriler önce yalnızca bakiyelerini ve hesap dökümlerini görebilecek. Transfer, çekim ve alım satım işlemleri ise bağımsız güvenlik testlerinden sonra açılacak.",
+      "why": "Borsa etkilenen varlıkları kendi kasasından karşılayacağını ve 15 milyon dolardan fazla çalıntı fonun dondurulduğunu söylüyor.",
+      "sourceUrl": "https://cointelegraph.com/news/mercado-bitcoin-phased-reopening-to-begin-monday-pledges-to-cover-losses"
+    },
+    {
+      "title": "Hindistan'dan yapay zekâ destekli saldırı uyarısı",
+      "body": "Ulusal siber güvenlik kurumu CERT-In, kripto borsalarını ve finans şirketlerini hedef alan bir saldırı kampanyasının tırmandığını açıkladı. Kuruma göre saldırganlar, saldırı betiklerini yapay zekâ araçlarıyla hızla üretiyor, açıkta kalan test ortamlarını ve ortak kullanılan kimlik bilgilerini istismar ediyor. Kurum etkilenen borsaların adını ve kayıp tutarını paylaşmadı.",
+      "why": "CERT-In, riskli şirketlere izlemeyi kesintisiz sürdürmelerini, hafta sonu ve tatillerde ekipleri güçlendirmelerini öneriyor. Bazı saldırılar tespiti geciktirmek için bu dönemlere denk getirilmiş.",
+      "sourceUrl": "https://cointelegraph.com/news/india-warns-ai-powered-hackers-targeting-crypto-exchanges-at-machine-speed"
+    },
+    {
+      "title": "Bitcoin'in sıradaki güncellemesi temizlik olabilir",
+      "body": "BIP-54 ortak yazarı Matt Corallo'ya göre Great Consensus Cleanup, uzlaşı kurallarındaki dört eski açığı kapatmayı amaçlıyor. Corallo, bu yumuşak çatallanmanın (soft fork) sıradaki güncelleme olma ihtimalini %80 olarak görüyor. Resmi bir takvim yok. Paul Sztorc'un geliştiriciler arasındaki yoklamasında en erken tahmin Eylül 2027, çoğu tahmin ise 2028 ve sonrası.",
+      "why": "Corallo, güncellemenin yeni geliştiriciler için pratik olacağını ve ileride kullanılacak bir etkinleştirme yöntemi bırakabileceğini söylüyor. Sztorc ise bunu yalnızca bir bakım güncellemesi olarak görüyor.",
+      "sourceUrl": "https://decrypt.co/382568/why-bitcoin-next-soft-fork-could-feel-like-practice-run"
+    }
+  ]
+}
