@@ -72,7 +72,7 @@ const nextConfig: NextConfig = {
       {
         source: '/dev-roadmap',
         destination:
-          'https://mire-math-90b.notion.site/Developer-Roadmap-403157721a4c8158a7a8d94eff1aa340',
+          'https://ytu-blockchain.notion.site/dev-roadmap',
         permanent: false,
       },
       {
