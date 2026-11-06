@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-06",
+  "summary": "Teknoloji hisselerindeki satış Bitcoin'in seçim sonrası kazancını sildi, Washington'da ise kripto yasası için yeni bir yol konuşuluyor. Güvenlik tarafında iki olay çalışan ve anahtar güvenliğini yeniden gündeme getirdi.",
+  "items": [
+    {
+      "title": "Bitcoin seçim sonrası kazancını geri verdi",
+      "body": "Decrypt'e göre Bitcoin perşembe günü %5'e yakın düşerek 76.500 dolar civarına geriledi. Bir saat içinde yaklaşık 428 milyon dolarlık yükseliş yönlü pozisyon zorla kapatıldı. Satış, yapay zekâ harcamalarına dair endişelerin vurduğu teknoloji hisseleriyle birlikte geldi.",
+      "why": "Habere göre çarşamba günkü yükselişin önemli kısmı yeni alımlardan değil, kapanan kısa pozisyonlardan geliyordu.",
+      "sourceUrl": "https://decrypt.co/382612/bitcoin-erases-election-rally-ai-stocks-plunge-428-million-crypto-longs"
+    },
+    {
+      "title": "Demokratlar kendi kripto tasarısını görüşüyor",
+      "body": "Gazeteci Eleanor Terrett'in kaynaklarına göre Temsilciler Meclisi'ndeki Demokratlar, Maxine Waters'ın önergesini kapsamlı bir piyasa yapısı tasarısına dönüştürmeyi konuşuyor. Plan SEC'in denetim yetkisini artırıp CFTC'nin rolünü sınırlıyor. Teklif henüz görüşme aşamasında.",
+      "why": "GSR'dan Carlos Guzman, CLARITY Yasası'nın bitmediğini ama geçmesinin zorlaştığını söylüyor.",
+      "sourceUrl": "https://decrypt.co/382602/democrats-to-push-broader-crypto-market-structure-bill-after-sweeping-us-midterms-report"
+    },
+    {
+      "title": "Mercado Bitcoin saldırısı duyurudan sonra da sürmüş",
+      "body": "Bitquery'nin analizine göre Brezilya borsası olayı kontrol altına aldığını açıkladıktan sonra saldırgan yaklaşık dört saat daha yatırma adreslerini boşalttı. Bitquery kaybı 48,6 milyon dolar, borsa ise 36,3 milyon dolar olarak hesaplıyor. Borsa, kayıpları kendi kaynaklarından karşılayacağını söylüyor.",
+      "why": "Bitquery, başka müşteri adreslerinin de açıkta olabileceği uyarısını yapıyor. Borsa güvenli olduklarını doğrulayana kadar eski yatırma adreslerinin kullanılmamasını öneriyor.",
+      "sourceUrl": "https://decrypt.co/382670/mercado-bitcoin-hack-contained-blockchain-data"
+    },
+    {
+      "title": "Sahte Teams daveti SignalPlus'ı vurdu",
+      "body": "Cointelegraph'a göre Binance ve Deribit, türev işlem platformu SignalPlus'a bağlı API anahtarlarını önlem olarak iptal etti. Şirkete göre saldırgan, ele geçirilmiş bir Telegram hesabından bir mühendise sahte toplantı daveti gönderdi. Kayıp 82.000 dolardan az ve kullanıcılara ödeneceği açıklandı.",
+      "why": "SignalPlus, API erişimini yalnızca onaylı IP adresleriyle sınırlamadığını kabul etti. Binance'ın 6,3 milyar dolarlık saldırısında da ele geçirilen çalışan bilgisayarları rol oynamıştı.",
+      "sourceUrl": "https://cointelegraph.com/news/binance-deribit-revoke-signalplus-api-fake-teams-attack"
+    },
+    {
+      "title": "Zcash güncellemesi eski havuzdaki fonları donduruyor",
+      "body": "Decrypt'e göre NU7 güncellemesi hedef blok süresini 75 saniyeden 25 saniyeye indiriyor. Güncelleme, ilk gizlilik havuzu Sprout'tan çıkış yapan işlem biçimini de geçersiz kılıyor. Bu havuzda yaklaşık 12.224 ZEC, yani 15-16 milyon dolarlık varlık bulunuyor.",
+      "why": "Fonlar yakılmıyor ama teknik şartname erişimin bir daha açılmayabileceğini belirtiyor.",
+      "sourceUrl": "https://decrypt.co/382663/zcash-upgrade-could-lock-16-million-crypto"
+    },
+    {
+      "title": "Amundi hisse endeksi fonunu Ethereum'da tokenize etti",
+      "body": "Avrupa'nın en büyük fon yöneticisi Amundi, STOXX Europe 600 fonunun tokenize bir pay sınıfını Ethereum'da çıkardı. Fon geleneksel kanallardan da sunulmaya devam edecek. RWA.xyz verilerine göre tokenize hisselerin değeri 4,24 milyar dolara ulaştı.",
+      "why": "Amundi para piyasası fonuyla başladığı bu alanı genişletiyor. Aynı verilere göre en büyük 10 ürünün tamamı ABD bağlantılı.",
+      "sourceUrl": "https://cointelegraph.com/news/amundi-tokenizes-european-equity-index-fund-ethereum"
+    },
+    {
+      "title": "Core Scientific madencilikten çıkıyor",
+      "body": "Finans direktörü Jim Nygaard, şirketin madencilikten çıkışı dördüncü çeyrekte tamamlamayı beklediğini söyledi. Üçüncü çeyrekte madencilik gelirinin 232,9 milyon dolarlık toplam gelirdeki payı %7,5'e geriledi. Gelirin geri kalanı yapay zekâ altyapısına da hizmet veren veri merkezi kiralamasından geliyor.",
+      "why": "Bitcoin madencileri ile yapay zekâ altyapısı arasındaki kayma sürüyor. Haber, ABD seçimlerinin veri merkezi yatırımları için yeni bir belirsizlik getirdiğini de not ediyor.",
+      "sourceUrl": "https://cointelegraph.com/news/core-scientific-to-quit-bitcoin-mining-by-year-end-as-ai-business-surges"
+    }
+  ]
+}
