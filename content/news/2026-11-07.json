@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-07",
+  "summary": "ABD Hazinesi MEXC'yi finans sisteminden kesme kararı aldı, Nijerya ve Rusya ise kendi kripto kurallarını netleştirdi. Güvenlik tarafında Binance saldırısının izi sürülürken Ethereum geliştiricileri de bir test güncellemesini risk nedeniyle erteledi.",
+  "items": [
+    {
+      "title": "ABD Hazinesi MEXC'ye transferleri yasaklıyor",
+      "body": "ABD Hazinesi'ne bağlı FinCEN, ABD'li finans kuruluşlarının MEXC Global'e ve bu borsadan transfer yapmasını yasaklayan bir karar yayımladı. FinCEN'e göre borsa, Mayıs 2021 ile Mayıs 2026 arasında en az 16 milyar dolarlık yasa dışı işleme aracılık etti. Karar, ABD resmî gazetesi Federal Register'da yayımlandıktan 30 gün sonra yürürlüğe girecek.",
+      "why": "FinCEN bu kez standart yaptırım yerine Rusya'ya yönelik kara para aklama yasasındaki bir hükmü kullandı.",
+      "sourceUrl": "https://decrypt.co/382758/treasury-cuts-off-crypto-exchange-mexc-us-financial-system"
+    },
+    {
+      "title": "Bitcoin hisseler toparlanırken ağustostan beri en düşük seviyeyi gördü",
+      "body": "Bitcoin cuma günü ABD piyasaları açıldıktan sonra 74.762 dolara geriledi. Bu, 21 Ağustos'tan beri en düşük seviye. Aynı gün açıklanan veriye göre ABD ekonomisi ekimde 65.000 beklentisine karşı 165.000 kişilik istihdam yarattı.",
+      "why": "CME verilerine göre aralıkta faiz artışı beklentisi %66,9'dan %76,8'e çıktı. Cointelegraph, güçlü istihdamın piyasaya likidite girişini azaltabileceğini not ediyor.",
+      "sourceUrl": "https://cointelegraph.com/markets/bitcoin-price-under-75k-crypto-markets-tech-stock"
+    },
+    {
+      "title": "Binance'ten çalınan fonların yaklaşık yarısı henüz aklanmadı",
+      "body": "Elliptic'e göre 29 Ekim'de çalınan 6,43 milyar doların yaklaşık 3,11 milyar doları hâlâ saldırıyla bağlantılı adreslerde duruyor. 2,85 milyar dolar ise donduruldu veya ele geçirildi. FBI saldırıyı Kuzey Koreli saldırganlara bağlıyor, Kuzey Kore bunu reddediyor.",
+      "why": "Dondurulan %44'lük oran, 2025'teki Bybit saldırısında yaklaşık %3'tü. Elliptic, aklamanın otomatik yürüdüğünü ama yapay zekâ ajanı kullanıldığına dair kanıt görmediğini söylüyor.",
+      "sourceUrl": "https://decrypt.co/382711/3-1b-in-stolen-binance-crypto-has-yet-to-be-laundered-elliptic"
+    },
+    {
+      "title": "Ethereum'da Glamsterdam'ın Hoodi adımı ertelendi",
+      "body": "Ethereum Vakfı'na göre Glamsterdam, sekiz akıllı sözleşme varsayımıyla ilgili sorunlar çözülene kadar Hoodi test ağına geçmeyecek. EIP-8037 ve EIP-8038 bazı işlemlerin gaz ücretini değiştiriyor. Denetim şirketi ChainSecurity'nin raporu, bunun sabit gaz varsayımına dayanan sözleşmeleri bozabileceğini gösterdi.",
+      "why": "Ertelemeyle geliştiriciler, güncelleme ana ağa ilerlemeden önce sorunları bulmak için zaman kazanıyor.",
+      "sourceUrl": "https://cointelegraph.com/news/ethereum-devs-fork-glamsterdam-hoodi-smart-contract-risks"
+    },
+    {
+      "title": "Gnosis Pay müşteri verilerinin açığa çıktığını duyurdu",
+      "body": "Gnosis Pay, 3 Kasım'da kendi markalı kartlarının altyapısına yetkisiz erişim tespit etti. Şirkete göre müşteri fonları etkilenmedi, ancak kaç kişinin ve hangi verilerin etkilendiği açıklanmadı.",
+      "why": "Şirket, gerçek bilgiler içerse bile beklenmedik mesajlara karşı dikkatli olunmasını istiyor. Kart numarası, PIN veya kurtarma kelimesi istemeyeceğini belirtiyor.",
+      "sourceUrl": "https://decrypt.co/382718/crypto-card-provider-gnosis-pay-hackers-customer-data"
+    },
+    {
+      "title": "Nijerya algoritmik stablecoinleri yasakladı",
+      "body": "Nijerya Merkez Bankası'nın perşembe günü yayımladığı düzenleme, stablecoin ihraççılarından tam rezerv ve en az %2 ek tampon istiyor. Rezervlere değil ağırlıklı olarak algoritmalara dayanan stablecoinler yasak. Mevcut şirketlerin lisans başvurusu için 180 günü var.",
+      "why": "Cointelegraph, Nijerya'yı Afrika'nın en büyük kripto pazarlarından biri olarak tanımlıyor.",
+      "sourceUrl": "https://cointelegraph.com/news/nigeria-algorithmic-stablecoin-ban-crypto-licensing"
+    },
+    {
+      "title": "Rusya'da bireysel kripto alımı 17 Kasım'da başlıyor",
+      "body": "Rusya Merkez Bankası'nın kesinleşen kurallarına göre borsalar 17 Kasım'dan itibaren bireysel yatırımcılara BTC, ETH ve USDT sunabilecek. Nitelikli olmayan yatırımcılar her aracı kurumdan yılda en fazla 300.000 ruble alabilecek. Herkesin zorunlu bir testi geçmesi gerekiyor.",
+      "why": "Düzenli kanallar açılırken dışarısı sıkılaşıyor. Doğrudan kişiden kişiye işlemler 1 Temmuz 2027'de yasaklanacak.",
+      "sourceUrl": "https://cointelegraph.com/news/russia-finalizes-crypto-trading-rules-november-rollout"
+    }
+  ]
+}
