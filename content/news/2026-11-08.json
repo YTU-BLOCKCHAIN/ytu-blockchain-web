@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-08",
+  "summary": "ABD makamları kripto üzerinden yaptırım aşmaya ve içeriden suiistimale karşı yeni adımlar attı. Tokenize hisse platformlarında büyük şirketlerin itirazları ve yeni bir Bitcoin çatallanması da teknik tarafta öne çıkıyor.",
+  "items": [
+    {
+      "title": "Eski FBI ajanı soruşturma cüzdanlarından kripto çaldığını kabul etti",
+      "body": "ABD Doğu Virginia Savcılığı'nın açıklamasına göre eski bir FBI karşı istihbarat ajanı, 35 soruşturmayla bağlantılı yaklaşık 100 usulsüz transferle yaklaşık 2,5 milyon dolarlık kripto varlık çaldı. Eski ajan elektronik dolandırıcılık ve kara para aklama suçlarını kabul etti. 20 yıla kadar hapis cezası istenebilecek davada karar duruşması 4 Mart 2027'de.",
+      "why": "Ajan, eylemlerinin suç örgütleri ve düşman ülkelerle ilgili FBI soruşturmalarını tehlikeye attığını kabul etti. Olay, soruşturma altındaki cüzdanlara erişimin içeriden kötüye kullanılabileceğini gösteriyor.",
+      "sourceUrl": "https://cointelegraph.com/news/ex-fbi-counterintelligence-agent-stole-almost-25m-in-crypto"
+    },
+    {
+      "title": "ABD, İran bağlantısı nedeniyle sekiz Kanadalı şirkete yaptırım uyguladı",
+      "body": "ABD Hazinesi, yaptırım listesindeki İranlı kuruluşlarla iş yaptığını söylediği sekiz Kanadalı döviz şirketini dolar sisteminden kesti. Hazine'ye göre bu şirketler İran riyalini ve diğer para birimlerini dijital varlıklarla takas etti, İran Devrim Muhafızları'na bağlı adreslerle işlemlere aracılık etti. Karar, Kanada'nın finansal istihbarat birimi FINTRAC ile birlikte alındı.",
+      "why": "Hazine'nin İran'ın kripto üzerinden yaptırımları aşmasına karşı kampanyası ABD dışındaki şirketlere uzanıyor. Açıklamaya göre bazı şirketler tespit edilmemek için ad ve adres değiştirmişti.",
+      "sourceUrl": "https://cointelegraph.com/news/us-sanctions-canadian-money-exchange-firms-over-iran-ties"
+    },
+    {
+      "title": "\"Muhteşem Yedili\" OKX-ICE tokenize hisse platformundan çekildi",
+      "body": "Decrypt'e göre Apple ve Meta, OKX ile NYSE'nin sahibi ICE'nin ortak girişimi OKXICE TSV'nin itiraz listesine eklendi. Böylece yedi büyük ABD teknoloji şirketinin tamamı hisselerinin bu platformda tokenize hâlde işlem görmesine karşı çıkmış oldu; listedeki şirket sayısı 67'ye ulaştı. SEC'in eylülde duyurduğu yenilik muafiyetine göre şirket 30 gün içinde yazılı itiraz ederse platform, üçüncü bir tarafın tokenize ettiği hisseyi listeleyemiyor.",
+      "why": "İtiraz yalnızca bu platform için geçerli. Yine de en büyük şirketler çekildiği için platformun açılışta hangi büyük hisseleri sunabileceği belirsiz; Coinbase, Robinhood ve Strategy listede yer almıyor.",
+      "sourceUrl": "https://decrypt.co/382768/apple-meta-every-magnificent-seven-stock-opts-out-okx-ice-venue"
+    },
+    {
+      "title": "Bitcoin'den ayrılan eCash zinciri devrede",
+      "body": "Cointelegraph Magazine'e göre geliştirici Paul Sztorc'un şirketi LayerTwo Labs, Bitcoin kodundan türetilen ayrı bir zincir olan eCash'i 29 Ekim'de başlattı. Çatallanma (hard fork) 973.728 numaralı Bitcoin bloğunda gerçekleşti ve o anda özel anahtarlarını elinde tutanlar aynı miktarda ECX aldı. Ağ, ana katmanı değiştirmeden yan zincirler kurmayı sağlayan Drivechain fikrine dayanıyor.",
+      "why": "İki zincir aynı işlem geçmişini paylaştığı için korumasız bir işlem öbür zincirde tekrarlanabiliyor (replay). Makale, ECX'in büyük borsalarda henüz yaygın olmadığını ve bazı ülkelerde vergi sonucu doğabileceğini de not ediyor.",
+      "sourceUrl": "https://cointelegraph.com/magazine/bitcoin-holders-have-received-ecash-what-can-you-with-it"
+    },
+    {
+      "title": "Tahmin piyasasında anket öncesi şüpheli işlem",
+      "body": "New York Times'ın haberine göre Vanderbilt Üniversitesi araştırmacıları, iki NYT/Siena anketi yayımlanmadan kısa süre önce şüpheli işlemler tespit etti. Bir Polymarket kullanıcısı 31 Ekim'de bir senatörün yeniden seçileceği yönünde yaklaşık 200.000 dolarlık pozisyon açtı; bir saat sonra çıkan anket senatörü önde gösterdi. Kullanıcının içeriden bilgiye erişip erişmediği belli değil, 77.000 doların üzerinde kazandığı belirtiliyor.",
+      "why": "Polymarket işlemleri fark ettiğini ve incelediğini açıkladı, Kalshi yorum yapmadı. Nisan ayında da bir ABD askeri, kamuya açık olmayan bilgiyle tahmin piyasasında işlem yapmakla suçlanmıştı.",
+      "sourceUrl": "https://cointelegraph.com/news/suspicious-prediction-market-activity-seen-before-election-poll-release-nyt"
+    }
+  ]
+}
